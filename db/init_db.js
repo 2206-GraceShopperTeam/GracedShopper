@@ -1,11 +1,9 @@
-const {
-  client,
-  // declare your model imports here
-  // for example, User
-} = require('./');
+const {client}  = require('./')
+const {createUser} = require("./")
 
 
 async function dropTables() {
+  client.connect()
   try {
     console.log("Dropping All Tables...");
     // drop all tables, in the correct order
@@ -49,7 +47,7 @@ async function createTables() {
 
       CREATE TABLE cart_products (
         id SERIAL PRIMARY KEY,
-          product_id INTEGER REFERENCES product (id),
+          product_id INTEGER REFERENCES products (id),
           cart_id INTEGER REFERENCES cart (id),
           quantity INTEGER NOT NULL
       );
@@ -119,13 +117,14 @@ async function rebuildDB() {
     await createTables();
     await createInitialUsers();
     await createInitialProducts();
+    client.end()
   } catch (error) {
     console.log("Error during rebuildDB");
     throw error;
   }
 }
 
-
+rebuildDB();
 module.exports = {
   rebuildDB,
   dropTables,
