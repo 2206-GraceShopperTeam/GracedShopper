@@ -48,7 +48,7 @@ export async function login(email, password) {
 
 
 export async function register(event) {
-  const registerUsername = event.target[0].value;
+  const registerEmail = event.target[0].value;
   const registerPassword = event.target[1].value;
   const registerName     = event.target[2].value;
   const registerAddress  = event.target[3].value;
