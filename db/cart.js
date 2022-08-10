@@ -56,7 +56,7 @@ async function updateCart({}) {
     throw error;
   }
 }
-
+ 
 async function destroyCart(id) {
   try {
     const {
