@@ -17,14 +17,30 @@ async function addProductToCart({ cartId, productId }) {
   }
 }
 
+async function getCartById(id) {
+  try {
+    const {
+      rows: [cart],
+    } = await client.query(
+      `
+        `,
+      []
+    );
+
+    return cart;
+  } catch (error) {
+    throw error;
+  }
+}
+
 async function updateCart({}) {
-    const setString = Object.keys(fields)
+  const setString = Object.keys(fields)
     .map((key, index) => `"${key}"=$${index + 1}`)
     .join(", ");
 
-    if (setString.length === 0) {
-        return;
-      }
+  if (setString.length === 0) {
+    return;
+  }
 
   try {
     const {
@@ -41,14 +57,13 @@ async function updateCart({}) {
   }
 }
 
-
-async function getCartById(id) {
+async function destroyCart(id) {
   try {
     const {
       rows: [cart],
     } = await client.query(
       `
-      `,
+        `,
       []
     );
 
@@ -59,7 +74,8 @@ async function getCartById(id) {
 }
 
 module.exports = {
-    addProductToCart,
-    updateCart,
-    getCartById,
-  };
+  addProductToCart,
+  updateCart,
+  getCartById,
+  destroyCart,
+};
