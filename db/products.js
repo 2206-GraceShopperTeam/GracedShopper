@@ -4,7 +4,7 @@ async function createProduct({name, description, price, category}) {
     try {
         const {rows:[product]} = await client.query (`
         INSERT INTO products (name, description, price, category)
-        VALUES ($1, $2)
+        VALUES ($1, $2,$3,$4)
         RETURNING *;
         `, [name, description, price, category])
         return product
@@ -12,3 +12,7 @@ async function createProduct({name, description, price, category}) {
         console.log("Trouble creating activity", error)
     }
 }
+
+module.exports = {
+    createProduct,
+  };

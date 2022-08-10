@@ -1,6 +1,6 @@
 const {client}  = require('./')
-const {createUser} = require("./")
-
+const {createUser} = require("./users")
+const {createProduct} = require("./products")
 
 async function dropTables() {
   client.connect()
@@ -63,9 +63,9 @@ async function createInitialUsers() {
   console.log("Starting to create users...");
   try {
     const usersToCreate = [
-      { email: "graces@hopper.com", password: "momofall", firstName: grace },
-      { email: "hoppers@hopper.com", password: "trappedinrussia",firstName: hopper },
-      { email: "eleven@ontherun.com", password: "hasallthepower",firstName: eleven },
+      { email: "graces@hopper.com", password: "momofall", firstName: "grace" },
+      { email: "hoppers@hopper.com", password: "trappedinrussia",firstName: "hopper" },
+      { email: "eleven@ontherun.com", password: "hasallthepower",firstName: "eleven" },
     ];
     const users = await Promise.all(usersToCreate.map(createUser));
 
