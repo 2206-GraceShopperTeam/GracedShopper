@@ -1,17 +1,14 @@
 const client = require("./client");
 
-async function addProductToCart({ cart_id, product_id }) {
+async function addProductToCart({ cartId, productId }) {
   try {
     const {
       rows: [cart],
     } = await client.query(
       `
-      INSERT INTO cart(cartId, product_id)
-      VALUES($1, $2)
-      ON CONFLICT (cart_id, product_id) DO NOTHING
-      RETURNING *
+      INSERT INTO
     `,
-      [cart_id, product_id]
+      [cartId, productId]
     );
 
     return cart;
@@ -26,11 +23,8 @@ async function getCartById(id) {
       rows: [cart],
     } = await client.query(
       `
-      SELECT *
-      FROM cart
-      WHERE id=$1
-    `,
-      [id]
+        `,
+      []
     );
 
     return cart;
@@ -39,7 +33,7 @@ async function getCartById(id) {
   }
 }
 
-async function updateCart(id, ...fields) {
+async function updateCart({}) {
   const setString = Object.keys(fields)
     .map((key, index) => `"${key}"=$${index + 1}`)
     .join(", ");
@@ -53,12 +47,8 @@ async function updateCart(id, ...fields) {
       rows: [cart],
     } = await client.query(
       `
-      UPDATE cart
-      SET ${setString}
-      WHERE id=${id}
-      RETURNING *;
-    `,
-      Object.values(fields)
+      `,
+      []
     );
 
     return cart;
@@ -73,10 +63,8 @@ async function destroyCart(id) {
       rows: [cart],
     } = await client.query(
       `
-      DELETE FROM cart
-        WHERE id=$1
-    `,
-      [id]
+        `,
+      []
     );
 
     return cart;
@@ -87,7 +75,7 @@ async function destroyCart(id) {
 
 module.exports = {
   addProductToCart,
-  getCartById,
   updateCart,
+  getCartById,
   destroyCart,
 };

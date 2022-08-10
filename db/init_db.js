@@ -8,10 +8,10 @@ async function dropTables() {
     console.log("Dropping All Tables...");
     // drop all tables, in the correct order
     await client.query(`
-  DROP TABLE IF EXISTS cart_products;
-  DROP TABLE IF EXISTS cart;
-  DROP TABLE IF EXISTS products;
-  DROP TABLE IF EXISTS users;
+    DROP TABLE IF EXISTS checkout;
+    DROP TABLE IF EXISTS cart;
+    DROP TABLE IF EXISTS products;
+    DROP TABLE IF EXISTS users;
   `);
   } catch (error) {
     console.error("Error dropping tables...");
@@ -29,7 +29,7 @@ async function createTables() {
         id SERIAL PRIMARY KEY,
               email VARCHAR(255) UNIQUE NOT NULL,
               password VARCHAR(255) NOT NULL,
-              "firstName" VARCHAR(255) NOT NULL,
+              name VARCHAR(255) NOT NULL,
               address TEXT);
 
       CREATE TABLE products (
@@ -40,17 +40,7 @@ async function createTables() {
           category VARCHAR(255) NOT NULL
       );
 
-      CREATE TABLE cart (
-        id SERIAL PRIMARY KEY,
-          user_id INTEGER REFERENCES users (id)
-      );
 
-      CREATE TABLE cart_products (
-        id SERIAL PRIMARY KEY,
-          product_id INTEGER REFERENCES products (id),
-          cart_id INTEGER REFERENCES cart (id),
-          quantity INTEGER NOT NULL
-      );
       
       
               `);
@@ -58,14 +48,27 @@ async function createTables() {
     throw error;
   }
 }
+      // CREATE TABLE checkout (
+      //   id SERIAL PRIMARY KEY,
+      //     user_id INTEGER REFERENCES users (id)
+      //     product INTEGER REFERENCES  cart (product_id),
+      //     cart INTEGER REFERENCES cart_id,
+      //     amount INTEGER REFERENCES cart (quantity),
+      // );
 
+      // CREATE TABLE cart (
+      //   id SERIAL PRIMARY KEY,
+      //     product_id INTEGER REFERENCES products (id),
+      //     cart_id INTEGER REFERENCES cart (id),
+      //     quantity INTEGER NOT NULL
+      // );
 async function createInitialUsers() {
   console.log("Starting to create users...");
   try {
     const usersToCreate = [
-      { email: "graces@hopper.com", password: "momofall", firstName: "grace" },
-      { email: "hoppers@hopper.com", password: "trappedinrussia",firstName: "hopper" },
-      { email: "eleven@ontherun.com", password: "hasallthepower",firstName: "eleven" },
+      { email: "graces@hopper.com", password: "momofall", name: "grace" },
+      { email: "hoppers@hopper.com", password: "trappedinrussia",name: "hopper" },
+      { email: "eleven@ontherun.com", password: "hasallthepower",name: "eleven" },
     ];
     const users = await Promise.all(usersToCreate.map(createUser));
 
@@ -114,7 +117,7 @@ async function createInitialProducts() {
 async function rebuildDB() {
   try {
     await dropTables();
-    await createTables();
+    await createTables();    
     await createInitialUsers();
     await createInitialProducts();
     client.end()
