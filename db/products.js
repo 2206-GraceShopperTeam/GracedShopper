@@ -84,6 +84,44 @@ async function attachProductsToCarts(carts) {
     }
 }
 
+async function updateProducts({id, ...fields}) {
+        const setString = Object.keys(fields).map(
+            (key,index) => `"${key}" = $${index + 1}`
+        ).join(', ');
+
+        if(setString.length === 0) {
+            return;
+        }
+        try {
+            const {
+                rows: [product]
+            } = await client.query(`
+            UPDATE products
+            SET ${setString}
+            WHERE id=${id}
+            RETURNING *;
+            `,
+            Object.values(fields));
+            return product;
+        } catch (error) {
+            console.error("Trouble Updating Products...")
+        }
+    }
+
+    async function deleteProduct(id) {
+        try {
+            await client.query(`
+            DELETE FROM products
+            WHERE id=${id};
+            `)
+            return product;
+        } catch (error) {
+            console.error ('Trouble deleting products', error);
+        }
+    }
+    //Check the DELETE FROM line, it may not be products
+
+
 
 
 module.exports = {
@@ -92,4 +130,6 @@ module.exports = {
     getProductById,
     getProductByName,
     attachProductsToCarts,
+    updateProducts,
+    deleteProduct,
   };
