@@ -2,7 +2,7 @@
 const { Client } = require("pg");
 
 const connectionString =
-  process.env.DATABASE_URL || "https://localhost:5432/GracedShopper";
+  process.env.DATABASE_URL || "https://localhost:5432/GraceShopper";
 
 // const client = new Pool({
 //   connectionString,
@@ -12,6 +12,6 @@ const connectionString =
 //       : undefined,
 // });
 
-const client = new Client("https://localhost:5432/GracedShopper")
+const client = new Client("https://localhost:5432/GraceShopper")
 
 module.exports = client;

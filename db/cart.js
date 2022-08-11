@@ -1,14 +1,13 @@
 const client = require("./client");
 const { attachProductsToCart } = require("./products");
 
-async function createCart(user_id, product_id, cart_id, quantity, price, name){
+async function createCart({user_id, product_id, quantity, name}){
   try {
     const {rows: [cart]} = await client.query(`
-    INSERT INTO carts(user_id, product_id, cart_id, quantity, price, name)
-    VALUES($1, $2, $3, $4, $5, $6)
-    ON CONFLICT (user_id) DO NOTHING
-    RETURNING *
-    `, {user_id, product_id, cart_id, quantity, price, name})
+    INSERT INTO carts(user_id, product_id, quantity, name)
+    VALUES($1, $2, $3, $4)
+    RETURNING *;
+    `, [user_id, product_id, quantity, name])
 
     return cart
   } catch (error) {
@@ -25,7 +24,7 @@ async function addProductToCart({ cart_id, product_id, quantity }) {
       INSERT INTO cart(cartId, product_id, quantity)
       VALUES($1, $2, $3)
       ON CONFLICT (cart_id, product_id, quantity) DO NOTHING
-      RETURNING *
+      RETURNING *;
     `,
       [cart_id, product_id, quantity]
     );

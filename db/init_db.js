@@ -5,6 +5,7 @@ const {
 } = require('./');
 const { addProductToCart, createCart } = require('./cart');
 const { createProduct, getAllProducts, getProductById, getProductByName, updateProducts, deleteProduct } = require('./products');
+const{createUser, getAllUsers} = require("./users")
 
 
 async function dropTables() {
@@ -18,7 +19,7 @@ async function dropTables() {
     DROP TABLE IF EXISTS products;
     DROP TABLE IF EXISTS users;
   `);
-  console.log('drop tables finihseds')
+  console.log('Finished Dropping Tables...')
   } catch (error) {
     console.error("Error dropping tables...");
     throw error;
@@ -47,25 +48,25 @@ async function createTables() {
       );
       CREATE TABLE carts (
         id SERIAL PRIMARY KEY,
-        user_id INTEGER REFERENCES users (id),
-          product_id INTEGER REFERENCES products (id),
-          cart_id INTEGER REFERENCES checkout (id),
+          user_id INTEGER REFERENCES users(id),
+          product_id INTEGER REFERENCES products(id),
           quantity INTEGER NOT NULL,
-          price INTEGER REFERENCES products (price),
-          name VARCHAR(255) REFERENCES products (name)
+          name VARCHAR(255) REFERENCES products(name),
+          UNIQUE (user_id,product_id,name)
       );`
       
       // CREATE TABLE checkout (
-        //   id SERIAL PRIMARY KEY,
-        //     user_id INTEGER REFERENCES users (id)
-        //     product INTEGER REFERENCES  cart (product_id),
-        //     cart INTEGER REFERENCES cart_id,
-        //     amount INTEGER REFERENCES cart (quantity),
-        // );
+      //     id SERIAL PRIMARY KEY,
+      //       user_id INTEGER REFERENCES users(id),
+      //       product INTEGER REFERENCES  cart(product_id),
+      //       cart INTEGER REFERENCES carts_id,
+      //       amount INTEGER REFERENCES cart (quantity)
+      //   );
         
         
         
               );
+    console.log("Finished Building Tables...");
   } catch (error) {
     throw error;
   }
@@ -125,12 +126,14 @@ async function createInitialProducts() {
 
 async function createInitialCart(){
   console.log('Starting to create carts...')
+  const products =  await getAllProducts()
+  const users =  await getAllUsers()
+  console.log(products, "whats in here")
   try {
     const cartsToCreate = [
-      {user_id: 1, product_id: 1, cart_id: 1, quantity: 2, price: products.price, name: products.name},
-      {user_id: 2, product_id: 2, cart_id: 2, quantity: 2, price: products.price, name: products.name},
-      {user_id: 3, product_id: 3, cart_id: 3, quantity: 2, price: products.price, name: products.name},
-      {user_id: 4, product_id: 4, cart_id: 4, quantity: 2, price: products.price, name: products.name}
+      {user_id: users[0].id, product_id: products[0].id, quantity: 2, name: products[0].name},
+      {user_id: users[1].id, product_id: products[1].id, quantity: 2, name: products[1].name},
+      {user_id: users[2].id, product_id: products[2].id, quantity: 2, name: products[2].name}
     ]
 
     const cart = await Promise.all(cartsToCreate.map(createCart));
@@ -151,7 +154,7 @@ async function rebuildDB() {
     await createTables();    
     await createInitialUsers();
     await createInitialProducts();
-    await createInitialCart();
+    await createInitialCart(getProductById(1));
 
     client.end()
   } catch (error) {
