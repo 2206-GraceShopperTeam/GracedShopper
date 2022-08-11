@@ -131,6 +131,7 @@ module.exports = {
   addProductToCart,
   getCartById,
   updateCart,
+  updateCart,
   destroyCart,
   getCartByUser,
   attachProductstoCart

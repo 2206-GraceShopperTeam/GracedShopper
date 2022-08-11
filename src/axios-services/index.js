@@ -27,3 +27,46 @@ export async function getAPIHealth() {
     return { healthy: false };
   }
 }
+
+export async function login(email, password) {
+  const request = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email: email,
+      password: password,
+    }),
+  };
+  const response = await fetch(`${BASE}/users/login`, request);
+  const result = await response.json();
+  const token = result.token;
+  return token;
+}
+
+
+
+export async function register(event) {
+  const registerEmail = event.target[0].value;
+  const registerPassword = event.target[1].value;
+  const registerName     = event.target[2].value;
+  const registerAddress  = event.target[3].value;
+
+  const response = await fetch(`${BASE}/users/register`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email: registerEmail,
+      password: registerPassword,
+      name : registerName,
+      address: registerAddress
+    }),
+  });
+  const result = await response.json();
+  const token = result.token;
+
+  localStorage.setItem("token", token);
+}

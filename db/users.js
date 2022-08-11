@@ -3,7 +3,8 @@ const bcrypt = require("bcrypt");
 const SALT_COUNT = 10;
 
 // user functions
-async function createUser({ email, password,firstName,address }) {
+async function createUser({ email, password,name,address }) {
+    // tested and working
     const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
     console.log("is this firing")
     try {
@@ -11,12 +12,12 @@ async function createUser({ email, password,firstName,address }) {
         rows: [user],
       } = await client.query(
         `
-      INSERT INTO users(email, password, "firstName",address) 
+      INSERT INTO users(email, password, name,address) 
       VALUES($1, $2, $3, $4) 
       ON CONFLICT (email) DO NOTHING 
-      RETURNING id,email,"firstName",address;
+      RETURNING id,email,name,address;
       `,
-        [email, hashedPassword,firstName,address]
+        [email, hashedPassword,name,address]
       );
       return user;
     } catch (error) {
@@ -25,6 +26,7 @@ async function createUser({ email, password,firstName,address }) {
   }
 
   async function getUser({ email, password }) {
+    //tested and working
     try {
       const {
         rows: [user],
@@ -48,8 +50,27 @@ async function createUser({ email, password,firstName,address }) {
     }
   }
 
+  async function getAllUsers() {
+    //this is specifically so that admin can view all users
+    //Tested and working
+    try {
+      const { rows: user } = await client.query(
+        `
+      SELECT *
+      FROM users
+      WHERE email = email
+  
+      `
+      );
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  }
+  
 
   async function getUserByEmail(email) {
+    //Tested and working
     try {
       const {
         rows: [user],
@@ -57,7 +78,7 @@ async function createUser({ email, password,firstName,address }) {
         `
         SELECT *
         FROM users
-        WHERE email=$1;
+        WHERE email = $1
       `,
         [email]
       );
@@ -68,6 +89,7 @@ async function createUser({ email, password,firstName,address }) {
     }
   }
   async function getUserById(userId) {
+    //Tested and working
     try {
       const {
         rows: [user],
@@ -79,12 +101,37 @@ async function createUser({ email, password,firstName,address }) {
       `,
         [userId]
       );
-      return { id: user.id, username: user.username };
+      return { id: user.id, username: user.name };
     } catch (error) {
       throw error;
     }
   }
   
+  async function updateUser({ id, ...fields }) {
+    //this is so users can update their info
+    //tested and working
+    try {
+      const setString = Object.keys(fields)
+        .map((key, index) => `"${key}"=$${index + 1}`)
+        .join(", ");
+      if (setString.length > 0) {
+        const {
+          rows: [user],
+        } = await client.query(
+          `
+           UPDATE users
+           SET ${setString}
+           WHERE id=${id}
+           RETURNING *;
+         `,
+          Object.values(fields)
+        );
+        return user;
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
 
 
 
@@ -93,4 +140,6 @@ async function createUser({ email, password,firstName,address }) {
     getUser,
     getUserById,
     getUserByEmail,
+    getAllUsers,
+    updateUser
   };
