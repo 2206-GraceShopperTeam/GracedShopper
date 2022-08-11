@@ -44,23 +44,23 @@ async function createTables() {
           category VARCHAR(255) NOT NULL
       );`
 
-      CREATE TABLE checkout (
-        id SERIAL PRIMARY KEY,
-          user_id INTEGER REFERENCES users (id)
-          product INTEGER REFERENCES  cart (product_id),
-          cart INTEGER REFERENCES cart_id,
-          amount INTEGER REFERENCES cart (quantity),
-      );
+      // CREATE TABLE checkout (
+      //   id SERIAL PRIMARY KEY,
+      //     user_id INTEGER REFERENCES users (id)
+      //     product INTEGER REFERENCES  cart (product_id),
+      //     cart INTEGER REFERENCES cart_id,
+      //     amount INTEGER REFERENCES cart (quantity),
+      // );
 
-      CREATE TABLE cart_products (
-        id SERIAL PRIMARY KEY,
-        user_id INTEGER REFERENCES users (id),
-          product_id INTEGER REFERENCES products (id),
-          cart_id INTEGER REFERENCES cart (id),
-          quantity INTEGER NOT NULL,
-          price INTEGER REFERENCES products (price),
-          name VARCHAR(255) REFERENCES products (name)
-      );
+      // CREATE TABLE cart_products (
+      //   id SERIAL PRIMARY KEY,
+      //   user_id INTEGER REFERENCES users (id),
+      //     product_id INTEGER REFERENCES products (id),
+      //     cart_id INTEGER REFERENCES cart (id),
+      //     quantity INTEGER NOT NULL,
+      //     price INTEGER REFERENCES products (price),
+      //     name VARCHAR(255) REFERENCES products (name)
+      // );
       
       
               );
@@ -131,8 +131,6 @@ async function rebuildDB() {
   } catch (error) {
     console.log("Error during rebuildDB");
     throw error;
-  } catch (error) {
-    throw (error);
   }
 }
 
