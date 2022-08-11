@@ -15,18 +15,17 @@ async function createCart({user_id, product_id, quantity, name}){
   }
 }
 
-async function addProductToCart({ cart_id, product_id, quantity }) {
+async function addProductToCart({ user_id, product_id, quantity, name }) {
   try {
     const {
       rows: [cart],
     } = await client.query(
       `
-      INSERT INTO cart(cartId, product_id, quantity)
-      VALUES($1, $2, $3)
-      ON CONFLICT (cart_id, product_id, quantity) DO NOTHING
+      INSERT INTO carts(user_id, product_id, quantity, name)
+      VALUES($1, $2, $3, $4)
       RETURNING *;
     `,
-      [cart_id, product_id, quantity]
+      [user_id, product_id, quantity, name]
     );
 
     return cart;
@@ -39,7 +38,7 @@ async function getCartByUser(userId) {
   try {
     const { rows: [cart] } = await client.query(`
     SELECT * 
-    FROM cart 
+    FROM carts
     WHERE user_id = $1
     `, [userId])
 
@@ -56,7 +55,7 @@ async function getCartById(id) {
     } = await client.query(
       `
       SELECT *
-      FROM cart
+      FROM carts
       WHERE id=$1
     `,
       [id]
@@ -68,21 +67,20 @@ async function getCartById(id) {
   }
 }
 
-async function updateCart(id, ...fields) {
+async function updateCart({id, ...fields}) {
   const setString = Object.keys(fields)
     .map((key, index) => `"${key}"=$${index + 1}`)
     .join(", ");
-
-  if (setString.length === 0) {
-    return;
-  }
-
+    
+    if (setString.length === 0) {
+      return;
+    }
   try {
     const {
       rows: [cart],
     } = await client.query(
       `
-      UPDATE cart
+      UPDATE carts
       SET ${setString}
       WHERE id=${id}
       RETURNING *;
@@ -102,13 +100,11 @@ async function destroyCart(id) {
       rows: [cart],
     } = await client.query(
       `
-      DELETE FROM cart
+      DELETE FROM carts
         WHERE id=$1
     `,
       [id]
     );
-
-    return cart;
   } catch (error) {
     throw error;
   }

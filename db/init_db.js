@@ -3,7 +3,7 @@ const {
   // declare your model imports here
   // for example, User
 } = require('./');
-const { addProductToCart, createCart } = require('./cart');
+const { addProductToCart, createCart, getCartById, updateCart, destroyCart } = require('./cart');
 const { createProduct, getAllProducts, getProductById, getProductByName, updateProducts, deleteProduct } = require('./products');
 const{createUser, getAllUsers} = require("./users")
 
@@ -154,8 +154,10 @@ async function rebuildDB() {
     await createTables();    
     await createInitialUsers();
     await createInitialProducts();
-    await createInitialCart(getProductById(1));
-
+    await createInitialCart();
+    console.log(await getCartById(2))
+    console.log(await destroyCart(2))
+    console.log(await getCartById(2))
     client.end()
   } catch (error) {
     console.log("Error during rebuildDB");
