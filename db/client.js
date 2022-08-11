@@ -1,7 +1,8 @@
+// Connect to DB
 const { Client } = require("pg");
 
 const connectionString =
-  process.env.DATABASE_URL || "https://localhost:5432/GraceShopper";
+  process.env.DATABASE_URL || "https://localhost:5432/GracedShopper";
 
 // const client = new Pool({
 //   connectionString,
@@ -11,6 +12,6 @@ const connectionString =
 //       : undefined,
 // });
 
-const client = new Client("https://localhost:5432/GraceShopper")
+const client = new Client("https://localhost:5432/GracedShopper")
 
 module.exports = client;
