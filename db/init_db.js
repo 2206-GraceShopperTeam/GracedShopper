@@ -47,9 +47,12 @@ async function createTables() {
 
       CREATE TABLE cart_products (
         id SERIAL PRIMARY KEY,
+        user_id INTEGER REFERENCES users (id),
           product_id INTEGER REFERENCES products (id),
           cart_id INTEGER REFERENCES cart (id),
-          quantity INTEGER NOT NULL
+          quantity INTEGER NOT NULL,
+          price INTEGER REFERENCES products (price),
+          name VARCHAR(255) REFERENCES products (name)
       );
       
       

@@ -1,19 +1,36 @@
 const client = require("./client");
-
-async function addProductToCart({ cartId, productId }) {
+const { attachProductsToCart } = require("./products");
+async function addProductToCart({ cart_id, product_id, quantity }) {
   try {
     const {
       rows: [cart],
     } = await client.query(
       `
-      INSERT INTO
+      INSERT INTO cart(cartId, product_id, quantity)
+      VALUES($1, $2, $3)
+      ON CONFLICT (cart_id, product_id, quantity) DO NOTHING
+      RETURNING *
     `,
-      [cartId, productId]
+      [cart_id, product_id, quantity]
     );
 
     return cart;
   } catch (error) {
     throw error;
+  }
+}
+
+async function getCartByUser(userId) {
+  try {
+    const { rows: [cart] } = await client.query(`
+    SELECT * 
+    FROM cart 
+    WHERE user_id = $1
+    `, [userId])
+
+    return cart
+  } catch (error) {
+      throw error
   }
 }
 
@@ -23,8 +40,11 @@ async function getCartById(id) {
       rows: [cart],
     } = await client.query(
       `
-        `,
-      []
+      SELECT *
+      FROM cart
+      WHERE id=$1
+    `,
+      [id]
     );
 
     return cart;
@@ -33,7 +53,7 @@ async function getCartById(id) {
   }
 }
 
-async function updateCart({}) {
+async function updateCart(id, ...fields) {
   const setString = Object.keys(fields)
     .map((key, index) => `"${key}"=$${index + 1}`)
     .join(", ");
@@ -47,8 +67,12 @@ async function updateCart({}) {
       rows: [cart],
     } = await client.query(
       `
-      `,
-      []
+      UPDATE cart
+      SET ${setString}
+      WHERE id=${id}
+      RETURNING *;
+    `,
+      Object.values(fields)
     );
 
     return cart;
@@ -63,8 +87,10 @@ async function destroyCart(id) {
       rows: [cart],
     } = await client.query(
       `
-        `,
-      []
+      DELETE FROM cart
+        WHERE id=$1
+    `,
+      [id]
     );
 
     return cart;
@@ -73,9 +99,39 @@ async function destroyCart(id) {
   }
 }
 
+async function attachProductstoCart(carts) {
+
+  const cartToReturn = [...carts];
+  const binds = carts.map((_, index) => `$${index + 1}`).join(', ');
+  const cartIds = carts.map(cart => cart.id);
+  if (!cartIds?.length) return [];
+
+  try {
+    const {rows: [products] } = await client.query(`
+    SELECT products.name, products.price,
+    FROM products 
+    JOIN name ON products.name = cart.name
+    JOIN price ON product.price = cart.price
+    WHERE 
+    ` [cart])
+
+    for(const cart of cartsToReturn) {
+      // filter the activities to only include those that have this routineId
+      const productsToAdd = products.filter(product => product.cart_id === cart.id);
+      // attach the activities to each single routine
+      cart.products = productsToAdd;
+    }
+
+    return cartsToReturn
+  } catch (error) {
+    throw error;
+  }
+}
 module.exports = {
   addProductToCart,
-  updateCart,
   getCartById,
+  updateCart,
   destroyCart,
+  getCartByUser,
+  attachProductstoCart
 };
