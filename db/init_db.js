@@ -3,6 +3,7 @@ const {
   // declare your model imports here
   // for example, User
 } = require('./');
+const { addProductToCart, createCart } = require('./cart');
 const { createProduct, getAllProducts, getProductById, getProductByName, updateProducts, deleteProduct } = require('./products');
 
 
@@ -13,10 +14,11 @@ async function dropTables() {
     // drop all tables, in the correct order
     await client.query(`
     DROP TABLE IF EXISTS checkout;
-    DROP TABLE IF EXISTS cart;
+    DROP TABLE IF EXISTS carts;
     DROP TABLE IF EXISTS products;
     DROP TABLE IF EXISTS users;
   `);
+  console.log('drop tables finihseds')
   } catch (error) {
     console.error("Error dropping tables...");
     throw error;
@@ -43,11 +45,11 @@ async function createTables() {
           price INTEGER NOT NULL,
           category VARCHAR(255) NOT NULL
       );
-      CREATE TABLE carts(
+      CREATE TABLE carts (
         id SERIAL PRIMARY KEY,
         user_id INTEGER REFERENCES users (id),
           product_id INTEGER REFERENCES products (id),
-          cart_id INTEGER REFERENCES cart (id),
+          cart_id INTEGER REFERENCES checkout (id),
           quantity INTEGER NOT NULL,
           price INTEGER REFERENCES products (price),
           name VARCHAR(255) REFERENCES products (name)
@@ -121,12 +123,36 @@ async function createInitialProducts() {
 }
 }
 
+async function createInitialCart(){
+  console.log('Starting to create carts...')
+  try {
+    const cartsToCreate = [
+      {user_id: 1, product_id: 1, cart_id: 1, quantity: 2, price: products.price, name: products.name},
+      {user_id: 2, product_id: 2, cart_id: 2, quantity: 2, price: products.price, name: products.name},
+      {user_id: 3, product_id: 3, cart_id: 3, quantity: 2, price: products.price, name: products.name},
+      {user_id: 4, product_id: 4, cart_id: 4, quantity: 2, price: products.price, name: products.name}
+    ]
+
+    const cart = await Promise.all(cartsToCreate.map(createCart));
+
+    console.log("Carts created:");
+    console.log(cart);
+    console.log("Finished creating carts!")
+
+  } catch (error) {
+    throw error
+  }
+
+}
+
 async function rebuildDB() {
   try {
     await dropTables();
     await createTables();    
     await createInitialUsers();
     await createInitialProducts();
+    await createInitialCart();
+
     client.end()
   } catch (error) {
     console.log("Error during rebuildDB");
