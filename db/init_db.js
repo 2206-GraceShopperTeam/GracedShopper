@@ -123,6 +123,8 @@ async function rebuildDB() {
     await createInitialProducts();
     console.log("Error during rebuildDB");
     throw error;
+  } catch (error) {
+    throw (error);
   }
 }
 
