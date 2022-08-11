@@ -40,9 +40,12 @@ async function createTables() {
           category VARCHAR(255) NOT NULL
       );
 
-      CREATE TABLE cart (
+      CREATE TABLE checkout (
         id SERIAL PRIMARY KEY,
           user_id INTEGER REFERENCES users (id)
+          product INTEGER REFERENCES  cart (product_id),
+          cart INTEGER REFERENCES cart_id,
+          amount INTEGER REFERENCES cart (quantity),
       );
 
       CREATE TABLE cart_products (
