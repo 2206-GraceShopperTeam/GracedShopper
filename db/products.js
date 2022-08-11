@@ -15,29 +15,26 @@ async function createProduct({name, description, price, category}) {
 
 async function getAllProducts() {
     try{
-        const {rows: productId} = await client.query(`
+        const {rows: product} = await client.query(`
         SELECT *
         FROM products
-        WHERE id=$1
         `)
 
-        const products = await Promise.all(productId.map(product => getProductById(product.id)))
-
-        return products;
+        return product;
     } catch (error) {
         console.error ("Trouble Getting All Products...")
     }
 }
 
-async function getProductById() {
+async function getProductById(id) {
     try {
-        const {rows: [products]} = await client.query(`
+        const {rows: [product]} = await client.query(`
         SELECT *
         FROM products
-        WHERE id=${productID}
-        `)
+        WHERE id=$1
+        `, [id])
         if(!product) {
-            return null
+            return null;
         }
         return product
     } catch (error) {
@@ -114,7 +111,6 @@ async function updateProducts({id, ...fields}) {
             DELETE FROM products
             WHERE id=${id};
             `)
-            return product;
         } catch (error) {
             console.error ('Trouble deleting products', error);
         }
