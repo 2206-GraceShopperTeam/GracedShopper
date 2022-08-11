@@ -62,7 +62,6 @@ async function createTables() {
       //     name VARCHAR(255) REFERENCES products (name)
       // );
       
->>>>>>> users
       
               );
   } catch (error) {
