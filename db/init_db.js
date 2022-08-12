@@ -5,7 +5,7 @@ const {
 } = require("./");
 const { createCart, getCartById } = require("./cart");
 const { createCheckout, getCheckoutByUser } = require("./checkout");
-const { createProduct, getAllProducts } = require("./products");
+const { createProduct, getAllProducts, attachProductsToCarts } = require("./products");
 const { createUser, getAllUsers } = require("./users");
 
 async function dropTables() {
@@ -50,16 +50,21 @@ async function createTables() {
       CREATE TABLE carts (
         id SERIAL PRIMARY KEY,
           user_id INTEGER REFERENCES users(id),
-          product_id INTEGER REFERENCES products(id),
-          quantity INTEGER NOT NULL,
-          name VARCHAR(255) REFERENCES products(name),
-          UNIQUE (user_id,product_id,name)
+          is_ordered BOOLEAN DEFAULT false
       );
       
-      CREATE TABLE checkout (
+      CREATE TABLE carts_products(
         id SERIAL PRIMARY KEY,
-          user_id INTEGER REFERENCES users(id),
-          cart_id INTEGER REFERENCES carts(id)
+        cart_id INTEGER REFERENCE carts(id),
+        product_id INTEGER REFERENCE carts(product_id),
+        quantity INTEGER NOT NULL,
+        UNIQUE (product_id, cart_id)
+      );
+
+      CREATE TABLE orders(
+        id SERIAL PRIMARY KEY,
+          cart_id INTEGER REFERENCES carts(id),
+          ordered_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
       );
     `
     );
@@ -256,7 +261,11 @@ async function rebuildDB() {
     await createInitialProducts();
     await createInitialCart();
     await createInitialCheckout();
-    console.log(await getCheckoutByUser(1));
+    console.log(await getCartById(4), 'this is before');
+    await attachProductsToCarts({ user_id:1, product_id:9, quantity:2, name: 'MacBook Pro'})
+    await attachProductsToCarts({ user_id:1, product_id:8, quantity:2, name: 'XPS14'})
+    console.log(await getCartById(4), 'this is after');
+    console.log(await getCartById(5), 'this is after');
     client.end();
   } catch (error) {
     console.log("Error during rebuildDB");

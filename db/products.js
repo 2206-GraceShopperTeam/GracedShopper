@@ -56,30 +56,44 @@ async function getProductByName(name) {
 }
 
 
-async function attachProductsToCarts(carts) {
-    const cartsToReturn = [...carts];
-    const binds = carts.map((_, index) => `$${index + 1}`).join(', ');
-    const cartIds = carts.map(cart => cart.id);
-    if (!cartIds?.length) return [];
+async function attachProductsToCarts({id, user_id, product_id, quantity, name }) {
 
     try {
-        const {rows: products} = await client.query(`
-        SELECT carts.*, cart_products."productId" = products.id
-        FROM products
-        JOIN cart_products ON cart_products."productID" = products.id
-        WHERE cart_products."productId" IN (${binds});
-        `, cartIds);
-
-        for (const cart of cartsToReturn) {
-            const productsToAdd = products.filter(cart => cart.productId === product.id);
-            //^^ this might be wrong, please check
-            cart.products = productsToAdd;
-        }
-        return cartsToReturn;
+        const { rows: [cart] } = await client.query(`
+        INSERT INTO carts (id, user_id, product_id, quantity, name)
+        VALUES ($1, $2, $3, $4, $5)
+        JOIN products ON carts.product_id = products.id
+        RETURNING *
+        `, [id, user_id, product_id, quantity, name])
+        console.log(cart, 'cart')
+        return cart
     } catch (error) {
-        console.error("Trouble attaching Products to Carts...", error);
+        throw error
     }
+
 }
+    // const cartsToReturn = [...carts];
+    // const binds = carts.map((_, index) => `$${index + 1}`).join(', ');
+    // const cartIds = carts.map(cart => cart.id);
+    // if (!cartIds?.length) return [];
+
+    // try {
+    //     const {rows: products} = await client.query(`
+    //     SELECT carts.*, cart_products."productId" = products.id
+    //     FROM products
+    //     JOIN cart_products ON cart_products."productID" = products.id
+    //     WHERE cart_products."productId" IN (${binds});
+    //     `, cartIds);
+
+    //     for (const cart of cartsToReturn) {
+    //         const productsToAdd = products.filter(cart => cart.productId === product.id);
+    //         //^^ this might be wrong, please check
+    //         cart.products = productsToAdd;
+    //     }
+    //     return cartsToReturn;
+    // } catch (error) {
+    //     console.error("Trouble attaching Products to Carts...", error);
+    // }
 
 async function updateProducts({id, ...fields}) {
         const setString = Object.keys(fields).map(
