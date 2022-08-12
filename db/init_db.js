@@ -3,7 +3,7 @@ const {
   // declare your model imports here
   // for example, User
 } = require("./");
-const { createCart, getCartById } = require("./cart");
+const { createCart, getCartById } = require("./carts_products");
 const { createCheckout, getCheckoutByUser } = require("./checkout");
 const { createProduct, getAllProducts, attachProductsToCarts } = require("./products");
 const { createUser, getAllUsers } = require("./users");
@@ -56,7 +56,7 @@ async function createTables() {
       CREATE TABLE carts_products(
         id SERIAL PRIMARY KEY,
         cart_id INTEGER REFERENCE carts(id),
-        product_id INTEGER REFERENCE carts(product_id),
+        product_id INTEGER REFERENCE products(id),
         quantity INTEGER NOT NULL,
         UNIQUE (product_id, cart_id)
       );

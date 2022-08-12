@@ -1,5 +1,5 @@
 const client = require("./client");
-const { attachCartToCheckout } = require("./cart");
+const { attachCartToCheckout } = require("./carts_products");
 
 async function createCheckout({ user_id, cart_id}) {
   try {
