@@ -1,8 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { App } from './components';
-// css stylesheets can be created for each component
-// place them in the src/style directory, and import them like this:
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import { App } from "./components";
 import './style/index.css';
+const root = ReactDOM.createRoot(document.getElementById("app"));
 
-ReactDOM.render(<App />, document.getElementById('root'));
+root.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-// getAPIHealth is defined in our axios-services directory index.js
-// you can think of that directory as a collection of api adapters
-// where each adapter fetches specific info from our express server's /api route
+import { Route, Routes } from "react-router-dom";
 import { getAPIHealth } from '../axios-services';
+import {Home,Header,Login,Products,Cart} from './'
 import '../style/App.css';
 
 const App = () => {
@@ -24,7 +23,16 @@ const App = () => {
 
   return (
     <div className="app-container">
-      <h1>Hello, World!</h1>
+      <Header/>
+      <Routes>
+
+         <Route path="/Login" element={<Login/>} />
+         <Route path="/Products" element={<Products/>} />
+         <Route path="/Cart" element={<Cart/>} />
+         <Route path="/" element={<Home/>} />
+         
+      </Routes>
+     
       <p>API Status: {APIHealth}</p>
     </div>
   );
