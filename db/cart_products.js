@@ -1,12 +1,12 @@
 const client = require("./client");
 
-async function createCart({ cart_id, product_id, quantity }) {
+async function createCartProducts({ cart_id, product_id, quantity }) {
   try {
     const {
       rows: [cart],
     } = await client.query(
       `
-    INSERT INTO carts(cart_id, product_id, quantity)
+    INSERT INTO cart_products (cart_id, product_id, quantity)
     VALUES($1, $2, $3)
     RETURNING *;
     `,
@@ -39,6 +39,6 @@ async function addProductToCart({ cart_id, product_id, quantity }) {
 }
 
 module.exports = {
-  createCart,
+  createCartProducts,
   addProductToCart,
 };

@@ -70,24 +70,22 @@ async function getProductByName(name) {
   }
 }
 
-async function attachProductsToCarts({
-  id,
-  user_id,
+async function attachProductsToCartProducts({
+  cart_id,
   product_id,
   quantity,
-  name,
 }) {
   try {
     const {
       rows: [cart],
     } = await client.query(
       `
-        INSERT INTO carts (id, user_id, product_id, quantity, name)
-        VALUES ($1, $2, $3, $4, $5)
-        JOIN products ON carts.product_id = products.id
+        INSERT INTO carts (cart_id, product_id, quantity)
+        VALUES ($1, $2, $3)
+        JOIN products ON cart_products.product_id = products.id
         RETURNING *
         `,
-      [id, user_id, product_id, quantity, name]
+      [cart_id, product_id, quantity]
     );
     console.log(cart, "cart");
     return cart;
@@ -139,7 +137,7 @@ module.exports = {
   getAllProducts,
   getProductById,
   getProductByName,
-  attachProductsToCarts,
+  attachProductsToCartProducts,
   updateProducts,
   deleteProduct,
 };

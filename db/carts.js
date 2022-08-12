@@ -1,5 +1,35 @@
 const client = require("./client");
 
+async function createCart({user_id, is_ordered}) {
+  try {
+    const {
+      rows: [cart]
+    } = await client.query(
+      `
+      INSERT INTO carts (user_id, is_ordered)
+      VALUES ($1, $2)
+      RETURNING *;
+      `, [user_id, is_ordered]
+    )
+    return cart;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getAllCarts() {
+  try {
+    const { rows: cart } = await client.query(`
+        SELECT *
+        FROM carts
+        `);
+
+    return cart;
+  } catch (error) {
+    throw error;
+  }
+}
+
 async function getCartByUser(userId) {
   try {
     const {
@@ -72,7 +102,7 @@ async function destroyCart(id) {
     } = await client.query(
       `
         DELETE FROM carts
-          WHERE id=$1
+        WHERE id=$1
       `,
       [id]
     );
@@ -82,6 +112,8 @@ async function destroyCart(id) {
 }
 
 module.exports = {
+  createCart,
+  getAllCarts,
   getCartByUser,
   getCartById,
   updateCart,
