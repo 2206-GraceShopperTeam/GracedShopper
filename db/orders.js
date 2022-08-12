@@ -1,33 +1,33 @@
 const client = require("./client");
 const { attachCartToCheckout } = require("./carts_products");
 
-async function createCheckout({ user_id, cart_id}) {
+async function createOrder({cart_id, ordered_date}) {
   try {
     const {
-      rows: [checkout],
+      rows: [order],
     } = await client.query(
       `
-          INSERT INTO checkout(user_id, cart_id) 
+          INSERT INTO orders(cart_id, ordered_date) 
           VALUES($1, $2)
           RETURNING *;
         `,
-      [user_id, cart_id]
+      [cart_id, ordered_date]
     );
 
-    return checkout;
+    return order;
   } catch (error) {
     throw error;
   }
 }
 
-async function getCheckoutByUser(user_id) {
+async function getOrderByCart(cart_id) {
   try {
     const { rows } = await client.query(
       `
-          SELECT checkout.*
-          FROM checkout
-          WHERE user_id = $1
-        `, [user_id]
+          SELECT orders.*
+          FROM orders
+          WHERE cart_id = $1
+        `, [cart_id]
     );
 
     return rows;
@@ -84,9 +84,9 @@ async function getCheckoutByUser(user_id) {
 // }
 
 module.exports = {
-  createCheckout,
+  createOrder,
+  getOrderByCart,
   // getCheckoutById,
   // getCheckoutWithoutProducts,
-  getCheckoutByUser,
   // destroyCheckout,
 };

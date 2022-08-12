@@ -4,7 +4,7 @@ const {
   // for example, User
 } = require("./");
 const { createCart, getCartById } = require("./carts_products");
-const { createCheckout, getCheckoutByUser } = require("./checkout");
+const { createCheckout, getCheckoutByUser } = require("./orders");
 const { createProduct, getAllProducts, attachProductsToCarts } = require("./products");
 const { createUser, getAllUsers } = require("./users");
 
@@ -53,7 +53,7 @@ async function createTables() {
           is_ordered BOOLEAN DEFAULT false
       );
       
-      CREATE TABLE carts_products(
+      CREATE TABLE carts_products (
         id SERIAL PRIMARY KEY,
         cart_id INTEGER REFERENCE carts(id),
         product_id INTEGER REFERENCE products(id),
@@ -61,7 +61,7 @@ async function createTables() {
         UNIQUE (product_id, cart_id)
       );
 
-      CREATE TABLE orders(
+      CREATE TABLE orders (
         id SERIAL PRIMARY KEY,
           cart_id INTEGER REFERENCES carts(id),
           ordered_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
