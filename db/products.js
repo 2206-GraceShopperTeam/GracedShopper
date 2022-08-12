@@ -70,30 +70,6 @@ async function getProductByName(name) {
   }
 }
 
-async function attachProductsToCartProducts({
-  cart_id,
-  product_id,
-  quantity,
-}) {
-  try {
-    const {
-      rows: [cart],
-    } = await client.query(
-      `
-        INSERT INTO carts (cart_id, product_id, quantity)
-        VALUES ($1, $2, $3)
-        JOIN products ON cart_products.product_id = products.id
-        RETURNING *
-        `,
-      [cart_id, product_id, quantity]
-    );
-    console.log(cart, "cart");
-    return cart;
-  } catch (error) {
-    throw error;
-  }
-}
-
 async function updateProducts({ id, ...fields }) {
   const setString = Object.keys(fields)
     .map((key, index) => `"${key}" = $${index + 1}`)
@@ -130,14 +106,12 @@ async function deleteProduct(id) {
     console.error("Trouble deleting products", error);
   }
 }
-//Check the DELETE FROM line, it may not be products
 
 module.exports = {
   createProduct,
   getAllProducts,
   getProductById,
   getProductByName,
-  attachProductsToCartProducts,
   updateProducts,
   deleteProduct,
 };

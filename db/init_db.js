@@ -3,9 +3,8 @@ const { createUser, getAllUsers } = require("./users");
 const {
   createProduct,
   getAllProducts,
-  attachProductsToCarts,
 } = require("./products");
-const { getAllCarts, createCart, getCartById } = require("./carts");
+const { getAllCarts, createCart } = require("./carts");
 const { createCartProducts } = require("./cart_products");
 
 async function dropTables() {
@@ -228,7 +227,7 @@ async function createInitialCart() {
 }
 
 async function createInitialCartProducts() {
-  console.log("Starting to create carts...");
+  console.log("Starting to create cart_products...");
   const carts = await getAllCarts();
   const products = await getAllProducts();
 
@@ -237,25 +236,25 @@ async function createInitialCartProducts() {
       {
         cart_id: carts[0].id,
         product_id: products[0].id,
+        quantity: 1,
+      },
+      {
+        cart_id: carts[0].id,
+        product_id: products[1].id,
         quantity: 2,
       },
-      // {
-      //   cart_id: carts[1].id,
-      //   product_id: products[1].id,
-      //   quantity: 2,
-      // },
-      // {
-      //   cart_id: carts[2].id,
-      //   product_id: products[2].id,
-      //   quantity: 2,
-      // },
+      {
+        cart_id: carts[0].id,
+        product_id: products[2].id,
+        quantity: 3,
+      },
     ];
 
     const cart = await Promise.all(
       cartProductsToCreate.map(createCartProducts)
     );
 
-    console.log("Cart_products created!");
+    console.log("Cart_products created:");
     console.log(cart);
     console.log("Finished creating cart_products!");
   } catch (error) {
@@ -263,24 +262,6 @@ async function createInitialCartProducts() {
     throw error;
   }
 }
-
-// async function createInitialCheckout() {
-//   console.log("Starting to create checkout...");
-//   const carts = await getCartById(1);
-//   console.log(carts, "message2");
-//   try {
-//     const checkoutToCreate = [{ user_id: 2, cart_id: 1 }];
-
-//     const checkout = await Promise.all(checkoutToCreate.map(createCheckout));
-
-//     console.log("Checkout created:");
-//     console.log(checkout);
-//     console.log("Finished creating checkout!");
-//   } catch (error) {
-//     console.error("Error creating checkout...");
-//     throw error;
-//   }
-// }
 
 async function rebuildDB() {
   try {
@@ -290,22 +271,6 @@ async function rebuildDB() {
     await createInitialProducts();
     await createInitialCart();
     await createInitialCartProducts();
-    // await createInitialCheckout();
-    console.log(await getCartById(4), "this is before");
-    // await attachProductsToCarts({
-    //   user_id: 1,
-    //   product_id: 9,
-    //   quantity: 2,
-    //   name: "MacBook Pro",
-    // });
-    // await attachProductsToCarts({
-    //   user_id: 1,
-    //   product_id: 8,
-    //   quantity: 2,
-    //   name: "XPS14",
-    // });
-    console.log(await getCartById(4), "this is after");
-    console.log(await getCartById(5), "this is after");
     client.end();
   } catch (error) {
     console.log("Error during rebuildDB");
