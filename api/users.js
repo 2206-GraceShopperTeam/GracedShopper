@@ -55,7 +55,7 @@ router.post("/login", async (req, res, next) => {
     //tested working
     //curl http://localhost:4000/api/users/login -H "Content-Type: application/json" -X POST -d '{"email": "graces@hopper.com", "password": "momofall"}'
     const { email, password } = req.body;
-  
+    console.log("inside the login route")
     if (!email || !password) {
       next({
         name: "MissingCredentialsError",

@@ -1,5 +1,20 @@
 const client = require("./client");
 
+async function getAllCartProducts() {
+  try {
+    const { rows } = await client.query(
+      `
+      SELECT cart_products.*
+      FROM cart_products
+    `
+    );
+
+    return rows;
+  } catch (error) {
+    throw error;
+  }
+}
+
 async function createCartProducts({ cart_id, product_id, quantity }) {
   try {
     const {
@@ -40,9 +55,7 @@ async function addProductToCart({ cart_id, product_id, quantity }) {
 
 async function getCartProductById(cart_id) {
   try {
-    const {
-      rows,
-    } = await client.query(
+    const { rows } = await client.query(
       `
         SELECT *
         FROM cart_products
@@ -65,7 +78,7 @@ async function updateCartProduct({ id, ...fields }) {
   if (setString.length === 0) {
     return;
   }
-  console.log(fields.cart_id, "abcd")
+  console.log(fields.cart_id, "abcd");
   try {
     const {
       rows: [cart_product],
@@ -102,6 +115,7 @@ async function destroyCartProduct(id) {
 }
 
 module.exports = {
+  getAllCartProducts,
   createCartProducts,
   addProductToCart,
   getCartProductById,
