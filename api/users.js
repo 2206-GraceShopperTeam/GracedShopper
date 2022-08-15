@@ -10,6 +10,7 @@ const { requireUser } = require("./util");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 
+const {JWT_SECRET} = process.env;
 // POST /api/users/register
 router.post("/register", async (req, res, next) => {
     //tested and working
@@ -35,7 +36,7 @@ router.post("/register", async (req, res, next) => {
           user.id,
           email
         ,
-        process.env.JWT_SECRET
+        JWT_SECRET
       );
 
       console.log(token, "let let me out")
@@ -68,7 +69,7 @@ router.post("/login", async (req, res, next) => {
   
       if (user) {
         const { id, email } = user;
-        const token = jwt.sign(id, email , process.env.JWT_SECRET);
+        const token = jwt.sign({id, email} , JWT_SECRET);
         console.log(token,'this be the token');
         
   

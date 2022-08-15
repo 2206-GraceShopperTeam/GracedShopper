@@ -1,5 +1,5 @@
 const express = require("express");
-const router = express.Router();
+const cart_product_router = express.Router();
 const { requireUser } = require("./util");
 // const { getCartProductById, updateCartProduct, destroyCartProduct } = require("../db"); need to update db
 const {
@@ -10,7 +10,7 @@ const {
 } = require("../db/cart_products");
 const { getProductById } = require("../db/products");
 
-router.get("/", async (req, res, next) => {
+cart_product_router.get("/", async (req, res, next) => {
   try {
     const allCartProducts = await getAllCartProducts();
     res.send(allCartProducts);
@@ -19,7 +19,7 @@ router.get("/", async (req, res, next) => {
   }
 })
 
-router.patch("/:cartProductId", requireUser, async (req, res, next) => {
+cart_product_router.patch("/:cartProductId", async (req, res, next) => {
   const { quantity } = req.body;
   const id = req.params.cartProductId;
   console.log(req.body, "abcdef")
@@ -40,7 +40,7 @@ router.patch("/:cartProductId", requireUser, async (req, res, next) => {
   }
 });
 
-router.delete("/:cartProductId", requireUser, async (req, res, next) => {
+cart_product_router.delete("/:cartProductId", requireUser, async (req, res, next) => {
   const id = req.params.cartProductId;
   const cartProduct = await getCartProductById(id);
   const product = await getProductById(cartProduct.id);
@@ -59,4 +59,4 @@ router.delete("/:cartProductId", requireUser, async (req, res, next) => {
   }
 });
 
-module.exports = router;
+module.exports = cart_product_router;

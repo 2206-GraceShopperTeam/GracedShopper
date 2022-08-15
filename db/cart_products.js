@@ -70,7 +70,9 @@ async function getCartProductById(cart_id) {
   }
 }
 
-async function updateCartProduct({ id, ...fields }) {
+async function updateCartProduct(params) {
+  console.log(params, "abcdef")
+  const { id, ...fields } = params
   const setString = Object.keys(fields)
     .map((key, index) => `"${key}"=$${index + 1}`)
     .join(", ");
