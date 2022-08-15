@@ -19,48 +19,27 @@ router.post('/', requireUser, async (req, res, next) => {
         
     }
 })
-// PATCH /api/products/:productId
-router.patch('/:cartId',requireUser, async (req, res, next) => {
-    const {userId} = req.body;
-    const cartId = req.params.cartId;
-    const existingCart = await getCartById(cartId);
-    try {
-        if(existingCart.id != req.user.id) {
-            res.status(403)
-            next({
-              name: 'CartNotFoundError',
-              message: `User ${req.user.username} is not allowed to update ${existingCart.id}`
-            });
-          } else {
-            const updatedCart = await updateCart({ quantity })
-            if(updatedCart) {
-              res.send(updatedCart);
-            }} 
-    } catch ({ name, message }) {
-        next({ name, message });  
-    }
-})
 
 // DELETE /api/cart/:cartId
-router.delete('/:cartId', requireUser, async (req, res, next) => {
-    const cartId = req.params.cartId;
-    const cart = await getCartById(cartId)
-    try {
-          if(cart.userId != req.user.id){
-            res.status(403)
-            next({
-                name: 'UnauthorizedDeleteError',
-                message: `User ${req.user.id} is not allowed to delete ${cart.id}`
-              });
-          }else{
-            destroycart(cartId)
-            res.send(cart)
-          }
-    }catch ({ name, message }) {
-        next({ name, message }); 
+// router.delete('/:cartId', requireUser, async (req, res, next) => {
+//     const cartId = req.params.cartId;
+//     const cart = await getCartById(cartId)
+//     try {
+//           if(cart.userId != req.user.id){
+//             res.status(403)
+//             next({
+//                 name: 'UnauthorizedDeleteError',
+//                 message: `User ${req.user.id} is not allowed to delete ${cart.id}`
+//               });
+//           }else{
+//             destroycart(cartId)
+//             res.send(cart)
+//           }
+//     }catch ({ name, message }) {
+//         next({ name, message }); 
 
-    }
-  });
+//     }
+//   });
 
   // POST /api/cart/:cartId/products
 router.post('/:cartId/products', requireUser, async (req, res, next) => {
