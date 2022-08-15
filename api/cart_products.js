@@ -3,11 +3,21 @@ const router = express.Router();
 const { requireUser } = require("./util");
 // const { getCartProductById, updateCartProduct, destroyCartProduct } = require("../db"); need to update db
 const {
+  getAllCartProducts,
   getCartProductById,
   updateCartProduct,
   destroyCartProduct,
 } = require("../db/cart_products");
 const { getProductById } = require("../db/products");
+
+router.get("/", async (req, res, next) => {
+  try {
+    const allCartProducts = await getAllCartProducts();
+    res.send(allCartProducts);
+  } catch (error) {
+    next(error);
+  }
+})
 
 router.patch("/:cartProductId", requireUser, async (req, res, next) => {
   const { quantity } = req.body;
