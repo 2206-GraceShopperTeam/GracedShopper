@@ -11,19 +11,10 @@ const router = express.Router();
 const { requireUser } = require("./util");
 
 router.get("/:productId", async (req, res, next) => {
-  const { productId } = req.params;
-  const obj = { id: productId };
-
+  const productId= req.params.productId;
   try {
-    const product = await getProductById(obj);
-    if (!product.length) {
-      next({
-        name: "Product Error",
-        message: `Product ${productId} not found`,
-      });
-    } else {
+    const product = await getProductById(productId);
       res.send(product);
-    }
   } catch ({ name, message }) {
     next({
       name,
@@ -39,11 +30,9 @@ router.get("/", async (req, res, next) => {
 
 router.post("/", requireUser, async (req, res, next) => {
   try {
-    const { name,description,
-      price,
-      category, } = req.body;
+    const { name, description, price, category } = req.body;
     const product = await getProductByName(name);
-    if (product.name === name) {
+    if (product) {
       next({
         name: "Name already exists",
         message: `A product with name ${name} already exists`,
@@ -55,10 +44,7 @@ router.post("/", requireUser, async (req, res, next) => {
         price,
         category,
       };
-      console.log(postData, "!!!!!!!!!")
-
       const newProduct = await createProduct(postData);
-
       res.send(newProduct);
     }
   } catch ({ name, message }) {
@@ -67,45 +53,20 @@ router.post("/", requireUser, async (req, res, next) => {
 });
 
 router.patch("/:productId", requireUser, async (req, res, next) => {
-  const { productId } = req.params;
-  const obj = { id: productId };
+  const productId = req.params.productId;
+  
   const { name, description, price, category } = req.body;
-  const fields = {};
-
-  if (name) {
-    fields.name = name;
-  }
-  if (description) {
-    fields.description = description;
-  }
-  if (price) {
-    fields.price = price;
-  }
-  if (category) {
-    fields.category = category;
-  }
   try {
-    const productName = await getProductByName(name);
-
-    if (!productName) {
-      next({
-        name: "doesnotexisterror",
-        message: `Product ${name} not found`,
-      });
-    } else {
-      const updatedProduct = updateProducts(obj, fields);
+   
+      const updatedProduct = await updateProducts(productId, {name, description, price, category});
       res.send(updatedProduct);
-    }
   } catch ({ name, message }) {
     next({ name, message });
   }
 });
 
-
-
-router.delete('/:productId', requireUser, async(req,res,next) => {
+router.delete('/:productId', async(req,res,next) => {
     const {productId} = req.params
-    // const obj = {id:productId}
     try {
         const product = await getProductById(productId)
         if (product) {
