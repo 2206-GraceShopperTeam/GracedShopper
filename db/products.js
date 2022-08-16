@@ -70,11 +70,10 @@ async function getProductByName(name) {
   }
 }
 
-async function updateProducts({ id, ...fields }) {
+async function updateProducts( id, fields={} ) {
   const setString = Object.keys(fields)
     .map((key, index) => `"${key}" = $${index + 1}`)
     .join(", ");
-
   if (setString.length === 0) {
     return;
   }
