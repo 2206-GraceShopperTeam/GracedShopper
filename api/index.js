@@ -59,6 +59,9 @@ router.use("/users", usersRouter);
 const cartProductsRouter = require("./cart_products");
 router.use("/cartProducts", cartProductsRouter);
 
+const cartRouter = require("./cart");
+router.use("/cart", cartRouter);
+
 // // ROUTER: /api/activities
 // const activitiesRouter = require("./products");
 // router.use("/activities", activitiesRouter);
