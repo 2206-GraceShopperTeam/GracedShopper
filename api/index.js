@@ -28,11 +28,9 @@ router.use(async (req, res, next) => {
     
     try {
       const { id } = jwt.verify(token, JWT_SECRET);
-      console.log("HERE I AM YOUR AUUTH THING", token, JWT_SECRET)
 
       if (id) {
         req.user = await getUserById(id);
-        console.log("You have been authenticated.")
         next();
       }
       else{
@@ -55,7 +53,7 @@ router.use(async (req, res, next) => {
 const usersRouter = require("./users");
 router.use("/users", usersRouter);
 const cart_product_router =  require("./cart_products")
-router.use("/cartProducts",cart_product_router);
+router.use("/cartProducts", cart_product_router);
 
 // // ROUTER: /api/activities
 // const activitiesRouter = require("./products");
