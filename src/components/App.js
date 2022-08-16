@@ -5,35 +5,23 @@ import {Home,Header,Login,Products,Cart} from './'
 import '../style/App.css';
 
 const App = () => {
-  const [APIHealth, setAPIHealth] = useState('');
+const [loggedIn,setLoggedIn] = useState(false)
 
   useEffect(() => {
-    // follow this pattern inside your useEffect calls:
-    // first, create an async function that will wrap your axios service adapter
-    // invoke the adapter, await the response, and set the data
-    const getAPIStatus = async () => {
-      const { healthy } = await getAPIHealth();
-      setAPIHealth(healthy ? 'api is up! :D' : 'api is down :/');
-    };
-
-    // second, after you've defined your getter above
-    // invoke it immediately after its declaration, inside the useEffect callback
-    getAPIStatus();
+    
   }, []);
 
   return (
     <div className="app-container">
-      <Header/>
+      <Header setLoggedIn={setLoggedIn} loggedIn={loggedIn}/>
       <Routes>
 
-         <Route path="/Login" element={<Login/>} />
+         <Route path="/Login" element={<Login setLoggedIn={setLoggedIn} loggedIn={loggedIn}/>} />
          <Route path="/Products" element={<Products/>} />
          <Route path="/Cart" element={<Cart/>} />
          <Route path="/" element={<Home/>} />
          
       </Routes>
-     
-      <p>API Status: {APIHealth}</p>
     </div>
   );
 };

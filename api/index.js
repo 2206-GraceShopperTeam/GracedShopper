@@ -1,8 +1,11 @@
 const express = require("express");
 const router = express.Router();
+const cors = require('cors');
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
 const { getUserById } = require("../db");
+
+router.use(cors())
 
 router.get('/', (req, res, next) => {
   res.send({

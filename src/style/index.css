@@ -342,15 +342,23 @@ left: 2vw;
   margin: 10px;
 }
 
-.products{
-  position: fixed;
-  top: 30%;
-}
-
 .loading{
   position: relative;
     width: 100vw;
     height: 87vh;
     top: 13vh;
     z-index: 15;
+}
+
+.products{
+  position: relative;
+  overflow-y: auto;
+  top: 22vh;
+}
+
+.allProducts{
+  display: flex;
+  flex-direction: row;
+  height: 10vh;
+  justify-content: space-between;
 }
