@@ -8,8 +8,8 @@ const { requireUser } = require('./util');
 
 //POST /api/cart
 router.post('/', requireUser, async (req, res, next) => {
+    console.log('this is me')
     const cart = await createCart({ user_id:req.user.id })
-
     try {
         if(cart){
       res.send(cart)

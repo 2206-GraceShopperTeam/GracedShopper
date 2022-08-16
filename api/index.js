@@ -50,6 +50,9 @@ router.use(async (req, res, next) => {
 const usersRouter = require("./users");
 router.use("/users", usersRouter);
 
+const usersRouter = require("./cart");
+router.use("/cart", usersRouter);
+
 // // ROUTER: /api/activities
 // const activitiesRouter = require("./products");
 // router.use("/activities", activitiesRouter);
