@@ -39,9 +39,10 @@ router.get("/", async (req, res, next) => {
 
 router.post("/", requireUser, async (req, res, next) => {
   try {
-    const { name } = req.body;
+    const { name,description,
+      price,
+      category, } = req.body;
     const product = await getProductByName(name);
-    console.log(product, "$$$$$$$$$")
     if (product.name === name) {
       next({
         name: "Name already exists",

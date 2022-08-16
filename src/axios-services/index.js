@@ -20,10 +20,6 @@ export async function login(email, password) {
 
 
 export async function register(email, password, name, address) {
-  // const registerEmail = event.target[0].value;
-  // const registerPassword = event.target[1].value;
-  // const registerName     = event.target[2].value;
-  // const registerAddress  = event.target[3].value;
 
   const response = await fetch(`http://localhost:4000/api/users/register`, {
     method: "POST",
@@ -49,6 +45,33 @@ export async function getProducts() {
     const response = await fetch(`http://localhost:4000/api/products`);
     const products = await response.json();
     return products;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function addToCart(cart_id, product_id, quantity) {
+
+  const response = await fetch(`http://localhost:4000/cartProducts/${cart_id}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      product: product_id,
+      quantity: quantity,
+    }),
+  });
+  const result = await response.json();
+  return result
+  
+}
+
+export async function createCart() {
+  try {
+    const response = await fetch(`http://localhost:4000/api/cart/createCart`);
+    const cart = await response.json();
+    return cart;
   } catch (error) {
     throw error;
   }
