@@ -1,24 +1,36 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { createCart, 
-    getCartById, 
-    updateCart } = require('../db/carts');
-    const { addProductToCart } = require('../db/cart_products');
-const { requireUser } = require('./util');
+const {
+  createCart,
+  getCartById,
+  updateCart,
+  getCartByUser,
+} = require("../db/carts");
+const { addProductToCart } = require("../db/cart_products");
+const { requireUser } = require("./util");
 
 //POST /api/cart
-router.post('/', requireUser, async (req, res, next) => {
-    console.log('this is me')
-    const cart = await createCart({ user_id:req.user.id })
-    try {
-        if(cart){
-      res.send(cart)
-        }
-    } catch (error) {
-        next(error)
-        
+router.get("/", async (req, res, next) => {
+  const user_id = req.user.id;
+
+  try {
+    const cart = await getCartByUser(user_id);
+    res.send(cart);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post("/createCart", requireUser, async (req, res, next) => {
+  const cart = await createCart({ user_id: req.user.id });
+  try {
+    if (cart) {
+      res.send(cart);
     }
-})
+  } catch (error) {
+    next(error);
+  }
+});
 
 // DELETE /api/cart/:cartId
 // router.delete('/:cartId', requireUser, async (req, res, next) => {
@@ -36,31 +48,10 @@ router.post('/', requireUser, async (req, res, next) => {
 //             res.send(cart)
 //           }
 //     }catch ({ name, message }) {
-//         next({ name, message }); 
+//         next({ name, message });
 
 //     }
 //   });
 
-  // POST /api/cart/:cartId/products
-router.post('/:cartId/products', requireUser, async (req, res, next) => {
-    const {cartId} = req.params;
-    const  {productId, quantity} = req.body;
-    
-    try {
-        const ogcart = await getcartProductById(productId)
-        if (ogcart) {
-            next({
-                name: 'DuplicatecartproductError',
-                message: `product ID ${productId} already exists in cart ID ${cartId}`
-              });
-        } else {
-            const added = await addProductToCart({ productId, quantity })
-            res.send(added)
-            
-        }
-    } catch (error){
-        next(error)
-    }
-    
-    })
-    module.exports = router;
+
+module.exports = router;

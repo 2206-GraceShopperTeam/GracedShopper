@@ -39,4 +39,25 @@ cart_product_router.delete("/:cartProductId", async (req, res, next) => {
   }
 });
 
+router.post("/:cartId", async (req, res, next) => {
+  const { cart_id } = req.params;
+  const { product_id, quantity } = req.body;
+  console.log(cart_id, "cartId", product_id, "productId", quantity, "quantity");
+
+  try {
+    // if (ogcart) {
+    //     next({
+    //         name: 'DuplicatecartproductError',
+    //         message: `product ID ${productId} already exists in cart ID ${cartId}`
+    //       });
+    // } else {
+    const added = await addProductToCart({ cart_id, product_id, quantity });
+    res.send(added);
+
+    // }
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = cart_product_router;
