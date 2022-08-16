@@ -74,19 +74,19 @@ async function updateCartProduct({ id, ...fields }) {
   const setString = Object.keys(fields)
     .map((key, index) => `"${key}"=$${index + 1}`)
     .join(", ");
-
-  if (setString.length === 0) {
-    return;
-  }
-  console.log(fields.cart_id, "abcd");
-  try {
-    const {
-      rows: [cart_product],
+    
+    if (setString.length === 0) {
+      return;
+    }
+    
+    try {
+      const {
+        rows: [cart_product],
     } = await client.query(
       `
         UPDATE cart_products
         SET ${setString}
-        WHERE id=${id} AND product_id=${fields.product_id}
+        WHERE product_id=${id}
         RETURNING *;
       `,
       Object.values(fields)

@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 const cors = require('cors');
 const jwt = require("jsonwebtoken");
-const { JWT_SECRET } = process.env;
+
+const {JWT_SECRET} = process.env;
 const { getUserById } = require("../db");
 
 router.use(cors())
@@ -22,19 +23,21 @@ router.get('/health', (req, res, next) => {
 router.use(async (req, res, next) => {
   const prefix = "Bearer ";
   const auth = req.header("Authorization");
-
   if (!auth) {
-    // nothing to see here
+    // nothing to see here`
     next();
   } else if (auth.startsWith(prefix)) {
     const token = auth.slice(prefix.length);
-
+    
     try {
       const { id } = jwt.verify(token, JWT_SECRET);
 
       if (id) {
         req.user = await getUserById(id);
         next();
+      }
+      else{
+        next({name: "Authorization ID Error", message: "Contact your administrator"})
       }
     } catch ({ name, message }) {
       next({ name, message });
@@ -53,8 +56,9 @@ router.use(async (req, res, next) => {
 const usersRouter = require("./users");
 router.use("/users", usersRouter);
 
-const productsRouter = require("./products");
-router.use("/products", productsRouter);
+const cartProductsRouter = require("./cart_products");
+router.use("/cartProducts", cartProductsRouter);
+
 // // ROUTER: /api/activities
 // const activitiesRouter = require("./products");
 // router.use("/activities", activitiesRouter);

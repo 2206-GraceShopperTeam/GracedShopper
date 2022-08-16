@@ -10,6 +10,7 @@ const { requireUser } = require("./util");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 
+const {JWT_SECRET} = process.env;
 // POST /api/users/register
 router.post("/register", async (req, res, next) => {
     //tested and working
@@ -28,17 +29,13 @@ router.post("/register", async (req, res, next) => {
       }
   
       const user = await createUser({ email, password, name, address });
-      console.log(user, "i be a genie in a bottle")
   
       const token = jwt.sign(
-        
           user.id,
           email
         ,
-        process.env.JWT_SECRET
+        JWT_SECRET
       );
-
-      console.log(token, "let let me out")
   
       res.send({
         message: "thank you for signing up",
@@ -55,7 +52,6 @@ router.post("/login", async (req, res, next) => {
     //tested working
     //curl http://localhost:4000/api/users/login -H "Content-Type: application/json" -X POST -d '{"email": "graces@hopper.com", "password": "momofall"}'
     const { email, password } = req.body;
-    console.log("inside the login route")
     if (!email || !password) {
       next({
         name: "MissingCredentialsError",
@@ -64,14 +60,11 @@ router.post("/login", async (req, res, next) => {
     }
     try {
       const user = await getUser({ email, password });
-      console.log(user, "what info do we have")
   
       if (user) {
         const { id, email } = user;
-        const token = jwt.sign(id, email , process.env.JWT_SECRET);
-        console.log(token,'this be the token');
+        const token = jwt.sign({id, email} , JWT_SECRET);
         
-  
         res.send({ user, message: "you're logged in!", token: `${token}` });
       }
       else {
