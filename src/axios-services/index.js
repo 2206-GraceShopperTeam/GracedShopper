@@ -73,9 +73,47 @@ export async function addToCartProducts(cart_id, product_id, quantity) {
   return result;
 }
 
-export async function editCartProduct() {}
+export async function getCartProducts() {
+  const response = await fetch(`http://localhost:4000/cartProducts/`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const result = await response.json();
+  return result;
+}
 
-export async function deleteCartProduct() {}
+export async function editCartProduct(cartProductId, quantity) {
+  const response = await fetch(
+    `http://localhost:4000/cartProducts/${cartProductId}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        quantity: quantity,
+      }),
+    }
+  );
+  const result = await response.json();
+  return result;
+}
+
+export async function removeCartProduct(cartProductId) {
+  const response = await fetch(
+    `http://localhost:4000/cartProducts/${cartProductId}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  const result = await response.json();
+  return result;
+}
 
 // Cart
 export async function createCart() {
