@@ -7,3 +7,4 @@ export { default as Cart } from './Cart';
 export { default as EditQuantity } from './EditQuantity';
 export { default as SingleCartProduct } from './SingleCartProduct';
 export { default as RemoveCartProduct } from './RemoveCartProduct';
+export { default as Checkout } from './Checkout';

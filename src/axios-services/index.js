@@ -126,4 +126,13 @@ export async function createCart() {
   }
 }
 
-export async function getAllCartProducts() {}
+export async function emptyCart(cartId){
+  try {
+    const response = await fetch(`http://localhost:4000/api/cart/emptyCart/${cartId}`)
+    const emptied = await response.json();
+    return emptied
+  } catch (error) {
+    next(error)
+  }
+}
+
