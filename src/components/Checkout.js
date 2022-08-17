@@ -10,7 +10,6 @@ const Checkout = (props) => {
     const [productName, setProductName] = useState('')
     const [price, setPrice] = useState('')
 
-    const cartProducts = await getCartProducts()
     return(
         <div className="cart">
             <h1>Order Details</h1>

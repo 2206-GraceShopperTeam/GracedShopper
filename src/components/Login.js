@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import {  useNavigate } from "react-router-dom";
 import {login, register} from "../axios-services"
 
-const Login = ({setLoggedIn,loggedIn}) => {
+const Login = ({setLoggedIn,loggedIn,user,setUser}) => {
      const navigate = useNavigate();
      const [signUp,setSignUp] = useState(false)
      const [email, setEmail] = useState("");
@@ -19,21 +19,36 @@ const Login = ({setLoggedIn,loggedIn}) => {
 
      },[signUp])
 
-     const handleReg = (regEmail,regPassword,name,address) => {
-      
-          if (regPassword !== confirmPassword) {
-            alert("Passwords don't match!");
-            setRegPassword("");
-            setConfirmPassword("");
-          } else {
-            register(regEmail,regPassword,name,address)
+
+
+     const handleReg = async () => {
+      try {
+      if (regPassword !== confirmPassword) {
+        alert("Passwords don't match!");
+        setRegPassword("");
+        setConfirmPassword("");
+      } else if (regEmail !== confirmEmail){
+        alert("Emails don't match!");
+        setConfirmEmail("");
+      }
+      const newUser = await register(regEmail,regPassword,name,address)
+      if(newUser){
+        console.log(newUser, "theres a troll")
             setRegEmail("");
             setRegPassword("");
             setConfirmPassword("");
+            setConfirmEmail("");
+            setName("");
+            setAddress("")
             alert("Registration successful please Login");
             setSignUp(false)
-          }
-        };
+      } else {
+          alert("registration unsuccessful")
+      }
+      } catch (error) {
+          throw error
+      }   
+  }
 
         const handleLogin = async (event) => {
           try {
@@ -184,10 +199,11 @@ const Login = ({setLoggedIn,loggedIn}) => {
 
 
           </form>
-          <button type="submit" onClick={(()=>{setSignUp(false),handleReg(regEmail,regPassword,name,address)})}>Sign Up</button>
+          <button type="submit" onClick={(()=>{handleReg()})}>Sign Up</button>
      </div>
 
   </div>;
 };
 
 export default Login;
+
