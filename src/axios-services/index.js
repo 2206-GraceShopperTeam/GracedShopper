@@ -38,21 +38,77 @@ export async function login(email, password) {
 }
 
 // Products
-export async function createProduct() {}
-
-export async function getProducts() {
-  try {
-    const response = await fetch(`http://localhost:4000/api/products`);
-    const products = await response.json();
-    return products;
-  } catch (error) {
-    throw error;
-  }
+export async function createProduct(
+  token,
+  nameProduct,
+  description,
+  price,
+  category
+) {
+  const response = await fetch(`http://localhost:4000/products`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      name: nameProduct,
+      description: description,
+      price: price,
+      category: category,
+    }),
+  });
+  const result = await response.json();
+  return result;
 }
 
-export async function editProduct() {}
+export async function getProducts() {
+  const response = await fetch(`http://localhost:4000/api/products`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const result = await response.json();
+  return result;
+}
 
-export async function deleteProduct() {}
+export async function editProduct(
+  productId,
+  token,
+  nameProduct,
+  description,
+  price,
+  category
+) {
+  const response = await fetch(`http://localhost:4000/products/${productId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      name: nameProduct,
+      description: description,
+      price: price,
+      category: category,
+    }),
+  });
+  const result = await response.json();
+  return result;
+}
+
+export async function deleteProduct(productId, token) {
+  const response = await fetch(`http://localhost:4000/products/${productId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const result = await response.json();
+  return result;
+}
 
 // Cart Products
 export async function addToCartProducts(cart_id, product_id, quantity) {

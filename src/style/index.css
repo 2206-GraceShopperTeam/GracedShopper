@@ -363,7 +363,6 @@ left: 2vw;
 
 .products{
   position: relative;
-  overflow-y: auto;
   top: 22vh;
 }
 
