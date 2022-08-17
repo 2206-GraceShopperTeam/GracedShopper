@@ -20,6 +20,9 @@ const Header = ({loggedIn,setLoggedIn}) => {
         <div className="loginBttn">
             <button id="loginBttn" onClick={(()=>{loggedIn ? logout() : navigate("/Login")})}>{!loggedIn ? "Login/Register" : "LogOut"}</button>
         </div>
+        <div className="loginBttn">
+            <button id="loginBttn" onClick={(()=>{loggedIn ? logout() : navigate("/Login")})}>{!loggedIn ? "Login/Register" : "LogOut"}</button>
+        </div>
         <div className="checkoutBttn">
             <button id="checkoutBttn" onClick={(()=>{navigate("/Cart")})}><IoCartOutline/>Cart</button>
         </div>

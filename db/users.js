@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const SALT_COUNT = 10;
 
 // user functions
-async function createUser( {email, password, name, address} ) {
+async function createUser( {email, password, name, address,admin} ) {
   // tested and working
   const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
   try {
@@ -11,11 +11,11 @@ async function createUser( {email, password, name, address} ) {
       rows: [user],
     } = await client.query(
       `
-      INSERT INTO users(email, password, name,address) 
-      VALUES($1, $2, $3, $4) 
-      RETURNING id,email,name,address;
+      INSERT INTO users(email, password, name,address,admin) 
+      VALUES($1, $2, $3, $4,$5) 
+      RETURNING id,email,name,address,admin;
       `,
-      [email, hashedPassword, name, address]
+      [email, hashedPassword, name, address,admin]
     );
     return user;
   } catch (error) {

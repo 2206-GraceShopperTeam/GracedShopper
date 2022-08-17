@@ -39,7 +39,8 @@ async function createTables() {
               email VARCHAR(255) UNIQUE NOT NULL,
               password VARCHAR(255) NOT NULL,
               name VARCHAR(255) NOT NULL,
-              address TEXT
+              address TEXT,
+              admin BOOLEAN DEFAULT FALSE
       );
 
       CREATE TABLE products (
@@ -53,7 +54,7 @@ async function createTables() {
       CREATE TABLE carts (
         id SERIAL PRIMARY KEY,
           user_id INTEGER REFERENCES users(id),
-          is_ordered BOOLEAN DEFAULT false
+          is_ordered BOOLEAN DEFAULT FALSE
       );
       
       CREATE TABLE cart_products (
@@ -82,16 +83,19 @@ async function createInitialUsers() {
   console.log("Starting to create users...");
   try {
     const usersToCreate = [
-      { email: "graces@hopper.com", password: "momofall", name: "grace" },
+      { email: "Admin@one.com", password: "graceshopper", name: "admin", address: "the cloud", admin: true },
+      { email: "graces@hopper.com", password: "momofall", name: "grace",admin: false },
       {
         email: "hoppers@hopper.com",
         password: "trappedinrussia",
         name: "hopper",
+        admin: false
       },
       {
         email: "eleven@ontherun.com",
         password: "hasallthepower",
         name: "eleven",
+        admin: false
       },
     ];
     const users = await Promise.all(usersToCreate.map(createUser));
@@ -267,7 +271,6 @@ async function rebuildDB() {
   try {
     await dropTables();
     await createTables();
-    console.log( await createUser({ email: "zackistheguy2", password: "zacktheguy", name: "zackthe1guy", address: "zacktheguy" },"am i real"))
     await createInitialUsers();
     await createInitialProducts();
     await createInitialCart();
