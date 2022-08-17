@@ -3,10 +3,10 @@ const router = express.Router();
 const {
   createCart,
   getCartById,
-  updateCart,
   getCartByUser,
 } = require("../db/carts");
-const { addProductToCart } = require("../db/cart_products");
+const { getCartProductById } = require("../db/cart_products");
+const { emptyCart } = require("../src/axios-services");
 const { requireUser } = require("./util");
 
 //POST /api/cart
@@ -21,7 +21,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.post("/createCart", requireUser, async (req, res, next) => {
+router.post("/createCart", async (req, res, next) => {
   const cart = await createCart({ user_id: req.user.id });
   try {
     if (cart) {
@@ -33,25 +33,18 @@ router.post("/createCart", requireUser, async (req, res, next) => {
 });
 
 // DELETE /api/cart/:cartId
-// router.delete('/:cartId', requireUser, async (req, res, next) => {
-//     const cartId = req.params.cartId;
-//     const cart = await getCartById(cartId)
-//     try {
-//           if(cart.userId != req.user.id){
-//             res.status(403)
-//             next({
-//                 name: 'UnauthorizedDeleteError',
-//                 message: `User ${req.user.id} is not allowed to delete ${cart.id}`
-//               });
-//           }else{
-//             destroycart(cartId)
-//             res.send(cart)
-//           }
-//     }catch ({ name, message }) {
-//         next({ name, message });
-
-//     }
-//   });
+router.delete("/emptyCart/:cartId", async (req, res, next) => {
+  const cart_id = req.params.cartId
+  const cartProducts = await getCartProductById(cart_id)
+  try {
+    if(cart){
+      await emptyCart(cart_id)
+      res.send(cartProducts)
+    }
+  } catch (error){
+    next(error)
+  }
+})
 
 
 module.exports = router;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Routes } from "react-router-dom";
 import { getAPIHealth } from '../axios-services';
-import {Home,Header,Login,Products,Cart} from './'
+import {Home,Header,Login,Products,Cart, Checkout} from './'
 import '../style/App.css';
 
 const App = () => {
@@ -17,7 +17,7 @@ const [user,setUser] = useState({})
       <Header setLoggedIn={setLoggedIn} loggedIn={loggedIn}/>
       <Routes>
 
-         <Route path="/Login" element={<Login setLoggedIn={setLoggedIn} loggedIn={loggedIn} user={user} setUser={setUser}/>} />
+         <Route path="/Login" element={<Login setLoggedIn={setLoggedIn} loggedIn={loggedIn}/>} />
          <Route path="/Products" element={<Products/>} />
          <Route path="/Cart" element={<Cart/>} />
          <Route path="/" element={<Home/>} />

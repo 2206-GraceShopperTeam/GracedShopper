@@ -127,4 +127,22 @@ export async function createCart() {
   }
 }
 
-export async function getAllCartProducts() {}
+export async function getAllCartProducts() {
+  try {
+    const response = await fetch('http://localhost:4000/api/cart_products')
+    const cart_products = await response.json();
+    return cart_products;
+  } catch (error){
+    throw (error)
+  }
+}
+
+export async function emptyCart(){
+  try {
+    const response = await fetch(`http://localhost:4000/api/cart/emptyCart/:cartId`)
+    const emptied = await response.json();
+    return emptied
+  } catch (error) {
+    next(error)
+  }
+}
