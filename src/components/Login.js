@@ -25,13 +25,20 @@ const Login = ({setLoggedIn,loggedIn}) => {
             alert("Passwords don't match!");
             setRegPassword("");
             setConfirmPassword("");
+          } else if (regEmail !== confirmEmail){
+            alert("Emails don't match!");
+            setRegEmail("");
+            setConfirmEmail("");
           } else {
             register(regEmail,regPassword,name,address)
-            setRegEmail("");
+            if(register){setRegEmail("");
             setRegPassword("");
             setConfirmPassword("");
+            setConfirmEmail("");
+            setName("");
+            setAddress("")
             alert("Registration successful please Login");
-            setSignUp(false)
+            setSignUp(false)}
           }
         };
 
