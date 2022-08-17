@@ -15,6 +15,7 @@ export async function register(email, password, name, address) {
   const result = await response.json();
   const token = result.token;
   localStorage.setItem("token", token);
+  return result
 }
 
 export async function login(email, password) {

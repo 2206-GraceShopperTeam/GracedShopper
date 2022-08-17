@@ -267,6 +267,7 @@ async function rebuildDB() {
   try {
     await dropTables();
     await createTables();
+    console.log( await createUser({ email: "zackistheguy2", password: "zacktheguy", name: "zackthe1guy", address: "zacktheguy" },"am i real"))
     await createInitialUsers();
     await createInitialProducts();
     await createInitialCart();

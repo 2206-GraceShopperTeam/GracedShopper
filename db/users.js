@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const SALT_COUNT = 10;
 
 // user functions
-async function createUser({ email, password, name, address }) {
+async function createUser( {email, password, name, address} ) {
   // tested and working
   const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
   try {
@@ -13,7 +13,6 @@ async function createUser({ email, password, name, address }) {
       `
       INSERT INTO users(email, password, name,address) 
       VALUES($1, $2, $3, $4) 
-      ON CONFLICT (email) DO NOTHING 
       RETURNING id,email,name,address;
       `,
       [email, hashedPassword, name, address]
