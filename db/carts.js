@@ -111,7 +111,22 @@ async function destroyCart(id) {
   }
 }
 
+async function emptyCart(cartId) {
+  try{
+    const { rows: [cart] } = await client.query(
+      `
+      DELETE FROM cart_products
+      WHERE cart_id = $1
+      `,
+      [cartId]
+    )
+  } catch (error) {
+    throw error
+  }
+}
+
 module.exports = {
+  emptyCart,
   createCart,
   getAllCarts,
   getCartByUser,
