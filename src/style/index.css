@@ -1,3 +1,14 @@
+/* temporary borders */
+.redBox {
+  transform: translateX(10px);
+  border: solid red 2px;
+}
+
+.greenBox {
+  transform: translateX(50px);
+  border: solid green 2px;
+}
+
 /* import fonts here */
 
 * {
@@ -362,3 +373,4 @@ left: 2vw;
   height: 10vh;
   justify-content: space-between;
 }
+

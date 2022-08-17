@@ -4,8 +4,9 @@ async function getAllCartProducts() {
   try {
     const { rows } = await client.query(
       `
-      SELECT cart_products.*
+      SELECT cart_products.*, products.*
       FROM cart_products
+      JOIN products ON cart_products.product_id=products.id
     `
     );
 

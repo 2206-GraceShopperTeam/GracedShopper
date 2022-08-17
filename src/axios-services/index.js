@@ -57,7 +57,7 @@ export async function deleteProduct() {}
 // Cart Products
 export async function addToCartProducts(cart_id, product_id, quantity) {
   const response = await fetch(
-    `http://localhost:4000/cartProducts/${cart_id}`,
+    `http://localhost:4000/api/cartProducts/${cart_id}`,
     {
       method: "POST",
       headers: {
@@ -74,7 +74,7 @@ export async function addToCartProducts(cart_id, product_id, quantity) {
 }
 
 export async function getCartProducts() {
-  const response = await fetch(`http://localhost:4000/cartProducts/`, {
+  const response = await fetch(`http://localhost:4000/api/cartProducts/`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -86,7 +86,7 @@ export async function getCartProducts() {
 
 export async function editCartProduct(cartProductId, quantity) {
   const response = await fetch(
-    `http://localhost:4000/cartProducts/${cartProductId}`,
+    `http://localhost:4000/api/cartProducts/${cartProductId}`,
     {
       method: "PATCH",
       headers: {
@@ -103,7 +103,7 @@ export async function editCartProduct(cartProductId, quantity) {
 
 export async function removeCartProduct(cartProductId) {
   const response = await fetch(
-    `http://localhost:4000/cartProducts/${cartProductId}`,
+    `http://localhost:4000/api/cartProducts/${cartProductId}`,
     {
       method: "DELETE",
       headers: {

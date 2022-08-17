@@ -4,3 +4,6 @@ export { default as Header } from './Header';
 export { default as Login } from './Login';
 export { default as Products } from './Products';
 export { default as Cart } from './Cart';
+export { default as EditQuantity } from './EditQuantity';
+export { default as SingleCartProduct } from './SingleCartProduct';
+export { default as RemoveCartProduct } from './RemoveCartProduct';
