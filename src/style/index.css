@@ -333,7 +333,10 @@ left: 2vw;
   width: 40%;
   right: 0;
   bottom: 0;
-  background-color: red;
+  background-image: url(https://images.unsplash.com/photo-1492321936769-b49830bc1d1e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80);
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
 }
 
 .registerForm,.loginForm{

@@ -6,6 +6,7 @@ import '../style/App.css';
 
 const App = () => {
 const [loggedIn,setLoggedIn] = useState(false)
+const [user,setUser] = useState({})
 
   useEffect(() => {
     
@@ -15,8 +16,8 @@ const [loggedIn,setLoggedIn] = useState(false)
     <div className="app-container">
       <Header setLoggedIn={setLoggedIn} loggedIn={loggedIn}/>
       <Routes>
-        <Route path='/Checkout' element={<Checkout />}/>
-         <Route path="/Login" element={<Login setLoggedIn={setLoggedIn} loggedIn={loggedIn}/>} />
+
+         <Route path="/Login" element={<Login setLoggedIn={setLoggedIn} loggedIn={loggedIn} user={user} setUser={setUser}/>} />
          <Route path="/Products" element={<Products/>} />
          <Route path="/Cart" element={<Cart/>} />
          <Route path="/" element={<Home/>} />

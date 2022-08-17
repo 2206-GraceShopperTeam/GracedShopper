@@ -13,30 +13,27 @@ const jwt = require("jsonwebtoken");
 const {JWT_SECRET} = process.env;
 // POST /api/users/register
 router.post("/register", async (req, res, next) => {
-    //tested and working
-    //curl http://localhost:4000/api/users/register -H "Content-Type: application/json" -X POST -d '{"email": "enterAnEmail@here.com", "password": "superstars", "name": "josiah", "address": "quebec"}'
-    try {
-      const { email, password, name, address } = req.body;
-      if (password.length < 8) {
-        next({ name: "passwordLengthError", message: `Password Too Short!` });
-      }
-      const _user = await getUserByEmail(email);
-      if (_user) {
-        next({
-          name: "userExistsError",
-          message: `User email ${email} is already taken.`,
-        });
-      }
-  
-      const user = await createUser({ email, password, name, address });
-  
-      const token = jwt.sign(
-          user.id,
-          email
-        ,
-        JWT_SECRET
+  //tested and working
+  try {
+    const { email, password, name, address } = req.body;
+    if (password.length < 8) {
+      next({ name: "passwordLengthError", message: `Password Too Short!` });
+    }
+    const _user = await getUserByEmail(email);
+    if (_user) {
+      next({
+        name: "userExistsError",
+        message: `User email ${email} is already taken.`,
+      });
+    }
+    
+    const user = await createUser( {email, password, name, address} );
+    
+    const token = jwt.sign(
+      {id: user.id,
+      email,},
+      JWT_SECRET
       );
-  
       res.send({
         message: "thank you for signing up",
         token,
