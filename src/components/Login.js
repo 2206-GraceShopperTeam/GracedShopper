@@ -31,9 +31,7 @@ const Login = ({setLoggedIn,loggedIn,user,setUser}) => {
         setConfirmEmail("");
       }
       const newUser = await register(regEmail,regPassword,name,address)
-      console.log(newUser, "this is a test")
       if(newUser){
-        console.log(newUser, "theres a troll")
             setRegEmail("");
             setRegPassword("");
             setConfirmPassword("");
@@ -53,10 +51,10 @@ const Login = ({setLoggedIn,loggedIn,user,setUser}) => {
         const handleLogin = async () => {
           try {
           const result = await login(email, password);
-          console.log(result, "what is this")
           
           if(result){
           localStorage.setItem("token", result.token);
+          localStorage.setItem("user",JSON.stringify(result.user))
           setLoggedIn(true);
           setUser(result.user)
           navigate("/")

@@ -103,7 +103,6 @@ async function createInitialUsers() {
     const users = await Promise.all(usersToCreate.map(createUser));
 
     console.log("Users created:");
-    console.log(users);
     console.log("Finished creating users!");
   } catch (error) {
     console.error("Error creating users...");
@@ -202,7 +201,6 @@ async function createInitialProducts() {
     const products = await Promise.all(productsToCreate.map(createProduct));
 
     console.log("Products created:");
-    console.log(products);
     console.log("Finished creating products!");
   } catch (error) {
     console.error("Error creating products...");
@@ -224,7 +222,6 @@ async function createInitialCart() {
     const cart = await Promise.all(cartToCreate.map(createCart));
 
     console.log("Cart created:");
-    console.log(cart);
     console.log("Finished creating cart!");
   } catch (error) {
     console.error("Error creating cart...");
@@ -261,7 +258,6 @@ async function createInitialCartProducts() {
     );
 
     console.log("Cart_products created:");
-    console.log(cart);
     console.log("Finished creating cart_products!");
   } catch (error) {
     console.error("Error creating cart_products...");

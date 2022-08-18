@@ -10,10 +10,8 @@ const Products = () => {
   useEffect(() => {
     async function fetchProducts() {
       const returnProducts = await getProducts();
-      console.log(returnProducts,"i am the stuff")
       setAllProducts(returnProducts);
     }
-    console.log( "is anyone home")
     fetchProducts();
   }, [cart]);
 useEffect(()=>{
@@ -25,10 +23,8 @@ useEffect(()=>{
      change = Math.floor(change);
      return change;
    }
-console.log(selectedProduct, "i have been chosen")
-console.log(cart, "i hold the secrets")
+
 const guestCart = localStorage.getItem('guest')
-console.log(guestCart, "i am secrets")
 
 function stringy(){
   localStorage.setItem("guest", JSON.stringify(cart))

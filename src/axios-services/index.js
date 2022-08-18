@@ -13,7 +13,6 @@ export async function register(regEmail,regPassword,name,address) {
     }),
   });
   const result = await response.json();
-  console.log(result,"im in the api")
   const token = result.token;
   localStorage.setItem("token", token);
   return result
@@ -50,7 +49,6 @@ export async function getAllUsers() {
 }
 
 export async function editUserInfo(userId, name,email,address) {
-  console.log(userId, name,email,address,"im in the hole")
   const response = await fetch(
     `http://localhost:4000/api/users/${userId}`,
     {
@@ -65,9 +63,7 @@ export async function editUserInfo(userId, name,email,address) {
       }),
     }
   );
-  console.log("im near the end of the hole")
   const result = await response.json();
-  console.log(result,"is in the hole")
   return result;
 }
 

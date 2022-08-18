@@ -6,19 +6,23 @@ import '../style/App.css';
 
 const App = () => {
 const [loggedIn,setLoggedIn] = useState(false)
-const [user,setUser] = useState(false)
+const [user,setUser] = useState([])
 const [updated,setUpdated] = useState(false)
 
 useEffect(() => {
   const stable = async () =>  {
     if (localStorage.getItem("token")) {
       setLoggedIn(true);
-      const me = await whoAmI(localStorage.getItem("token"));
-      setUser(me)
   }}
+  document.addEventListener("load", setUpdated(!updated))
   
 stable()
-}, [updated]);
+}, [loggedIn]);
+
+useEffect(()=>{
+  const data = JSON.parse(localStorage.getItem("user"))
+  document.addEventListener("load", setUser(data))
+},[updated])
 
   return (
     <div className="app-container">
