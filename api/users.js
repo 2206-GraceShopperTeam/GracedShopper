@@ -101,9 +101,7 @@ router.post("/login", async (req, res, next) => {
     
     const { email, name, address } = req.body;
     try {
-      
       const updatedUser = await updateUser(userId, {email, name, address});
-      console.log("im the whole hole")
         res.send(updatedUser);
     } catch ({ name, message }) {
       next({ name, message });

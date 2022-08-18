@@ -8,7 +8,6 @@ const Users = () => {
   useEffect(() => {
     async function fetchUsers() {
       const returnUsers = await getAllUsers();
-      console.log(returnUsers,"i am the stuff")
       setAllUsers(returnUsers);
     }
     fetchUsers();

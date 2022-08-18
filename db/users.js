@@ -112,13 +112,11 @@ async function getUserById(userId) {
 async function updateUser(id,{...fields }) {
   //this is so users can update their info
   //tested and working
-    console.log(fields, "run track and")
     const setString = Object.keys(fields)
       .map((key, index) => `"${key}"=$${index + 1}`)
       .join(", ");
     if (setString.length === 0) {
       return "not enough info" }
-      console.log(setString,"is good for fishin")
       try{
       const {
         rows: [user],
@@ -131,7 +129,6 @@ async function updateUser(id,{...fields }) {
          `,
         Object.values(fields)
       );
-      console.log(user, "never played with us")
       return user;
   } catch (error) {
     throw error;

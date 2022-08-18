@@ -1,6 +1,30 @@
 import React, { useEffect, useState } from "react";
+import {getCart, createCart} from "../axios-services"
 
-const Home = () => {
+const Home = ({user,setCartInfo}) => {
+
+    useEffect(()=>{
+        if("id" in user){async function fetchCart(){
+          const oldCart = await getCart(user.id)
+          console.log("you already have a cart")
+          setCartInfo(oldCart)
+          localStorage.setItem("cartInfo", JSON.stringify(oldCart))
+        }
+        async function makeCart(){
+          if(!fetchCart){
+            console.log("lets make you a new cart")
+            const newCart = await createCart(user.id)
+            setCartInfo(newCart)}
+            localStorage.setItem("cartInfo", JSON.stringify(newCart))
+          
+          } 
+            
+          fetchCart()
+          makeCart()}
+        
+       },[])
+
+
     return (
 <div /*Starter Div */>
 <div>

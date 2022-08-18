@@ -3,18 +3,25 @@ import { TbEdit } from "react-icons/tb";
 import { editUserInfo } from "../axios-services";
 
 const UserInfo = ({user,setUser,setUpdated,updated}) => {
+    const [reload,setReload] = useState(false)
     const [editName,setEditName] = useState(false)
     const [editEmail,setEditEmail] = useState(false)
     const [editAddress,setEditAddress] = useState(false)
-    const [name,setName] = useState(user.name)
-    const [email,setEmail] = useState(user.email)
-    const [address,setAddress] = useState(user.address)
-// console.log(user.email,"i am the king")
+    const [name,setName] = useState(user.name ? user.name : "")
+    const [email,setEmail] = useState(user.email ? user.email : "")
+    const [address,setAddress] = useState(user.address ? user.address: "")
     useEffect(()=>{
+      document.addEventListener("load", setReload(true))
+      if("undefined" in user||"null" in user || user.length === 0 ){
+        return
+      } else {
+        setName(user.name)
+        setEmail(user.email)
+        setAddress(user.address)
+      }
+    },[updated])
 
-    },[user])
 
-console.log(name, "who is the king!??!?!??!?????!?!?!?")
     const handleChange = async (event) => {
         event.preventDefault();
         const updateUser = await editUserInfo(
@@ -25,6 +32,7 @@ console.log(name, "who is the king!??!?!??!?????!?!?!?")
           
         );
         setUser(updateUser)
+        localStorage.setItem("user",JSON.stringify(updateUser))
         setEditAddress(false);
         setEditName(false);
         setEditEmail(false);

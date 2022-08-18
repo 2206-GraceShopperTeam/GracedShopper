@@ -1,29 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Routes } from "react-router-dom";
-<<<<<<< HEAD
-import { getAPIHealth } from '../axios-services';
-import {Home,Header,Login,Products,Cart,Dell,HP,ASUS,Apple} from './'
-=======
 import { whoAmI } from '../axios-services';
-import {Home,Header,Login,Products,Cart,Checkout,AllUsers,UserInfo} from './'
->>>>>>> userFunc
+import {Home,Header,Login,Products,Cart,Checkout,AllUsers,UserInfo,Dell,HP,ASUS,Apple} from './'
 import '../style/App.css';
 
 const App = () => {
 const [loggedIn,setLoggedIn] = useState(false)
-const [user,setUser] = useState(false)
+const [user,setUser] = useState([])
 const [updated,setUpdated] = useState(false)
+const [cart,setCart] = useState([])
+const [cartInfo,setCartInfo] = useState([])
 
 useEffect(() => {
   const stable = async () =>  {
     if (localStorage.getItem("token")) {
       setLoggedIn(true);
-      const me = await whoAmI(localStorage.getItem("token"));
-      setUser(me)
   }}
+  document.addEventListener("load", setUpdated(!updated))
   
 stable()
-}, [updated]);
+}, [loggedIn]);
+
+useEffect(()=>{
+  const data = JSON.parse(localStorage.getItem("user"))
+  document.addEventListener("load", setUser(data))
+},[updated])
 
   return (
     <div className="app-container">
@@ -33,13 +34,13 @@ stable()
          <Route path="/AllUsers" element={<AllUsers />} />
          <Route path="/UserInfo" element={<UserInfo user={user} setUser={setUser} setUpdated={setUpdated} updated={updated}/>} />
          <Route path="/Login" element={<Login setLoggedIn={setLoggedIn} loggedIn={loggedIn} user={user} setUser={setUser}/>} />
-         <Route path="/Products" element={<Products/>} />
+         <Route path="/Products" element={<Products setLoggedIn={setLoggedIn} loggedIn={loggedIn} user={user} setUser={setUser} cart={cart} setCart={setCart}/>} />
          <Route path="/Products/Dell" element={<Dell/>} />
          <Route path="/Products/HP" element={<HP/>} />
          <Route path="/Products/ASUS" element={<ASUS/>} />
          <Route path="/Products/Apple" element={<Apple/>} />
-         <Route path="/Cart" element={<Cart/>} />
-         <Route path="/" element={<Home/>} />
+         <Route path="/Cart" element={<Cart cart={cart} cartInfo={cartInfo} user={user}/>} />
+         <Route path="/" element={<Home user={user} setCartInfo={setCartInfo}/>} />
          
       </Routes>
     </div>

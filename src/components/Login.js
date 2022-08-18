@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {  useNavigate } from "react-router-dom";
-import {login, register} from "../axios-services"
+import {getCart, login, register,createCart} from "../axios-services"
 
 const Login = ({setLoggedIn,loggedIn,user,setUser}) => {
      const navigate = useNavigate();
@@ -15,8 +15,7 @@ const Login = ({setLoggedIn,loggedIn,user,setUser}) => {
      const [confirmPassword, setConfirmPassword] = useState("");
 
      useEffect(()=>{
-
-     },[signUp])
+     },[loggedIn])
 
 
 
@@ -31,9 +30,7 @@ const Login = ({setLoggedIn,loggedIn,user,setUser}) => {
         setConfirmEmail("");
       }
       const newUser = await register(regEmail,regPassword,name,address)
-      console.log(newUser, "this is a test")
       if(newUser){
-        console.log(newUser, "theres a troll")
             setRegEmail("");
             setRegPassword("");
             setConfirmPassword("");
@@ -53,10 +50,11 @@ const Login = ({setLoggedIn,loggedIn,user,setUser}) => {
         const handleLogin = async () => {
           try {
           const result = await login(email, password);
-          console.log(result, "what is this")
+          const newCart = await createCart(result.user.id)
           
           if(result){
           localStorage.setItem("token", result.token);
+          localStorage.setItem("user",JSON.stringify(result.user))
           setLoggedIn(true);
           setUser(result.user)
           navigate("/")

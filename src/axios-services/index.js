@@ -13,7 +13,6 @@ export async function register(regEmail,regPassword,name,address) {
     }),
   });
   const result = await response.json();
-  console.log(result,"im in the api")
   const token = result.token;
   localStorage.setItem("token", token);
   return result
@@ -50,7 +49,6 @@ export async function getAllUsers() {
 }
 
 export async function editUserInfo(userId, name,email,address) {
-  console.log(userId, name,email,address,"im in the hole")
   const response = await fetch(
     `http://localhost:4000/api/users/${userId}`,
     {
@@ -65,9 +63,7 @@ export async function editUserInfo(userId, name,email,address) {
       }),
     }
   );
-  console.log("im near the end of the hole")
   const result = await response.json();
-  console.log(result,"is in the hole")
   return result;
 }
 
@@ -188,6 +184,16 @@ export async function getCartProducts() {
   const result = await response.json();
   return result;
 }
+export async function getCartProductsById(id) {
+  const response = await fetch(`http://localhost:4000/api/cartProducts/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const result = await response.json();
+  return result;
+}
 
 export async function editCartProduct(cartProductId, quantity) {
   const response = await fetch(
@@ -221,9 +227,27 @@ export async function removeCartProduct(cartProductId) {
 }
 
 // Cart
-export async function createCart() {
+export async function createCart(id) {
   try {
-    const response = await fetch(`http://localhost:4000/api/cart/createCart`);
+    const response = await fetch(`http://localhost:4000/api/cart/createCart`,{
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      user_id: id,
+    }),
+  })
+    const cart = await response.json();
+    return cart;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function getCart(id) {
+  try {
+    const response = await fetch(`http://localhost:4000/api/cart/${id}`)
     const cart = await response.json();
     return cart;
   } catch (error) {

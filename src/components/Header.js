@@ -7,7 +7,6 @@ import {IoCartOutline} from 'react-icons/io5'
 const Header = ({loggedIn,setLoggedIn,user,setUser}) => {
   const navigate = useNavigate();
   useEffect(() => {
-
   }, [loggedIn]);
 
 
@@ -30,7 +29,7 @@ const Header = ({loggedIn,setLoggedIn,user,setUser}) => {
         <div className="shopBttn">
             <button id="shopBttn" onClick={(()=>{navigate("/Products")})}>Shop All</button>
         </div>
-        {/* {user.admin === true && loggedIn ? */}
+        { loggedIn && user.admin === true ?
           <div className="adminBttn" >
           <div className="allUsersBttn">
             <button  onClick={(()=>{navigate("/AllUsers")})}>All Users</button>
@@ -39,7 +38,7 @@ const Header = ({loggedIn,setLoggedIn,user,setUser}) => {
             <button id="shopBttn" onClick={(()=>{navigate("/UserInfo")})}>My Info</button>
         </div> 
         </div> 
-        {/* // : null} */}
+         : null}
        
       </header>
     );

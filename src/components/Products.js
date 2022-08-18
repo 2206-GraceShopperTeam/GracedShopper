@@ -54,7 +54,12 @@ const Products = () => {
                   Price: ${product.price}.{randomCents()}
                 </p>
                 <p>Brand: {product.category}</p>
-                <button>Add to cart</button>
+                <button onClick={(()=>{ cart.push(selectedProduct)})}>Add to cart</button>
+                <div className={loggedIn && user.admin === true ? "adminOpt" : "hidden"}>
+                <button>delete</button>
+                <button>add</button>
+                <button>update</button>
+                </div>
               </div>
             );
           })
