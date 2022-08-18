@@ -19,7 +19,7 @@
 .brandName {
   display: flex;
   justify-content: center;
-
+  padding-bottom: 30px;
 }
 
 .brandAndButtonsColumn {
@@ -31,8 +31,6 @@
   display: flex;
   justify-content: center;
   justify-content: space-around;
-  padding-bottom: 20px;
-  width:300px;
   font-size: 20px;
 }
 
@@ -64,8 +62,8 @@
 .singleGreenBox {
   border: solid green 2px;
   display: flex;
+  flex-direction: column;
   position: relative;
-  top: 20vh;
 }
 
 /* import fonts here */
@@ -448,7 +446,7 @@ left: 2vw;
 
 .products{
   position: relative;
-  top: 22vh;
+  top: 12vh;
 }
 
 .allProducts{

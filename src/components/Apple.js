@@ -3,7 +3,7 @@ import { getProducts } from "../axios-services";
 import { useNavigate } from "react-router";
 
 const Apple = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const [allProducts, setAllProducts] = useState([]);
 
   useEffect(() => {
@@ -13,6 +13,10 @@ const Apple = () => {
     }
     fetchProducts();
   }, []);
+
+  const productClick = (product) => {
+    navigate(`/products/${product.id}`)
+  }
 
   const dellHandleClick = (event) => {
     event.preventDefault();
@@ -56,7 +60,7 @@ const Apple = () => {
         ? allProducts.map((product) => {
             return product.category === "Apple" ? (
               <div className="greenBox" key={`Products${product.id}`}>
-                <div className="productName">
+                <div className="productName" onClick={()=>{productClick(product)}}>
                   <p>
                     <b>{product.name}</b>
                   </p>

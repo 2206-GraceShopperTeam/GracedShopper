@@ -16,7 +16,6 @@ const Products = ({loggedIn, user, cart}) => {
   }, []);
 
   const productClick = (product) => {
-    console.log(product, "apple")
     navigate(`/products/${product.id}`)
   }
 
