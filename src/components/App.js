@@ -33,6 +33,10 @@ useEffect(()=>{
          <Route path="/UserInfo" element={<UserInfo user={user} setUser={setUser} setUpdated={setUpdated} updated={updated}/>} />
          <Route path="/Login" element={<Login setLoggedIn={setLoggedIn} loggedIn={loggedIn} user={user} setUser={setUser}/>} />
          <Route path="/Products" element={<Products/>} />
+         <Route path="/Products/Dell" element={<Dell/>} />
+         <Route path="/Products/HP" element={<HP/>} />
+         <Route path="/Products/ASUS" element={<ASUS/>} />
+         <Route path="/Products/Apple" element={<Apple/>} />
          <Route path="/Cart" element={<Cart/>} />
          <Route path="/" element={<Home/>} />
          
