@@ -4,16 +4,15 @@ import {login, register} from "../axios-services"
 
 const Login = ({setLoggedIn,loggedIn,user,setUser}) => {
      const navigate = useNavigate();
-     const [signUp,setSignUp] = useState(false)
+     const [name, setName] = useState("");
      const [email, setEmail] = useState("");
+     const [address, setAddress] = useState("");
+     const [signUp,setSignUp] = useState(false)
      const [password, setPassword] = useState("");
      const [regEmail, setRegEmail] = useState("");
-     const [confirmEmail, setConfirmEmail] = useState("");
      const [regPassword, setRegPassword] = useState("");
+     const [confirmEmail, setConfirmEmail] = useState("");
      const [confirmPassword, setConfirmPassword] = useState("");
-     const [name, setName] = useState("");
-     const [address, setAddress] = useState("");
-
 
      useEffect(()=>{
 
@@ -32,6 +31,7 @@ const Login = ({setLoggedIn,loggedIn,user,setUser}) => {
         setConfirmEmail("");
       }
       const newUser = await register(regEmail,regPassword,name,address)
+      console.log(newUser, "this is a test")
       if(newUser){
         console.log(newUser, "theres a troll")
             setRegEmail("");
@@ -50,15 +50,15 @@ const Login = ({setLoggedIn,loggedIn,user,setUser}) => {
       }   
   }
 
-        const handleLogin = async (event) => {
+        const handleLogin = async () => {
           try {
-          event.preventDefault();
-          const token = await login(email, password);
-          console.log(token, "what is this")
+          const result = await login(email, password);
+          console.log(result, "what is this")
           
-          if(token){
-          localStorage.setItem("token", token);
+          if(result){
+          localStorage.setItem("token", result.token);
           setLoggedIn(true);
+          setUser(result.user)
           navigate("/")
           } else {
               alert("incorrect username or password please try again")

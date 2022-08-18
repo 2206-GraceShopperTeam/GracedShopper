@@ -8,3 +8,5 @@ export { default as EditQuantity } from './EditQuantity';
 export { default as SingleCartProduct } from './SingleCartProduct';
 export { default as RemoveCartProduct } from './RemoveCartProduct';
 export { default as Checkout } from './Checkout';
+export { default as AllUsers } from './AllUsers';
+export { default as UserInfo } from './UserInfo';
