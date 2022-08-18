@@ -423,3 +423,9 @@ left: 2vw;
   top: 22vh;
 }
 
+.AddProduct{
+  display: flex;
+  position: relative;
+  top: 20vh;
+}
+

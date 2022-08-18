@@ -30,7 +30,7 @@ const Header = ({loggedIn,setLoggedIn,user,setUser}) => {
             <button id="shopBttn" onClick={(()=>{navigate("/Products")})}>Shop All</button>
         </div>
         <div className="addBttn">
-            <button id="addBttn">Add Product</button>
+            <button id="addBttn" onClick={()=>{navigate("/AddProduct")}}>Add Product</button>
         </div>
         { loggedIn && user.admin === true ?
           <div className="adminBttn" >
@@ -46,5 +46,7 @@ const Header = ({loggedIn,setLoggedIn,user,setUser}) => {
       </header>
     );
   };
+
+
   
   export default Header;
