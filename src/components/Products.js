@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { getProducts, addToCartProducts } from "../axios-services";
 import { useNavigate } from "react-router";
 
-const Products = ({loggedIn, user}) => {
+const Products = ({loggedIn, user, cart}) => {
   let navigate = useNavigate();
   const [allProducts, setAllProducts] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState([]);
 
   useEffect(() => {
     async function fetchProducts() {
@@ -47,7 +48,8 @@ const Products = ({loggedIn, user}) => {
       {allProducts.length
         ? allProducts.map((product) => {
             return (
-              <div className="greenBox" key={`Products${product.id}`}>
+              <div className="greenBox" key={`Products${product.id}`} onMouseOver={(()=>{setSelectedProduct(product)})}
+              >
                 <p>Name: {product.name}</p>
                 <p>Description: {product.description}</p>
                 <p>
