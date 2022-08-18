@@ -1,0 +1,13 @@
+.checkout{
+    position: relative;
+    background-color: rgb(242, 245, 247);
+    top: 20vh;
+    width: 30vw;
+    height: 30vh;
+  }
+  
+.message{
+    position: relative;
+    top: 20vh;
+    font-size: large;
+}
