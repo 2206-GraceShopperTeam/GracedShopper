@@ -38,7 +38,7 @@ async function createCartProducts({ cart_id, product_id, quantity }) {
 async function addProductToCart({ cart_id, product_id, quantity }) {
   try {
     const {
-      rows: [cart],
+      rows: [cart_products],
     } = await client.query(
       `
       INSERT INTO cart_products (cart_id, product_id, quantity)
@@ -48,7 +48,7 @@ async function addProductToCart({ cart_id, product_id, quantity }) {
       [cart_id, product_id, quantity]
     );
 
-    return cart;
+    return cart_products;
   } catch (error) {
     throw error;
   }

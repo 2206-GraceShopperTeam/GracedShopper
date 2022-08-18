@@ -18,7 +18,7 @@ cart_product_router.get("/", async (req, res, next) => {
 });
 
 cart_product_router.post("/:cartId", async (req, res, next) => {
-  const cart_id = req.params.cartId;
+  const cart_id = req.params
   const { product_id, quantity } = req.body;
 
   try {

@@ -4,10 +4,11 @@ import { useNavigate } from "react-router";
 
 
 
-const Products = () => {
+const Products = ({cart,setCart,user,loggedIn}) => {
   let navigate = useNavigate();
 
   const [allProducts, setAllProducts] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState([]);
   const token = localStorage.getItem("token")
 
   useEffect(() => {
@@ -64,12 +65,18 @@ const Products = () => {
               <div
                 className="greenBox"
                 key={`Products${product.id}`}
+                onMouseOver={(()=>{setSelectedProduct(product)})}
               >
                 <p>Name: {product.name}</p>
                 <p>Description: {product.description}</p>
                 <p>Price: ${product.price}.{randomCents()}</p>
                 <p>Brand: {product.category}</p>
-                <button>Add to cart</button>
+                <button onClick={(()=>{ cart.push(selectedProduct)})}>Add to cart</button>
+                <div className={loggedIn && user.admin === true ? "adminOpt" : "hidden"}>
+                <button>delete</button>
+                <button>add</button>
+                <button>update</button>
+                </div>
               </div>
             );
           })

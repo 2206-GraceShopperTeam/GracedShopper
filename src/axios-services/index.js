@@ -217,9 +217,27 @@ export async function removeCartProduct(cartProductId) {
 }
 
 // Cart
-export async function createCart() {
+export async function createCart(id) {
   try {
-    const response = await fetch(`http://localhost:4000/api/cart/createCart`);
+    const response = await fetch(`http://localhost:4000/api/cart/createCart`,{
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      user_id: id,
+    }),
+  })
+    const cart = await response.json();
+    return cart;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function getCart(id) {
+  try {
+    const response = await fetch(`http://localhost:4000/api/cart/${id}`)
     const cart = await response.json();
     return cart;
   } catch (error) {
