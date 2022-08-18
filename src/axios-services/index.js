@@ -90,7 +90,7 @@ export async function createProduct(
   price,
   category
 ) {
-  const response = await fetch(`http://localhost:4000/products`, {
+  const response = await fetch(`http://localhost:4000/api/products`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -126,7 +126,7 @@ export async function editProduct(
   price,
   category
 ) {
-  const response = await fetch(`http://localhost:4000/products/${productId}`, {
+  const response = await fetch(`http://localhost:4000/api/products/${productId}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -143,15 +143,18 @@ export async function editProduct(
   return result;
 }
 
-export async function deleteProduct(productId, token) {
-  const response = await fetch(`http://localhost:4000/products/${productId}`, {
+export async function deleteProduct(productId) {
+  console.log("did i fire?")
+  console.log(productId,"was i supposed to?")
+  const response = await fetch(`http://localhost:4000/api/products/${productId}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
     },
   });
+  console.log(response,"delete me please")
   const result = await response.json();
+  console.log(result,"thank you")
   return result;
 }
 

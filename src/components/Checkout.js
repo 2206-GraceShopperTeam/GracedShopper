@@ -11,7 +11,7 @@ const Checkout = (props) => {
     const [price, setPrice] = useState('')
 
     return(
-        <div className="cart">
+        <div className="checkout">
             <h1>Order Details</h1>
             <div>
                 <div className="checkoutproducts">

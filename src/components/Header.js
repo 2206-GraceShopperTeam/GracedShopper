@@ -29,6 +29,9 @@ const Header = ({loggedIn,setLoggedIn,user,setUser}) => {
         <div className="shopBttn">
             <button id="shopBttn" onClick={(()=>{navigate("/Products")})}>Shop All</button>
         </div>
+        <div className="addBttn">
+            <button id="addBttn">Add Product</button>
+        </div>
         { loggedIn && user.admin === true ?
           <div className="adminBttn" >
           <div className="allUsersBttn">

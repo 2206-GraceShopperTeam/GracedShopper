@@ -96,11 +96,12 @@ async function updateProducts( id, fields={} ) {
 }
 
 async function deleteProduct(id) {
+  console.log("did i make it??")
   try {
     await client.query(`
             DELETE FROM products
-            WHERE id=${id};
-            `);
+            WHERE id=$1;
+            `,[id]);
   } catch (error) {
     console.error("Trouble deleting products", error);
   }

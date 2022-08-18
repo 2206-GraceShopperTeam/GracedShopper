@@ -32,7 +32,7 @@ const Cart = ({cart,user,cartInfo}) => {
     <div className="loading">
       <h1>Cart</h1>
       {cartProducts.length ? (
-        cart.map((product) => {
+        cartProducts.map((product) => {
           return <SingleCartProduct key={`routine${product.id}`} product={product} />;
         })
       ) : (

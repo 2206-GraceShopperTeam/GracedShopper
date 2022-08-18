@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from "react";
-import { getProducts,addToCart } from "../axios-services";
+import { getProducts,addToCart, deleteProduct } from "../axios-services";
 import { useNavigate } from "react-router";
 
 
@@ -15,10 +15,11 @@ const Products = ({cart,setCart,user,loggedIn}) => {
     async function fetchProducts() {
       const returnProducts = await getProducts();
       setAllProducts(returnProducts);
-      
+
     }
     fetchProducts();
   }, []);
+
 
   const dellHandleClick = (event) => {
     event.preventDefault()
@@ -37,13 +38,21 @@ const Products = ({cart,setCart,user,loggedIn}) => {
     navigate("/Products/Apple")
   }
 
+const handleDelete = async () => {
+  console.log("im in a whale")
+  const productId = selectedProduct.id
+  const removed = await deleteProduct(productId)
+  console.log(removed, "hello??")
+  if(removed){
+    alert("product deleted")
+    console.log("where am i")
+  }
+
+}
 
 
-  function randomCents(){
-     let change = Math.random() * 100;
-     change = Math.floor(change);
-     return change;
-   }
+
+ 
 
   return (
     <div className="products">
@@ -69,12 +78,11 @@ const Products = ({cart,setCart,user,loggedIn}) => {
               >
                 <p>Name: {product.name}</p>
                 <p>Description: {product.description}</p>
-                <p>Price: ${product.price}.{randomCents()}</p>
+                <p>Price: ${product.price}</p>
                 <p>Brand: {product.category}</p>
                 <button onClick={(()=>{ cart.push(selectedProduct)})}>Add to cart</button>
                 <div className={loggedIn && user.admin === true ? "adminOpt" : "hidden"}>
-                <button>delete</button>
-                <button>add</button>
+                <button onClick={()=>{handleDelete()}}>delete</button>
                 <button>update</button>
                 </div>
               </div>
