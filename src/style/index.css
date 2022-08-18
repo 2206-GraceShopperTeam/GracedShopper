@@ -45,6 +45,7 @@
 
 .hoverButton:hover {
   background-color: yellow;
+  cursor: pointer;
 }
 
 .productName {
@@ -55,9 +56,16 @@
 }
 
 .productName:hover {
-  color: blue;
+  background-color: #add8e6 ;
   text-decoration: underline;
   cursor: pointer;
+}
+
+.singleGreenBox {
+  border: solid green 2px;
+  display: flex;
+  position: relative;
+  top: 20vh;
 }
 
 /* import fonts here */

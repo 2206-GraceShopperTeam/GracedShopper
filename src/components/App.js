@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Routes } from "react-router-dom";
 import { whoAmI } from '../axios-services';
-import {Home,Header,Login,Products,Cart,Checkout,AllUsers,UserInfo,Dell,HP,ASUS,Apple} from './'
+import {Home,Header,Login,Products,Cart,Checkout,AllUsers,UserInfo,Dell,HP,ASUS,Apple, SingleCartProduct} from './'
 import '../style/App.css';
 
 const App = () => {
@@ -40,6 +40,7 @@ useEffect(()=>{
          <Route path="/Products/ASUS" element={<ASUS/>} />
          <Route path="/Products/Apple" element={<Apple/>} />
          <Route path="/Cart" element={<Cart cart={cart} cartInfo={cartInfo} user={user}/>} />
+         <Route path="/Products/:productId" element={<SingleCartProduct />} />
          <Route path="/" element={<Home user={user} setCartInfo={setCartInfo}/>} />
          
       </Routes>

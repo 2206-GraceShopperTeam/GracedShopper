@@ -3,7 +3,7 @@ import { getProducts, addToCartProducts } from "../axios-services";
 import { useNavigate } from "react-router";
 
 const Products = ({loggedIn, user, cart}) => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const [allProducts, setAllProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState([]);
 
@@ -14,6 +14,11 @@ const Products = ({loggedIn, user, cart}) => {
     }
     fetchProducts();
   }, []);
+
+  const productClick = (product) => {
+    console.log(product, "apple")
+    navigate(`/products/${product.id}`)
+  }
 
   const dellHandleClick = (event) => {
     event.preventDefault();
@@ -58,7 +63,7 @@ const Products = ({loggedIn, user, cart}) => {
             return (
               <div className="greenBox" key={`Products${product.id}`} onMouseOver={(()=>{setSelectedProduct(product)})}
               >
-                <div className="productName">
+                <div className="productName" onClick={()=>{productClick(product)}}>
                   <p>
                     <b>{product.name}</b>
                   </p>
