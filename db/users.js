@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const SALT_COUNT = 10;
 
 // user functions
-async function createUser({ email, password, name, address }) {
+async function createUser({ email, password, name, address,admin }) {
   // tested and working
   const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
   try {
@@ -11,12 +11,11 @@ async function createUser({ email, password, name, address }) {
       rows: [user],
     } = await client.query(
       `
-      INSERT INTO users(email, password, name,address) 
-      VALUES($1, $2, $3, $4) 
-      ON CONFLICT (email) DO NOTHING 
-      RETURNING id,email,name,address;
+      INSERT INTO users(email, password, name,address,admin) 
+      VALUES($1, $2, $3, $4,$5)  
+      RETURNING id,email,name,address,admin;
       `,
-      [email, hashedPassword, name, address]
+      [email, hashedPassword, name, address,admin]
     );
     return user;
   } catch (error) {
@@ -45,6 +44,7 @@ async function getUser({ email, password }) {
           email: user.email,
           name: user.name,
           address: user.address,
+          admin: user.admin
         };
         return safeUser;
       } else return false; //login failed
@@ -62,7 +62,6 @@ async function getAllUsers() {
       `
       SELECT *
       FROM users
-      WHERE email = email
   
       `
     );
@@ -104,20 +103,23 @@ async function getUserById(userId) {
       `,
       [userId]
     );
-    return { id: user.id, username: user.name };
+    return { id: user.id, name: user.name, email: user.email, address: user.address };
   } catch (error) {
     throw error;
   }
 }
 
-async function updateUser({ id, ...fields }) {
+async function updateUser(id,{...fields }) {
   //this is so users can update their info
   //tested and working
-  try {
+    console.log(fields, "run track and")
     const setString = Object.keys(fields)
       .map((key, index) => `"${key}"=$${index + 1}`)
       .join(", ");
-    if (setString.length > 0) {
+    if (setString.length === 0) {
+      return "not enough info" }
+      console.log(setString,"is good for fishin")
+      try{
       const {
         rows: [user],
       } = await client.query(
@@ -129,8 +131,8 @@ async function updateUser({ id, ...fields }) {
          `,
         Object.values(fields)
       );
+      console.log(user, "never played with us")
       return user;
-    }
   } catch (error) {
     throw error;
   }

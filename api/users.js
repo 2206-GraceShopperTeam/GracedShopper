@@ -16,6 +16,7 @@ router.post("/register", async (req, res, next) => {
     //tested and working
     //curl http://localhost:4000/api/users/register -H "Content-Type: application/json" -X POST -d '{"email": "enterAnEmail@here.com", "password": "superstars", "name": "josiah", "address": "quebec"}'
     try {
+
       const { email, password, name, address } = req.body;
       if (password.length < 8) {
         next({ name: "passwordLengthError", message: `Password Too Short!` });
@@ -27,16 +28,15 @@ router.post("/register", async (req, res, next) => {
           message: `User email ${email} is already taken.`,
         });
       }
-  
-      const user = await createUser({ email, password, name, address });
-  
+
+      const user = await  createUser({ email, password, name, address });
       const token = jwt.sign(
-          user.id,
-          email
+          {id:user.id,
+          email}
         ,
         JWT_SECRET
       );
-  
+
       res.send({
         message: "thank you for signing up",
         token,
@@ -75,14 +75,36 @@ router.post("/login", async (req, res, next) => {
     }
   });
 
-  // GET /api/users/cart/:cartId
-router.get("/cart/:cartId", async (req, res, next) => {
-    const email = req.params.email;
+
+  router.get("/", async (req, res, next) => {
     try {
-      if (req.user && req.user.email === email) {
-        const cart = await getCartByUserEmail({ email });
-        res.send(cart);
-      } 
+      const users = await getAllUsers();
+        res.send(users);
+    } catch ({ name, message }) {
+      next({
+        name,
+        message,
+      });
+    }
+  });
+
+  router.get("/me", requireUser, async (req, res, next) => {
+    try {
+      res.send(req.user);
+    } catch ({ name, message }) {
+      next({ name, message });
+    }
+  });
+
+  router.patch("/:userId", async (req, res, next) => {
+    const userId = req.params.userId;
+    
+    const { email, name, address } = req.body;
+    try {
+      
+      const updatedUser = await updateUser(userId, {email, name, address});
+      console.log("im the whole hole")
+        res.send(updatedUser);
     } catch ({ name, message }) {
       next({ name, message });
     }

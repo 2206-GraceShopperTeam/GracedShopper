@@ -56,13 +56,26 @@ left:4vw;
 
 .loginBttn{
   position: fixed;
-  left: 88vw;
+  left: 94vw;
   top: 7.4%;
   padding: 1vw;
 }
+.allUsersBttn{
+  position: fixed;
+  left: 82.5vw;
+  top: 7.4%;
+  padding: 1vw;}
+
+.myInfoBttn{
+  position: fixed;
+  left: 88.5vw;
+  top: 7.2%;
+  padding: 1vw;
+}
+
 .checkoutBttn{
   position: fixed;
-  left: 88%;
+  left: 86%;
   top: 1.5%;
 
 }
@@ -99,6 +112,19 @@ left:4vw;
     width: auto;
     height: 2in;
   }
+
+  .allUsersBttn{
+    position: fixed;
+    left: 70vw;
+    top: 7.4%;
+    padding: 1vw;}
+  
+  .myInfoBttn{
+    position: fixed;
+    left: 88vw;
+    top: 7.4%;
+    padding: 1vw;}
+
   .checkoutBttn{
     position: fixed;
     left: 92%;
@@ -373,3 +399,20 @@ left: 2vw;
   justify-content: space-between;
 }
 
+.userInfo{
+  position: relative;
+  top: 22vh;
+}
+.UsersName{
+  position: relative;
+
+  top: 22vh;
+}
+.UsersEmail{
+  position: relative;
+  top: 22vh;
+}
+.UsersAddress{
+  position: relative;
+  top: 22vh;
+}

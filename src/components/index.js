@@ -7,7 +7,13 @@ export { default as Cart } from './Cart';
 export { default as EditQuantity } from './EditQuantity';
 export { default as SingleCartProduct } from './SingleCartProduct';
 export { default as RemoveCartProduct } from './RemoveCartProduct';
+<<<<<<< HEAD
 export {default as Dell} from './Dell';
 export {default as HP} from './HP';
 export {default as Apple} from './Apple';
 export {default as ASUS} from './ASUS';
+=======
+export { default as Checkout } from './Checkout';
+export { default as AllUsers } from './AllUsers';
+export { default as UserInfo } from './UserInfo';
+>>>>>>> userFunc

@@ -1,20 +1,22 @@
 // Users
-export async function register(email, password, name, address) {
+export async function register(regEmail,regPassword,name,address) {
   const response = await fetch(`http://localhost:4000/api/users/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      email: email,
-      password: password,
+      email: regEmail,
+      password: regPassword,
       name: name,
       address: address,
     }),
   });
   const result = await response.json();
+  console.log(result,"im in the api")
   const token = result.token;
   localStorage.setItem("token", token);
+  return result
 }
 
 export async function login(email, password) {
@@ -33,8 +35,55 @@ export async function login(email, password) {
     request
   );
   const result = await response.json();
-  const token = result.token;
-  return token;
+  // const token = result.token;
+  return result;
+}
+
+export async function getAllUsers() {
+  try {
+    const response = await fetch(`http://localhost:4000/api/users`);
+    const users = await response.json();
+    return users;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function editUserInfo(userId, name,email,address) {
+  console.log(userId, name,email,address,"im in the hole")
+  const response = await fetch(
+    `http://localhost:4000/api/users/${userId}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        name: name,
+        address: address,
+      }),
+    }
+  );
+  console.log("im near the end of the hole")
+  const result = await response.json();
+  console.log(result,"is in the hole")
+  return result;
+}
+
+export async function whoAmI(token) {
+  try {
+    const response = await fetch(`http://localhost:4000/api/users/me`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    throw error;
+  }
 }
 
 // Products
@@ -182,4 +231,13 @@ export async function createCart() {
   }
 }
 
-export async function getAllCartProducts() {}
+export async function emptyCart(cartId){
+  try {
+    const response = await fetch(`http://localhost:4000/api/cart/emptyCart/${cartId}`)
+    const emptied = await response.json();
+    return emptied
+  } catch (error) {
+    next(error)
+  }
+}
+
