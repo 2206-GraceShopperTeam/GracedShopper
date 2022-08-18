@@ -5,8 +5,59 @@
 }
 
 .greenBox {
-  transform: translateX(50px);
+  /* transform: translateX(50px); */
   border: solid green 2px;
+}
+
+/* products page */
+.brandAndButtonsCenter {
+  display: flex;
+  justify-content: center;
+  font-family: Barlow, Arial, Helvetica, sans-serif;
+}
+
+.brandName {
+  display: flex;
+  justify-content: center;
+
+}
+
+.brandAndButtonsColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.brandButtons {
+  display: flex;
+  justify-content: center;
+  justify-content: space-around;
+  padding-bottom: 20px;
+  width:300px;
+  font-size: 20px;
+}
+
+.hoverButton {
+  border: 1px solid black;
+  padding: 10px;
+  margin-right: 30px;
+  margin-left: 30px;
+}
+
+.hoverButton:hover {
+  background-color: yellow;
+}
+
+.productName {
+  font-family: Barlow, Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+}
+
+.productName:hover {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 /* import fonts here */

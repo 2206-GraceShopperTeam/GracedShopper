@@ -31,29 +31,47 @@ const Dell = () => {
     navigate("/Products/Apple");
   };
 
-  function randomCents() {
-    let change = Math.random() * 100;
-    change = Math.floor(change);
-    return change;
-  }
-
   return (
     <div className="products">
-      <h1>Dell</h1>
-      <button onClick={dellHandleClick}>Dell</button>
-      <button onClick={hpHandleClick}>HP</button>
-      <button onClick={asusHandleClick}>ASUS</button>
-      <button onClick={appleHandleClick}>Apple</button>
+      <div className="brandAndButtonsCenter">
+        <div className="brandAndButtonsColumn">
+          <div className="brandButtons">
+            <p className="hoverButton" onClick={dellHandleClick}>
+              Dell
+            </p>
+            <p className="hoverButton" onClick={hpHandleClick}>
+              HP
+            </p>
+            <p className="hoverButton" onClick={asusHandleClick}>
+              ASUS
+            </p>
+            <p className="hoverButton" onClick={appleHandleClick}>
+              Apple
+            </p>
+          </div>
+          <h1 className="brandName">Dell</h1>
+        </div>
+      </div>
       {allProducts.length
         ? allProducts.map((product) => {
             return product.category === "DELL" ? (
               <div className="greenBox" key={`Products${product.id}`}>
-                <p>Name: {product.name}</p>
-                <p>Description: {product.description}</p>
+                <div className="productName">
+                  <p>
+                    <b>{product.name}</b>
+                  </p>
+                </div>
                 <p>
-                  Price: ${product.price}..{randomCents()}
+                  <b>Description: </b>
+                  {product.description}
                 </p>
-                <p>Brand: {product.category}</p>
+                <p>
+                  <b>Price: </b>${product.price}
+                </p>
+                <p>
+                  <b>Brand: </b>
+                  {product.category}
+                </p>
                 <button>Add to Cart</button>
               </div>
             ) : null;

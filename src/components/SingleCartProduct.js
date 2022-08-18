@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { EditQuantity, RemoveCartProduct } from "./";
 
-const SingleCartProduct = ({ product }) => {
+const SingleCartProduct = ({ product, cart }) => {
   const [thisProduct, setThisProduct] = useState(product);
 
   function randomCents() {
@@ -22,7 +22,7 @@ const SingleCartProduct = ({ product }) => {
           <p>Brand: {thisProduct.category}</p>
           <p>Quantity: {thisProduct.quantity}</p>
           <EditQuantity thisProduct={thisProduct} setThisProduct={setThisProduct} cartProductId={thisProduct.id} />
-          <RemoveCartProduct setThisProduct={setThisProduct} cartProductId={thisProduct.id} />
+          <RemoveCartProduct setThisProduct={setThisProduct} cartProductId={thisProduct.id} cart={cart} />
         </div>
       ) : (
         null

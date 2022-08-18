@@ -32,31 +32,42 @@ const Products = ({loggedIn, user, cart}) => {
     navigate("/Products/Apple");
   };
 
-  function randomCents() {
-    let change = Math.random() * 100;
-    change = Math.floor(change);
-    return change;
-  }
-
   return (
     <div className="products">
-      <h1>All Laptops</h1>
-      <button onClick={dellHandleClick}>Dell</button>
-      <button onClick={hpHandleClick}>HP</button>
-      <button onClick={asusHandleClick}>ASUS</button>
-      <button onClick={appleHandleClick}>Apple</button>
+      <div className="brandAndButtonsCenter">
+        <div className="brandAndButtonsColumn">
+          <div className="brandButtons">
+            <p className="hoverButton" onClick={dellHandleClick}>
+              Dell
+            </p>
+            <p className="hoverButton" onClick={hpHandleClick}>
+              HP
+            </p>
+            <p className="hoverButton" onClick={asusHandleClick}>
+              ASUS
+            </p>
+            <p className="hoverButton" onClick={appleHandleClick}>
+              Apple
+            </p>
+          </div>
+          <h1 className="brandName">All Laptops</h1>
+        </div>
+      </div>
       {allProducts.length
         ? allProducts.map((product) => {
             return (
               <div className="greenBox" key={`Products${product.id}`} onMouseOver={(()=>{setSelectedProduct(product)})}
               >
-                <p>Name: {product.name}</p>
-                <p>Description: {product.description}</p>
-                <p>
-                  Price: ${product.price}.{randomCents()}
+                <div className="productName">
+                  <p>
+                    <b>{product.name}</b>
+                  </p>
+                </div>
+                <p><b>Description: </b>{product.description}</p>
+                <p><b>Price: </b>${product.price}
                 </p>
-                <p>Brand: {product.category}</p>
-                <button onClick={(()=>{ cart.push(selectedProduct)})}>Add to cart</button>
+                <p><b>Brand: </b>{product.category}</p>
+                <button onClick={(()=>{ cart.push(selectedProduct); alert("Product added to Cart!")})}>Add to cart</button>
                 <div className={loggedIn && user.admin === true ? "adminOpt" : "hidden"}>
                 <button>delete</button>
                 <button>add</button>
