@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getProducts } from "../axios-services";
 import { useNavigate } from "react-router";
 
-const Apple = ({cart}) => {
+const Apple = ({ cart }) => {
   const navigate = useNavigate();
   const [allProducts, setAllProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState([]);
@@ -16,8 +16,8 @@ const Apple = ({cart}) => {
   }, []);
 
   const productClick = (product) => {
-    navigate(`/products/${product.id}`)
-  }
+    navigate(`/products/${product.id}`);
+  };
 
   const dellHandleClick = (event) => {
     event.preventDefault();
@@ -60,18 +60,42 @@ const Apple = ({cart}) => {
       {allProducts.length
         ? allProducts.map((product) => {
             return product.category === "Apple" ? (
-              <div className="greenBox" key={`Products${product.id}`} onMouseOver={(()=>{setSelectedProduct(product)})}>
-                <div className="productName" onClick={()=>{productClick(product)}}>
+              <div
+                className="greenBox"
+                key={`Products${product.id}`}
+                onMouseOver={() => {
+                  setSelectedProduct(product);
+                }}
+              >
+                <div
+                  className="productName"
+                  onClick={() => {
+                    productClick(product);
+                  }}
+                >
                   <p>
                     <b>{product.name}</b>
                   </p>
                 </div>
-                <p><b>Description: </b>{product.description}</p>
-                <p><b>Price: </b>
-                  ${product.price}
+                <p>
+                  <b>Description: </b>
+                  {product.description}
                 </p>
-                <p><b>Brand: </b>{product.category}</p>
-                <button onClick={(()=>{ cart.push(selectedProduct); alert("Product added to Cart!")})}>Add to cart</button>
+                <p>
+                  <b>Price: </b>${product.price}
+                </p>
+                <p>
+                  <b>Brand: </b>
+                  {product.category}
+                </p>
+                <button
+                  onClick={() => {
+                    cart.push(selectedProduct);
+                    alert("Product added to Cart!");
+                  }}
+                >
+                  Add to cart
+                </button>
               </div>
             ) : null;
           })

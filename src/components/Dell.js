@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getProducts } from "../axios-services";
 import { useNavigate } from "react-router";
 
-const Dell = ({cart}) => {
+const Dell = ({ cart }) => {
   const navigate = useNavigate();
   const [allProducts, setAllProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState([]);
@@ -16,8 +16,8 @@ const Dell = ({cart}) => {
   }, []);
 
   const productClick = (product) => {
-    navigate(`/products/${product.id}`)
-  }
+    navigate(`/products/${product.id}`);
+  };
 
   const dellHandleClick = (event) => {
     event.preventDefault();
@@ -60,8 +60,19 @@ const Dell = ({cart}) => {
       {allProducts.length
         ? allProducts.map((product) => {
             return product.category === "DELL" ? (
-              <div className="greenBox" key={`Products${product.id}`} onMouseOver={(()=>{setSelectedProduct(product)})}>
-                <div className="productName" onClick={()=>{productClick(product)}}>
+              <div
+                className="greenBox"
+                key={`Products${product.id}`}
+                onMouseOver={() => {
+                  setSelectedProduct(product);
+                }}
+              >
+                <div
+                  className="productName"
+                  onClick={() => {
+                    productClick(product);
+                  }}
+                >
                   <p>
                     <b>{product.name}</b>
                   </p>
@@ -77,7 +88,14 @@ const Dell = ({cart}) => {
                   <b>Brand: </b>
                   {product.category}
                 </p>
-                <button onClick={(()=>{ cart.push(selectedProduct); alert("Product added to Cart!")})}>Add to cart</button>
+                <button
+                  onClick={() => {
+                    cart.push(selectedProduct);
+                    alert("Product added to Cart!");
+                  }}
+                >
+                  Add to cart
+                </button>
               </div>
             ) : null;
           })

@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { getCartProducts, addToCartProducts, createCart, getCart, getCartProductsById } from "../axios-services";
+import {
+  getCartProducts,
+  addToCartProducts,
+  createCart,
+  getCart,
+  getCartProductsById,
+} from "../axios-services";
 import { SingleCartProduct } from "./";
 
-const Cart = ({cart, user, cartInfo}) => {
+const Cart = ({ cart, user, cartInfo }) => {
   const [cartProducts, setCartProducts] = useState([]);
   // const [userCart, setUserCart] = useState([]);
   // const useStateIsBad = JSON.parse(localStorage.getItem("cartInfo"))
@@ -32,7 +38,13 @@ const Cart = ({cart, user, cartInfo}) => {
       <h1>Cart</h1>
       {cartProducts.length ? (
         cart.map((product) => {
-          return <SingleCartProduct key={`routine${product.id}`} product={product} cart={cart} />;
+          return (
+            <SingleCartProduct
+              key={`routine${product.id}`}
+              product={product}
+              cart={cart}
+            />
+          );
         })
       ) : (
         <h3>Your Cart is Empty</h3>

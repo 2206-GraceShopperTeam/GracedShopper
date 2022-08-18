@@ -43,24 +43,26 @@ const SingleCartProduct = ({ product, cart }) => {
 
   return (
     <div className="products">
-      {!cart ? (<div className="brandAndButtonsCenter">
-        <div className="brandAndButtonsColumn">
-          <div className="brandButtons">
-            <p className="hoverButton" onClick={dellHandleClick}>
-              Dell
-            </p>
-            <p className="hoverButton" onClick={hpHandleClick}>
-              HP
-            </p>
-            <p className="hoverButton" onClick={asusHandleClick}>
-              ASUS
-            </p>
-            <p className="hoverButton" onClick={appleHandleClick}>
-              Apple
-            </p>
+      {!cart ? (
+        <div className="brandAndButtonsCenter">
+          <div className="brandAndButtonsColumn">
+            <div className="brandButtons">
+              <p className="hoverButton" onClick={dellHandleClick}>
+                Dell
+              </p>
+              <p className="hoverButton" onClick={hpHandleClick}>
+                HP
+              </p>
+              <p className="hoverButton" onClick={asusHandleClick}>
+                ASUS
+              </p>
+              <p className="hoverButton" onClick={appleHandleClick}>
+                Apple
+              </p>
+            </div>
           </div>
         </div>
-      </div>) : null}
+      ) : null}
       {thisProduct ? (
         <div>
           <div className="singleGreenBox">
