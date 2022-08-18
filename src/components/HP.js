@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { getProducts } from "../axios-services";
 import { useNavigate } from "react-router";
 
-const HP = () => {
+const HP = ({cart}) => {
   const navigate = useNavigate();
   const [allProducts, setAllProducts] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState([]);
 
   useEffect(() => {
     async function fetchProducts() {
@@ -59,7 +60,7 @@ const HP = () => {
       {allProducts.length
         ? allProducts.map((product) => {
             return product.category === "HP" ? (
-              <div className="greenBox" key={`Products${product.id}`}>
+              <div className="greenBox" key={`Products${product.id}`} onMouseOver={(()=>{setSelectedProduct(product)})}>
                 <div className="productName" onClick={()=>{productClick(product)}}>
                   <p>
                     <b>{product.name}</b>
@@ -70,7 +71,7 @@ const HP = () => {
                   ${product.price}
                 </p>
                 <p><b>Brand: </b>{product.category}</p>
-                <button>Add to Cart</button>
+                <button onClick={(()=>{ cart.push(selectedProduct); alert("Product added to Cart!")})}>Add to cart</button>
               </div>
             ) : null;
           })
