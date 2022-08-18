@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getProducts, addToCartProducts } from "../axios-services";
 import { useNavigate } from "react-router";
 
-const Products = () => {
+const Products = ({loggedIn, user}) => {
   let navigate = useNavigate();
   const [allProducts, setAllProducts] = useState([]);
 
