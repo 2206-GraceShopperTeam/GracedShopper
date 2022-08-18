@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { getCartProducts,addToCartProducts,createCart,getCart } from "../axios-services";
+import { getCartProducts,addToCartProducts,createCart,getCart,getCartProductsById } from "../axios-services";
 import { SingleCartProduct } from "./";
 
 const Cart = ({cart,user,cartInfo}) => {
   const [cartProducts, setCartProducts] = useState([]);
   const [userCart, setUserCart] = useState([]);
 
-
+  const useStateIsBad = JSON.parse(localStorage.getItem("cartInfo"))
 
   useEffect(() => {
     async function fetchCartProducts() {
@@ -20,11 +20,8 @@ const Cart = ({cart,user,cartInfo}) => {
     const useStateIsBad = JSON.parse(localStorage.getItem("cartInfo"))
     async function fetchAddToCartProducts() {
       const cart_id = useStateIsBad.id
-      console.log(cart[0].id, "show me the errors")
-      const product_id = cart[0].id
-      console.log(product_id, "im meaningless")
       const quantity = 2
-      const returnCartProducts = await addToCartProducts({cart_id : cart_id, product_id: product_id, quantity: quantity});
+      const returnCartProducts = await addToCartProducts(1, 1,2);
       setCartProducts(returnCartProducts);
       console.log(returnCartProducts, "jimmy johns??")
     }

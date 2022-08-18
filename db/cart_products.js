@@ -35,7 +35,7 @@ async function createCartProducts({ cart_id, product_id, quantity }) {
   }
 }
 
-async function addProductToCart({ cart_id, product_id, quantity }) {
+async function addProductToCart(cart_id, {product_id, quantity }) {
   try {
     const {
       rows: [cart_products],
