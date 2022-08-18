@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { getProducts, addToCartProducts } from "../axios-services";
+import { getProducts } from "../axios-services";
 import { useNavigate } from "react-router";
 
-const Products = ({loggedIn, user, cart}) => {
-  const navigate = useNavigate();
+const Dell = () => {
+  let navigate = useNavigate();
   const [allProducts, setAllProducts] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState([]);
 
   useEffect(() => {
     async function fetchProducts() {
@@ -14,11 +13,6 @@ const Products = ({loggedIn, user, cart}) => {
     }
     fetchProducts();
   }, []);
-
-  const productClick = (product) => {
-    console.log(product, "apple")
-    navigate(`/products/${product.id}`)
-  }
 
   const dellHandleClick = (event) => {
     event.preventDefault();
@@ -55,35 +49,36 @@ const Products = ({loggedIn, user, cart}) => {
               Apple
             </p>
           </div>
-          <h1 className="brandName">All Laptops</h1>
+          <h1 className="brandName">Dell</h1>
         </div>
       </div>
       {allProducts.length
         ? allProducts.map((product) => {
-            return (
-              <div className="greenBox" key={`Products${product.id}`} onMouseOver={(()=>{setSelectedProduct(product)})}
-              >
-                <div className="productName" onClick={()=>{productClick(product)}}>
+            return product.category === "DELL" ? (
+              <div className="greenBox" key={`Products${product.id}`}>
+                <div className="productName">
                   <p>
                     <b>{product.name}</b>
                   </p>
                 </div>
-                <p><b>Description: </b>{product.description}</p>
-                <p><b>Price: </b>${product.price}
+                <p>
+                  <b>Description: </b>
+                  {product.description}
                 </p>
-                <p><b>Brand: </b>{product.category}</p>
-                <button onClick={(()=>{ cart.push(selectedProduct); alert("Product added to Cart!")})}>Add to cart</button>
-                <div className={loggedIn && user.admin === true ? "adminOpt" : "hidden"}>
-                <button>delete</button>
-                <button>add</button>
-                <button>update</button>
-                </div>
+                <p>
+                  <b>Price: </b>${product.price}
+                </p>
+                <p>
+                  <b>Brand: </b>
+                  {product.category}
+                </p>
+                <button>Add to Cart</button>
               </div>
-            );
+            ) : null;
           })
         : null}
     </div>
   );
 };
 
-export default Products;
+export default Dell;

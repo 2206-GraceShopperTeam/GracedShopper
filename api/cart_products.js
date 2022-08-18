@@ -18,13 +18,23 @@ cart_product_router.get("/", async (req, res, next) => {
 });
 
 cart_product_router.post("/:cartId", async (req, res, next) => {
-  const cart_id = req.params.cartId;
+  const cart_id = req.params
   const { product_id, quantity } = req.body;
 
   try {
-    const added = await addProductToCart({ cart_id, product_id, quantity });
+    const added = await addProductToCart( cart_id, {product_id, quantity} );
 
     res.send(added);
+  } catch (error) {
+    next(error);
+  }
+});
+cart_product_router.get("/:cartId", async (req, res, next) => {
+  const cart_id = req.params
+  try {
+    const userCart = await getCartProductById( cart_id );
+
+    res.send(userCart);
   } catch (error) {
     next(error);
   }

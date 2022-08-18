@@ -39,7 +39,9 @@ async function createTables() {
               email VARCHAR(255) UNIQUE NOT NULL,
               password VARCHAR(255) NOT NULL,
               name VARCHAR(255) NOT NULL,
-              address TEXT
+              address TEXT,
+              admin BOOLEAN DEFAULT false
+              
       );
 
       CREATE TABLE products (
@@ -82,22 +84,25 @@ async function createInitialUsers() {
   console.log("Starting to create users...");
   try {
     const usersToCreate = [
-      { email: "graces@hopper.com", password: "momofall", name: "grace" },
+      { email: "Admin@one.com", password: "graceshopper", name: "admin", admin: true },
+
+      { email: "graces@hopper.com", password: "momofall", name: "grace", admin: false },
       {
         email: "hoppers@hopper.com",
         password: "trappedinrussia",
         name: "hopper",
+        admin: false
       },
       {
         email: "eleven@ontherun.com",
         password: "hasallthepower",
         name: "eleven",
+        admin: false
       },
     ];
     const users = await Promise.all(usersToCreate.map(createUser));
 
     console.log("Users created:");
-    console.log(users);
     console.log("Finished creating users!");
   } catch (error) {
     console.error("Error creating users...");
@@ -196,7 +201,6 @@ async function createInitialProducts() {
     const products = await Promise.all(productsToCreate.map(createProduct));
 
     console.log("Products created:");
-    console.log(products);
     console.log("Finished creating products!");
   } catch (error) {
     console.error("Error creating products...");
@@ -218,7 +222,6 @@ async function createInitialCart() {
     const cart = await Promise.all(cartToCreate.map(createCart));
 
     console.log("Cart created:");
-    console.log(cart);
     console.log("Finished creating cart!");
   } catch (error) {
     console.error("Error creating cart...");
@@ -255,7 +258,6 @@ async function createInitialCartProducts() {
     );
 
     console.log("Cart_products created:");
-    console.log(cart);
     console.log("Finished creating cart_products!");
   } catch (error) {
     console.error("Error creating cart_products...");

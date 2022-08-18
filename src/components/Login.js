@@ -1,49 +1,62 @@
 import React, { useEffect, useState } from "react";
 import {  useNavigate } from "react-router-dom";
-import {login, register} from "../axios-services"
+import {getCart, login, register,createCart} from "../axios-services"
 
-const Login = ({setLoggedIn,loggedIn}) => {
+const Login = ({setLoggedIn,loggedIn,user,setUser}) => {
      const navigate = useNavigate();
-     const [signUp,setSignUp] = useState(false)
+     const [name, setName] = useState("");
      const [email, setEmail] = useState("");
+     const [address, setAddress] = useState("");
+     const [signUp,setSignUp] = useState(false)
      const [password, setPassword] = useState("");
      const [regEmail, setRegEmail] = useState("");
-     const [confirmEmail, setConfirmEmail] = useState("");
      const [regPassword, setRegPassword] = useState("");
+     const [confirmEmail, setConfirmEmail] = useState("");
      const [confirmPassword, setConfirmPassword] = useState("");
-     const [name, setName] = useState("");
-     const [address, setAddress] = useState("");
-
 
      useEffect(()=>{
+     },[loggedIn])
 
-     },[signUp])
 
-     const handleReg = (regEmail,regPassword,name,address) => {
-      
-          if (regPassword !== confirmPassword) {
-            alert("Passwords don't match!");
-            setRegPassword("");
-            setConfirmPassword("");
-          } else {
-            register(regEmail,regPassword,name,address)
+
+     const handleReg = async () => {
+      try {
+      if (regPassword !== confirmPassword) {
+        alert("Passwords don't match!");
+        setRegPassword("");
+        setConfirmPassword("");
+      } else if (regEmail !== confirmEmail){
+        alert("Emails don't match!");
+        setConfirmEmail("");
+      }
+      const newUser = await register(regEmail,regPassword,name,address)
+      if(newUser){
             setRegEmail("");
             setRegPassword("");
             setConfirmPassword("");
+            setConfirmEmail("");
+            setName("");
+            setAddress("")
             alert("Registration successful please Login");
             setSignUp(false)
-          }
-        };
+      } else {
+          alert("registration unsuccessful")
+      }
+      } catch (error) {
+          throw error
+      }   
+  }
 
-        const handleLogin = async (event) => {
+        const handleLogin = async () => {
           try {
-          event.preventDefault();
-          const token = await login(email, password);
-          console.log(token, "what is this")
+          const result = await login(email, password);
+          const newCart = await createCart(result.user.id)
           
-          if(token){
-          localStorage.setItem("token", token);
+          if(result){
+          localStorage.setItem("token", result.token);
+          localStorage.setItem("user",JSON.stringify(result.user))
           setLoggedIn(true);
+          setUser(result.user)
           navigate("/")
           } else {
               alert("incorrect username or password please try again")
@@ -184,10 +197,11 @@ const Login = ({setLoggedIn,loggedIn}) => {
 
 
           </form>
-          <button type="submit" onClick={(()=>{setSignUp(false),handleReg(regEmail,regPassword,name,address)})}>Sign Up</button>
+          <button type="submit" onClick={(()=>{handleReg()})}>Sign Up</button>
      </div>
 
   </div>;
 };
 
 export default Login;
+

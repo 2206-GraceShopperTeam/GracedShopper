@@ -1,13 +1,13 @@
 // Users
-export async function register(email, password, name, address) {
+export async function register(regEmail,regPassword,name,address) {
   const response = await fetch(`http://localhost:4000/api/users/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      email: email,
-      password: password,
+      email: regEmail,
+      password: regPassword,
       name: name,
       address: address,
     }),
@@ -15,6 +15,7 @@ export async function register(email, password, name, address) {
   const result = await response.json();
   const token = result.token;
   localStorage.setItem("token", token);
+  return result
 }
 
 export async function login(email, password) {
@@ -33,26 +34,137 @@ export async function login(email, password) {
     request
   );
   const result = await response.json();
-  const token = result.token;
-  return token;
+  // const token = result.token;
+  return result;
 }
 
-// Products
-export async function createProduct() {}
-
-export async function getProducts() {
+export async function getAllUsers() {
   try {
-    const response = await fetch(`http://localhost:4000/api/products`);
-    const products = await response.json();
-    return products;
+    const response = await fetch(`http://localhost:4000/api/users`);
+    const users = await response.json();
+    return users;
   } catch (error) {
     throw error;
   }
 }
 
-export async function editProduct() {}
+export async function editUserInfo(userId, name,email,address) {
+  const response = await fetch(
+    `http://localhost:4000/api/users/${userId}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        name: name,
+        address: address,
+      }),
+    }
+  );
+  const result = await response.json();
+  return result;
+}
 
-export async function deleteProduct() {}
+export async function whoAmI(token) {
+  try {
+    const response = await fetch(`http://localhost:4000/api/users/me`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    throw error;
+  }
+}
+
+// Products
+export async function createProduct(
+  token,
+  nameProduct,
+  description,
+  price,
+  category
+) {
+  const response = await fetch(`http://localhost:4000/products`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      name: nameProduct,
+      description: description,
+      price: price,
+      category: category,
+    }),
+  });
+  const result = await response.json();
+  return result;
+}
+
+export async function getProducts() {
+  const response = await fetch(`http://localhost:4000/api/products`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const result = await response.json();
+  return result;
+}
+
+export async function getProductById(productId) {
+  const response = await fetch(`http://localhost:4000/api/products/${productId}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const result = await response.json();
+  return result;
+}
+
+export async function editProduct(
+  productId,
+  token,
+  nameProduct,
+  description,
+  price,
+  category
+) {
+  const response = await fetch(`http://localhost:4000/products/${productId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      name: nameProduct,
+      description: description,
+      price: price,
+      category: category,
+    }),
+  });
+  const result = await response.json();
+  return result;
+}
+
+export async function deleteProduct(productId, token) {
+  const response = await fetch(`http://localhost:4000/products/${productId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const result = await response.json();
+  return result;
+}
 
 // Cart Products
 export async function addToCartProducts(cart_id, product_id, quantity) {
@@ -75,6 +187,16 @@ export async function addToCartProducts(cart_id, product_id, quantity) {
 
 export async function getCartProducts() {
   const response = await fetch(`http://localhost:4000/api/cartProducts/`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const result = await response.json();
+  return result;
+}
+export async function getCartProductsById(id) {
+  const response = await fetch(`http://localhost:4000/api/cartProducts/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -116,9 +238,27 @@ export async function removeCartProduct(cartProductId) {
 }
 
 // Cart
-export async function createCart() {
+export async function createCart(id) {
   try {
-    const response = await fetch(`http://localhost:4000/api/cart/createCart`);
+    const response = await fetch(`http://localhost:4000/api/cart/createCart`,{
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      user_id: id,
+    }),
+  })
+    const cart = await response.json();
+    return cart;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function getCart(id) {
+  try {
+    const response = await fetch(`http://localhost:4000/api/cart/${id}`)
     const cart = await response.json();
     return cart;
   } catch (error) {

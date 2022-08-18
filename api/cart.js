@@ -9,20 +9,22 @@ const {
 const { addProductToCart } = require("../db/cart_products");
 const { requireUser } = require("./util");
 
-//POST /api/cart
-router.get("/", async (req, res, next) => {
-  const user_id = req.user.id;
-
+//POST /api/cart/userId
+router.get("/:userId", async (req, res, next) => {
+  const {userId} = req.params
+console.log(userId, "am i a ral boi")
   try {
-    const cart = await getCartByUser(user_id);
+    const cart = await getCartByUser(userId);
+    console.log(cart,"hi howd you find me")
     res.send(cart);
   } catch (error) {
     next(error);
   }
 });
 
-router.post("/createCart", requireUser, async (req, res, next) => {
-  const cart = await createCart({ user_id: req.user.id });
+router.post("/createCart", async (req, res, next) => {
+  const user_id = req.body
+  const cart = await createCart( user_id );
   try {
     if (cart) {
       res.send(cart);
