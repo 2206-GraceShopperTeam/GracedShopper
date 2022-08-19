@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getProducts, addToCartProducts } from "../axios-services";
+import { getProducts } from "../axios-services";
 import { useNavigate } from "react-router";
 
 const Products = ({ loggedIn, user, cart }) => {
