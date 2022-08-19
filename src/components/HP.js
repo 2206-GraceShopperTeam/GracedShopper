@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getProducts } from "../axios-services";
 import { useNavigate } from "react-router";
 
-const HP = ({ cart }) => {
+const HP = ({ cart, cartInfo, setCartInfo }) => {
   const navigate = useNavigate();
   const [allProducts, setAllProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState([]);
@@ -34,6 +34,21 @@ const HP = ({ cart }) => {
   const appleHandleClick = (event) => {
     event.preventDefault();
     navigate("/Products/Apple");
+  };
+
+  const addToCart = () => {
+    const searchCart = cart.find(
+      (product) => product.name === selectedProduct.name
+    );
+    setCartInfo(!cartInfo);
+    if (!searchCart) {
+      selectedProduct.quantity = 1;
+      cart.push(selectedProduct);
+      alert("item added to cart");
+    } else {
+      searchCart.quantity++;
+      alert("Quantity increased");
+    }
   };
 
   return (
@@ -90,8 +105,7 @@ const HP = ({ cart }) => {
                 </p>
                 <button
                   onClick={() => {
-                    cart.push(selectedProduct);
-                    alert("Product added to Cart!");
+                    addToCart();
                   }}
                 >
                   Add to cart
