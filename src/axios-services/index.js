@@ -258,7 +258,9 @@ export async function createCart(id) {
 export async function getCart(id) {
   try {
     const response = await fetch(`http://localhost:4000/api/cart/${id}`)
+    console.log(response,"hello my g")
     const cart = await response.json();
+    console.log(cart, "this is the end")
     return cart;
   } catch (error) {
     throw error;

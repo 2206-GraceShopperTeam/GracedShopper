@@ -11,6 +11,7 @@ async function createCart({user_id}) {
       RETURNING *;
       `, [user_id]
       )
+      console.log(cart,"i have the goods")
     return cart;
   } catch (error) {
     throw error;
@@ -33,18 +34,19 @@ async function getAllCarts() {
 async function getCartByUser(userId) {
   try {
     const {
-      rows: [cart],
+      rows,
     } = await client.query(
       `
-      SELECT * 
+      SELECT *
       FROM carts
-      JOIN cart_products ON id = cart_products.cart_id
-      WHERE user_id = $1
+      JOIN cart_products ON carts.id = cart_products.cart_id
+      JOIN products ON products.id = cart_products.product_id
+      WHERE user_id = $1;
       `,
       [userId]
     );
 
-    return cart;
+    return rows;
   } catch (error) {
     throw error;
   }

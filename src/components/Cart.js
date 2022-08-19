@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { getCartProducts } from "../axios-services";
+import { getCart, getCartProducts } from "../axios-services";
 import { SingleCartProduct } from "./";
 import { useNavigate, useLocation } from "react-router-dom";
 
-const Cart = ({ cart }) => {
+const Cart = ({ cart,cartInfo,setCartInfo }) => {
   const [cartProducts, setCartProducts] = useState([]);
   const [cartEmpty, setCartEmpty] = useState(false);
 
@@ -14,12 +14,13 @@ const Cart = ({ cart }) => {
   };
 
   useEffect(() => {
+    console.log(cart,"i am the cart king")
     async function fetchCartProducts() {
       const returnCartProducts = await getCartProducts();
       setCartProducts(returnCartProducts);
     }
     fetchCartProducts();
-  }, [cartEmpty]);
+  }, [cartInfo]);
   return (
     <div className="cartParent">
       <p className="cartTitle">Cart</p>
@@ -27,12 +28,16 @@ const Cart = ({ cart }) => {
       {cart && cart.length ? (
         cart.map((product) => {
           return (
+            <div>
             <SingleCartProduct
               key={`routine${product.id}`}
               product={product}
               cart2={cart}
               setCartEmpty={setCartEmpty}
-            />
+              setCartInfo={setCartInfo}
+              cartInfo={cartInfo}
+              />
+            </div>
           );
         })
       ) : (

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import {  useNavigate } from "react-router-dom";
-import { login, register,createCart} from "../axios-services"
+import {Error} from "./"
+import { login, register,createCart,getCart} from "../axios-services"
 
 const Login = ({setLoggedIn,loggedIn,setUser}) => {
      const navigate = useNavigate();
      const [name, setName] = useState("");
+     const [error, setError] = useState(false);
      const [email, setEmail] = useState("");
      const [address, setAddress] = useState("");
      const [signUp,setSignUp] = useState(false)
@@ -39,19 +41,15 @@ const Login = ({setLoggedIn,loggedIn,setUser}) => {
             setAddress("")
             alert("Registration successful please Login");
             setSignUp(false)
-      } else {
-          alert("registration unsuccessful")
-      }
+      } 
       } catch (error) {
-          throw error
+          alert("register failed")
       }   
   }
 
         const handleLogin = async () => {
           try {
           const result = await login(email, password);
-          const newCart = await createCart(result.user.id)
-          
           if(result){
           localStorage.setItem("token", result.token);
           localStorage.setItem("user",JSON.stringify(result.user))
@@ -64,19 +62,17 @@ const Login = ({setLoggedIn,loggedIn,setUser}) => {
             navigate(redirect)
           }else{
           navigate("/")}
-          } else {
-              alert("incorrect username or password please try again")
-          }
+          } 
           } catch (error) {
-              throw error
+            setError(true)
           }
           
-      }
-      
+        }
+        
         const emailChange = (event) => {
           setEmail(event.target.value);
         };
-
+        
         const passwordChange = (event) => {
           setPassword(event.target.value);
         };
@@ -84,15 +80,15 @@ const Login = ({setLoggedIn,loggedIn,setUser}) => {
         const regEmailChange = (event) => {
           setRegEmail(event.target.value);
         };
-
+        
         const confirmEmailChange = (event) => {
           setConfirmEmail(event.target.value);
         };
-      
+        
         const regPasswordChange = (event) => {
           setRegPassword(event.target.value);
         };
-      
+        
         const confirmPasswordChange = (event) => {
           setConfirmPassword(event.target.value);
         };
@@ -102,11 +98,12 @@ const Login = ({setLoggedIn,loggedIn,setUser}) => {
         const confirmAddressChange = (event) => {
           setAddress(event.target.value);
         };
-      
-
-
-  return <div>
+        
+        
+        
+        return <div>
      <div className="loginContainer">
+      <div className={error ? "error" : "hidden"}>{<Error setError={setError}/>}</div>
           <h1 className="loginTitle">
                Login to Your Account
           </h1>

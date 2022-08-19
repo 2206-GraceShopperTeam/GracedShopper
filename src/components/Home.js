@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import {getCart, createCart} from "../axios-services"
+import {getCart, createCart,} from "../axios-services"
 
-const Home = ({user,setCart,cart}) => {
+const Home = ({user,setCart,cart,loggedIn}) => {
 
     // useEffect(()=>{
     //   async function fetchCart () {
@@ -20,10 +20,13 @@ const Home = ({user,setCart,cart}) => {
       async function createCart (){
         if(!localStorage.getItem("user") && !localStorage.getItem("cart")){
           setCart([])
+        } else {
+          const userCart = await getCart(1)
+          setCart(userCart)
         }
       }
       createCart()
-    },[])
+    },[loggedIn])
 
   return (
     <div /*Starter Div */>

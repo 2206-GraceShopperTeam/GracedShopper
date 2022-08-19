@@ -520,3 +520,16 @@ left: 2vw;
   top: 20vh;
 }
 
+.errorMessage{
+  background-color: grey;
+  color: white;
+  width: 15vw;
+  height: 10vh;
+  top: 50vh;
+  z-index: 100;
+}
+.error{
+  z-index: 100;
+  position: absolute;
+  left: 26.5vw;
+}
