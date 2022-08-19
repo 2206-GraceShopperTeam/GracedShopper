@@ -1,28 +1,23 @@
 import React, { useState } from "react";
 import { editCartProduct } from "../axios-services";
 
-const EditQuantity = ({ thisProduct, setThisProduct, cartProductId }) => {
+const EditQuantity = ({ thisProduct, setThisProduct, cartProductId,cart,setCart }) => {
   const [editForm, setEditForm] = useState(false);
   const [error, setError] = useState(null);
-  const [quantity, setQuantity] = useState(thisProduct.quantity);
+  const [quantity, setQuantity] = useState(thisProduct ? thisProduct.quantity : 1);
 
   const handleEdit = async (event) => {
     event.preventDefault();
-    const result = await editCartProduct(cartProductId, quantity);
-
-    if (result.error) {
-      setError(result);
-      setQuantity("");
-    } else {
+console.log(cart,"im the cart")
+    
       setEditForm(false);
       setError(null);
-      setThisProduct({
-        ...thisProduct,
-        quantity: result.quantity,
-      });
-      return result;
-    }
-  };
+      const searchCart= cart.find((product)=> product.name===thisProduct.name)
+      console.log(searchCart,"whats the deal")
+    if(searchCart){
+      searchCart.quantity = quantity
+    } 
+    };
 
   const quantityChange = (event) => {
     setQuantity(event.target.value);

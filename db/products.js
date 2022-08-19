@@ -99,8 +99,8 @@ async function deleteProduct(id) {
   try {
     await client.query(`
             DELETE FROM products
-            WHERE id=${id};
-            `);
+            WHERE id=$1;
+            `,[id]);
   } catch (error) {
     console.error("Trouble deleting products", error);
   }

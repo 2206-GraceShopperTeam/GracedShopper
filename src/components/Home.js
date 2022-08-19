@@ -1,8 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { } from "../axios-services";
+import {getCart, createCart} from "../axios-services"
 
-const Home = () => {
-  
+const Home = ({user,setCart,cart}) => {
+
+    // useEffect(()=>{
+    //   async function fetchCart () {
+    //     if(localStorage.getItem("user")){
+    //       const user = JSON.parse(localStorage.getItem("user"))
+    //       const oldCart = await getCart(user.id)
+    //       setCart(oldCart)
+    //     }
+    //   }
+    //   console.log(cart, "im the old cart")
+    //   fetchCart()
+    // },[])
+
+
+    useEffect(()=>{
+      async function createCart (){
+        if(!localStorage.getItem("user") && !localStorage.getItem("cart")){
+          setCart([])
+        }
+      }
+      console.log(cart, "im the new cart")
+      createCart()
+    },[])
+
   return (
     <div /*Starter Div */>
       <div>

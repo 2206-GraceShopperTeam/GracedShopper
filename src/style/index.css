@@ -183,7 +183,13 @@ left:4vw;
   left: 46%;
   top: 9%;
 }
-#shopBttn{
+.addBttn{
+  position: fixed;
+  left: 54%;
+  top: 9%;
+}
+
+#shopBttn,#addBttn{
   font-size: 15px;
 }
 
@@ -507,3 +513,10 @@ left: 2vw;
   position: relative;
   top: 22vh;
 }
+
+.AddProduct{
+  display: flex;
+  position: relative;
+  top: 20vh;
+}
+

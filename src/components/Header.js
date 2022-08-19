@@ -29,19 +29,25 @@ const Header = ({loggedIn,setLoggedIn,user}) => {
         <div className="shopBttn">
             <button id="shopBttn" onClick={(()=>{navigate("/Products")})}>Shop All</button>
         </div>
+        {loggedIn && user.admin === true ?
+        <div className="addBttn">
+            <button id="addBttn" onClick={()=>{navigate("/AddProduct")}}>Add Product</button>
+        </div>:null}
         { loggedIn && user.admin === true ?
           <div className="adminBttn" >
           <div className="allUsersBttn">
             <button  onClick={(()=>{navigate("/AllUsers")})}>All Users</button>
         </div>
-        <div className="myInfoBttn">
-            <button id="shopBttn" onClick={(()=>{navigate("/UserInfo")})}>My Info</button>
-        </div> 
+       
         </div> 
          : null}
-       
+        {loggedIn ? <div className="myInfoBttn">
+            <button id="shopBttn" onClick={(()=>{navigate("/UserInfo")})}>My Info</button>
+        </div> : null }
       </header>
     );
   };
+
+
   
   export default Header;
