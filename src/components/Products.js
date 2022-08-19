@@ -16,6 +16,10 @@ const Products = ({ loggedIn, user, cart }) => {
     fetchProducts();
   }, []);
 
+  const productClick = (product) => {
+    navigate(`/products/${product.id}`);
+  };
+
   const dellHandleClick = (event) => {
     event.preventDefault();
     navigate("/Products/Dell");
@@ -74,15 +78,43 @@ const handleDelete = async () => {
                 key={`Products${product.id}`}
                 onMouseOver={(()=>{setSelectedProduct(product)})}
               >
-                <p>Name: {product.name}</p>
-                <p>Description: {product.description}</p>
-                <p>Price: ${product.price}</p>
-                <p>Brand: {product.category}</p>
-                <button onClick={(()=>{ cart.push(selectedProduct)})}>Add to cart</button>
-                <div className={loggedIn && user.admin === true ? "adminOpt" : "hidden"}>
-                <button>delete</button>
-                <button>add</button>
-                <button>update</button>
+                <div
+                  className="productName"
+                  onClick={() => {
+                    productClick(product);
+                  }}
+                >
+                  <p>
+                    <b>{product.name}</b>
+                  </p>
+                </div>
+                <p>
+                  <b>Description: </b>
+                  {product.description}
+                </p>
+                <p>
+                  <b>Price: </b>${product.price}
+                </p>
+                <p>
+                  <b>Brand: </b>
+                  {product.category}
+                </p>
+                <button
+                  onClick={() => {
+                    cart.push(selectedProduct);
+                    alert("Product added to Cart!");
+                  }}
+                >
+                  Add to cart
+                </button>
+                <div
+                  className={
+                    loggedIn && user.admin === true ? "adminOpt" : "hidden"
+                  }
+                >
+                  <button>delete</button>
+                  <button>add</button>
+                  <button>update</button>
                 </div>
               </div>
             );

@@ -14,7 +14,6 @@ const SingleCartProduct = ({ product, cart, setCartEmpty }) => {
     async function fetchSingleProduct() {
       const returnSingleProduct = await getProductById(productId);
       setThisProduct(returnSingleProduct);
-      console.log(thisProduct, "apple")
     }
     if (productId) {
       fetchSingleProduct();
@@ -37,7 +36,6 @@ const SingleCartProduct = ({ product, cart, setCartEmpty }) => {
     event.preventDefault();
     navigate("/Products/Apple");
   };
-
   return (
     <div className="products">
       {!cart ? (
@@ -62,10 +60,10 @@ const SingleCartProduct = ({ product, cart, setCartEmpty }) => {
       ) : null}
       {thisProduct ? (
         <div>
-          <div className="singleBlackBox" >
-            <div className="productName" onMouseOver={() => {
+          <div className="singleBlackBox" onMouseOver={() => {
                   setSelectedProduct(thisProduct);
-                }}>
+                }} >
+            <div className="productName" >
               <p>
                 <b>{thisProduct.name}</b>
               </p>
@@ -81,13 +79,13 @@ const SingleCartProduct = ({ product, cart, setCartEmpty }) => {
               <b>Brand: </b>
               {thisProduct.category}
             </p>
-            {cart ? (
+            {location.href === "http://localhost:3000/Cart" ? (
               <p>
                 <b>Quantity: </b>
                 {thisProduct.quantity}
               </p>
             ) : null}
-            {!cart ? (<button
+            {location.href !== "http://localhost:3000/Cart" ? (<button
                   onClick={() => {
                     cart.push(selectedProduct);
                     alert("Product added to Cart!");
@@ -95,7 +93,7 @@ const SingleCartProduct = ({ product, cart, setCartEmpty }) => {
                 >
                   Add to cart
                 </button>) : null}
-            {cart ? (
+            {location.href === "http://localhost:3000/Cart" ? (
               <>
                 <EditQuantity
                   thisProduct={thisProduct}

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {  useNavigate } from "react-router-dom";
-import {getCart, login, register,createCart} from "../axios-services"
+import { login, register,createCart} from "../axios-services"
 
-const Login = ({setLoggedIn,loggedIn,user,setUser}) => {
+const Login = ({setLoggedIn,loggedIn,setUser}) => {
      const navigate = useNavigate();
      const [name, setName] = useState("");
      const [email, setEmail] = useState("");

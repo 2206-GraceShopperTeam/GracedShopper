@@ -42,8 +42,8 @@ useEffect(()=>{
          <Route path="/Products/HP" element={<HP cart={cart} />} />
          <Route path="/Products/ASUS" element={<ASUS cart={cart} />} />
          <Route path="/Products/Apple" element={<Apple cart={cart} />} />
-         <Route path="/Cart" element={<Cart cart={cart} cartInfo={cartInfo} user={user}/>} />
-         <Route path="/Products/:productId" element={<SingleCartProduct />} />
+         <Route path="/Cart" element={<Cart cart={cart} />} />
+         <Route path="/Products/:productId" element={<SingleCartProduct cart={cart}/>} />
          <Route path="/" element={<Home user={user} setCartInfo={setCartInfo}/>} />
          
       </Routes>

@@ -17,12 +17,6 @@ const Checkout = () => {
     async function fetchCartProducts() {
       const returnCartProducts = await getCartProducts();
       setCartProducts(returnCartProducts);
-      //   for (var x = 0; x < returnCartProducts.length; x++) {
-      //     if (returnCartProducts[x].cart_id === 1) {
-      //       myCart.push(cartProducts[x]);
-      //       console.log(myCart, 'this is myCart')
-      //     }
-      //   }
     }
     if (!myCart.length > 0) {
       setCheck(true);

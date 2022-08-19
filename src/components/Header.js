@@ -4,7 +4,7 @@ import "../style/index.css"
 import logo from '../images/ScreenShot.png'
 import {IoCartOutline} from 'react-icons/io5'
 
-const Header = ({loggedIn,setLoggedIn,user,setUser}) => {
+const Header = ({loggedIn,setLoggedIn,user}) => {
   const navigate = useNavigate();
   useEffect(() => {
   }, [loggedIn]);

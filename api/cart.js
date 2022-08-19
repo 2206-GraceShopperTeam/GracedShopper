@@ -12,10 +12,8 @@ const { requireUser } = require("./util");
 //POST /api/cart/userId
 router.get("/:userId", async (req, res, next) => {
   const {userId} = req.params
-console.log(userId, "am i a ral boi")
   try {
     const cart = await getCartByUser(userId);
-    console.log(cart,"hi howd you find me")
     res.send(cart);
   } catch (error) {
     next(error);

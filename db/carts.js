@@ -11,7 +11,6 @@ async function createCart({user_id, is_ordered}) {
       RETURNING *;
       `, [user_id, is_ordered]
       )
-      console.log(cart,"or did you find me")
     return cart;
   } catch (error) {
     throw error;
