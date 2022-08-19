@@ -34,18 +34,19 @@ async function getAllCarts() {
 async function getCartByUser(userId) {
   try {
     const {
-      rows: [cart],
+      rows,
     } = await client.query(
       `
       SELECT *
       FROM carts
       JOIN cart_products ON carts.id = cart_products.cart_id
+      JOIN products ON products.id = cart_products.product_id
       WHERE user_id = $1;
       `,
       [userId]
     );
 
-    return cart;
+    return rows;
   } catch (error) {
     throw error;
   }

@@ -15,3 +15,4 @@ export { default as Checkout } from './Checkout';
 export { default as AllUsers } from './AllUsers';
 export { default as UserInfo } from './UserInfo';
 export { default as AddProduct } from './AddProduct';
+export {default as Error} from './Error'
