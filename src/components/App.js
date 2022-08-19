@@ -30,7 +30,7 @@ useEffect(()=>{
     <div className="app-container">
       <Header setLoggedIn={setLoggedIn} loggedIn={loggedIn} user={user} setUser={setUser}/>
       <Routes>
-         <Route path="/Checkout" element={<Checkout />} />
+         <Route path="/Checkout" element={<Checkout cart={cart}/>} />
          <Route path="/AllUsers" element={<AllUsers />} />
          <Route path="/UserInfo" element={<UserInfo user={user} setUser={setUser} setUpdated={setUpdated} updated={updated}/>} />
          <Route path="/Login" element={<Login setLoggedIn={setLoggedIn} loggedIn={loggedIn} user={user} setUser={setUser}/>} />
