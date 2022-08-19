@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { editCartProduct } from "../axios-services";
 
-const EditQuantity = ({ thisProduct, setThisProduct, cartProductId,cart,setCart }) => {
+const EditQuantity = ({ thisProduct, setThisProduct, cartProductId,cart,setCartInfo, cartInfo }) => {
   const [editForm, setEditForm] = useState(false);
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(thisProduct ? thisProduct.quantity : 1);
@@ -16,6 +16,7 @@ console.log(cart,"im the cart")
       console.log(searchCart,"whats the deal")
     if(searchCart){
       searchCart.quantity = quantity
+      setCartInfo(!cartInfo)
     } 
     };
 

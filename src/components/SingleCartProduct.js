@@ -4,7 +4,8 @@ import { getProductById } from "../axios-services";
 import { useNavigate } from "react-router";
 import { EditQuantity, RemoveCartProduct } from "./";
 
-const SingleCartProduct = ({ product, cart,setCart }) => {
+const SingleCartProduct = (params) => {
+  const { product, cart,setCart } = params
   const navigate = useNavigate();
   const [thisProduct, setThisProduct] = useState(product);
   const [selectedProduct, setSelectedProduct] = useState([]);
