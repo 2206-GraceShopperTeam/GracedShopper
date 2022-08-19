@@ -43,7 +43,7 @@ useEffect(()=>{
          <Route path="/RemoveCartProduct" element={<RemoveCartProduct cartInfo={cartInfo} setCartInfo={setCartInfo}/>} />
          <Route path="/SingleCartProduct" element={<SingleCartProduct cartInfo={cartInfo} setCartInfo={setCartInfo}/>} />
          <Route path="/AddProduct" element={<AddProduct />} />
-         <Route path="/Checkout" element={<Checkout />} />
+         <Route path="/Checkout" element={<Checkout cart={cart}/>} />
          <Route path="/AddProduct" element={<AddProduct />} />
          <Route path="/AllUsers" element={<AllUsers />} />
          <Route path="/UserInfo" element={<UserInfo user={user} setUser={setUser} setUpdated={setUpdated} updated={updated}/>} />

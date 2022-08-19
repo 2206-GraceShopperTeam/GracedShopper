@@ -9,11 +9,8 @@ const Cart = ({ cart }) => {
 
   const navigate = useNavigate();
 
-  const handleClick = (cart) => {
-    console.log(cart, 'this is cart')
+  const handleClick = () => {
     navigate('/Checkout')
-    // navigate("../Checkout", {state:{cart}})
-    // <button class="nav-item nav-link-edit" [routerLink]="['Home']">Home</button >
   };
 
   useEffect(() => {
@@ -26,6 +23,7 @@ const Cart = ({ cart }) => {
   return (
     <div className="cartParent">
       <p className="cartTitle">Cart</p>
+      <button className="checkoutButton" onClick={handleClick}>Checkout</button>
       {cart && cart.length ? (
         cart.map((product) => {
           return (
