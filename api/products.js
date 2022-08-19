@@ -66,13 +66,11 @@ router.patch("/:productId", requireUser, async (req, res, next) => {
 });
 
 router.delete('/:productId', async(req,res,next) => {
-  console.log("whats going on here")
     const productId = req.params.productId
     try {
         const product = await getProductById(productId)
             await deleteProduct(productId)
             const deleted = await getProductById(productId)
-            console.log(deleted, "im freeee")
             if(!deleted){
               res.send({ success: true, ..._routine })
             }

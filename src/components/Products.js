@@ -3,7 +3,6 @@ import { getProducts, deleteProduct } from "../axios-services";
 import { useNavigate } from "react-router";
 
 const Products = ({ loggedIn, user, cart,setCartInfo,cartInfo,setCart }) => {
-  console.log(setCart, "set cart")
   const navigate = useNavigate();
   const [allProducts, setAllProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState([]);

@@ -64,7 +64,7 @@ const App = () => {
          <Route path="/RemoveCartProduct" element={<RemoveCartProduct />} />
          <Route path="/SingleCartProduct" element={<SingleCartProduct cart={cart} setCart={setCart}/>} />
          <Route path="/AddProduct" element={<AddProduct />} />
-         <Route path="/Checkout" element={<Checkout cart={cart}/>} />
+         <Route path="/Checkout" element={<Checkout cart={cart} setCart={setCart}/>} />
          <Route path="/AddProduct" element={<AddProduct />} />
          <Route path="/AllUsers" element={<AllUsers />} />
          <Route path="/UserInfo" element={<UserInfo user={user} setUser={setUser} setUpdated={setUpdated} updated={updated}/>} />

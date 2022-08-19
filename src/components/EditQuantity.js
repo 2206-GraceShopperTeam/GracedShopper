@@ -11,7 +11,7 @@ const EditQuantity = ({ thisProduct, setThisProduct, cartProductId,cart,setCartI
     event.preventDefault();
     setEditForm(false);
     setError(null);
-    console.log(cart, "apple")
+
     const searchCart = cart.find(
       (product) => product.name === thisProduct.name
     );

@@ -14,7 +14,6 @@ const AddProduct = () => {
     if ("error" in newProduct) {
       alert("An product with that name already exists please try again!");
     } else {
-      console.log(newProduct, " were is the meat");
       alert("product was created!");
       return newProduct;
     }

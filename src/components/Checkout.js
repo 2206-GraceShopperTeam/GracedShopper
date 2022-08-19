@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { getCartProducts } from "../axios-services";
 import "../style/Checkout.css";
 
-const Checkout = ({cart}) => {
+const Checkout = ({cart,setCart}) => {
   const [cartProducts, setCartProducts] = useState([]);
   const [check, setCheck] = useState(false);
   const [purchased, setPurchased] = useState(false)
   var myCart = [];
 
-  const token  = localstorage.getItem('token')
+  const token  = localStorage.getItem('token')
 
   useEffect(() => {
     async function fetchCartProducts() {
@@ -38,7 +38,7 @@ const Checkout = ({cart}) => {
         <h3>{email}</h3>
         <h3>{address}</h3>
       </form>
-      <button onClick={()=>{setPurchased(!purchased)}}>Purchase</button>
+      <button onClick={()=>{setPurchased(!purchased),setCart([])}}>Purchase</button>
       </div>
       <div className={!purchased ? 'hidden' : 'purchaseMessage'}>Thank You For Your Money!</div>
     </div>
@@ -55,7 +55,7 @@ const Checkout = ({cart}) => {
             <h3>${product.price}</h3>
           </div>
         )}
-        <button onClick={()=>{setPurchased(!purchased)}}>Purchase</button>
+        <button onClick={()=>{setPurchased(!purchased),setCart([])}}>Purchase</button>
         </div>
         <div className={!purchased ? 'hidden' : 'purchaseMessage'}>Thank You For Your Money!</div>
         </div>
