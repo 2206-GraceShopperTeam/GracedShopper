@@ -19,7 +19,7 @@ const Cart = ({ cart}) => {
   return (
     <div className="cartParent">
       <p className="cartTitle">Cart</p>
-      {cart.length ? (
+      {cart && cart.length ? (
         cart.map((product) => {
           return (
             <SingleCartProduct

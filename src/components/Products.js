@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getProducts, deleteProduct, getProductById } from "../axios-services";
 import { useNavigate } from "react-router";
 
-const Products = ({ loggedIn, user, cart }) => {
+const Products = ({ loggedIn, user, cart,setCartInfo,cartInfo,setCart }) => {
   const navigate = useNavigate();
   const [allProducts, setAllProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState([]);
@@ -13,12 +13,19 @@ const Products = ({ loggedIn, user, cart }) => {
       const returnProducts = await getProducts();
       setAllProducts(returnProducts);
     }
+    console.log(cart,"im in products")
     fetchProducts();
     if (removedProduct) {
       alert("product deleted");
       setRemovedProduct(false);
     }
   }, [removedProduct]);
+
+  useEffect(()=>{
+    if(cart===null){
+      setCart([])
+    }
+  },[])
 
   const productClick = (product) => {
     navigate(`/products/${product.id}`);
@@ -49,13 +56,14 @@ const Products = ({ loggedIn, user, cart }) => {
 
   const addToCart = () => {
     const searchCart= cart.find((product)=> product.name===selectedProduct.name)
+    setCartInfo(!cartInfo)
     if(!searchCart){
       selectedProduct.quantity = 1
       cart.push(selectedProduct)
       alert("item added to cart")
     } else {
       searchCart.quantity++
-      alert("item already in cart")
+      alert("Quantity increased")
     }
   }
 
