@@ -66,19 +66,16 @@ router.patch("/:productId", requireUser, async (req, res, next) => {
 });
 
 router.delete('/:productId', async(req,res,next) => {
-    const {productId} = req.params
+  console.log("whats going on here")
+    const productId = req.params.productId
     try {
         const product = await getProductById(productId)
-        if (product) {
-            deleteProduct(productId)
-            res.send(product)
-        } else {
-            res.status(403);
-            next({
-                name: "Missing User Error",
-                message: `User ${req.user.username} is not allowed to delete`
-            })
-        }
+            await deleteProduct(productId)
+            const deleted = await getProductById(productId)
+            console.log(deleted, "im freeee")
+            if(!deleted){
+              res.send({ success: true, ..._routine })
+            }
     } catch ({name, message}) {
         next({name, message})
     }

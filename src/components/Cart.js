@@ -26,10 +26,7 @@ const Cart = ({ cart }) => {
   return (
     <div className="cartParent">
       <p className="cartTitle">Cart</p>
-      <button className="checkoutButton" onClick={handleClick}>
-        Checkout
-      </button>
-      {cart.length ? (
+      {cart && cart.length ? (
         cart.map((product) => {
           return (
             <SingleCartProduct

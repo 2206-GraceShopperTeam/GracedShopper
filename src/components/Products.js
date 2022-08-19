@@ -1,19 +1,31 @@
 import React, { useState, useEffect } from "react";
-import { getProducts } from "../axios-services";
+import { getProducts, deleteProduct, getProductById } from "../axios-services";
 import { useNavigate } from "react-router";
 
-const Products = ({ loggedIn, user, cart }) => {
+const Products = ({ loggedIn, user, cart,setCartInfo,cartInfo,setCart }) => {
   const navigate = useNavigate();
   const [allProducts, setAllProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState([]);
+  const [removedProduct, setRemovedProduct] = useState(false);
 
   useEffect(() => {
     async function fetchProducts() {
       const returnProducts = await getProducts();
       setAllProducts(returnProducts);
     }
+    console.log(cart,"im in products")
     fetchProducts();
-  }, []);
+    if (removedProduct) {
+      alert("product deleted");
+      setRemovedProduct(false);
+    }
+  }, [removedProduct]);
+
+  useEffect(()=>{
+    if(cart===null){
+      setCart([])
+    }
+  },[])
 
   const productClick = (product) => {
     navigate(`/products/${product.id}`);
@@ -35,6 +47,25 @@ const Products = ({ loggedIn, user, cart }) => {
     event.preventDefault();
     navigate("/Products/Apple");
   };
+
+  const handleDelete = async () => {
+    const productId = selectedProduct.id;
+    setRemovedProduct(true);
+    await deleteProduct(productId);
+  };
+
+  const addToCart = () => {
+    const searchCart= cart.find((product)=> product.name===selectedProduct.name)
+    setCartInfo(!cartInfo)
+    if(!searchCart){
+      selectedProduct.quantity = 1
+      cart.push(selectedProduct)
+      alert("item added to cart")
+    } else {
+      searchCart.quantity++
+      alert("Quantity increased")
+    }
+  }
 
   return (
     <div className="products">
@@ -90,8 +121,7 @@ const Products = ({ loggedIn, user, cart }) => {
                 </p>
                 <button
                   onClick={() => {
-                    cart.push(selectedProduct);
-                    alert("Product added to Cart!");
+                    addToCart()
                   }}
                 >
                   Add to cart
@@ -101,7 +131,13 @@ const Products = ({ loggedIn, user, cart }) => {
                     loggedIn && user.admin === true ? "adminOpt" : "hidden"
                   }
                 >
-                  <button>delete</button>
+                  <button
+                    onClick={() => {
+                      handleDelete();
+                    }}
+                  >
+                    delete
+                  </button>
                   <button>add</button>
                   <button>update</button>
                 </div>

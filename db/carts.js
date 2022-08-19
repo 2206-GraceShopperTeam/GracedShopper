@@ -38,6 +38,7 @@ async function getCartByUser(userId) {
       `
       SELECT * 
       FROM carts
+      JOIN cart_products ON id = cart_products.cart_id
       WHERE user_id = $1
       `,
       [userId]
