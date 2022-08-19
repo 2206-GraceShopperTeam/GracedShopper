@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
-import {
-  getCartProducts,
-} from "../axios-services";
+import { getCartProducts } from "../axios-services";
 import { SingleCartProduct } from "./";
+import { useNavigate, useLocation } from "react-router-dom";
 
-const Cart = ({ cart}) => {
+const Cart = ({ cart }) => {
   const [cartProducts, setCartProducts] = useState([]);
   const [cartEmpty, setCartEmpty] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/Checkout')
+  };
 
   useEffect(() => {
     async function fetchCartProducts() {
@@ -15,10 +20,10 @@ const Cart = ({ cart}) => {
     }
     fetchCartProducts();
   }, [cartEmpty]);
-
   return (
     <div className="cartParent">
       <p className="cartTitle">Cart</p>
+      <button className="checkoutButton" onClick={handleClick}>Checkout</button>
       {cart && cart.length ? (
         cart.map((product) => {
           return (
