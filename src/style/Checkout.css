@@ -1,0 +1,15 @@
+.checkout{
+    position: relative;
+    top: 20vh;
+
+  }
+  
+.message{
+    position: relative;
+    top: 20vh;
+    font-size: large;
+}
+.cartProduct{
+    display:flex;
+    flex-direction: row;
+}

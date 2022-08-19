@@ -4,9 +4,99 @@
   border: solid red 2px;
 }
 
-.greenBox {
-  transform: translateX(50px);
-  border: solid green 2px;
+.blackBox {
+  /* transform: translateX(50px); */
+  border: solid black 2px;
+  box-shadow: 0px 15px 10px -15px black;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+/* products page */
+.brandAndButtonsCenter {
+  display: flex;
+  justify-content: center;
+  font-family: Barlow, Arial, Helvetica, sans-serif;
+}
+
+.brandName {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 30px;
+}
+
+.brandAndButtonsColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.brandButtons {
+  display: flex;
+  justify-content: center;
+  justify-content: space-around;
+  font-size: 20px;
+}
+
+.hoverButton {
+  border: 1px solid black;
+  padding: 10px;
+  margin-right: 30px;
+  margin-left: 30px;
+}
+
+.hoverButton:hover {
+  background-color: yellow;
+  cursor: pointer;
+}
+
+.productName {
+  font-family: Barlow, Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+}
+
+.productName:hover {
+  background-color: #add8e6 ;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.singleBlackBox {
+  border: solid black 2px;
+  box-shadow: 0px 15px 10px -15px black;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+/* Carts Page */
+.cartParent {
+  position: relative;
+  width: 100vw;
+  /* height: 87vh; */
+  top: 5vh;
+  /* z-index: 15; */
+}
+
+.cartTitle {
+  top: 10vh;
+  position: relative;
+  font-size: 30px;
+  font-family: Barlow, Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+}
+
+.cartSubTitle {
+  top: 10vh;
+  position: relative;
+  font-size: 20px;
+  font-family: Barlow, Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
 }
 
 /* import fonts here */
@@ -347,7 +437,7 @@ left: 2vw;
   width: 40%;
   right: 0;
   bottom: 0;
-  /* background-color: green; */
+  /* background-color: black; */
   background-image: url(https://images.unsplash.com/photo-1492321936769-b49830bc1d1e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80);
   background-size: cover;
     background-repeat: no-repeat;
@@ -395,7 +485,7 @@ left: 2vw;
 
 .products{
   position: relative;
-  top: 22vh;
+  top: 12vh;
 }
 
 .allProducts{

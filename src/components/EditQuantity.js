@@ -1,17 +1,14 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { editCartProduct } from "../axios-services";
 
-const EditQuantity = ({thisProduct, setThisProduct, cartProductId}) => {
+const EditQuantity = ({ thisProduct, setThisProduct, cartProductId }) => {
   const [editForm, setEditForm] = useState(false);
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(thisProduct.quantity);
 
   const handleEdit = async (event) => {
     event.preventDefault();
-    const result = await editCartProduct(
-      cartProductId,
-      quantity
-    );
+    const result = await editCartProduct(cartProductId, quantity);
 
     if (result.error) {
       setError(result);
@@ -41,9 +38,7 @@ const EditQuantity = ({thisProduct, setThisProduct, cartProductId}) => {
           required={true}
           onChange={quantityChange}
         />
-        <button type="submit">
-          UPDATE
-        </button>
+        <button type="submit">UPDATE</button>
       </form>
     );
   };
