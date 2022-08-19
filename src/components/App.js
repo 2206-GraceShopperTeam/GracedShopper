@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Routes } from "react-router-dom";
 import { whoAmI } from '../axios-services';
-import {Home,Header,Login,Products,Cart,Checkout,AllUsers,UserInfo,Dell,HP,ASUS,Apple,AddProduct,SingleCartProduct,RemoveCartProduct} from './'
+import {Home,Header,Login,Products,Cart,Checkout,AllUsers,UserInfo,Dell,HP,ASUS,Apple,AddProduct,SingleCartProduct,RemoveCartProduct,EditQuantity} from './'
 import '../style/App.css';
 
 const App = () => {
@@ -39,6 +39,7 @@ useEffect(()=>{
     <div className="app-container">
       <Header setLoggedIn={setLoggedIn} loggedIn={loggedIn} user={user} setUser={setUser}/>
       <Routes>
+         <Route path="/EditQuantity" element={<EditQuantity cart={cart} setCart={setCart} cartInfo={cartInfo} setCartInfo={setCartInfo}/>} />
          <Route path="/RemoveCartProduct" element={<RemoveCartProduct cartInfo={cartInfo} setCartInfo={setCartInfo}/>} />
          <Route path="/SingleCartProduct" element={<SingleCartProduct cartInfo={cartInfo} setCartInfo={setCartInfo}/>} />
          <Route path="/AddProduct" element={<AddProduct />} />

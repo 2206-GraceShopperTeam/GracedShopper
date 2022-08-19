@@ -4,7 +4,7 @@ import { getProductById } from "../axios-services";
 import { useNavigate } from "react-router";
 import { EditQuantity, RemoveCartProduct } from "./";
 
-const SingleCartProduct = ({ product, cart,setCartInfo, cartInfo }) => {
+const SingleCartProduct = ({ product, cart,setCart }) => {
   const navigate = useNavigate();
   const [thisProduct, setThisProduct] = useState(product);
   const [selectedProduct, setSelectedProduct] = useState([]);
@@ -21,9 +21,9 @@ const SingleCartProduct = ({ product, cart,setCartInfo, cartInfo }) => {
     }
   }, [selectedProduct]);
 
-  useEffect(()=>{
-    setCartInfo(!cartInfo)
-  },[cartEmpty])
+  // useEffect(()=>{
+  //   setCartInfo(!cartInfo)
+  // },[cartEmpty])
 
   const dellHandleClick = (event) => {
     event.preventDefault();
@@ -106,6 +106,8 @@ const SingleCartProduct = ({ product, cart,setCartInfo, cartInfo }) => {
                   setThisProduct={setThisProduct}
                   cartProductId={thisProduct.id}
                   setCartEmpty={setCartEmpty}
+                  cart={cart}
+                  setCart={setCart}
                 />
                 <RemoveCartProduct
                   setThisProduct={setThisProduct}
