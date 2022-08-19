@@ -1,20 +1,24 @@
-import React, {useState,useEffect} from "react";
-import { getProducts,addToCart } from "../axios-services";
+import React, { useState, useEffect } from "react";
+import { getProducts, deleteProduct, getProductById } from "../axios-services";
 import { useNavigate } from "react-router";
 
 const Products = ({ loggedIn, user, cart }) => {
   const navigate = useNavigate();
   const [allProducts, setAllProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState([]);
+  const [removedProduct, setRemovedProduct] = useState(false);
 
   useEffect(() => {
     async function fetchProducts() {
       const returnProducts = await getProducts();
       setAllProducts(returnProducts);
-      
     }
     fetchProducts();
-  }, []);
+    if (removedProduct) {
+      alert("product deleted");
+      setRemovedProduct(false);
+    }
+  }, [removedProduct]);
 
   const productClick = (product) => {
     navigate(`/products/${product.id}`);
@@ -33,21 +37,27 @@ const Products = ({ loggedIn, user, cart }) => {
     navigate("/Products/ASUS");
   };
   const appleHandleClick = (event) => {
-    event.preventDefault()
-    navigate("/Products/Apple")
-  }
+    event.preventDefault();
+    navigate("/Products/Apple");
+  };
 
-const handleDelete = async () => {
-  console.log("im in a whale")
-  const productId = selectedProduct.id
-  const removed = await deleteProduct(productId)
-  console.log(removed, "hello??")
-  if(removed){
-    alert("product deleted")
-    console.log("where am i")
-  }
+  const handleDelete = async () => {
+    const productId = selectedProduct.id;
+    setRemovedProduct(true);
+    await deleteProduct(productId);
+  };
 
-}
+  const addToCart = () => {
+    const searchCart= cart.find((product)=> product.name===selectedProduct.name)
+    if(!searchCart){
+      selectedProduct.quantity = 1
+      cart.push(selectedProduct)
+      alert("item added to cart")
+    } else {
+      searchCart.quantity++
+      alert("item already in cart")
+    }
+  }
 
   return (
     <div className="products">
@@ -76,7 +86,9 @@ const handleDelete = async () => {
               <div
                 className="blackBox"
                 key={`Products${product.id}`}
-                onMouseOver={(()=>{setSelectedProduct(product)})}
+                onMouseOver={() => {
+                  setSelectedProduct(product);
+                }}
               >
                 <div
                   className="productName"
@@ -101,8 +113,7 @@ const handleDelete = async () => {
                 </p>
                 <button
                   onClick={() => {
-                    cart.push(selectedProduct);
-                    alert("Product added to Cart!");
+                    addToCart()
                   }}
                 >
                   Add to cart
@@ -112,7 +123,13 @@ const handleDelete = async () => {
                     loggedIn && user.admin === true ? "adminOpt" : "hidden"
                   }
                 >
-                  <button>delete</button>
+                  <button
+                    onClick={() => {
+                      handleDelete();
+                    }}
+                  >
+                    delete
+                  </button>
                   <button>add</button>
                   <button>update</button>
                 </div>

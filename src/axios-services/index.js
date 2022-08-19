@@ -155,17 +155,13 @@ export async function editProduct(
 }
 
 export async function deleteProduct(productId) {
-  console.log("did i fire?")
-  console.log(productId,"was i supposed to?")
   const response = await fetch(`http://localhost:4000/api/products/${productId}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
     },
   });
-  console.log(response,"delete me please")
   const result = await response.json();
-  console.log(result,"thank you")
   return result;
 }
 
