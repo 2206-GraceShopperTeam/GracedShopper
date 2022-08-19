@@ -20,10 +20,6 @@ const SingleCartProduct = ({ product, cart }) => {
     }
   }, []);
 
-  const productClick = (product) => {
-    navigate(`/products/${product.id}`);
-  };
-
   const dellHandleClick = (event) => {
     event.preventDefault();
     navigate("/Products/Dell");
@@ -65,13 +61,8 @@ const SingleCartProduct = ({ product, cart }) => {
       ) : null}
       {thisProduct ? (
         <div>
-          <div className="singleGreenBox">
-            <div
-              className="productName"
-              onClick={() => {
-                productClick(product);
-              }}
-            >
+          <div className="singleBlackBox">
+            <div className="productName">
               <p>
                 <b>{thisProduct.name}</b>
               </p>

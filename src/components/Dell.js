@@ -61,7 +61,7 @@ const Dell = ({ cart }) => {
         ? allProducts.map((product) => {
             return product.category === "DELL" ? (
               <div
-                className="greenBox"
+                className="blackBox"
                 key={`Products${product.id}`}
                 onMouseOver={() => {
                   setSelectedProduct(product);

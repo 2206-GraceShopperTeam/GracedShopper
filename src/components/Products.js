@@ -61,7 +61,7 @@ const Products = ({ loggedIn, user, cart }) => {
         ? allProducts.map((product) => {
             return (
               <div
-                className="greenBox"
+                className="blackBox"
                 key={`Products${product.id}`}
                 onMouseOver={() => {
                   setSelectedProduct(product);
