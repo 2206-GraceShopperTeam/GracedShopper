@@ -82,9 +82,9 @@ const AddProduct = () => {
             required={true}
             onChange={descriptionChange}
           />
-          <label for="cars">Choose a Brand:</label>
+          <label >Choose a Brand:</label>
 
-          <select id="cars">
+          <select id="brand">
             <option value="DELL">DELL</option>
             <option value="HP">HP</option>
             <option value="ASUS">ASUS</option>

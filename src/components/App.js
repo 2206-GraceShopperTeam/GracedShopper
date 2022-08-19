@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Routes } from "react-router-dom";
 import { whoAmI } from '../axios-services';
-import {Home,Header,Login,Products,Cart,Checkout,AllUsers,UserInfo,Dell,HP,ASUS,Apple} from './'
+import {Home,Header,Login,Products,Cart,Checkout,AllUsers,UserInfo,Dell,HP,ASUS,Apple,AddProduct,SingleCartProduct} from './'
 import '../style/App.css';
 
 const App = () => {
@@ -30,6 +30,8 @@ useEffect(()=>{
     <div className="app-container">
       <Header setLoggedIn={setLoggedIn} loggedIn={loggedIn} user={user} setUser={setUser}/>
       <Routes>
+         <Route path="/SingleCartProduct" element={<SingleCartProduct />} />
+         <Route path="/AddProduct" element={<AddProduct />} />
          <Route path="/Checkout" element={<Checkout />} />
          <Route path="/AddProduct" element={<AddProduct />} />
          <Route path="/AllUsers" element={<AllUsers />} />

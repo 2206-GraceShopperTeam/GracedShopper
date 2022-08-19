@@ -45,19 +45,6 @@ const handleDelete = async () => {
 
 }
 
-
-
- 
-
-
-
- 
-=======
-    event.preventDefault();
-    navigate("/Products/Apple");
-  };
->>>>>>> productNewFront
-
   return (
     <div className="products">
       <div className="brandAndButtonsCenter">
@@ -89,7 +76,7 @@ const handleDelete = async () => {
               >
                 <p>Name: {product.name}</p>
                 <p>Description: {product.description}</p>
-                <p>Price: ${product.price}.{randomCents()}</p>
+                <p>Price: ${product.price}</p>
                 <p>Brand: {product.category}</p>
                 <button onClick={(()=>{ cart.push(selectedProduct)})}>Add to cart</button>
                 <div className={loggedIn && user.admin === true ? "adminOpt" : "hidden"}>
