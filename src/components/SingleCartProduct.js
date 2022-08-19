@@ -4,7 +4,7 @@ import { getProductById } from "../axios-services";
 import { useNavigate } from "react-router";
 import { EditQuantity, RemoveCartProduct } from "./";
 
-const SingleCartProduct = ({ product, cart, setCartEmpty }) => {
+const SingleCartProduct = ({ product, cart2, cart, setCartEmpty }) => {
   const navigate = useNavigate();
   const [thisProduct, setThisProduct] = useState(product);
   const [selectedProduct, setSelectedProduct] = useState([]);
@@ -38,7 +38,7 @@ const SingleCartProduct = ({ product, cart, setCartEmpty }) => {
   };
   return (
     <div className="products">
-      {!cart ? (
+      {!cart2 ? (
         <div className="brandAndButtonsCenter">
           <div className="brandAndButtonsColumn">
             <div className="brandButtons">
@@ -103,7 +103,7 @@ const SingleCartProduct = ({ product, cart, setCartEmpty }) => {
                 <RemoveCartProduct
                   setThisProduct={setThisProduct}
                   cartProductId={thisProduct.id}
-                  cart={cart}
+                  cart={cart2}
                   setCartEmpty={setCartEmpty}
                 />
               </>
