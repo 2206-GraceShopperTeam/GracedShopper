@@ -5,19 +5,18 @@ const AddProduct = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("DELL");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const token = localStorage.getItem("token");
-    const newActivity = await createUserActivity(name, description, token);
-    if ("error" in newActivity) {
-      alert("An activity with that name already exists please try again!");
+    const newProduct = await createProduct(token,name, description,price,category);
+    if ("error" in newProduct) {
+      alert("An product with that name already exists please try again!");
     } else {
-      console.log(newActivity, " were is the meat");
-      alert("Activity was created!");
-      setShowModal(false);
-      return newActivity;
+      console.log(newProduct, " were is the meat");
+      alert("product was created!");
+      return newProduct;
     }
   };
 
@@ -42,7 +41,6 @@ const AddProduct = () => {
         <p
           className="xButton"
           onClick={() => {
-            setShowModal(false);
           }}
         >
           ❌
@@ -50,7 +48,7 @@ const AddProduct = () => {
       </div>
       <form>
         <div className="createForm">
-          <textarea
+          <input
             className="createField"
             type="text"
             name="name"
@@ -66,7 +64,7 @@ const AddProduct = () => {
             required={true}
             onChange={descriptionChange}
           />
-          <textarea
+          <input
             className="createField"
             type="number"
             name="price"
@@ -74,17 +72,9 @@ const AddProduct = () => {
             required={true}
             onChange={priceChange}
           />
-          <textarea
-            className="createField"
-            type="text"
-            name="description"
-            placeholder="Description"
-            required={true}
-            onChange={descriptionChange}
-          />
           <label >Choose a Brand:</label>
 
-          <select id="brand">
+          <select id="brand" onChange={categoryChange}>
             <option value="DELL">DELL</option>
             <option value="HP">HP</option>
             <option value="ASUS">ASUS</option>
