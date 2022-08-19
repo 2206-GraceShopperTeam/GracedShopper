@@ -46,7 +46,7 @@ const App = () => {
   }, [updated]);
 
   useEffect(() => {
-    if (cart && cart.length !== 0) {
+    if (cart ) {
       localStorage.setItem("cart", JSON.stringify(cart));
     }
   }, [cartInfo]);
@@ -61,8 +61,8 @@ const App = () => {
       />
       <Routes>
          <Route path="/EditQuantity" element={<EditQuantity cart={cart} setCart={setCart} cartInfo={cartInfo} setCartInfo={setCartInfo}/>} />
-         <Route path="/RemoveCartProduct" element={<RemoveCartProduct />} />
-         <Route path="/SingleCartProduct" element={<SingleCartProduct cart={cart} setCart={setCart}/>} />
+         <Route path="/RemoveCartProduct" element={<RemoveCartProduct cartInfo={cartInfo} setCartInfo={setCartInfo} />} />
+         <Route path="/SingleCartProduct" element={<SingleCartProduct cart={cart} setCart={setCart} setCartInfo={setCartInfo} cartInfo={cartInfo}/>} />
          <Route path="/AddProduct" element={<AddProduct />} />
          <Route path="/Checkout" element={<Checkout cart={cart} setCart={setCart}/>} />
          <Route path="/AddProduct" element={<AddProduct />} />

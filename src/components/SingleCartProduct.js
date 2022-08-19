@@ -10,7 +10,6 @@ const SingleCartProduct = ({ product, cart2, cart, setCart, cartInfo, setCartInf
   const [selectedProduct, setSelectedProduct] = useState([]);
   const [cartEmpty, setCartEmpty] = useState(false);
   let { productId } = useParams();
-
   useEffect(() => {
     async function fetchSingleProduct() {
       const returnSingleProduct = await getProductById(productId);
@@ -123,6 +122,8 @@ const SingleCartProduct = ({ product, cart2, cart, setCart, cartInfo, setCartInf
                   setCartEmpty={setCartEmpty}
                   cart={cart2}
                   setCart={setCart}
+                  setCartInfo={setCartInfo}
+                  cartInfo={cartInfo}
                 />
                 <RemoveCartProduct
                   setThisProduct={setThisProduct}
@@ -130,6 +131,8 @@ const SingleCartProduct = ({ product, cart2, cart, setCart, cartInfo, setCartInf
                   cart={cart2}
                   setCartEmpty={setCartEmpty}
                   cartEmpty={cartEmpty}
+                  cartInfo={cartInfo} 
+                  setCartInfo={setCartInfo}
                 />
               </>
             ) : null}

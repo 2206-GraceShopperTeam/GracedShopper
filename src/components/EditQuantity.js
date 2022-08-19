@@ -35,7 +35,7 @@ const EditQuantity = ({ thisProduct, setThisProduct, cartProductId,cart,setCartI
           required={true}
           onChange={quantityChange}
         />
-        <button type="submit">UPDATE</button>
+        <button type="submit" onClick={(()=>setCartInfo(!cartInfo))}>UPDATE</button>
       </form>
     );
   };
