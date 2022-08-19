@@ -22,7 +22,6 @@ const Home = ({user,setCart,cart}) => {
           setCart([])
         }
       }
-      console.log(cart, "im the new cart")
       createCart()
     },[])
 

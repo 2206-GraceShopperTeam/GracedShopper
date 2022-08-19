@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { editCartProduct } from "../axios-services";
 
-const EditQuantity = ({ thisProduct, setThisProduct, cartProductId,cart,setCart }) => {
+const EditQuantity = ({ thisProduct, setThisProduct, cartProductId, cart, setCart }) => {
   const [editForm, setEditForm] = useState(false);
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(thisProduct ? thisProduct.quantity : 1);

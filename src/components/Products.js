@@ -13,7 +13,6 @@ const Products = ({ loggedIn, user, cart,setCartInfo,cartInfo,setCart }) => {
       const returnProducts = await getProducts();
       setAllProducts(returnProducts);
     }
-    console.log(cart,"im in products")
     fetchProducts();
     if (removedProduct) {
       alert("product deleted");

@@ -4,7 +4,7 @@ import { getProductById } from "../axios-services";
 import { useNavigate } from "react-router";
 import { EditQuantity, RemoveCartProduct } from "./";
 
-const SingleCartProduct = ({ product, cart2, cart,setCart }) => {
+const SingleCartProduct = ({ product, cart2, cart, setCart }) => {
   const navigate = useNavigate();
   const [thisProduct, setThisProduct] = useState(product);
   const [selectedProduct, setSelectedProduct] = useState([]);
@@ -94,7 +94,6 @@ const SingleCartProduct = ({ product, cart2, cart,setCart }) => {
                   onClick={() => {
                     cart.push(selectedProduct);
                     alert("Product added to Cart!");
-                    change();
                   }}
                 >
                   Add to cart
