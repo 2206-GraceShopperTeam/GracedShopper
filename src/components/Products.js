@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getProducts, deleteProduct, getProductById } from "../axios-services";
+import { getProducts, deleteProduct } from "../axios-services";
 import { useNavigate } from "react-router";
 
 const Products = ({ loggedIn, user, cart,setCartInfo,cartInfo,setCart }) => {
@@ -14,7 +14,6 @@ const Products = ({ loggedIn, user, cart,setCartInfo,cartInfo,setCart }) => {
       const returnProducts = await getProducts();
       setAllProducts(returnProducts);
     }
-    console.log(cart,"im in products")
     fetchProducts();
     if (removedProduct) {
       alert("product deleted");
@@ -22,11 +21,11 @@ const Products = ({ loggedIn, user, cart,setCartInfo,cartInfo,setCart }) => {
     }
   }, [removedProduct]);
 
-  useEffect(()=>{
-    if(cart===null){
-      setCart([])
+  useEffect(() => {
+    if (cart === null) {
+      setCart([]);
     }
-  },[])
+  }, []);
 
   const productClick = (product) => {
     navigate(`/products/${product.id}`);
@@ -56,17 +55,19 @@ const Products = ({ loggedIn, user, cart,setCartInfo,cartInfo,setCart }) => {
   };
 
   const addToCart = () => {
-    const searchCart= cart.find((product)=> product.name===selectedProduct.name)
-    setCartInfo(!cartInfo)
-    if(!searchCart){
-      selectedProduct.quantity = 1
-      cart.push(selectedProduct)
-      alert("item added to cart")
+    const searchCart = cart.find(
+      (product) => product.name === selectedProduct.name
+    );
+    setCartInfo(!cartInfo);
+    if (!searchCart) {
+      selectedProduct.quantity = 1;
+      cart.push(selectedProduct);
+      alert("item added to cart");
     } else {
-      searchCart.quantity++
-      alert("Quantity increased")
+      searchCart.quantity++;
+      alert("Quantity increased");
     }
-  }
+  };
 
   return (
     <div className="products">
@@ -122,7 +123,7 @@ const Products = ({ loggedIn, user, cart,setCartInfo,cartInfo,setCart }) => {
                 </p>
                 <button
                   onClick={() => {
-                    addToCart()
+                    addToCart();
                   }}
                 >
                   Add to cart

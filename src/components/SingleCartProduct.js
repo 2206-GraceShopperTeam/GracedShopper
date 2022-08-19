@@ -4,8 +4,7 @@ import { getProductById } from "../axios-services";
 import { useNavigate } from "react-router";
 import { EditQuantity, RemoveCartProduct } from "./";
 
-const SingleCartProduct = (params) => {
-  const { product, cart,setCart } = params
+const SingleCartProduct = ({ product, cart2, cart, setCart, cartInfo, setCartInfo }) => {
   const navigate = useNavigate();
   const [thisProduct, setThisProduct] = useState(product);
   const [selectedProduct, setSelectedProduct] = useState([]);
@@ -21,10 +20,6 @@ const SingleCartProduct = (params) => {
       fetchSingleProduct();
     }
   }, [selectedProduct]);
-
-  // useEffect(()=>{
-  //   setCartInfo(!cartInfo)
-  // },[cartEmpty])
 
   const dellHandleClick = (event) => {
     event.preventDefault();
@@ -42,9 +37,25 @@ const SingleCartProduct = (params) => {
     event.preventDefault();
     navigate("/Products/Apple");
   };
+
+  const addToCart = () => {
+    const searchCart = cart.find(
+      (product) => product.name === selectedProduct.name
+    );
+    setCartInfo(!cartInfo);
+    if (!searchCart) {
+      selectedProduct.quantity = 1;
+      cart.push(selectedProduct);
+      alert("item added to cart");
+    } else {
+      searchCart.quantity++;
+      alert("Quantity increased");
+    }
+  };
+
   return (
     <div className="products">
-      {!cart ? (
+      {!cart2 ? (
         <div className="brandAndButtonsCenter">
           <div className="brandAndButtonsColumn">
             <div className="brandButtons">
@@ -66,10 +77,13 @@ const SingleCartProduct = (params) => {
       ) : null}
       {thisProduct ? (
         <div>
-          <div className="singleBlackBox" onMouseOver={() => {
-                  setSelectedProduct(thisProduct);
-                }} >
-            <div className="productName" >
+          <div
+            className="singleBlackBox"
+            onMouseOver={() => {
+              setSelectedProduct(thisProduct);
+            }}
+          >
+            <div className="productName">
               <p>
                 <b>{thisProduct.name}</b>
               </p>
@@ -91,15 +105,15 @@ const SingleCartProduct = (params) => {
                 {thisProduct.quantity}
               </p>
             ) : null}
-            {location.href !== "http://localhost:3000/Cart" ? (<button
-                  onClick={() => {
-                    cart.push(selectedProduct);
-                    alert("Product added to Cart!");
-                    change();
-                  }}
-                >
-                  Add to cart
-                </button>) : null}
+            {location.href !== "http://localhost:3000/Cart" ? (
+              <button
+              onClick={() => {
+                addToCart();
+              }}
+              >
+                Add to cart
+              </button>
+            ) : null}
             {location.href === "http://localhost:3000/Cart" ? (
               <>
                 <EditQuantity
@@ -107,13 +121,13 @@ const SingleCartProduct = (params) => {
                   setThisProduct={setThisProduct}
                   cartProductId={thisProduct.id}
                   setCartEmpty={setCartEmpty}
-                  cart={cart}
+                  cart={cart2}
                   setCart={setCart}
                 />
                 <RemoveCartProduct
                   setThisProduct={setThisProduct}
                   cartProductId={thisProduct.id}
-                  cart={cart}
+                  cart={cart2}
                   setCartEmpty={setCartEmpty}
                   cartEmpty={cartEmpty}
                 />

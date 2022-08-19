@@ -25,7 +25,7 @@ const Cart = ({ cart}) => {
             <SingleCartProduct
               key={`routine${product.id}`}
               product={product}
-              cart={cart}
+              cart2={cart}
               setCartEmpty={setCartEmpty}
             />
           );
