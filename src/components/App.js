@@ -70,10 +70,10 @@ const App = () => {
          <Route path="/UserInfo" element={<UserInfo user={user} setUser={setUser} setUpdated={setUpdated} updated={updated}/>} />
          <Route path="/Login" element={<Login setLoggedIn={setLoggedIn} loggedIn={loggedIn} user={user} setUser={setUser}/>} />
          <Route path="/Products" element={<Products setLoggedIn={setLoggedIn} loggedIn={loggedIn} user={user} setUser={setUser} cart={cart} setCart={setCart} setCartInfo={setCartInfo} cartInfo={cartInfo}/>} />
-         <Route path="/Products/Dell" element={<Dell cart={cart} />} />
-         <Route path="/Products/HP" element={<HP cart={cart} />} />
-         <Route path="/Products/ASUS" element={<ASUS cart={cart} />} />
-         <Route path="/Products/Apple" element={<Apple cart={cart} />} />
+         <Route path="/Products/Dell" element={<Dell cart={cart} cartInfo={cartInfo} setCartInfo={setCartInfo} />} />
+         <Route path="/Products/HP" element={<HP cart={cart} cartInfo={cartInfo} setCartInfo={setCartInfo} />} />
+         <Route path="/Products/ASUS" element={<ASUS cart={cart} cartInfo={cartInfo} setCartInfo={setCartInfo} />} />
+         <Route path="/Products/Apple" element={<Apple cart={cart} cartInfo={cartInfo} setCartInfo={setCartInfo} />} />
          <Route path="/Cart" element={<Cart cart={cart} setCartInfo={setCartInfo} cartInfo={cartInfo} />} />
          <Route path="/Products/:productId" element={<SingleCartProduct cart={cart} setCart={setCart} setCartInfo={setCartInfo} cartInfo={cartInfo}/> } />
          <Route path="/" element={<Home user={user} setCart={setCart} cart={cart} />} />
