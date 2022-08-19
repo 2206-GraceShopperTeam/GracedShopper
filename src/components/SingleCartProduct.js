@@ -4,7 +4,7 @@ import { getProductById } from "../axios-services";
 import { useNavigate } from "react-router";
 import { EditQuantity, RemoveCartProduct } from "./";
 
-const SingleCartProduct = ({ product, cart }) => {
+const SingleCartProduct = ({ product, cart, setCartEmpty }) => {
   const navigate = useNavigate();
   const [thisProduct, setThisProduct] = useState(product);
   const [selectedProduct, setSelectedProduct] = useState([]);
@@ -14,11 +14,12 @@ const SingleCartProduct = ({ product, cart }) => {
     async function fetchSingleProduct() {
       const returnSingleProduct = await getProductById(productId);
       setThisProduct(returnSingleProduct);
+      console.log(thisProduct, "apple")
     }
     if (productId) {
       fetchSingleProduct();
     }
-  }, []);
+  }, [selectedProduct]);
 
   const dellHandleClick = (event) => {
     event.preventDefault();
@@ -61,8 +62,10 @@ const SingleCartProduct = ({ product, cart }) => {
       ) : null}
       {thisProduct ? (
         <div>
-          <div className="singleBlackBox">
-            <div className="productName">
+          <div className="singleBlackBox" >
+            <div className="productName" onMouseOver={() => {
+                  setSelectedProduct(thisProduct);
+                }}>
               <p>
                 <b>{thisProduct.name}</b>
               </p>
@@ -84,6 +87,14 @@ const SingleCartProduct = ({ product, cart }) => {
                 {thisProduct.quantity}
               </p>
             ) : null}
+            {!cart ? (<button
+                  onClick={() => {
+                    cart.push(selectedProduct);
+                    alert("Product added to Cart!");
+                  }}
+                >
+                  Add to cart
+                </button>) : null}
             {cart ? (
               <>
                 <EditQuantity
@@ -95,6 +106,7 @@ const SingleCartProduct = ({ product, cart }) => {
                   setThisProduct={setThisProduct}
                   cartProductId={thisProduct.id}
                   cart={cart}
+                  setCartEmpty={setCartEmpty}
                 />
               </>
             ) : null}

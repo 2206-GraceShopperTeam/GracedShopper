@@ -10,6 +10,7 @@ import { SingleCartProduct } from "./";
 
 const Cart = ({ cart, user, cartInfo }) => {
   const [cartProducts, setCartProducts] = useState([]);
+  const [cartEmpty, setCartEmpty] = useState(false);
   // const [userCart, setUserCart] = useState([]);
   // const useStateIsBad = JSON.parse(localStorage.getItem("cartInfo"))
 
@@ -19,7 +20,7 @@ const Cart = ({ cart, user, cartInfo }) => {
       setCartProducts(returnCartProducts);
     }
     fetchCartProducts();
-  }, []);
+  }, [cartEmpty]);
 
   // useEffect(() => {
   //   const useStateIsBad = JSON.parse(localStorage.getItem("cartInfo"))
@@ -34,20 +35,21 @@ const Cart = ({ cart, user, cartInfo }) => {
   // }, [cart]);
 
   return (
-    <div>
-      <h1>Cart</h1>
-      {cartProducts.length ? (
+    <div className="cartParent">
+      <p className="cartTitle">Cart</p>
+      {cart.length ? (
         cart.map((product) => {
           return (
             <SingleCartProduct
               key={`routine${product.id}`}
               product={product}
               cart={cart}
+              setCartEmpty={setCartEmpty}
             />
           );
         })
       ) : (
-        <h3>Your Cart is Empty</h3>
+        <p className="cartSubTitle">Your Cart is Empty</p>
       )}
     </div>
 

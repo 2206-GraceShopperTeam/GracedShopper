@@ -72,6 +72,33 @@
   padding: 10px;
 }
 
+/* Carts Page */
+.cartParent {
+  position: relative;
+  width: 100vw;
+  /* height: 87vh; */
+  top: 5vh;
+  /* z-index: 15; */
+}
+
+.cartTitle {
+  top: 10vh;
+  position: relative;
+  font-size: 30px;
+  font-family: Barlow, Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+}
+
+.cartSubTitle {
+  top: 10vh;
+  position: relative;
+  font-size: 20px;
+  font-family: Barlow, Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+}
+
 /* import fonts here */
 
 * {
