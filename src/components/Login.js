@@ -55,7 +55,13 @@ const Login = ({setLoggedIn,loggedIn,setUser}) => {
           localStorage.setItem("user",JSON.stringify(result.user))
           setLoggedIn(true);
           setUser(result.user)
-          navigate("/")
+          if(localStorage.getItem('redirect')){
+            const redirect = localStorage.getItem('redirect')
+            localStorage.removeItem('redirect')
+            console.log(redirect, 'this is redirect')
+            navigate(redirect)
+          }else{
+          navigate("/")}
           } 
           } catch (error) {
             setError(true)
