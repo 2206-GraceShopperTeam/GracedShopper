@@ -14,7 +14,6 @@ const Cart = ({ cart,cartInfo,setCartInfo }) => {
   };
 
   useEffect(() => {
-    console.log(cart,"i am the cart king")
     async function fetchCartProducts() {
       const returnCartProducts = await getCartProducts();
       setCartProducts(returnCartProducts);

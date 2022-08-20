@@ -101,7 +101,6 @@
 }
 
 /* import fonts here */
-
 * {
   box-sizing: border-box;
 }
@@ -124,11 +123,9 @@ body {
   width: 100%;
 }
 
-
 /* CSS for Header*/
 .header{
   background-color: green;
-  color: white;
   width: 100%;
   height: 13%;
   position: fixed;
@@ -139,18 +136,19 @@ body {
 
 .logo{
   position: relative;
-width: auto;
-height: 13vh;
-left:4vw;
+  width: auto;
+  height: 13vh;
+  left:4vw;
+  cursor: pointer;
 }
-
 
 .loginBttn{
   position: fixed;
   left: 94vw;
-  top: 7.4%;
+  top: 5.4%;
   padding: 1vw;
 }
+
 .allUsersBttn{
   position: fixed;
   left: 82.5vw;
@@ -159,52 +157,75 @@ left:4vw;
 
 .myInfoBttn{
   position: fixed;
-  left: 88.5vw;
-  top: 7.2%;
+  left: 80vw;
+  top: 3%;
   padding: 1vw;
+  color: white;
+  font-size: 25px;
+  font-family: Barlow, Arial, Helvetica, sans-serif;
+  cursor: pointer;
 }
 
 .checkoutBttn{
   position: fixed;
   left: 86%;
   top: 1.5%;
-
 }
+
 #loginBttn{
   font-size: small;
 }
+
 #checkoutBttn{
-  font-size:35px;
-  background: none;
+  font-size:40px;
+    background: none;
     border: none;
+    font-family: Barlow, Arial, Helvetica, sans-serif;
+    color: white;
+    cursor: pointer;
 }
+
+.shopAll {
+  display: flex;
+  justify-content: center;
+}
+
 .shopBttn{
   position: fixed;
-  left: 46%;
-  top: 9%;
+  top: 5%;
+  display: flex;
+  justify-content: center;
+  font-size: 25px;
+  font-family: Barlow, Arial, Helvetica, sans-serif;
+  color: white;
 }
+
+.shopBttn:hover {
+  cursor: pointer;
+}
+
 .addBttn{
   position: fixed;
   left: 54%;
   top: 9%;
 }
 
-#shopBttn,#addBttn{
+#addBttn{
   font-size: 15px;
 }
 
 @media (min-width: 106em) and (min-height: 50em){
   .logo{
     position: relative;
-  width: auto;
-  height: 13vh;
-  left: 2vw;
+    width: auto;
+    height: 13vh;
+    left: 2vw;
   }
 
   .loginBttn{
     position: fixed;
     left: 91vw;
-    top: 7%;
+    top: 6.4%;
     padding: 1vw;
     width: auto;
     height: 2in;
@@ -218,26 +239,34 @@ left:4vw;
   
   .myInfoBttn{
     position: fixed;
-    left: 88vw;
-    top: 7.4%;
-    padding: 1vw;}
+    left: 80vw;
+    top: 3.25%;
+    padding: 1vw;
+    color: white;
+    font-size: 25px;
+    font-family: Barlow, Arial, Helvetica, sans-serif;
+  }
 
   .checkoutBttn{
     position: fixed;
     left: 92%;
     top: 1.5%;
-  
   }
 
   #loginBttn{
     font-size: large;
   }
+
   #checkoutBttn{
     font-size:40px;
     background: none;
     border: none;
+    font-family: Barlow, Arial, Helvetica, sans-serif;
+    color: white;
+    cursor: pointer;
   }
 }
+
 /* CSS for Home*/
 .ad{
   position: relative;
@@ -252,12 +281,11 @@ left:4vw;
   bottom: 0;
   background-color: #f4f7f4;
   height: 52vh;
-
 }
 
 .nowAvailable{
   position: relative;
-left: 2vw;
+  left: 2vw;
 }
 
 .mac{
@@ -276,7 +304,6 @@ left: 2vw;
   width: 33vw;
   bottom: 0;
   left: 33vw;
-
 }
 
 .catcher{
@@ -295,6 +322,7 @@ left: 2vw;
   left: 40%;
   top: 10%;
 }
+
 .stock{
   /* background-color: #566637; */
   background-image: url(https://images.unsplash.com/photo-1601467995997-ac1ae9a8fff4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NjJ8fGJveGVzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60);
@@ -305,7 +333,6 @@ left: 2vw;
   width: 34vw;
   bottom: 0;
   left: 66vw;
-
 }
 
 .ourStock{
@@ -335,12 +362,11 @@ left: 2vw;
     bottom: 0;
     background-color: #f4f7f4;
     height: 52vh;
-  
   }
   
   .nowAvailable{
     position: relative;
-  left: 2vw;
+    left: 2vw;
   }
   
   .mac{
@@ -359,7 +385,6 @@ left: 2vw;
     width: 33vw;
     bottom: 0;
     left: 33vw;
-  
   }
   
   .catcher{
@@ -378,6 +403,7 @@ left: 2vw;
     left: 40%;
     top: 10%;
   }
+
   .stock{
     /* background-color: #566637; */
     background-image: url(https://images.unsplash.com/photo-1601467995997-ac1ae9a8fff4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NjJ8fGJveGVzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60);
@@ -388,7 +414,6 @@ left: 2vw;
     width: 34vw;
     bottom: 0;
     left: 66vw;
-  
   }
   
   .ourStock{
@@ -404,7 +429,6 @@ left: 2vw;
     padding: 5px;
     top: 30%;
   }
-  
 }
 
 .loginContainer{
@@ -420,8 +444,8 @@ left: 2vw;
   /* background-color: blue; */
   background-image: url(https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80);
   background-size: cover;
-    background-repeat: no-repeat;
-    color: white;
+  background-repeat: no-repeat;
+  color: white;
 }
 
 .hidden{
@@ -441,8 +465,8 @@ left: 2vw;
   /* background-color: black; */
   background-image: url(https://images.unsplash.com/photo-1492321936769-b49830bc1d1e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80);
   background-size: cover;
-    background-repeat: no-repeat;
-    color: white;
+  background-repeat: no-repeat;
+  color: white;
 }
 
 .loginTitle{
@@ -478,10 +502,10 @@ left: 2vw;
 
 .loading{
   position: relative;
-    width: 100vw;
-    height: 87vh;
-    top: 13vh;
-    z-index: 15;
+  width: 100vw;
+  height: 87vh;
+  top: 13vh;
+  z-index: 15;
 }
 
 .products{
@@ -500,15 +524,17 @@ left: 2vw;
   position: relative;
   top: 22vh;
 }
+
 .UsersName{
   position: relative;
-
   top: 22vh;
 }
+
 .UsersEmail{
   position: relative;
   top: 22vh;
 }
+
 .UsersAddress{
   position: relative;
   top: 22vh;
@@ -528,6 +554,7 @@ left: 2vw;
   top: 50vh;
   z-index: 100;
 }
+
 .error{
   z-index: 100;
   position: absolute;
