@@ -1,53 +1,105 @@
-import React, { useState,useEffect } from "react";
-import {  useNavigate } from "react-router-dom";
-import "../style/index.css"
-import logo from '../images/ScreenShot.png'
-import {IoCartOutline} from 'react-icons/io5'
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import "../style/index.css";
+import logo from "../images/ScreenShot.png";
+import { IoCartOutline } from "react-icons/io5";
 
-const Header = ({loggedIn,setLoggedIn,user}) => {
+const Header = ({ loggedIn, setLoggedIn, user }) => {
   const navigate = useNavigate();
-  useEffect(() => {
-  }, [loggedIn]);
 
+  useEffect(() => {}, [loggedIn]);
 
   const logout = () => {
-    localStorage.clear()
-    setLoggedIn(false)
-    navigate("/")
-  }
-    return (
-      <header className="header">
-        <div className="logoContainer">
-        <img className="logo" src={logo} alt="logo" onClick={(()=>{navigate("/")})}></img>
-        </div>
-        <div className="loginBttn">
-            <button id="loginBttn" onClick={(()=>{loggedIn ? logout() : navigate("/Login")})}>{!loggedIn ? "Login/Register" : "LogOut"}</button>
-        </div>
-        <div className="checkoutBttn">
-            <button id="checkoutBttn" onClick={(()=>{navigate("/Cart")})}><IoCartOutline/>Cart</button>
-        </div>
-        <div className="shopBttn">
-            <button id="shopBttn" onClick={(()=>{navigate("/Products")})}>Shop All</button>
-        </div>
-        {loggedIn && user.admin === true ?
-        <div className="addBttn">
-            <button id="addBttn" onClick={()=>{navigate("/AddProduct")}}>Add Product</button>
-        </div>:null}
-        { loggedIn && user.admin === true ?
-          <div className="adminBttn" >
-          <div className="allUsersBttn">
-            <button  onClick={(()=>{navigate("/AllUsers")})}>All Users</button>
-        </div>
-       
-        </div> 
-         : null}
-        {loggedIn ? <div className="myInfoBttn">
-            <button id="shopBttn" onClick={(()=>{navigate("/UserInfo")})}>My Info</button>
-        </div> : null }
-      </header>
-    );
+    localStorage.clear();
+    setLoggedIn(false);
+    navigate("/");
   };
 
+  return (
+    <header className="header">
+      <div className="logoContainer">
+        <img
+          className="logo"
+          src={logo}
+          alt="logo"
+          onClick={() => {
+            navigate("/");
+          }}
+        ></img>
+      </div>
+      <div className="loginBttn">
+        <button
+          id="loginBttn"
+          onClick={() => {
+            loggedIn ? logout() : navigate("/Login");
+          }}
+        >
+          {!loggedIn ? "Login/Register" : "LogOut"}
+        </button>
+      </div>
+      <div className="checkoutBttn">
+        <button
+          id="checkoutBttn"
+          onClick={() => {
+            navigate("/Cart");
+          }}
+        >
+          <IoCartOutline />
+          Cart
+        </button>
+      </div>
+      <div className="shopAll">
+        <div className="shopBttn">
+          <p
+            id="shopBttn"
+            onClick={() => {
+              navigate("/Products");
+            }}
+          >
+            Shop All
+          </p>
+        </div>
+      </div>
 
-  
-  export default Header;
+      {loggedIn && user.admin === true ? (
+        <div className="addBttn">
+          <button
+            id="addBttn"
+            onClick={() => {
+              navigate("/AddProduct");
+            }}
+          >
+            Add Product
+          </button>
+        </div>
+      ) : null}
+      {loggedIn && user.admin === true ? (
+        <div className="adminBttn">
+          <div className="allUsersBttn">
+            <button
+              onClick={() => {
+                navigate("/AllUsers");
+              }}
+            >
+              All Users
+            </button>
+          </div>
+        </div>
+      ) : null}
+      {loggedIn ? (
+        <div className="myInfoBttn">
+          <p
+            id="shopBttn"
+            onClick={() => {
+              navigate("/UserInfo");
+            }}
+          >
+            My Info
+          </p>
+        </div>
+      ) : null}
+    </header>
+  );
+};
+
+export default Header;
