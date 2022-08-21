@@ -19,15 +19,12 @@ cart_product_router.get("/", async (req, res, next) => {
 });
 
 cart_product_router.post("/:cartId", async (req, res, next) => {
-  const {cart_id} = req.params
+  let {cartId} = req.params
   const { product_id, quantity } = req.body;
   
 
   try {
-    const product = await getCartProductById(product_id)
-    console.log(product,"i live")
-    const added = await addProductToCart( cart_id, product_id, quantity );
-
+    const added = await addProductToCart(cartId,product_id,quantity );
     res.send(added);
   } catch (error) {
     next(error);

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getProducts, deleteProduct } from "../axios-services";
+import { getProducts, deleteProduct, addToCartProducts } from "../axios-services";
 import { useNavigate } from "react-router";
 
 const Products = ({ loggedIn, user, cart,setCartInfo,cartInfo,setCart }) => {
@@ -53,13 +53,14 @@ const Products = ({ loggedIn, user, cart,setCartInfo,cartInfo,setCart }) => {
     await deleteProduct(productId);
   };
 
-  const addToCart = () => {
+  const addToCart =  async() => {
     const searchCart = cart.find(
       (product) => product.name === selectedProduct.name
     );
     setCartInfo(!cartInfo);
     if (!searchCart) {
       selectedProduct.quantity = 1;
+      await addToCartProducts(1,selectedProduct.id,3)
       cart.push(selectedProduct);
       alert("item added to cart");
     } else {
