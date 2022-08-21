@@ -27,8 +27,7 @@ const Checkout = ({ cart, setCart }) => {
   if (token) {
     const string = localStorage.getItem('user')
     const user = JSON.parse(string)
-    console.log(user)
-    console.log("i am logged in ");
+
     return (
       <div className="checkout">
         <div className={purchased ? "hidden" : "orderInfo"}>
@@ -60,7 +59,7 @@ const Checkout = ({ cart, setCart }) => {
     );
   } 
   else if(guest){
-    console.log(guest, 'i am a guest')
+
     return (
       <div className="checkout">
         <div className={purchased ? "hidden" : "orderInfo"}>

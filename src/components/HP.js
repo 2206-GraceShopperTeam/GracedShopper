@@ -77,7 +77,7 @@ const HP = ({ cart, cartInfo, setCartInfo }) => {
             return product.category === "HP" ? (
               <div
                 className="blackBox"
-                key={`Products${product.id}`}
+                key={`HP${product.id}`}
                 onMouseOver={() => {
                   setSelectedProduct(product);
                 }}

@@ -29,7 +29,7 @@ const Cart = ({ cart, cartInfo, setCartInfo }) => {
           return (
             <div>
               <SingleCartProduct
-                key={`routine${product.id}`}
+                key={`singleCartProduct${product.id}`}
                 product={product}
                 cart2={cart}
                 setCartEmpty={setCartEmpty}

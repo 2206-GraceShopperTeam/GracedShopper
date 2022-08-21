@@ -77,7 +77,7 @@ const Apple = ({ cart, cartInfo, setCartInfo }) => {
             return product.category === "Apple" ? (
               <div
                 className="blackBox"
-                key={`Products${product.id}`}
+                key={`Apple${product.id}`}
                 onMouseOver={() => {
                   setSelectedProduct(product);
                 }}
