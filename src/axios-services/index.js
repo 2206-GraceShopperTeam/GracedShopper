@@ -255,7 +255,7 @@ export async function createCart(id) {
   }
 }
 
-export async function getCart(id) {
+export async function getCartById(id) {
   try {
     const response = await fetch(`http://localhost:4000/api/cart/${id}`)
     const cart = await response.json();
@@ -274,4 +274,6 @@ export async function emptyCart(cartId){
     next(error)
   }
 }
+
+
 
