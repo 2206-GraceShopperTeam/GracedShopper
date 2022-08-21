@@ -63,26 +63,26 @@ const Header = ({ loggedIn, setLoggedIn, user }) => {
 
       {loggedIn && user.admin === true ? (
         <div className="addBttn">
-          <button
+          <p
             id="addBttn"
             onClick={() => {
               navigate("/AddProduct");
             }}
           >
             Add Product
-          </button>
+          </p>
         </div>
       ) : null}
       {loggedIn && user.admin === true ? (
         <div className="adminBttn">
           <div className="allUsersBttn">
-            <button
+            <p
               onClick={() => {
                 navigate("/AllUsers");
               }}
             >
               All Users
-            </button>
+            </p>
           </div>
         </div>
       ) : null}

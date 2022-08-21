@@ -48,7 +48,7 @@ const AddProduct = () => {
       <form>
         <div className="createForm">
           <input
-            className="createField"
+            
             type="text"
             name="name"
             placeholder="Name"
@@ -64,7 +64,7 @@ const AddProduct = () => {
             onChange={descriptionChange}
           />
           <input
-            className="createField"
+            
             type="number"
             name="price"
             placeholder="Price"

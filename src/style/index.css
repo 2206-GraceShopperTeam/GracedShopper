@@ -100,6 +100,17 @@
   justify-content: center;
 }
 
+.checkoutButtonParent {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  top: 15vh;
+}
+
+.checkoutButton {
+  font-size: large;
+}
+
 /* import fonts here */
 * {
   box-sizing: border-box;
@@ -151,15 +162,23 @@ body {
 
 .allUsersBttn{
   position: fixed;
-  left: 82.5vw;
-  top: 7.4%;
-  padding: 1vw;}
+    left: 68vw;
+    top: 3%;
+    color: white;
+    font-size: 25px;
+    font-family: Barlow, Arial, Helvetica, sans-serif;
+    cursor: pointer;
+}
+
+.adminBttn {
+  display: flex;
+  justify-content: center;
+}
 
 .myInfoBttn{
   position: fixed;
   left: 80vw;
   top: 3%;
-  padding: 1vw;
   color: white;
   font-size: 25px;
   font-family: Barlow, Arial, Helvetica, sans-serif;
@@ -192,7 +211,7 @@ body {
 
 .shopBttn{
   position: fixed;
-  top: 5%;
+  top: 5.5%;
   display: flex;
   justify-content: center;
   font-size: 25px;
@@ -206,12 +225,12 @@ body {
 
 .addBttn{
   position: fixed;
-  left: 54%;
-  top: 9%;
-}
-
-#addBttn{
-  font-size: 15px;
+    right: 70vw;
+    top: 5.5%;
+    color: white;
+    font-size: 25px;
+    font-family: Barlow, Arial, Helvetica, sans-serif;
+    cursor: pointer;
 }
 
 @media (min-width: 106em) and (min-height: 50em){
@@ -233,15 +252,18 @@ body {
 
   .allUsersBttn{
     position: fixed;
-    left: 70vw;
-    top: 7.4%;
-    padding: 1vw;}
+    left: 63vw;
+    top: 5.5%;
+    color: white;
+    font-size: 25px;
+    font-family: Barlow, Arial, Helvetica, sans-serif;
+    cursor: pointer;
+  }
   
   .myInfoBttn{
     position: fixed;
     left: 80vw;
-    top: 3.25%;
-    padding: 1vw;
+    top: 5.5%;
     color: white;
     font-size: 25px;
     font-family: Barlow, Arial, Helvetica, sans-serif;
@@ -513,6 +535,11 @@ body {
   top: 12vh;
 }
 
+.users {
+  position: relative;
+  top: 20vh;
+}
+
 .allProducts{
   display: flex;
   flex-direction: row;
@@ -522,28 +549,44 @@ body {
 
 .userInfo{
   position: relative;
-  top: 22vh;
+  top: 5vh;
 }
 
 .UsersName{
   position: relative;
   top: 22vh;
+  border: solid black 2px;
+  box-shadow: 0px 15px 10px -15px black;
+  margin-bottom: 20px;
+  padding: 10px;
 }
 
 .UsersEmail{
   position: relative;
   top: 22vh;
+  border: solid black 2px;
+  box-shadow: 0px 15px 10px -15px black;
+  margin-bottom: 20px;
+  padding: 10px;
 }
 
 .UsersAddress{
   position: relative;
   top: 22vh;
+  border: solid black 2px;
+  box-shadow: 0px 15px 10px -15px black;
+  margin-bottom: 20px;
+  padding: 10px;
 }
 
 .AddProduct{
   display: flex;
   position: relative;
   top: 20vh;
+  border: solid black 2px;
+  box-shadow: 0px 15px 10px -15px black;
+  margin-bottom: 20px;
+  padding: 10px;
 }
 
 .errorMessage{
@@ -559,4 +602,9 @@ body {
   z-index: 100;
   position: absolute;
   left: 26.5vw;
+}
+
+.createField {
+  position: relative;
+  top: 2vh;
 }

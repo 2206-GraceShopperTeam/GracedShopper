@@ -3,14 +3,14 @@ import { getCart, getCartProducts } from "../axios-services";
 import { SingleCartProduct } from "./";
 import { useNavigate, useLocation } from "react-router-dom";
 
-const Cart = ({ cart,cartInfo,setCartInfo }) => {
+const Cart = ({ cart, cartInfo, setCartInfo }) => {
   const [cartProducts, setCartProducts] = useState([]);
   const [cartEmpty, setCartEmpty] = useState(false);
 
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/Checkout')
+    navigate("/Checkout");
   };
 
   useEffect(() => {
@@ -23,18 +23,18 @@ const Cart = ({ cart,cartInfo,setCartInfo }) => {
   return (
     <div className="cartParent">
       <p className="cartTitle">Cart</p>
-      <button className="checkoutButton" onClick={handleClick}>Checkout</button>
+
       {cart && cart.length ? (
         cart.map((product) => {
           return (
             <div>
-            <SingleCartProduct
-              key={`routine${product.id}`}
-              product={product}
-              cart2={cart}
-              setCartEmpty={setCartEmpty}
-              setCartInfo={setCartInfo}
-              cartInfo={cartInfo}
+              <SingleCartProduct
+                key={`routine${product.id}`}
+                product={product}
+                cart2={cart}
+                setCartEmpty={setCartEmpty}
+                setCartInfo={setCartInfo}
+                cartInfo={cartInfo}
               />
             </div>
           );
@@ -42,6 +42,11 @@ const Cart = ({ cart,cartInfo,setCartInfo }) => {
       ) : (
         <p className="cartSubTitle">Your Cart is Empty</p>
       )}
+      <div className="checkoutButtonParent">
+        <button className="checkoutButton" onClick={handleClick}>
+          Checkout
+        </button>
+      </div>
     </div>
   );
 };

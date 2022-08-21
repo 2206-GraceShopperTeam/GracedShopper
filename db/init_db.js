@@ -41,7 +41,6 @@ async function createTables() {
               name VARCHAR(255) NOT NULL,
               address TEXT,
               admin BOOLEAN DEFAULT false
-              
       );
 
       CREATE TABLE products (

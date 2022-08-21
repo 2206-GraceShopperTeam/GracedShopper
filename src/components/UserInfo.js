@@ -43,15 +43,15 @@ const UserInfo = ({user,setUser,setUpdated,updated}) => {
     return (
         <div className="userInfo">
             <div className={!editName ? "UsersName" : "hidden"}>
-                {user.name}
+                <b>Username: </b>{user.name}
                 <TbEdit className="editButton" onClick={() => setEditName(true)} />
             </div>
             <div className={!editEmail ? "UsersEmail" : "hidden"}>
-                {user.email}
+                <b>Email: </b>{user.email}
                 <TbEdit className="editButton" onClick={() => setEditEmail(true)} />
             </div>
             <div className={!editAddress ? "UsersAddress" : "hidden"}>
-                {user.address}
+                <b>Address: </b>{user.address}
                 <TbEdit className="editButton" onClick={() => setEditAddress(true)} />
             </div>
             <div className={editName ? "UsersName" : "hidden"}>

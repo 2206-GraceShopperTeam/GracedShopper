@@ -14,12 +14,13 @@ const Users = () => {
   }, []);
 
   return (
-    <div className="products">
+    <div className="users">
+      <div>
       {allUsers.length
         ? allUsers.map((user) => {
             return (
               <div
-                className="allUsers"
+              className="blackBox"
                 key={`Users${user.id}`}
               >
                 <p>Name: {user.name}</p>
@@ -29,6 +30,7 @@ const Users = () => {
             );
           })
         : null}
+        </div>
     </div>
   );
 };
