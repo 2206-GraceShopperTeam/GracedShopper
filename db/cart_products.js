@@ -16,7 +16,7 @@ async function getAllCartProducts() {
   }
 }
 
-async function createCartProducts({ cart_id, product_id, quantity }) {
+async function createCartProducts( {cart_id, product_id, quantity }) {
   try {
     const {
       rows: [cart],
@@ -35,7 +35,7 @@ async function createCartProducts({ cart_id, product_id, quantity }) {
   }
 }
 
-async function addProductToCart(cart_id, {product_id, quantity }) {
+async function addProductToCart(cart_id, product_id, quantity ) {
   try {
     const {
       rows: [cart_products],
@@ -47,7 +47,6 @@ async function addProductToCart(cart_id, {product_id, quantity }) {
     `,
       [cart_id, product_id, quantity]
     );
-
     return cart_products;
   } catch (error) {
     throw error;
