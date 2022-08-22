@@ -8,15 +8,17 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
   const [cartProducts, setCartProducts] = useState([]);
   const [purchased, setPurchased] = useState(false);
   const [guest, setGuest] = useState(false);
-  const [total, setTotal] = useState([]);
+  // const [total, setTotal] = useState([]);
   const [productCart, setProductCart] = useState([]);
   const string = localStorage.getItem("user");
   const user = JSON.parse(string);
   
-  
+  var total = 0
+
   
   async function getProductCart() {
     if(user){ const cart = await getCartById(user.id);
+      console.log(cart, 'this is users cart', user.id, 'this is the userid')
     setProductCart(cart);}
    
   }
@@ -28,7 +30,7 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
     }
     fetchCartProducts();
   }, []);
-
+console.log(productCart, 'this is the users cart later')
   return (
     <div>
       {loggedIn ? (
@@ -36,8 +38,12 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
           <div className={purchased ? "hidden" : "orderInfo"}>
             {productCart.map((product, index) => {
               if (user.id === product.user_id) {
+                // {
+                //   total.push(product.price * product.quantity);
+                // }
                 {
-                  total.push(product.price * product.quantity);
+                  total += (product.price * product.quantity)
+                  console.log(total, 'this is total')
                 }
                 return (
                   <div key={index} className="cartProduct">
@@ -49,9 +55,10 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
               }
             })}
             <form>
-              <h3>
+              {/* <h3>
                 Total: ${total.reduce((partialSum, a) => partialSum + a, 0)}
-              </h3>
+              </h3> */}
+              <h3>total: ${total}</h3>
               <h3>{user.email}</h3>
               <h3>{user.address}</h3>
             </form>
@@ -71,7 +78,7 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
         <div>
           {!guest ? (
             <div className="checkoutOptions">
-              //{" "}
+              {" "}
               <button
                 onClick={() => {
                   localStorage.setItem("redirect", "/Checkout"),
