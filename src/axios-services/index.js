@@ -224,7 +224,6 @@ export async function editCartProduct(cartProductId, quantity) {
 }
 
 export async function removeCartProduct(cartProductId,product_id) {
-  console.log(cartProductId, "im on the id")
   const response = await fetch(
     `http://localhost:4000/api/cartProducts/${cartProductId}`,
     {

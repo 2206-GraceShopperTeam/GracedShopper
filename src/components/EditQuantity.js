@@ -1,7 +1,13 @@
 import React, { useState } from "react";
-import {editCartProduct} from "../axios-services"
+import { editCartProduct } from "../axios-services";
 
-const EditQuantity = ({ thisProduct,cart,setCartInfo, cartInfo,loggedIn }) => {
+const EditQuantity = ({
+  thisProduct,
+  cart,
+  setCartInfo,
+  cartInfo,
+  loggedIn,
+}) => {
   const [editForm, setEditForm] = useState(false);
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(
@@ -13,29 +19,25 @@ const EditQuantity = ({ thisProduct,cart,setCartInfo, cartInfo,loggedIn }) => {
     setEditForm(false);
     setError(null);
 
-    
-    if(!loggedIn){const searchCart = cart.find(
-      (product) => product.name === thisProduct.name
-    );
-    if (searchCart) {
-      searchCart.quantity = quantity;
-      setCartInfo(!cartInfo)
-    }}
-
-
-    if(loggedIn){
+    if (!loggedIn) {
       const searchCart = cart.find(
-      (product) => product.name === thisProduct.name
-    );
-    if (searchCart) {
-      const result = await editCartProduct(searchCart.id,quantity);
-      console.log(result, "this is the final chapter")
-      setCartInfo(!cartInfo)
-    }}
-    
+        (product) => product.name === thisProduct.name
+      );
+      if (searchCart) {
+        searchCart.quantity = quantity;
+        setCartInfo(!cartInfo);
+      }
+    }
 
-
-
+    if (loggedIn) {
+      const searchCart = cart.find(
+        (product) => product.name === thisProduct.name
+      );
+      if (searchCart) {
+        const result = await editCartProduct(searchCart.id, quantity);
+        setCartInfo(!cartInfo);
+      }
+    }
   };
 
   const quantityChange = (event) => {
@@ -52,7 +54,9 @@ const EditQuantity = ({ thisProduct,cart,setCartInfo, cartInfo,loggedIn }) => {
           required={true}
           onChange={quantityChange}
         />
-        <button type="submit" onClick={(()=>setCartInfo(!cartInfo))}>UPDATE</button>
+        <button type="submit" onClick={() => setCartInfo(!cartInfo)}>
+          UPDATE
+        </button>
       </form>
     );
   };

@@ -1,36 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import {getCartById,getProducts} from "../axios-services"
+import { getCartById, getProducts } from "../axios-services";
 
-const Home = ({setCart,cart,loggedIn}) => {
-  const [amount,setAmount] = useState(0)
+const Home = ({ setCart, cart, loggedIn }) => {
+  const [amount, setAmount] = useState(0);
   const string = localStorage.getItem("user");
   const user = JSON.parse(string);
   const navigate = useNavigate();
-  
-  
-  
-  
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     async function fetchProducts() {
       const returnProducts = await getProducts();
       setAmount(returnProducts.length);
     }
     fetchProducts();
-  },[])
+  }, []);
 
-    useEffect(()=>{
-      async function createCart (){
-        if(!localStorage.getItem("user") && !localStorage.getItem("cart")){
-          setCart([])
-        } else if (loggedIn) {
-          const userCart = await getCartById(user.id)
-          setCart(userCart)
-        }
+  useEffect(() => {
+    async function createCart() {
+      if (!localStorage.getItem("user") && !localStorage.getItem("cart")) {
+        setCart([]);
+      } else if (loggedIn) {
+        const userCart = await getCartById(user.id);
+        setCart(userCart);
       }
-      createCart()
-    },[loggedIn])
+    }
+    createCart();
+  }, [loggedIn]);
 
   return (
     <div /*Starter Div */>
@@ -57,7 +53,14 @@ const Home = ({setCart,cart,loggedIn}) => {
           <br />
           So sign up while the promo lasts!
         </p>
-        <button className="offerBttn" onClick={()=>{navigate("/Login")}}>Sign-Up</button>
+        <button
+          className="offerBttn"
+          onClick={() => {
+            navigate("/Login");
+          }}
+        >
+          Sign-Up
+        </button>
       </div>
       <div className="stock">
         <h2 className="ourStock">Our Stock</h2>

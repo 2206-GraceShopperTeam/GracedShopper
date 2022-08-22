@@ -1,14 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getProductById,editCartProduct } from "../axios-services";
+import {
+  getProductById,
+  editCartProduct,
+  addToCartProducts,
+} from "../axios-services";
 import { useNavigate } from "react-router";
 import { EditQuantity, RemoveCartProduct } from "./";
 
-const SingleCartProduct = ({ product, cart2, cart, setCart, cartInfo, setCartInfo,loggedIn}) => {
+const SingleCartProduct = ({
+  product,
+  cart2,
+  cart,
+  setCart,
+  cartInfo,
+  setCartInfo,
+  loggedIn,
+}) => {
   const navigate = useNavigate();
   const [thisProduct, setThisProduct] = useState(product);
   const [selectedProduct, setSelectedProduct] = useState([]);
   const [cartEmpty, setCartEmpty] = useState(false);
+  const string = localStorage.getItem("user");
+  const user = JSON.parse(string);
   let { productId } = useParams();
   useEffect(() => {
     async function fetchSingleProduct() {
@@ -20,9 +34,9 @@ const SingleCartProduct = ({ product, cart2, cart, setCart, cartInfo, setCartInf
     }
   }, [selectedProduct]);
 
-  useEffect(()=>{
+  useEffect(() => {
     //this is to refresh when items are updated
-  },[cartInfo])
+  }, [cartInfo]);
 
   const dellHandleClick = (event) => {
     event.preventDefault();
@@ -56,24 +70,27 @@ const SingleCartProduct = ({ product, cart2, cart, setCart, cartInfo, setCartInf
     }
   };
 
-  const addToUserCart =  async() => {
+  const addToUserCart = async () => {
     const searchCart = cart.find(
       (product) => product.name === selectedProduct.name
     );
-    console.log(searchCart, "the emaw")
 
     if (!searchCart) {
       selectedProduct.quantity = 1;
-      await addToCartProducts(user.id,selectedProduct.id,selectedProduct.quantity)
-      console.log(searchCart, "the fmaw")
+      await addToCartProducts(
+        user.id,
+        selectedProduct.id,
+        selectedProduct.quantity
+      );
 
       alert("item added to cart");
-       }else {
-      alert("Quantity increased")
-      console.log(searchCart, "the gmaw")
-      searchCart.quantity++
-    const result = await editCartProduct(searchCart.id,searchCart.quantity);
-    setCartInfo(!cartInfo);}}
+    } else {
+      alert("Quantity increased");
+      searchCart.quantity++;
+      const result = await editCartProduct(searchCart.id, searchCart.quantity);
+      setCartInfo(!cartInfo);
+    }
+  };
 
   return (
     <div className="products">
@@ -129,9 +146,9 @@ const SingleCartProduct = ({ product, cart2, cart, setCart, cartInfo, setCartInf
             ) : null}
             {location.href !== "http://localhost:3000/Cart" ? (
               <button
-              onClick={() => {
-                loggedIn ? addToUserCart() : addToCart()
-              }}
+                onClick={() => {
+                  loggedIn ? addToUserCart() : addToCart();
+                }}
               >
                 Add to cart
               </button>
@@ -156,7 +173,7 @@ const SingleCartProduct = ({ product, cart2, cart, setCart, cartInfo, setCartInf
                   cart={cart2}
                   setCartEmpty={setCartEmpty}
                   cartEmpty={cartEmpty}
-                  cartInfo={cartInfo} 
+                  cartInfo={cartInfo}
                   setCartInfo={setCartInfo}
                   loggedIn={loggedIn}
                 />

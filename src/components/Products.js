@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { getProducts, deleteProduct, addToCartProducts,editCartProduct } from "../axios-services";
+import {
+  getProducts,
+  deleteProduct,
+  addToCartProducts,
+  editCartProduct,
+} from "../axios-services";
 import { useNavigate } from "react-router";
 
-const Products = ({ loggedIn, cart,setCartInfo,cartInfo,setCart }) => {
+const Products = ({ loggedIn, cart, setCartInfo, cartInfo, setCart }) => {
   const navigate = useNavigate();
   const [allProducts, setAllProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState([]);
@@ -55,42 +60,43 @@ const Products = ({ loggedIn, cart,setCartInfo,cartInfo,setCart }) => {
     await deleteProduct(productId);
   };
 
-  const addToCart =  async() => {
+  const addToCart = async () => {
     const searchCart = cart.find(
       (product) => product.name === selectedProduct.name
     );
-    console.log(searchCart, "the amaw")
 
     setCartInfo(!cartInfo);
     if (!searchCart) {
-      console.log(searchCart, "the bmaw")
-
       selectedProduct.quantity = 1;
       cart.push(selectedProduct);
       alert("item added to cart");
-       }else {searchCart.quantity++;
-        console.log(searchCart, "the cmaw")
+    } else {
+      searchCart.quantity++;
 
-      alert("Quantity increased");}
+      alert("Quantity increased");
     }
-  const addToUserCart =  async() => {
+  };
+  const addToUserCart = async () => {
     const searchCart = cart.find(
       (product) => product.name === selectedProduct.name
     );
-    console.log(searchCart, "the emaw")
 
     if (!searchCart) {
       selectedProduct.quantity = 1;
-      await addToCartProducts(user.id,selectedProduct.id,selectedProduct.quantity)
-      console.log(searchCart, "the fmaw")
+      await addToCartProducts(
+        user.id,
+        selectedProduct.id,
+        selectedProduct.quantity
+      );
 
       alert("item added to cart");
-       }else {
-      alert("Quantity increased")
-      console.log(searchCart, "the gmaw")
-      searchCart.quantity++
-    const result = await editCartProduct(searchCart.id,searchCart.quantity);
-    setCartInfo(!cartInfo);}}
+    } else {
+      alert("Quantity increased");
+      searchCart.quantity++;
+      const result = await editCartProduct(searchCart.id, searchCart.quantity);
+      setCartInfo(!cartInfo);
+    }
+  };
 
   return (
     <div className="products">
@@ -146,7 +152,7 @@ const Products = ({ loggedIn, cart,setCartInfo,cartInfo,setCart }) => {
                 </p>
                 <button
                   onClick={() => {
-                   loggedIn ? addToUserCart() : addToCart()
+                    loggedIn ? addToUserCart() : addToCart();
                   }}
                 >
                   Add to cart

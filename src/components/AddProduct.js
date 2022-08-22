@@ -10,7 +10,13 @@ const AddProduct = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const token = localStorage.getItem("token");
-    const newProduct = await createProduct(token,name, description,price,category);
+    const newProduct = await createProduct(
+      token,
+      name,
+      description,
+      price,
+      category
+    );
     if ("error" in newProduct) {
       alert("An product with that name already exists please try again!");
     } else {
@@ -37,18 +43,13 @@ const AddProduct = () => {
     <div className="AddProduct">
       <div className="routineDetailsTitle">
         Add New Product
-        <p
-          className="xButton"
-          onClick={() => {
-          }}
-        >
+        <p className="xButton" onClick={() => {}}>
           ❌
         </p>
       </div>
       <form>
         <div className="createForm">
           <input
-            
             type="text"
             name="name"
             placeholder="Name"
@@ -64,14 +65,13 @@ const AddProduct = () => {
             onChange={descriptionChange}
           />
           <input
-            
             type="number"
             name="price"
             placeholder="Price"
             required={true}
             onChange={priceChange}
           />
-          <label >Choose a Brand:</label>
+          <label>Choose a Brand:</label>
 
           <select id="brand" onChange={categoryChange}>
             <option value="DELL">DELL</option>

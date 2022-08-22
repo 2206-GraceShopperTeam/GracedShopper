@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { getProducts } from "../axios-services";
+import {
+  getProducts,
+  addToCartProducts,
+  editCartProduct,
+} from "../axios-services";
 import { useNavigate } from "react-router";
 
-const HP = ({ cart, cartInfo, setCartInfo }) => {
+const HP = ({ cart, cartInfo, setCartInfo, loggedIn }) => {
   const navigate = useNavigate();
+  const string = localStorage.getItem("user");
+  const user = JSON.parse(string);
   const [allProducts, setAllProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState([]);
 
@@ -48,6 +54,28 @@ const HP = ({ cart, cartInfo, setCartInfo }) => {
     } else {
       searchCart.quantity++;
       alert("Quantity increased");
+    }
+  };
+
+  const addToUserCart = async () => {
+    const searchCart = cart.find(
+      (product) => product.name === selectedProduct.name
+    );
+
+    if (!searchCart) {
+      selectedProduct.quantity = 1;
+      await addToCartProducts(
+        user.id,
+        selectedProduct.id,
+        selectedProduct.quantity
+      );
+
+      alert("item added to cart");
+    } else {
+      alert("Quantity increased");
+      searchCart.quantity++;
+      const result = await editCartProduct(searchCart.id, searchCart.quantity);
+      setCartInfo(!cartInfo);
     }
   };
 
@@ -105,7 +133,7 @@ const HP = ({ cart, cartInfo, setCartInfo }) => {
                 </p>
                 <button
                   onClick={() => {
-                    addToCart();
+                    loggedIn ? addToUserCart() : addToCart();
                   }}
                 >
                   Add to cart
