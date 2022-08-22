@@ -1,33 +1,32 @@
 import React, { useEffect, useState } from "react";
-import {getCartById, createCart,} from "../axios-services"
+import { useNavigate } from "react-router";
+import { getCartById, getProducts } from "../axios-services";
 
-const Home = ({setCart,cart,loggedIn}) => {
+const Home = ({ setCart, cart, loggedIn }) => {
+  const [amount, setAmount] = useState(0);
   const string = localStorage.getItem("user");
   const user = JSON.parse(string);
-    // useEffect(()=>{
-    //   async function fetchCart () {
-    //     if(localStorage.getItem("user")){
-    //       const user = JSON.parse(localStorage.getItem("user"))
-    //       const oldCart = await getCart(user.id)
-    //       setCart(oldCart)
-    //     }
-    //   }
-    //   console.log(cart, "im the old cart")
-    //   fetchCart()
-    // },[])
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    async function fetchProducts() {
+      const returnProducts = await getProducts();
+      setAmount(returnProducts.length);
+    }
+    fetchProducts();
+  }, []);
 
-    useEffect(()=>{
-      async function createCart (){
-        if(!localStorage.getItem("user") && !localStorage.getItem("cart")){
-          setCart([])
-        } else {
-          const userCart = await getCartById(user.id)
-          setCart(userCart)
-        }
+  useEffect(() => {
+    async function createCart() {
+      if (!localStorage.getItem("user") && !localStorage.getItem("cart")) {
+        setCart([]);
+      } else if (loggedIn) {
+        const userCart = await getCartById(user.id);
+        setCart(userCart);
       }
-      createCart()
-    },[loggedIn])
+    }
+    createCart();
+  }, [loggedIn]);
 
   return (
     <div /*Starter Div */>
@@ -54,12 +53,19 @@ const Home = ({setCart,cart,loggedIn}) => {
           <br />
           So sign up while the promo lasts!
         </p>
-        <button className="offerBttn">Sign-Up</button>
+        <button
+          className="offerBttn"
+          onClick={() => {
+            navigate("/Login");
+          }}
+        >
+          Sign-Up
+        </button>
       </div>
       <div className="stock">
         <h2 className="ourStock">Our Stock</h2>
         <p className="howMany">
-          Currently we have over (this many computers) in stock!
+          {`Currently we have over ${amount} in stock!`}
           <br /> There's sure to be one that meets your needs!
         </p>
       </div>

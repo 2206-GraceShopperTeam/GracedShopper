@@ -21,14 +21,14 @@ const Cart = ({ cart, cartInfo, setCartInfo,loggedIn,setCart }) => {
         setCart(userCart)
       }
     }
+    useEffect(()=>{
+      createCart()
+    },[cartInfo])
   useEffect(()=>{
-   
+    
     createCart()
   },[loggedIn])
-
-  useEffect(()=>{
-    createCart()
-  },[cartInfo])
+  
 
   useEffect(() => {
     async function fetchCartProducts() {

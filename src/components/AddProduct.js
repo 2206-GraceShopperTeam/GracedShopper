@@ -42,18 +42,13 @@ const AddProduct = () => {
     <div className="AddProduct">
       <div className="routineDetailsTitle">
         Add New Product
-        <p
-          className="xButton"
-          onClick={() => {
-          }}
-        >
+        <p className="xButton" onClick={() => {}}>
           ❌
         </p>
       </div>
       <form>
         <div className="createForm">
           <input
-            
             type="text"
             name="name"
             placeholder="Name"
@@ -83,7 +78,7 @@ const AddProduct = () => {
             required={true}
             onChange={priceChange}
           />
-          <label >Choose a Brand:</label>
+          <label>Choose a Brand:</label>
 
           <select id="brand" onChange={categoryChange}>
             <option value="DELL">DELL</option>
