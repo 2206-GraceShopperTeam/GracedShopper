@@ -30,7 +30,7 @@ router.get("/", async (req, res, next) => {
 
 router.post("/", requireUser, async (req, res, next) => {
   try {
-    const { name, description, price, category } = req.body;
+    const { name, description, price, category, picture } = req.body;
     const product = await getProductByName(name);
     if (product) {
       next({
@@ -43,6 +43,7 @@ router.post("/", requireUser, async (req, res, next) => {
         description,
         price,
         category,
+        picture,
       };
       const newProduct = await createProduct(postData);
       res.send(newProduct);
@@ -55,10 +56,10 @@ router.post("/", requireUser, async (req, res, next) => {
 router.patch("/:productId", requireUser, async (req, res, next) => {
   const productId = req.params.productId;
   
-  const { name, description, price, category } = req.body;
+  const { name, description, price, category, picture } = req.body;
   try {
    
-      const updatedProduct = await updateProducts(productId, {name, description, price, category});
+      const updatedProduct = await updateProducts(productId, {name, description, price, category, picture});
       res.send(updatedProduct);
   } catch ({ name, message }) {
     next({ name, message });
