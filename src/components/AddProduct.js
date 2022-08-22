@@ -6,11 +6,12 @@ const AddProduct = () => {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("DELL");
+  const [picture, setPicture] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const token = localStorage.getItem("token");
-    const newProduct = await createProduct(token,name, description,price,category);
+    const newProduct = await createProduct(token,name, description,price,category,picture);
     if ("error" in newProduct) {
       alert("An product with that name already exists please try again!");
     } else {
@@ -31,6 +32,10 @@ const AddProduct = () => {
   };
   const categoryChange = (event) => {
     setCategory(event.target.value);
+  };
+
+  const pictureChange = (event) => {
+    setPicture(event.target.value);
   };
 
   return (
@@ -63,8 +68,15 @@ const AddProduct = () => {
             required={true}
             onChange={descriptionChange}
           />
-          <input
-            
+          <textarea
+            className="createField"
+            type="text"
+            name="picture"
+            placeholder="Picture: provide url"
+            required={true}
+            onChange={pictureChange}
+          />
+          <input 
             type="number"
             name="price"
             placeholder="Price"

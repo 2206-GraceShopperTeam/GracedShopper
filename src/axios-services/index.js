@@ -89,7 +89,8 @@ export async function createProduct(
   nameProduct,
   description,
   price,
-  category
+  category,
+  picture
 ) {
   const response = await fetch(`http://localhost:4000/api/products`, {
     method: "POST",
@@ -102,6 +103,7 @@ export async function createProduct(
       description: description,
       price: price,
       category: category,
+      picture: picture,
     }),
   });
   const result = await response.json();
