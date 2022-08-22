@@ -33,6 +33,7 @@ const Login = ({setLoggedIn,loggedIn,setUser}) => {
       }
       const newUser = await register(regEmail,regPassword,name,address)
       if(newUser){
+        console.log(newUser.user.id, "whats the info here")
             setRegEmail("");
             setRegPassword("");
             setConfirmPassword("");
@@ -41,6 +42,7 @@ const Login = ({setLoggedIn,loggedIn,setUser}) => {
             setAddress("")
             alert("Registration successful please Login");
             setSignUp(false)
+            await createCart(newUser.user.id)
       } 
       } catch (error) {
           alert("register failed")

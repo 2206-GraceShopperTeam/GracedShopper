@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getProductById } from "../axios-services";
+import { getProductById,editCartProduct } from "../axios-services";
 import { useNavigate } from "react-router";
 import { EditQuantity, RemoveCartProduct } from "./";
 
-const SingleCartProduct = ({ product, cart2, cart, setCart, cartInfo, setCartInfo }) => {
+const SingleCartProduct = ({ product, cart2, cart, setCart, cartInfo, setCartInfo,loggedIn}) => {
   const navigate = useNavigate();
   const [thisProduct, setThisProduct] = useState(product);
   const [selectedProduct, setSelectedProduct] = useState([]);
@@ -19,6 +19,10 @@ const SingleCartProduct = ({ product, cart2, cart, setCart, cartInfo, setCartInf
       fetchSingleProduct();
     }
   }, [selectedProduct]);
+
+  useEffect(()=>{
+    //this is to refresh when items are updated
+  },[cartInfo])
 
   const dellHandleClick = (event) => {
     event.preventDefault();
@@ -51,6 +55,25 @@ const SingleCartProduct = ({ product, cart2, cart, setCart, cartInfo, setCartInf
       alert("Quantity increased");
     }
   };
+
+  const addToUserCart =  async() => {
+    const searchCart = cart.find(
+      (product) => product.name === selectedProduct.name
+    );
+    console.log(searchCart, "the emaw")
+
+    if (!searchCart) {
+      selectedProduct.quantity = 1;
+      await addToCartProducts(user.id,selectedProduct.id,selectedProduct.quantity)
+      console.log(searchCart, "the fmaw")
+
+      alert("item added to cart");
+       }else {
+      alert("Quantity increased")
+      console.log(searchCart, "the gmaw")
+      searchCart.quantity++
+    const result = await editCartProduct(searchCart.id,searchCart.quantity);
+    setCartInfo(!cartInfo);}}
 
   return (
     <div className="products">
@@ -107,7 +130,7 @@ const SingleCartProduct = ({ product, cart2, cart, setCart, cartInfo, setCartInf
             {location.href !== "http://localhost:3000/Cart" ? (
               <button
               onClick={() => {
-                addToCart();
+                loggedIn ? addToUserCart() : addToCart()
               }}
               >
                 Add to cart
@@ -131,9 +154,11 @@ const SingleCartProduct = ({ product, cart2, cart, setCart, cartInfo, setCartInf
                   setCart={setCart}
                   setCartInfo={setCartInfo}
                   cartInfo={cartInfo}
+                  loggedIn={loggedIn}
                 />
                 <RemoveCartProduct
                   setThisProduct={setThisProduct}
+                  thisProduct={thisProduct}
                   cartProductId={thisProduct.id}
                   cart={cart2}
                   setCartEmpty={setCartEmpty}

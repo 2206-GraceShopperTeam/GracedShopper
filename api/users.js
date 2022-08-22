@@ -17,7 +17,7 @@ router.post("/register", async (req, res, next) => {
     //curl http://localhost:4000/api/users/register -H "Content-Type: application/json" -X POST -d '{"email": "enterAnEmail@here.com", "password": "superstars", "name": "josiah", "address": "quebec"}'
     try {
 
-      const { email, password, name, address } = req.body;
+      const { email, password, name, address,admin } = req.body;
       if (password.length < 8) {
         next({ name: "passwordLengthError", message: `Password Too Short!` });
       }
@@ -29,7 +29,7 @@ router.post("/register", async (req, res, next) => {
         });
       }
 
-      const user = await  createUser({ email, password, name, address });
+      const user = await  createUser({ email, password, name, address,admin });
       const token = jwt.sign(
           {id:user.id,
           email}

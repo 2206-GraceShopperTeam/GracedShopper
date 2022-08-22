@@ -10,6 +10,7 @@ export async function register(regEmail,regPassword,name,address) {
       password: regPassword,
       name: name,
       address: address,
+      admin: false,
     }),
   });
   const result = await response.json();
@@ -222,7 +223,8 @@ export async function editCartProduct(cartProductId, quantity) {
   return result;
 }
 
-export async function removeCartProduct(cartProductId) {
+export async function removeCartProduct(cartProductId,product_id) {
+  console.log(cartProductId, "im on the id")
   const response = await fetch(
     `http://localhost:4000/api/cartProducts/${cartProductId}`,
     {
@@ -230,6 +232,9 @@ export async function removeCartProduct(cartProductId) {
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({
+        product_id: product_id,
+      }),
     }
   );
   const result = await response.json();
@@ -255,7 +260,7 @@ export async function createCart(id) {
   }
 }
 
-export async function getCart(id) {
+export async function getCartById(id) {
   try {
     const response = await fetch(`http://localhost:4000/api/cart/${id}`)
     const cart = await response.json();
@@ -274,4 +279,6 @@ export async function emptyCart(cartId){
     next(error)
   }
 }
+
+
 

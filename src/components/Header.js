@@ -61,7 +61,7 @@ const Header = ({ loggedIn, setLoggedIn, user }) => {
         </div>
       </div>
 
-      {loggedIn && user.admin === true ? (
+      {loggedIn  === true ? (
         <div className="addBttn">
           <p
             id="addBttn"
@@ -73,7 +73,7 @@ const Header = ({ loggedIn, setLoggedIn, user }) => {
           </p>
         </div>
       ) : null}
-      {loggedIn && user.admin === true ? (
+      {loggedIn  === true ? (
         <div className="adminBttn">
           <div className="allUsersBttn">
             <p

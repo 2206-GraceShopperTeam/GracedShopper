@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import {editCartProduct} from "../axios-services"
 
-const EditQuantity = ({ thisProduct, setThisProduct, cartProductId,cart,setCartInfo, cartInfo }) => {
+const EditQuantity = ({ thisProduct,cart,setCartInfo, cartInfo,loggedIn }) => {
   const [editForm, setEditForm] = useState(false);
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(
@@ -12,13 +13,29 @@ const EditQuantity = ({ thisProduct, setThisProduct, cartProductId,cart,setCartI
     setEditForm(false);
     setError(null);
 
-    const searchCart = cart.find(
+    
+    if(!loggedIn){const searchCart = cart.find(
       (product) => product.name === thisProduct.name
     );
     if (searchCart) {
       searchCart.quantity = quantity;
       setCartInfo(!cartInfo)
-    }
+    }}
+
+
+    if(loggedIn){
+      const searchCart = cart.find(
+      (product) => product.name === thisProduct.name
+    );
+    if (searchCart) {
+      const result = await editCartProduct(searchCart.id,quantity);
+      console.log(result, "this is the final chapter")
+      setCartInfo(!cartInfo)
+    }}
+    
+
+
+
   };
 
   const quantityChange = (event) => {

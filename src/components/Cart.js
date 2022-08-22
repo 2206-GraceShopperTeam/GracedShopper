@@ -1,17 +1,34 @@
 import React, { useState, useEffect } from "react";
-import { getCart, getCartProducts } from "../axios-services";
+import { getCart, getCartProducts,getCartById } from "../axios-services";
 import { SingleCartProduct } from "./";
 import { useNavigate, useLocation } from "react-router-dom";
 
-const Cart = ({ cart, cartInfo, setCartInfo }) => {
+const Cart = ({ cart, cartInfo, setCartInfo,loggedIn,setCart }) => {
   const [cartProducts, setCartProducts] = useState([]);
   const [cartEmpty, setCartEmpty] = useState(false);
-
+  const string = localStorage.getItem("user");
+  const user = JSON.parse(string);
   const navigate = useNavigate();
 
   const handleClick = () => {
     navigate("/Checkout");
   };
+ async function createCart (){
+      if(!localStorage.getItem("user") && !localStorage.getItem("cart")){
+        setCart([])
+      } else if (loggedIn) {
+        const userCart = await getCartById(user.id)
+        setCart(userCart)
+      }
+    }
+  useEffect(()=>{
+   
+    createCart()
+  },[loggedIn])
+
+  useEffect(()=>{
+    createCart()
+  },[cartInfo])
 
   useEffect(() => {
     async function fetchCartProducts() {
@@ -35,6 +52,7 @@ const Cart = ({ cart, cartInfo, setCartInfo }) => {
                 setCartEmpty={setCartEmpty}
                 setCartInfo={setCartInfo}
                 cartInfo={cartInfo}
+                loggedIn={loggedIn}
               />
             </div>
           );
