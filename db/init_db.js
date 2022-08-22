@@ -216,6 +216,19 @@ async function createInitialCart() {
         user_id: users[0].id,
         is_ordered: false,
       },
+      {
+        user_id: users[1].id,
+        is_ordered: false,
+      },
+      {
+        user_id: users[2].id,
+        is_ordered: false,
+      },
+      {
+        user_id: users[3].id,
+        is_ordered: false,
+      },
+
     ];
 
     const cart = await Promise.all(cartToCreate.map(createCart));
@@ -243,7 +256,7 @@ async function createInitialCartProducts() {
       {
         cart_id: carts[0].id,
         product_id: products[1].id,
-        quantity: 2,
+        quantity: 10,
       },
       {
         cart_id: carts[0].id,

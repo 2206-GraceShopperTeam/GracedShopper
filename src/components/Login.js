@@ -41,6 +41,7 @@ const Login = ({setLoggedIn,loggedIn,setUser}) => {
             setAddress("")
             alert("Registration successful please Login");
             setSignUp(false)
+            await createCart(newUser.user.id)
       } 
       } catch (error) {
           alert("register failed")

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getCartProducts, getCartById } from "../axios-services";
+import { getCartProducts, getCartById, emptyCart } from "../axios-services";
 import "../style/Checkout.css";
 
 const Checkout = ({ cart, setCart, loggedIn }) => {
@@ -14,11 +14,10 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
   const user = JSON.parse(string);
   
   var total = 0
-
   
   async function getProductCart() {
     if(user){ const cart = await getCartById(user.id);
-      console.log(cart, 'this is users cart', user.id, 'this is the userid')
+      console.log(cart, 'this is users cart', user.id, 'this is the userid', cart.user_id, 'this is cart user id')
     setProductCart(cart);}
    
   }
@@ -64,7 +63,7 @@ console.log(productCart, 'this is the users cart later')
             </form>
             <button
               onClick={() => {
-                setPurchased(!purchased), setCart([]);
+                setPurchased(!purchased), setCart([]), emptyCart();
               }}
             >
               Purchase
