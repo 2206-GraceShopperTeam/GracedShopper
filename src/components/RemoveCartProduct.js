@@ -6,9 +6,7 @@ const RemoveCartProduct = ({ setThisProduct, cartProductId, cart, setCartEmpty,c
   
   const handleDelete = async (event) => {
     event.preventDefault();
-    console.log(thisProduct.id, "i am the product")
-    console.log(cartProductId, "i am the product")
-    const result = await removeCartProduct(cartProductId,thisProduct.id);
+    const result = await removeCartProduct(thisProduct.cart_id,thisProduct.id);
     console.log(result, "i am the result")
 
     if (result) {
