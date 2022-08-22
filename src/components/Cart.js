@@ -3,7 +3,7 @@ import { getCart, getCartProducts } from "../axios-services";
 import { SingleCartProduct } from "./";
 import { useNavigate, useLocation } from "react-router-dom";
 
-const Cart = ({ cart, cartInfo, setCartInfo }) => {
+const Cart = ({ cart, cartInfo, setCartInfo,loggedIn }) => {
   const [cartProducts, setCartProducts] = useState([]);
   const [cartEmpty, setCartEmpty] = useState(false);
 
@@ -35,6 +35,7 @@ const Cart = ({ cart, cartInfo, setCartInfo }) => {
                 setCartEmpty={setCartEmpty}
                 setCartInfo={setCartInfo}
                 cartInfo={cartInfo}
+                loggedIn={loggedIn}
               />
             </div>
           );

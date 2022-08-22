@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getProducts, deleteProduct, addToCartProducts } from "../axios-services";
+import { getProducts, deleteProduct, addToCartProducts,editCartProduct } from "../axios-services";
 import { useNavigate } from "react-router";
 
 const Products = ({ loggedIn, cart,setCartInfo,cartInfo,setCart }) => {
@@ -59,19 +59,38 @@ const Products = ({ loggedIn, cart,setCartInfo,cartInfo,setCart }) => {
     const searchCart = cart.find(
       (product) => product.name === selectedProduct.name
     );
+    console.log(searchCart, "the amaw")
+
     setCartInfo(!cartInfo);
     if (!searchCart) {
+      console.log(searchCart, "the bmaw")
+
       selectedProduct.quantity = 1;
-      if(loggedIn){
-      await addToCartProducts(user.id,selectedProduct.id,selectedProduct.quantity)
-      }
       cart.push(selectedProduct);
       alert("item added to cart");
-    } else {
-      searchCart.quantity++;
-      alert("Quantity increased");
+       }else {searchCart.quantity++;
+        console.log(searchCart, "the cmaw")
+
+      alert("Quantity increased");}
     }
-  };
+  const addToUserCart =  async() => {
+    const searchCart = cart.find(
+      (product) => product.name === selectedProduct.name
+    );
+    console.log(searchCart, "the emaw")
+
+    if (!searchCart) {
+      selectedProduct.quantity = 1;
+      await addToCartProducts(user.id,selectedProduct.id,selectedProduct.quantity)
+      console.log(searchCart, "the fmaw")
+
+      alert("item added to cart");
+       }else {
+      alert("Quantity increased")
+      console.log(searchCart, "the gmaw")
+      searchCart.quantity++
+    const result = await editCartProduct(searchCart.id,searchCart.quantity);
+    setCartInfo(!cartInfo);}}
 
   return (
     <div className="products">
@@ -127,7 +146,7 @@ const Products = ({ loggedIn, cart,setCartInfo,cartInfo,setCart }) => {
                 </p>
                 <button
                   onClick={() => {
-                    addToCart();
+                   loggedIn ? addToUserCart() : addToCart()
                   }}
                 >
                   Add to cart
