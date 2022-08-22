@@ -60,7 +60,7 @@ const Products = ({ loggedIn, user, cart,setCartInfo,cartInfo,setCart }) => {
     setCartInfo(!cartInfo);
     if (!searchCart) {
       selectedProduct.quantity = 1;
-      await addToCartProducts(1,selectedProduct.id,3)
+      await addToCartProducts(4,selectedProduct.id,3)
       cart.push(selectedProduct);
       alert("item added to cart");
     } else {

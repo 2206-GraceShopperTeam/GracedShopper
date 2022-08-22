@@ -12,13 +12,20 @@ const Checkout = ({ cart, setCart }) => {
   const [productCart, setProductCart] = useState([])
   const navigate = useNavigate();
 
+  const string = localStorage.getItem("user");
+  const user = JSON.parse(string);
+  console.log(user.id, 'ths is user id')
   const token = localStorage.getItem("token");
   var myCart = [];
  
-  async function getProductCart(cart_id) {
-    const cart = await getCartById(cart_id)
+  
+  async function getProductCart() {
+    const cart = await getCartById(user.id)
+    console.log(cart)
     setProductCart(cart)
   }
+
+  getProductCart()
 
   useEffect(() => {
     async function fetchCartProducts() {
