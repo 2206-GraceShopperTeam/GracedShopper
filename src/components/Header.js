@@ -4,9 +4,10 @@ import "../style/index.css";
 import logo from "../images/ScreenShot.png";
 import { IoCartOutline } from "react-icons/io5";
 
-const Header = ({ loggedIn, setLoggedIn, user }) => {
+const Header = ({ loggedIn, setLoggedIn}) => {
   const navigate = useNavigate();
-
+  const string = localStorage.getItem("user");
+  const user = JSON.parse(string);
   useEffect(() => {}, [loggedIn]);
 
   const logout = () => {
@@ -61,7 +62,7 @@ const Header = ({ loggedIn, setLoggedIn, user }) => {
         </div>
       </div>
 
-      {loggedIn  === true ? (
+      {loggedIn && user.admin === true ? (
         <div className="addBttn">
           <p
             id="addBttn"
@@ -73,7 +74,7 @@ const Header = ({ loggedIn, setLoggedIn, user }) => {
           </p>
         </div>
       ) : null}
-      {loggedIn  === true ? (
+      {loggedIn && user.admin === true ? (
         <div className="adminBttn">
           <div className="allUsersBttn">
             <p
@@ -86,7 +87,7 @@ const Header = ({ loggedIn, setLoggedIn, user }) => {
           </div>
         </div>
       ) : null}
-      {loggedIn ? (
+      {loggedIn && user.admin === true ? (
         <div className="myInfoBttn">
           <p
             id="shopBttn"
