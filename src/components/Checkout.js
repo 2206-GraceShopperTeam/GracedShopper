@@ -35,7 +35,7 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
         <div className="checkout">
           <div className={purchased ? "hidden" : "orderInfo"}>
             {productCart.map((product, index) => {
-              if (user.id === product.user_id) {
+              if (true) {
                 {
                   total.push(product.price * product.quantity);
                 }
@@ -71,7 +71,7 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
         <div>
           {!guest ? (
             <div className="checkoutOptions">
-              //{" "}
+              {" "}
               <button
                 onClick={() => {
                   localStorage.setItem("redirect", "/Checkout"),

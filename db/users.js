@@ -11,11 +11,11 @@ async function createUser({ email, password, name, address,admin }) {
       rows: [user],
     } = await client.query(
       `
-      INSERT INTO users(email, password, name,address,admin) 
-      VALUES($1, $2, $3, $4,$5)  
-      RETURNING id,email,name,address,admin;
+      INSERT INTO users(email, password, name,address) 
+      VALUES($1, $2, $3, $4)  
+      RETURNING id,email,name,address;
       `,
-      [email, hashedPassword, name, address,admin]
+      [email, hashedPassword, name, address]
     );
     return user;
   } catch (error) {

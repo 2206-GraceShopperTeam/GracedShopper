@@ -85,18 +85,17 @@ async function createInitialUsers() {
     const usersToCreate = [
       { email: "Admin@one.com", password: "graceshopper", name: "admin", admin: true },
 
-      { email: "graces@hopper.com", password: "momofall", name: "grace", admin: false },
+      { email: "graces@hopper.com", password: "momofall", name: "grace" },
       {
         email: "hoppers@hopper.com",
         password: "trappedinrussia",
         name: "hopper",
-        admin: false
+        
       },
       {
         email: "eleven@ontherun.com",
         password: "hasallthepower",
         name: "eleven",
-        admin: false
       },
     ];
     const users = await Promise.all(usersToCreate.map(createUser));
@@ -216,6 +215,18 @@ async function createInitialCart() {
         user_id: users[0].id,
         is_ordered: false,
       },
+      {
+        user_id: users[1].id,
+        is_ordered: false,
+      },
+      {
+        user_id: users[2].id,
+        is_ordered: false,
+      },
+      {
+        user_id: users[3].id,
+        is_ordered: false,
+      },
     ];
 
     const cart = await Promise.all(cartToCreate.map(createCart));
@@ -232,21 +243,21 @@ async function createInitialCartProducts() {
   console.log("Starting to create cart_products...");
   const carts = await getAllCarts();
   const products = await getAllProducts();
-
+console.log(carts[0].id, "whats the info")
   try {
     const cartProductsToCreate = [
       {
-        cart_id: carts[0].id,
+        cart_id: 1,
         product_id: products[0].id,
         quantity: 1,
       },
       {
-        cart_id: carts[0].id,
+        cart_id: 1,
         product_id: products[1].id,
-        quantity: 2,
+        quantity: 10,
       },
       {
-        cart_id: carts[0].id,
+        cart_id: 1,
         product_id: products[2].id,
         quantity: 3,
       },

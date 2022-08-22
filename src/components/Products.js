@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { getProducts, deleteProduct, addToCartProducts } from "../axios-services";
 import { useNavigate } from "react-router";
 
-const Products = ({ loggedIn, user, cart,setCartInfo,cartInfo,setCart }) => {
+const Products = ({ loggedIn, cart,setCartInfo,cartInfo,setCart }) => {
   const navigate = useNavigate();
   const [allProducts, setAllProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState([]);
   const [removedProduct, setRemovedProduct] = useState(false);
+  const string = localStorage.getItem("user");
+  const user = JSON.parse(string);
 
   useEffect(() => {
     async function fetchProducts() {
@@ -60,7 +62,7 @@ const Products = ({ loggedIn, user, cart,setCartInfo,cartInfo,setCart }) => {
     setCartInfo(!cartInfo);
     if (!searchCart) {
       selectedProduct.quantity = 1;
-      await addToCartProducts(1,selectedProduct.id,3)
+      await addToCartProducts(user.id,selectedProduct.id,3)
       cart.push(selectedProduct);
       alert("item added to cart");
     } else {
