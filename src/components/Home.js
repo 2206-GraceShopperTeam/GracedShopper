@@ -21,7 +21,7 @@ const Home = ({setCart,cart,loggedIn}) => {
       async function createCart (){
         if(!localStorage.getItem("user") && !localStorage.getItem("cart")){
           setCart([])
-        } else {
+        } else if (loggedIn) {
           const userCart = await getCartById(user.id)
           setCart(userCart)
         }

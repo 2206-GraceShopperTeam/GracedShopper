@@ -158,6 +158,7 @@ const SingleCartProduct = ({ product, cart2, cart, setCart, cartInfo, setCartInf
                   cartEmpty={cartEmpty}
                   cartInfo={cartInfo} 
                   setCartInfo={setCartInfo}
+                  loggedIn={loggedIn}
                 />
               </>
             ) : null}
