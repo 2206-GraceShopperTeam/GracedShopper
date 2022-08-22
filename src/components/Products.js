@@ -163,7 +163,6 @@ const Products = ({ loggedIn, cart,setCartInfo,cartInfo,setCart }) => {
                   >
                     delete
                   </button>
-                  <button>add</button>
                   <button>update</button>
                 </div>
               </div>
