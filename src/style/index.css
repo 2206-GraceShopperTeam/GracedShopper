@@ -76,6 +76,7 @@
   max-height: 400px;
   max-width: auto;
   align-items: center;
+  z-index: -1;
 }
 
 .pictureDiv {
@@ -83,6 +84,7 @@
   justify-content: flex-end;
   position: relative;
   bottom: 6.5vh;
+  z-index: -1;
 }
 
 /* Carts Page */
