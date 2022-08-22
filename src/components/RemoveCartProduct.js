@@ -1,10 +1,15 @@
 import React, {useState} from "react";
 import { removeCartProduct } from "../axios-services";
 
-const RemoveCartProduct = ({ setThisProduct, cartProductId, cart, setCartEmpty,cartEmpty,setCartInfo, cartInfo }) => {
+const RemoveCartProduct = ({ setThisProduct, cartProductId, cart, setCartEmpty,cartEmpty,setCartInfo, cartInfo,thisProduct }) => {
+  
+  
   const handleDelete = async (event) => {
     event.preventDefault();
-    const result = await removeCartProduct(cartProductId);
+    console.log(thisProduct.id, "i am the product")
+    console.log(cartProductId, "i am the product")
+    const result = await removeCartProduct(cartProductId,thisProduct.id);
+    console.log(result, "i am the result")
 
     if (result) {
       setThisProduct(null);

@@ -147,6 +147,7 @@ const SingleCartProduct = ({ product, cart2, cart, setCart, cartInfo, setCartInf
                 />
                 <RemoveCartProduct
                   setThisProduct={setThisProduct}
+                  thisProduct={thisProduct}
                   cartProductId={thisProduct.id}
                   cart={cart2}
                   setCartEmpty={setCartEmpty}

@@ -223,7 +223,8 @@ export async function editCartProduct(cartProductId, quantity) {
   return result;
 }
 
-export async function removeCartProduct(cartProductId) {
+export async function removeCartProduct(cartProductId,product_id) {
+  console.log(cartProductId, "im the cartPI", product_id, "im thr PI")
   const response = await fetch(
     `http://localhost:4000/api/cartProducts/${cartProductId}`,
     {
@@ -231,6 +232,9 @@ export async function removeCartProduct(cartProductId) {
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({
+        product_id: product_id,
+      }),
     }
   );
   const result = await response.json();

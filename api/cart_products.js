@@ -54,11 +54,11 @@ cart_product_router.patch("/:cartProductId", async (req, res, next) => {
 });
 
 cart_product_router.delete("/:cartProductId", async (req, res, next) => {
-  const id = req.params.cartProductId;
-  const cartProduct = await getCartProductById(id);
+  const cartId = req.params.cartProductId;
+  const {product_id} = req.body
   try {
-    await destroyCartProduct(id);
-    res.send({ cartProduct });
+    await destroyCartProduct(cartId,product_id);
+    res.send({message: "deletion successful"});
   } catch (error) {
     next(error);
   }
