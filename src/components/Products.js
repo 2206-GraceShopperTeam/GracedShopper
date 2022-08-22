@@ -120,6 +120,7 @@ const Products = ({ loggedIn, user, cart,setCartInfo,cartInfo,setCart }) => {
                   <b>Brand: </b>
                   {product.category}
                 </p>
+                
                 <button
                   onClick={() => {
                     addToCart();
@@ -127,6 +128,10 @@ const Products = ({ loggedIn, user, cart,setCartInfo,cartInfo,setCart }) => {
                 >
                   Add to cart
                 </button>
+
+              <div className="pictureDiv">
+                <img src = {product.picture} className="productPicture"/>
+              </div>
                 <div
                   className={
                     loggedIn && user.admin === true ? "adminOpt" : "hidden"

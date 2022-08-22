@@ -65,11 +65,24 @@
 .singleBlackBox {
   border: solid black 2px;
   box-shadow: 0px 15px 10px -15px black;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  position: relative;
+  position: relative; */
   margin-bottom: 20px;
   padding: 10px;
+}
+
+.productPicture {
+  max-height: 400px;
+  max-width: auto;
+  align-items: center;
+}
+
+.pictureDiv {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  bottom: 6.5vh;
 }
 
 /* Carts Page */
@@ -487,6 +500,8 @@ left: 2vw;
 .products{
   position: relative;
   top: 12vh;
+  width: 1200px;
+  height: 550px;
 }
 
 .allProducts{

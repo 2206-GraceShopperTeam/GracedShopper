@@ -112,8 +112,15 @@ const SingleCartProduct = ({ product, cart2, cart, setCart, cartInfo, setCartInf
               }}
               >
                 Add to cart
-              </button>
+              </button>              
             ) : null}
+            {location.href !== "http://localhost:3000/Cart" ? (
+              <div className="pictureDiv">
+              <img src = {thisProduct.picture} className="productPicture"/>
+            </div>          
+            ) : null}
+            
+            
             {location.href === "http://localhost:3000/Cart" ? (
               <>
                 <EditQuantity

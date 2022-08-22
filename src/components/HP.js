@@ -110,6 +110,11 @@ const HP = ({ cart, cartInfo, setCartInfo }) => {
                 >
                   Add to cart
                 </button>
+
+              <div className="pictureDiv">
+                <img src = {product.picture} className="productPicture"/>
+              </div>
+
               </div>
             ) : null;
           })
