@@ -20,6 +20,10 @@ const SingleCartProduct = ({ product, cart2, cart, setCart, cartInfo, setCartInf
     }
   }, [selectedProduct]);
 
+  useEffect(()=>{
+    //this is to refresh when items are updated
+  },[cartInfo])
+
   const dellHandleClick = (event) => {
     event.preventDefault();
     navigate("/Products/Dell");
