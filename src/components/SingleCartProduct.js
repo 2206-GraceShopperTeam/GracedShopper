@@ -158,8 +158,11 @@ const SingleCartProduct = ({
               <img src = {thisProduct.picture} className="productPicture"/>
             </div>          
             ) : null}
-            
-            
+            {/* {location.href == "http://localhost:3000/Cart" ? (
+              <div className="pictureDiv">
+              <img src = {thisProduct.picture} className="productPicture"/>
+            </div>          
+            ) : null} */}
             {location.href === "http://localhost:3000/Cart" ? (
               <>
                 <EditQuantity
