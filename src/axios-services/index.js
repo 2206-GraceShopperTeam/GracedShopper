@@ -10,6 +10,7 @@ export async function register(regEmail,regPassword,name,address) {
       password: regPassword,
       name: name,
       address: address,
+      admin: false,
     }),
   });
   const result = await response.json();

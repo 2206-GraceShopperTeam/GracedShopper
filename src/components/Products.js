@@ -62,7 +62,9 @@ const Products = ({ loggedIn, cart,setCartInfo,cartInfo,setCart }) => {
     setCartInfo(!cartInfo);
     if (!searchCart) {
       selectedProduct.quantity = 1;
-      await addToCartProducts(user.id,selectedProduct.id,3)
+      if(loggedIn){
+      await addToCartProducts(user.id,selectedProduct.id,selectedProduct.quantity)
+      }
       cart.push(selectedProduct);
       alert("item added to cart");
     } else {
