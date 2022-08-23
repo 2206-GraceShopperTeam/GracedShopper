@@ -7,7 +7,6 @@ const {
   destroyCartProduct,
   addProductToCart,
 } = require("../db/cart_products");
-const{ getProductById} = require("../db/products");
 
 cart_product_router.get("/", async (req, res, next) => {
   try {
@@ -19,21 +18,20 @@ cart_product_router.get("/", async (req, res, next) => {
 });
 
 cart_product_router.post("/:cartId", async (req, res, next) => {
-  let {cartId} = req.params
+  let { cartId } = req.params;
   const { product_id, quantity } = req.body;
-  
-
   try {
-    const added = await addProductToCart(cartId,product_id,quantity );
+    const added = await addProductToCart(cartId, product_id, quantity);
     res.send(added);
   } catch (error) {
     next(error);
   }
 });
+
 cart_product_router.get("/:cartId", async (req, res, next) => {
-  const cart_id = req.params
+  const cart_id = req.params;
   try {
-    const userCart = await getCartProductById( cart_id );
+    const userCart = await getCartProductById(cart_id);
 
     res.send(userCart);
   } catch (error) {
@@ -55,10 +53,10 @@ cart_product_router.patch("/:cartProductId", async (req, res, next) => {
 
 cart_product_router.delete("/:cartProductId", async (req, res, next) => {
   const cartProductId = req.params.cartProductId;
-  const {product_id} = req.body
+  const { product_id } = req.body;
   try {
-    await destroyCartProduct(cartProductId,product_id);
-    res.send({message: "deletion successful"});
+    await destroyCartProduct(cartProductId, product_id);
+    res.send({ message: "deletion successful" });
   } catch (error) {
     next(error);
   }

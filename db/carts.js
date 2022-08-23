@@ -1,16 +1,18 @@
 const client = require("./client");
 
-async function createCart({user_id}) {
+async function createCart({ user_id }) {
   try {
     const {
-      rows: [cart]
+      rows: [cart],
     } = await client.query(
       `
       INSERT INTO carts (user_id)
       VALUES ($1)
       RETURNING *;
-      `, [user_id]
-      )
+      `,
+      [user_id]
+    );
+
     return cart;
   } catch (error) {
     throw error;
@@ -19,10 +21,12 @@ async function createCart({user_id}) {
 
 async function getAllCarts() {
   try {
-    const { rows: cart } = await client.query(`
-        SELECT *
-        FROM carts
-        `);
+    const { rows: cart } = await client.query(
+      `
+      SELECT *
+      FROM carts
+    `
+    );
 
     return cart;
   } catch (error) {
@@ -32,16 +36,14 @@ async function getAllCarts() {
 
 async function getCartByUser(userId) {
   try {
-    const {
-      rows,
-    } = await client.query(
+    const { rows } = await client.query(
       `
       SELECT *
       FROM carts
       JOIN cart_products ON carts.id = cart_products.cart_id
       JOIN products ON products.id = cart_products.product_id
       WHERE user_id = $1;
-      `,
+    `,
       [userId]
     );
 

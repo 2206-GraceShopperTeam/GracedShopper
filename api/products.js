@@ -11,10 +11,10 @@ const router = express.Router();
 const { requireUser } = require("./util");
 
 router.get("/:productId", async (req, res, next) => {
-  const productId= req.params.productId;
+  const productId = req.params.productId;
   try {
     const product = await getProductById(productId);
-      res.send(product);
+    res.send(product);
   } catch ({ name, message }) {
     next({
       name,
@@ -55,29 +55,33 @@ router.post("/", requireUser, async (req, res, next) => {
 
 router.patch("/:productId", requireUser, async (req, res, next) => {
   const productId = req.params.productId;
-  
   const { name, description, price, category, picture } = req.body;
   try {
-   
-      const updatedProduct = await updateProducts(productId, {name, description, price, category, picture});
-      res.send(updatedProduct);
+    const updatedProduct = await updateProducts(productId, {
+      name,
+      description,
+      price,
+      category,
+      picture,
+    });
+    res.send(updatedProduct);
   } catch ({ name, message }) {
     next({ name, message });
   }
 });
 
-router.delete('/:productId', async(req,res,next) => {
-    const productId = req.params.productId
-    try {
-        const product = await getProductById(productId)
-            await deleteProduct(productId)
-            const deleted = await getProductById(productId)
-            if(!deleted){
-              res.send({ success: true, ..._routine })
-            }
-    } catch ({name, message}) {
-        next({name, message})
+router.delete("/:productId", async (req, res, next) => {
+  const productId = req.params.productId;
+  try {
+    const product = await getProductById(productId);
+    await deleteProduct(productId);
+    const deleted = await getProductById(productId);
+    if (!deleted) {
+      res.send({ success: true, ..._routine });
     }
-})
+  } catch ({ name, message }) {
+    next({ name, message });
+  }
+});
 
 module.exports = router;

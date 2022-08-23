@@ -1,20 +1,18 @@
 const express = require("express");
 const router = express.Router();
-const cors = require('cors');
+const cors = require("cors");
 const jwt = require("jsonwebtoken");
-
-const {JWT_SECRET} = process.env;
+const { JWT_SECRET } = process.env;
 const { getUserById } = require("../db");
+router.use(cors());
 
-router.use(cors())
-
-router.get('/', (req, res, next) => {
+router.get("/", (req, res, next) => {
   res.send({
-    message: 'API is under construction!',
+    message: "API is under construction!",
   });
 });
 
-router.get('/health', (req, res, next) => {
+router.get("/health", (req, res, next) => {
   res.send({
     healthy: true,
   });
@@ -28,16 +26,16 @@ router.use(async (req, res, next) => {
     next();
   } else if (auth.startsWith(prefix)) {
     const token = auth.slice(prefix.length);
-    
     try {
       const { id } = jwt.verify(token, JWT_SECRET);
-
       if (id) {
         req.user = await getUserById(id);
         next();
-      }
-      else{
-        next({name: "Authorization ID Error", message: "Contact your administrator"})
+      } else {
+        next({
+          name: "Authorization ID Error",
+          message: "Contact your administrator",
+        });
       }
     } catch ({ name, message }) {
       next({ name, message });
@@ -50,9 +48,6 @@ router.use(async (req, res, next) => {
   }
 });
 
-// place your routers here
-
-// ROUTER: /api/users
 const usersRouter = require("./users");
 router.use("/users", usersRouter);
 
@@ -64,16 +59,5 @@ router.use("/cart", cartRouter);
 
 const productsRouter = require("./products");
 router.use("/products", productsRouter);
-// // ROUTER: /api/activities
-// const activitiesRouter = require("./products");
-// router.use("/activities", activitiesRouter);
-
-// // ROUTER: /api/cart
-// const cartRouter = require("./cart");
-// router.use("/cart", cartRouter);
-
-// // ROUTER: /api/checkout
-// const checkoutRouter = require("./checkout");
-// router.use("/checkout", checkoutRouter);
 
 module.exports = router;

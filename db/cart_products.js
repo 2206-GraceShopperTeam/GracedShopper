@@ -16,7 +16,7 @@ async function getAllCartProducts() {
   }
 }
 
-async function createCartProducts( {cart_id, product_id, quantity }) {
+async function createCartProducts({ cart_id, product_id, quantity }) {
   try {
     const {
       rows: [cart],
@@ -35,7 +35,7 @@ async function createCartProducts( {cart_id, product_id, quantity }) {
   }
 }
 
-async function addProductToCart(cart_id, product_id, quantity ) {
+async function addProductToCart(cart_id, product_id, quantity) {
   try {
     const {
       rows: [cart_products],
@@ -47,6 +47,7 @@ async function addProductToCart(cart_id, product_id, quantity ) {
     `,
       [cart_id, product_id, quantity]
     );
+    
     return cart_products;
   } catch (error) {
     throw error;
@@ -74,14 +75,14 @@ async function updateCartProduct({ id, ...fields }) {
   const setString = Object.keys(fields)
     .map((key, index) => `"${key}"=$${index + 1}`)
     .join(", ");
-    
-    if (setString.length === 0) {
-      return;
-    }
-    
-    try {
-      const {
-        rows: [cart_product],
+
+  if (setString.length === 0) {
+    return;
+  }
+
+  try {
+    const {
+      rows: [cart_product],
     } = await client.query(
       `
         UPDATE cart_products
@@ -98,7 +99,7 @@ async function updateCartProduct({ id, ...fields }) {
   }
 }
 
-async function destroyCartProduct(cart_id,product_id) {
+async function destroyCartProduct(cart_id, product_id) {
   try {
     const {
       rows: [cart_product],
@@ -107,7 +108,7 @@ async function destroyCartProduct(cart_id,product_id) {
         DELETE FROM cart_products
         WHERE cart_id=$1 AND product_id=$2
       `,
-      [cart_id,product_id]
+      [cart_id, product_id]
     );
   } catch (error) {
     throw error;

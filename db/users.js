@@ -2,21 +2,20 @@ const client = require("./client");
 const bcrypt = require("bcrypt");
 const SALT_COUNT = 10;
 
-// user functions
-async function createUser({ email, password, name, address,admin }) {
-  // tested and working
+async function createUser({ email, password, name, address, admin }) {
   const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
   try {
     const {
       rows: [user],
     } = await client.query(
       `
-      INSERT INTO users(email, password, name,address,admin) 
-      VALUES($1, $2, $3, $4,$5)  
-      RETURNING id,email,name,address,admin;
+        INSERT INTO users(email, password, name,address,admin) 
+        VALUES($1, $2, $3, $4,$5)  
+        RETURNING id,email,name,address,admin;
       `,
-      [email, hashedPassword, name, address,admin]
+      [email, hashedPassword, name, address, admin]
     );
+
     return user;
   } catch (error) {
     throw error;
@@ -24,16 +23,15 @@ async function createUser({ email, password, name, address,admin }) {
 }
 
 async function getUser({ email, password }) {
-  //tested and working
   try {
     const {
       rows: [user],
     } = await client.query(
       `
-      SELECT *
-      FROM users
-      WHERE email=$1
-    `,
+        SELECT *
+        FROM users
+        WHERE email=$1
+      `,
       [email]
     );
     if (user) {
@@ -44,8 +42,9 @@ async function getUser({ email, password }) {
           email: user.email,
           name: user.name,
           address: user.address,
-          admin: user.admin
+          admin: user.admin,
         };
+
         return safeUser;
       } else return false; //login failed
     }
@@ -55,16 +54,14 @@ async function getUser({ email, password }) {
 }
 
 async function getAllUsers() {
-  //this is specifically so that admin can view all users
-  //Tested and working
   try {
     const { rows: user } = await client.query(
       `
-      SELECT *
-      FROM users
-  
+        SELECT *
+        FROM users
       `
     );
+
     return user;
   } catch (error) {
     throw error;
@@ -72,7 +69,6 @@ async function getAllUsers() {
 }
 
 async function getUserByEmail(email) {
-  //Tested and working
   try {
     const {
       rows: [user],
@@ -91,45 +87,50 @@ async function getUserByEmail(email) {
   }
 }
 async function getUserById(userId) {
-  //Tested and working
   try {
     const {
       rows: [user],
     } = await client.query(
       `
-      SELECT *
-      FROM users
-      WHERE id = $1;
+        SELECT *
+        FROM users
+        WHERE id = $1;
       `,
       [userId]
     );
-    return { id: user.id, name: user.name, email: user.email, address: user.address };
+
+    return {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      address: user.address,
+    };
   } catch (error) {
     throw error;
   }
 }
 
-async function updateUser(id,{...fields }) {
-  //this is so users can update their info
-  //tested and working
-    const setString = Object.keys(fields)
-      .map((key, index) => `"${key}"=$${index + 1}`)
-      .join(", ");
-    if (setString.length === 0) {
-      return "not enough info" }
-      try{
-      const {
-        rows: [user],
-      } = await client.query(
-        `
-           UPDATE users
-           SET ${setString}
-           WHERE id=${id}
-           RETURNING *;
-         `,
-        Object.values(fields)
-      );
-      return user;
+async function updateUser(id, { ...fields }) {
+  const setString = Object.keys(fields)
+    .map((key, index) => `"${key}"=$${index + 1}`)
+    .join(", ");
+  if (setString.length === 0) {
+    return "not enough info";
+  }
+  try {
+    const {
+      rows: [user],
+    } = await client.query(
+      `
+        UPDATE users
+        SET ${setString}
+        WHERE id=${id}
+        RETURNING *;
+      `,
+      Object.values(fields)
+    );
+
+    return user;
   } catch (error) {
     throw error;
   }
