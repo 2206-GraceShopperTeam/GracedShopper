@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
   getProducts,
+  getCartById,
   addToCartProducts,
   editCartProduct,
 } from "../axios-services";
@@ -61,17 +62,18 @@ const ASUS = ({ cart, cartInfo, setCartInfo, loggedIn }) => {
   };
 
   const addToUserCart = async () => {
+    let cart = await getCartById(user.id);
     const searchCart = cart.find(
       (product) => product.name === selectedProduct.name
     );
-
     if (!searchCart) {
       selectedProduct.quantity = 1;
-      await addToCartProducts(
+     let addedProduct = await addToCartProducts(
         user.id,
         selectedProduct.id,
         selectedProduct.quantity
       );
+      setCartInfo(!cartInfo);
       alert("item added to cart");
     } else {
       alert("Quantity increased");

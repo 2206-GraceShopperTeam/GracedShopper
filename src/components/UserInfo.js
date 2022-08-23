@@ -58,7 +58,6 @@ const UserInfo = ({ user, setUser, setUpdated, updated }) => {
             onChange={(e) => setName(e.target.value)}
           />
           <button type="submit">☑️</button>
-          <button onClick={() => setEditName(false)}>❌</button>
         </form>
         <TbEdit className="editButton" onClick={() => setEditName(false)} />
       </div>
@@ -70,7 +69,6 @@ const UserInfo = ({ user, setUser, setUpdated, updated }) => {
             onChange={(e) => setEmail(e.target.value)}
           />
           <button type="submit">☑️</button>
-          <button onClick={() => setEditEmail(false)}>❌</button>
         </form>
         <TbEdit className="editButton" onClick={() => setEditEmail(false)} />
       </div>
@@ -82,7 +80,6 @@ const UserInfo = ({ user, setUser, setUpdated, updated }) => {
             onChange={(e) => setAddress(e.target.value)}
           />
           <button type="submit">☑️</button>
-          <button onClick={() => setEditAddress(false)}>❌</button>
         </form>
         <TbEdit className="editButton" onClick={() => setEditAddress(false)} />
       </div>

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
   getProductById,
+  getCartById,
   editCartProduct,
   addToCartProducts,
-  getCartProductsById,
 } from "../axios-services";
 import { useNavigate } from "react-router";
 import { EditQuantity, RemoveCartProduct } from "./";
@@ -76,17 +76,18 @@ const SingleCartProduct = ({
   };
 
   const addToUserCart = async () => {
+    let cart = await getCartById(user.id);
     const searchCart = cart.find(
       (product) => product.name === selectedProduct.name
     );
-
     if (!searchCart) {
       selectedProduct.quantity = 1;
-      await addToCartProducts(
+     let addedProduct = await addToCartProducts(
         user.id,
         selectedProduct.id,
         selectedProduct.quantity
       );
+      setCartInfo(!cartInfo);
       alert("item added to cart");
     } else {
       alert("Quantity increased");
