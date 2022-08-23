@@ -1,13 +1,22 @@
+<<<<<<< HEAD
 .checkout {
   position: relative;
   top: 20vh;
 }
+=======
+.checkout{
+  display:flex;
+  flex-direction: column;
+    position: relative;
+    top: 20vh;
+>>>>>>> newcheckoutfe
 
 .message {
   position: relative;
   top: 20vh;
   font-size: large;
 }
+<<<<<<< HEAD
 .cartProduct {
   display: flex;
   flex-direction: row;
@@ -17,3 +26,35 @@
   position: relative;
   top: 20vh;
 }
+=======
+
+.checkoutOptions{
+  position: relative;
+  top: 20vh;
+  
+  }
+  
+.orderInfo{
+  display:flex;
+  flex-direction: column;
+  width: 600px;
+  border: solid black 2px;
+  box-shadow: 0px 15px 10px -15px black;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.cartProduct{
+    display:flex;
+    flex-direction: row;
+    justify-content: left;
+}
+.total{
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.price{
+justify-self: end;
+}
+>>>>>>> newcheckoutfe
