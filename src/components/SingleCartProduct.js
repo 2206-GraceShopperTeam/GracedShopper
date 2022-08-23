@@ -4,6 +4,7 @@ import {
   getProductById,
   editCartProduct,
   addToCartProducts,
+  getCartProductsById,
 } from "../axios-services";
 import { useNavigate } from "react-router";
 import { EditQuantity, RemoveCartProduct } from "./";
@@ -36,7 +37,7 @@ const SingleCartProduct = ({
   }, [selectedProduct]);
 
   useEffect(() => {
-    //this is to refresh when items are updated
+
   }, [cartInfo]);
 
   const dellHandleClick = (event) => {

@@ -1,30 +1,29 @@
 import React, { useState, useEffect } from "react";
 import {
   getProducts,
+  getCartById,
   deleteProduct,
   addToCartProducts,
   editCartProduct,
 } from "../axios-services";
 import { useNavigate } from "react-router";
+import EditProduct from "./EditProduct";
 
-const Products = ({ loggedIn, cart, setCartInfo, cartInfo, setCart }) => {
+const Products = ({ loggedIn, cart, setCartInfo, cartInfo, setCart,setUpdated,updated }) => {
   const navigate = useNavigate();
   const [allProducts, setAllProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState([]);
+  const [product, setProduct] = useState([]);
   const [removedProduct, setRemovedProduct] = useState(false);
+  const [alterProduct, setAlterProduct] = useState(false);
   const string = localStorage.getItem("user");
   const user = JSON.parse(string);
-
   useEffect(() => {
     async function fetchProducts() {
       const returnProducts = await getProducts();
       setAllProducts(returnProducts);
     }
     fetchProducts();
-    if (removedProduct) {
-      alert("product deleted");
-      setRemovedProduct(false);
-    }
   }, [removedProduct]);
 
   useEffect(() => {
@@ -32,6 +31,9 @@ const Products = ({ loggedIn, cart, setCartInfo, cartInfo, setCart }) => {
       setCart([]);
     }
   }, []);
+  useEffect(()=>{
+  },[selectedProduct])
+
 
   const productClick = (product) => {
     navigate(`/products/${product.id}`);
@@ -64,6 +66,7 @@ const Products = ({ loggedIn, cart, setCartInfo, cartInfo, setCart }) => {
   };
 
   const addToCart = async () => {
+    console.log(cart,"im the cart")
     const searchCart = cart.find(
       (product) => product.name === selectedProduct.name
     );
@@ -79,17 +82,19 @@ const Products = ({ loggedIn, cart, setCartInfo, cartInfo, setCart }) => {
   };
 
   const addToUserCart = async () => {
+    let cart = await getCartById(user.id);
     const searchCart = cart.find(
       (product) => product.name === selectedProduct.name
     );
-
+    console.log(searchCart, "what am i")
     if (!searchCart) {
       selectedProduct.quantity = 1;
-      await addToCartProducts(
+     let addedProduct = await addToCartProducts(
         user.id,
         selectedProduct.id,
         selectedProduct.quantity
       );
+      setCartInfo(!cartInfo);
       alert("item added to cart");
     } else {
       alert("Quantity increased");
@@ -173,12 +178,13 @@ const Products = ({ loggedIn, cart, setCartInfo, cartInfo, setCart }) => {
                   >
                     delete
                   </button>
-                  <button>update</button>
+                  <button onClick={()=>{setAlterProduct(true);setProduct(selectedProduct) }}>update</button>
                 </div>
               </div>
             );
           })
         : null}
+        {alterProduct ? <EditProduct  alterProduct={alterProduct} setAlterProduct={setAlterProduct} product={product} setProduct={product} setUpdated={setUpdated} updated={updated}/>: null}
     </div>
   );
 };

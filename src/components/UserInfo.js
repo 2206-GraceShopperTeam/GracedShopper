@@ -20,7 +20,7 @@ const UserInfo = ({ user, setUser, setUpdated, updated }) => {
       setEmail(user.email);
       setAddress(user.address);
     }
-  }, [updated]);
+  }, []);
 
   const handleChange = async (event) => {
     event.preventDefault();
@@ -36,7 +36,7 @@ const UserInfo = ({ user, setUser, setUpdated, updated }) => {
   return (
     <div className="userInfo">
       <div className={!editName ? "UsersName" : "hidden"}>
-        <b>Username: </b>
+        <b>Name: </b>
         {user.name}
         <TbEdit className="editButton" onClick={() => setEditName(true)} />
       </div>

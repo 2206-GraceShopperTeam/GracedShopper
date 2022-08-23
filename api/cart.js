@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { createCart, getCartByUser } = require("../db/carts");
+const { createCart, getCartByUser, destroyCart } = require("../db/carts");
 
 //POST /api/cart/userId
 router.get("/:userId", async (req, res, next) => {
@@ -20,6 +20,18 @@ router.post("/createCart", async (req, res, next) => {
     if (cart) {
       res.send(cart);
     }
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.delete("/:cartId", async (req, res, next) => {
+  console.log("friends for rurro")
+  console.log(req.params, "ruro")
+  const { cartId } = req.params;
+  try {
+    const cart = await destroyCart(cartId);
+    res.send(cart);
   } catch (error) {
     next(error);
   }

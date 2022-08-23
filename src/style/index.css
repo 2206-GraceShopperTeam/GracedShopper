@@ -635,3 +635,22 @@ body {
   position: relative;
   top: 2vh;
 }
+
+.prodInfo{
+  position: fixed;
+  z-index: 100;
+  top: 30vh;
+  right: 24vw;
+  border: solid black 2px;
+  box-shadow: 20px 15px 10px -15px black;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: white;
+}
+
+.prodName{
+  font-family: Barlow, Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+}

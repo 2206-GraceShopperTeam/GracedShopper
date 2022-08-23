@@ -115,6 +115,7 @@ async function destroyCartProduct(cart_id, product_id) {
   }
 }
 
+
 module.exports = {
   getAllCartProducts,
   createCartProducts,

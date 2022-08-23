@@ -1,24 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getCartProducts, getCartById, emptyCart } from "../axios-services";
+import { getCartProducts, getCartById, emptyCart,createCart } from "../axios-services";
 import "../style/Checkout.css";
 
 const Checkout = ({ cart, setCart, loggedIn }) => {
   const navigate = useNavigate();
   const [cartProducts, setCartProducts] = useState([]);
+  const [cartId, setCartId] = useState(0)
   const [purchased, setPurchased] = useState(false);
   const [guest, setGuest] = useState(false);
   const [productCart, setProductCart] = useState([]);
   const string = localStorage.getItem("user");
   const user = JSON.parse(string);
 
-  var total = 0;
+  let total = 0;
 
   async function getProductCart() {
     if (user) {
       const cart = await getCartById(user.id);
+      console.log(cart, "im the c")
       setProductCart(cart);
     }
+  }
+  async function emptyThyCart (){
+    let id = productCart[0].cart_id
+    await emptyCart(id)
+  }
+  async function fillThyCart (){
+    await createCart(user.id)
   }
 
   useEffect(() => {
@@ -29,7 +38,6 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
     }
     fetchCartProducts();
   }, []);
-
   return (
     <div>
       {loggedIn ? (
@@ -37,7 +45,8 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
           <div className={purchased ? "hidden" : "orderInfo"}>
             <h1>Order Details</h1>
             {productCart.map((product, index) => {
-              if (true) {
+              if (product) {
+                localStorage.setItem("cartId", product.cart_id)
                 {
                   total += product.price * product.quantity;
                 }
@@ -57,11 +66,11 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
             </div>
             <div>
               <h3>Email Address: {user.email}</h3>
-              <h3>Shipping Address: {user.address}</h3>
+              <h3>Shipping Address: {user.address ? user.address : "No Address on File"}</h3>
             </div>
             <button
               onClick={() => {
-                setPurchased(!purchased), setCart([]), emptyCart();
+                setPurchased(!purchased); setCart([]); emptyThyCart();
               }}
             >
               Confirm Order

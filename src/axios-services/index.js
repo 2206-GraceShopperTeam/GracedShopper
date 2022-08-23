@@ -135,11 +135,15 @@ export async function getProductById(productId) {
 export async function editProduct(
   productId,
   token,
-  nameProduct,
+  {name,
   description,
   price,
-  category
+  picture,
+  category}
 ) {
+  console.log(name,
+    description,
+    price, "do i know the things")
   const response = await fetch(
     `http://localhost:4000/api/products/${productId}`,
     {
@@ -149,9 +153,10 @@ export async function editProduct(
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        name: nameProduct,
+        name: name,
         description: description,
         price: price,
+        picture: picture,
         category: category,
       }),
     }
@@ -233,7 +238,8 @@ export async function editCartProduct(cartProductId, quantity) {
 }
 
 export async function removeCartProduct(cartProductId, product_id) {
-  const response = await fetch(
+  try {
+    const response = await fetch(
     `http://localhost:4000/api/cartProducts/${cartProductId}`,
     {
       method: "DELETE",
@@ -247,6 +253,10 @@ export async function removeCartProduct(cartProductId, product_id) {
   );
   const result = await response.json();
   return result;
+  } catch (error) {
+    console.log("delete failed")
+  }
+  
 }
 
 // Cart
@@ -279,13 +289,17 @@ export async function getCartById(id) {
 }
 
 export async function emptyCart(cartId) {
-  try {
+  console.log(cartId, "friends")
     const response = await fetch(
-      `http://localhost:4000/api/cart/emptyCart/${cartId}`
+      `http://localhost:4000/api/cart/${cartId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
     );
-    const emptied = await response.json();
-    return emptied;
-  } catch (error) {
-    next(error);
+    const result = await response.json();
+    console.log(result, "whats here")
+    return result;
   }
-}
