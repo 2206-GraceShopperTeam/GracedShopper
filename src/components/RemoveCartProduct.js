@@ -15,14 +15,14 @@ const RemoveCartProduct = ({
       const result = await removeCartProduct(
         thisProduct.cart_id,
         thisProduct.id
-      );
+      )}
 
-    if (cart) {
+    if (localStorage.getItem("cart")) {
       setThisProduct(null);
       cart.pop();
       setCartInfo(!cartInfo);
       alert("Product has been removed!");
-    }}}
+    }}
   
 
   return (
