@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { getCartById, getProducts } from "../axios-services";
 
-const Home = ({ setCart, cart, loggedIn }) => {
+const Home = ({ setCart, loggedIn }) => {
   const [amount, setAmount] = useState(0);
   const string = localStorage.getItem("user");
   const user = JSON.parse(string);
@@ -29,7 +29,7 @@ const Home = ({ setCart, cart, loggedIn }) => {
   }, [loggedIn]);
 
   return (
-    <div /*Starter Div */>
+    <div>
       <div>
         <img
           className="ad"
@@ -69,8 +69,6 @@ const Home = ({ setCart, cart, loggedIn }) => {
           <br /> There's sure to be one that meets your needs!
         </p>
       </div>
-
-      {/* Final Div  */}
     </div>
   );
 };

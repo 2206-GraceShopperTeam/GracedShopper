@@ -10,6 +10,7 @@ const UserInfo = ({ user, setUser, setUpdated, updated }) => {
   const [name, setName] = useState(user.name ? user.name : "");
   const [email, setEmail] = useState(user.email ? user.email : "");
   const [address, setAddress] = useState(user.address ? user.address : "");
+
   useEffect(() => {
     document.addEventListener("load", setReload(true));
     if ("undefined" in user || "null" in user || user.length === 0) {

@@ -34,7 +34,6 @@ const App = () => {
       }
     };
     document.addEventListener("load", setUpdated(!updated));
-
     stable();
   }, [loggedIn]);
 
@@ -76,7 +75,7 @@ const App = () => {
          <Route path="/Products/Apple" element={<Apple cart={cart} cartInfo={cartInfo} setCartInfo={setCartInfo} loggedIn={loggedIn}/>} />
          <Route path="/Cart" element={<Cart cart={cart} loggedIn={loggedIn} setCart={setCart} setCartInfo={setCartInfo} cartInfo={cartInfo} />} />
          <Route path="/Products/:productId" element={<SingleCartProduct cart={cart} setCart={setCart} setCartInfo={setCartInfo} cartInfo={cartInfo} loggedIn={loggedIn}/> } />
-         <Route path="/" element={<Home user={user} setCart={setCart} cart={cart} loggedIn={loggedIn}/>} />
+         <Route path="/" element={<Home user={user} setCart={setCart} loggedIn={loggedIn}/>} />
          
       </Routes>
     </div>

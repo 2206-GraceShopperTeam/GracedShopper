@@ -41,14 +41,17 @@ const Products = ({ loggedIn, cart, setCartInfo, cartInfo, setCart }) => {
     event.preventDefault();
     navigate("/Products/Dell");
   };
+
   const hpHandleClick = (event) => {
     event.preventDefault();
     navigate("/Products/HP");
   };
+
   const asusHandleClick = (event) => {
     event.preventDefault();
     navigate("/Products/ASUS");
   };
+
   const appleHandleClick = (event) => {
     event.preventDefault();
     navigate("/Products/Apple");
@@ -64,7 +67,6 @@ const Products = ({ loggedIn, cart, setCartInfo, cartInfo, setCart }) => {
     const searchCart = cart.find(
       (product) => product.name === selectedProduct.name
     );
-
     setCartInfo(!cartInfo);
     if (!searchCart) {
       selectedProduct.quantity = 1;
@@ -72,10 +74,10 @@ const Products = ({ loggedIn, cart, setCartInfo, cartInfo, setCart }) => {
       alert("item added to cart");
     } else {
       searchCart.quantity++;
-
       alert("Quantity increased");
     }
   };
+
   const addToUserCart = async () => {
     const searchCart = cart.find(
       (product) => product.name === selectedProduct.name
@@ -88,7 +90,6 @@ const Products = ({ loggedIn, cart, setCartInfo, cartInfo, setCart }) => {
         selectedProduct.id,
         selectedProduct.quantity
       );
-
       alert("item added to cart");
     } else {
       alert("Quantity increased");
@@ -157,9 +158,9 @@ const Products = ({ loggedIn, cart, setCartInfo, cartInfo, setCart }) => {
                 >
                   Add to cart
                 </button>
-              <div className="pictureDiv">
-                <img src = {product.picture} className="productPicture"/>
-              </div>
+                <div className="pictureDiv">
+                  <img src={product.picture} className="productPicture" />
+                </div>
                 <div
                   className={
                     loggedIn && user.admin === true ? "adminOpt" : "hidden"

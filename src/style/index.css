@@ -57,7 +57,7 @@
 }
 
 .productName:hover {
-  background-color: #add8e6 ;
+  background-color: #add8e6;
   text-decoration: underline;
   cursor: pointer;
 }
@@ -103,7 +103,6 @@
   font-family: Barlow, Arial, Helvetica, sans-serif;
   display: flex;
   justify-content: center;
-  
 }
 
 .cartSubTitle {
@@ -150,39 +149,38 @@ body {
 }
 
 /* CSS for Header*/
-.header{
+.header {
   background-color: green;
   width: 100%;
   height: 13%;
   position: fixed;
   top: 0;
   z-index: 10;
-
 }
 
-.logo{
+.logo {
   position: relative;
   width: auto;
   height: 13vh;
-  left:4vw;
+  left: 4vw;
   cursor: pointer;
 }
 
-.loginBttn{
+.loginBttn {
   position: fixed;
   left: 94vw;
   top: 5.4%;
   padding: 1vw;
 }
 
-.allUsersBttn{
+.allUsersBttn {
   position: fixed;
-    left: 68vw;
-    top: 3%;
-    color: white;
-    font-size: 25px;
-    font-family: Barlow, Arial, Helvetica, sans-serif;
-    cursor: pointer;
+  left: 68vw;
+  top: 3%;
+  color: white;
+  font-size: 25px;
+  font-family: Barlow, Arial, Helvetica, sans-serif;
+  cursor: pointer;
 }
 
 .adminBttn {
@@ -190,7 +188,7 @@ body {
   justify-content: center;
 }
 
-.myInfoBttn{
+.myInfoBttn {
   position: fixed;
   left: 80vw;
   top: 3%;
@@ -200,23 +198,23 @@ body {
   cursor: pointer;
 }
 
-.checkoutBttn{
+.checkoutBttn {
   position: fixed;
   left: 86%;
   top: 1.5%;
 }
 
-#loginBttn{
+#loginBttn {
   font-size: small;
 }
 
-#checkoutBttn{
-  font-size:40px;
-    background: none;
-    border: none;
-    font-family: Barlow, Arial, Helvetica, sans-serif;
-    color: white;
-    cursor: pointer;
+#checkoutBttn {
+  font-size: 40px;
+  background: none;
+  border: none;
+  font-family: Barlow, Arial, Helvetica, sans-serif;
+  color: white;
+  cursor: pointer;
 }
 
 .shopAll {
@@ -224,7 +222,7 @@ body {
   justify-content: center;
 }
 
-.shopBttn{
+.shopBttn {
   position: fixed;
   top: 5.5%;
   display: flex;
@@ -238,25 +236,25 @@ body {
   cursor: pointer;
 }
 
-.addBttn{
+.addBttn {
   position: fixed;
-    right: 70vw;
-    top: 5.5%;
-    color: white;
-    font-size: 25px;
-    font-family: Barlow, Arial, Helvetica, sans-serif;
-    cursor: pointer;
+  right: 70vw;
+  top: 5.5%;
+  color: white;
+  font-size: 25px;
+  font-family: Barlow, Arial, Helvetica, sans-serif;
+  cursor: pointer;
 }
 
-@media (min-width: 106em) and (min-height: 50em){
-  .logo{
+@media (min-width: 106em) and (min-height: 50em) {
+  .logo {
     position: relative;
     width: auto;
     height: 13vh;
     left: 2vw;
   }
 
-  .loginBttn{
+  .loginBttn {
     position: fixed;
     left: 91vw;
     top: 6.4%;
@@ -265,7 +263,7 @@ body {
     height: 2in;
   }
 
-  .allUsersBttn{
+  .allUsersBttn {
     position: fixed;
     left: 63vw;
     top: 5.5%;
@@ -274,8 +272,8 @@ body {
     font-family: Barlow, Arial, Helvetica, sans-serif;
     cursor: pointer;
   }
-  
-  .myInfoBttn{
+
+  .myInfoBttn {
     position: fixed;
     left: 80vw;
     top: 5.5%;
@@ -284,18 +282,18 @@ body {
     font-family: Barlow, Arial, Helvetica, sans-serif;
   }
 
-  .checkoutBttn{
+  .checkoutBttn {
     position: fixed;
     left: 92%;
     top: 1.5%;
   }
 
-  #loginBttn{
+  #loginBttn {
     font-size: large;
   }
 
-  #checkoutBttn{
-    font-size:40px;
+  #checkoutBttn {
+    font-size: 40px;
     background: none;
     border: none;
     font-family: Barlow, Arial, Helvetica, sans-serif;
@@ -305,14 +303,14 @@ body {
 }
 
 /* CSS for Home*/
-.ad{
+.ad {
   position: relative;
   width: 100vw;
   height: 40vh;
   top: 4vw;
 }
 
-.newP{
+.newP {
   position: fixed;
   left: 0%;
   bottom: 0;
@@ -320,16 +318,16 @@ body {
   height: 52vh;
 }
 
-.nowAvailable{
+.nowAvailable {
   position: relative;
   left: 2vw;
 }
 
-.mac{
+.mac {
   width: 33vw;
 }
 
-.signUp{
+.signUp {
   /* background-color: #c19944; */
   background-image: url(https://images.unsplash.com/photo-1590845947676-fa2576f401b2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTh8fG9yYW5nZSUyMHRlY2h8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60);
   background-size: cover;
@@ -343,24 +341,24 @@ body {
   left: 33vw;
 }
 
-.catcher{
+.catcher {
   position: relative;
   left: 30%;
 }
 
-.pitch{
+.pitch {
   position: relative;
   left: 23%;
   padding: 5px;
 }
 
-.offerBttn{
+.offerBttn {
   position: relative;
   left: 40%;
   top: 10%;
 }
 
-.stock{
+.stock {
   /* background-color: #566637; */
   background-image: url(https://images.unsplash.com/photo-1601467995997-ac1ae9a8fff4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NjJ8fGJveGVzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60);
   background-size: cover;
@@ -372,45 +370,45 @@ body {
   left: 66vw;
 }
 
-.ourStock{
+.ourStock {
   position: relative;
   left: 43%;
   top: 30%;
 }
 
-.howMany{
+.howMany {
   position: relative;
   left: 16%;
   top: 26%;
-  font-size: smaller
+  font-size: smaller;
 }
 
-@media (min-width: 106em) and (min-height: 50em){
-  .ad{
+@media (min-width: 106em) and (min-height: 50em) {
+  .ad {
     position: relative;
     width: 100vw;
     height: 40vh;
     top: 4vw;
   }
-  
-  .newP{
+
+  .newP {
     position: fixed;
     left: 0%;
     bottom: 0;
     background-color: #f4f7f4;
     height: 52vh;
   }
-  
-  .nowAvailable{
+
+  .nowAvailable {
     position: relative;
     left: 2vw;
   }
-  
-  .mac{
+
+  .mac {
     width: 33vw;
   }
-  
-  .signUp{
+
+  .signUp {
     /* background-color: #c19944; */
     background-image: url(https://images.unsplash.com/photo-1590845947676-fa2576f401b2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTh8fG9yYW5nZSUyMHRlY2h8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60);
     background-size: cover;
@@ -423,25 +421,25 @@ body {
     bottom: 0;
     left: 33vw;
   }
-  
-  .catcher{
+
+  .catcher {
     position: relative;
     left: 30%;
   }
-  
-  .pitch{
+
+  .pitch {
     position: relative;
     left: 23%;
     padding: 5px;
   }
-  
-  .offerBttn{
+
+  .offerBttn {
     position: relative;
     left: 40%;
     top: 10%;
   }
 
-  .stock{
+  .stock {
     /* background-color: #566637; */
     background-image: url(https://images.unsplash.com/photo-1601467995997-ac1ae9a8fff4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NjJ8fGJveGVzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60);
     background-size: cover;
@@ -452,14 +450,14 @@ body {
     bottom: 0;
     left: 66vw;
   }
-  
-  .ourStock{
+
+  .ourStock {
     position: relative;
     left: 43%;
     top: 30%;
   }
-  
-  .howMany{
+
+  .howMany {
     position: relative;
     font-size: medium;
     left: 23%;
@@ -468,7 +466,7 @@ body {
   }
 }
 
-.loginContainer{
+.loginContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -485,11 +483,11 @@ body {
   color: white;
 }
 
-.hidden{
+.hidden {
   display: none;
 }
 
-.signUpContainer{
+.signUpContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -506,19 +504,20 @@ body {
   color: white;
 }
 
-.loginTitle{
+.loginTitle {
   position: relative;
   left: 5%;
   bottom: 8%;
 }
 
-.loginForm,.signInBttn{
+.loginForm,
+.signInBttn {
   position: relative;
   left: 5%;
   bottom: 7%;
 }
 
-.registerContainer{
+.registerContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -531,13 +530,14 @@ body {
   background-color: red;
 }
 
-.registerForm,.loginForm{
+.registerForm,
+.loginForm {
   display: flex;
   flex-direction: column;
   margin: 10px;
 }
 
-.loading{
+.loading {
   position: relative;
   width: 100vw;
   height: 87vh;
@@ -545,7 +545,7 @@ body {
   z-index: 15;
 }
 
-.products{
+.products {
   position: relative;
   top: 12vh;
   width: 1200px;
@@ -557,19 +557,19 @@ body {
   top: 20vh;
 }
 
-.allProducts{
+.allProducts {
   display: flex;
   flex-direction: row;
   height: 10vh;
   justify-content: space-between;
 }
 
-.userInfo{
+.userInfo {
   position: relative;
   top: 5vh;
 }
 
-.UsersName{
+.UsersName {
   position: relative;
   top: 22vh;
   border: solid black 2px;
@@ -578,7 +578,7 @@ body {
   padding: 10px;
 }
 
-.UsersEmail{
+.UsersEmail {
   position: relative;
   top: 22vh;
   border: solid black 2px;
@@ -587,7 +587,7 @@ body {
   padding: 10px;
 }
 
-.UsersAddress{
+.UsersAddress {
   position: relative;
   top: 22vh;
   border: solid black 2px;
@@ -596,7 +596,7 @@ body {
   padding: 10px;
 }
 
-.AddProduct{
+.AddProduct {
   display: flex;
   position: relative;
   top: 20vh;
@@ -606,7 +606,7 @@ body {
   padding: 10px;
 }
 
-.errorMessage{
+.errorMessage {
   background-color: grey;
   color: white;
   width: 15vw;
@@ -615,7 +615,7 @@ body {
   z-index: 100;
 }
 
-.error{
+.error {
   z-index: 100;
   position: absolute;
   left: 26.5vw;

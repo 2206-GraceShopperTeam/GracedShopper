@@ -12,14 +12,14 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
   const [productCart, setProductCart] = useState([]);
   const string = localStorage.getItem("user");
   const user = JSON.parse(string);
-  
-  
-  
+
   async function getProductCart() {
-    if(user){ const cart = await getCartById(user.id);
-    setProductCart(cart);}
-   
+    if (user) {
+      const cart = await getCartById(user.id);
+      setProductCart(cart);
+    }
   }
+
   useEffect(() => {
     getProductCart();
     async function fetchCartProducts() {
@@ -124,5 +124,5 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
     </div>
   );
 };
-export default Checkout;
 
+export default Checkout;

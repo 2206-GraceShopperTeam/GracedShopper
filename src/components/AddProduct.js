@@ -11,7 +11,14 @@ const AddProduct = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const token = localStorage.getItem("token");
-    const newProduct = await createProduct(token,name, description,price,category,picture);
+    const newProduct = await createProduct(
+      token,
+      name,
+      description,
+      price,
+      category,
+      picture
+    );
     if ("error" in newProduct) {
       alert("An product with that name already exists please try again!");
     } else {
@@ -27,9 +34,11 @@ const AddProduct = () => {
   const descriptionChange = (event) => {
     setDescription(event.target.value);
   };
+
   const priceChange = (event) => {
     setPrice(event.target.value);
   };
+
   const categoryChange = (event) => {
     setCategory(event.target.value);
   };
@@ -71,7 +80,7 @@ const AddProduct = () => {
             required={true}
             onChange={pictureChange}
           />
-          <input 
+          <input
             type="number"
             name="price"
             placeholder="Price"
@@ -79,7 +88,6 @@ const AddProduct = () => {
             onChange={priceChange}
           />
           <label>Choose a Brand:</label>
-
           <select id="brand" onChange={categoryChange}>
             <option value="DELL">DELL</option>
             <option value="HP">HP</option>

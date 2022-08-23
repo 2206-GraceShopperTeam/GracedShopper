@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { getCart, getCartProducts,getCartById } from "../axios-services";
+import { getCartProducts, getCartById } from "../axios-services";
 import { SingleCartProduct } from "./";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const Cart = ({ cart, cartInfo, setCartInfo,loggedIn,setCart }) => {
+const Cart = ({ cart, cartInfo, setCartInfo, loggedIn, setCart }) => {
   const [cartProducts, setCartProducts] = useState([]);
   const [cartEmpty, setCartEmpty] = useState(false);
   const string = localStorage.getItem("user");
@@ -13,22 +13,23 @@ const Cart = ({ cart, cartInfo, setCartInfo,loggedIn,setCart }) => {
   const handleClick = () => {
     navigate("/Checkout");
   };
- async function createCart (){
-      if(!localStorage.getItem("user") && !localStorage.getItem("cart")){
-        setCart([])
-      } else if (loggedIn) {
-        const userCart = await getCartById(user.id)
-        setCart(userCart)
-      }
+
+  async function createCart() {
+    if (!localStorage.getItem("user") && !localStorage.getItem("cart")) {
+      setCart([]);
+    } else if (loggedIn) {
+      const userCart = await getCartById(user.id);
+      setCart(userCart);
     }
-    useEffect(()=>{
-      createCart()
-    },[cartInfo])
-  useEffect(()=>{
-    
-    createCart()
-  },[loggedIn])
-  
+  }
+
+  useEffect(() => {
+    createCart();
+  }, [cartInfo]);
+
+  useEffect(() => {
+    createCart();
+  }, [loggedIn]);
 
   useEffect(() => {
     async function fetchCartProducts() {
@@ -37,10 +38,10 @@ const Cart = ({ cart, cartInfo, setCartInfo,loggedIn,setCart }) => {
     }
     fetchCartProducts();
   }, [cartInfo]);
+
   return (
     <div className="cartParent">
       <p className="cartTitle">Cart</p>
-
       {cart && cart.length ? (
         cart.map((product) => {
           return (

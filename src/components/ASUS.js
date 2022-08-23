@@ -29,14 +29,17 @@ const ASUS = ({ cart, cartInfo, setCartInfo, loggedIn }) => {
     event.preventDefault();
     navigate("/Products/Dell");
   };
+
   const hpHandleClick = (event) => {
     event.preventDefault();
     navigate("/Products/HP");
   };
+
   const asusHandleClick = (event) => {
     event.preventDefault();
     navigate("/Products/ASUS");
   };
+
   const appleHandleClick = (event) => {
     event.preventDefault();
     navigate("/Products/Apple");
@@ -69,7 +72,6 @@ const ASUS = ({ cart, cartInfo, setCartInfo, loggedIn }) => {
         selectedProduct.id,
         selectedProduct.quantity
       );
-
       alert("item added to cart");
     } else {
       alert("Quantity increased");
@@ -138,11 +140,9 @@ const ASUS = ({ cart, cartInfo, setCartInfo, loggedIn }) => {
                 >
                   Add to cart
                 </button>
-
                 <div className="pictureDiv">
-                  <img src = {product.picture} className="productPicture"/>
+                  <img src={product.picture} className="productPicture" />
                 </div>
-
               </div>
             ) : null;
           })

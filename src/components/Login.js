@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Error } from "./";
-import { login, register, createCart, getCart } from "../axios-services";
+import { login, register, createCart } from "../axios-services";
 
 const Login = ({ setLoggedIn, loggedIn, setUser }) => {
   const navigate = useNavigate();
@@ -89,9 +89,11 @@ const Login = ({ setLoggedIn, loggedIn, setUser }) => {
   const confirmPasswordChange = (event) => {
     setConfirmPassword(event.target.value);
   };
+
   const nameChange = (event) => {
     setName(event.target.value);
   };
+
   const confirmAddressChange = (event) => {
     setAddress(event.target.value);
   };
@@ -113,7 +115,6 @@ const Login = ({ setLoggedIn, loggedIn, setUser }) => {
             onChange={emailChange}
             value={email}
           />
-
           <input
             type="password"
             name="password"
@@ -134,7 +135,6 @@ const Login = ({ setLoggedIn, loggedIn, setUser }) => {
           Sign In
         </button>
       </div>
-
       <div className={signUp ? "hidden" : "signUpContainer"}>
         <h1>New Here?</h1>
         <h4>Sign up and enjoy a wide range of benefits!</h4>
@@ -146,7 +146,6 @@ const Login = ({ setLoggedIn, loggedIn, setUser }) => {
           Sign up
         </button>
       </div>
-
       <div className={!signUp ? "hidden" : "registerContainer"}>
         <h1 className="registerTitle">Register Your New Account</h1>
         <form className="registerForm" onSubmit={handleReg}>
@@ -159,7 +158,6 @@ const Login = ({ setLoggedIn, loggedIn, setUser }) => {
             onChange={regEmailChange}
             value={regEmail}
           />
-
           <input
             type="text"
             name="confirmEmail"
@@ -169,7 +167,6 @@ const Login = ({ setLoggedIn, loggedIn, setUser }) => {
             onChange={confirmEmailChange}
             value={confirmEmail}
           />
-
           <input
             type="password"
             name="password"
@@ -179,7 +176,6 @@ const Login = ({ setLoggedIn, loggedIn, setUser }) => {
             onChange={regPasswordChange}
             value={regPassword}
           />
-
           <input
             type="password"
             name="confirmPassword"
@@ -189,7 +185,6 @@ const Login = ({ setLoggedIn, loggedIn, setUser }) => {
             onChange={confirmPasswordChange}
             value={confirmPassword}
           />
-
           <input
             type="text"
             name="name"
@@ -198,7 +193,6 @@ const Login = ({ setLoggedIn, loggedIn, setUser }) => {
             onChange={nameChange}
             value={name}
           />
-
           <input
             type="text"
             name="address"

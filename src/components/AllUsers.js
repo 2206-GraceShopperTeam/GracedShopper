@@ -3,7 +3,6 @@ import { getAllUsers } from "../axios-services";
 
 const Users = () => {
   const [allUsers, setAllUsers] = useState([]);
-  const token = localStorage.getItem("token");
 
   useEffect(() => {
     async function fetchUsers() {

@@ -24,6 +24,7 @@ const SingleCartProduct = ({
   const string = localStorage.getItem("user");
   const user = JSON.parse(string);
   let { productId } = useParams();
+
   useEffect(() => {
     async function fetchSingleProduct() {
       const returnSingleProduct = await getProductById(productId);
@@ -42,14 +43,17 @@ const SingleCartProduct = ({
     event.preventDefault();
     navigate("/Products/Dell");
   };
+
   const hpHandleClick = (event) => {
     event.preventDefault();
     navigate("/Products/HP");
   };
+
   const asusHandleClick = (event) => {
     event.preventDefault();
     navigate("/Products/ASUS");
   };
+
   const appleHandleClick = (event) => {
     event.preventDefault();
     navigate("/Products/Apple");
@@ -82,7 +86,6 @@ const SingleCartProduct = ({
         selectedProduct.id,
         selectedProduct.quantity
       );
-
       alert("item added to cart");
     } else {
       alert("Quantity increased");
@@ -151,12 +154,12 @@ const SingleCartProduct = ({
                 }}
               >
                 Add to cart
-              </button>              
+              </button>
             ) : null}
             {location.href !== "http://localhost:3000/Cart" ? (
               <div className="pictureDiv">
-              <img src = {thisProduct.picture} className="productPicture"/>
-            </div>          
+                <img src={thisProduct.picture} className="productPicture" />
+              </div>
             ) : null}
             {/* {location.href == "http://localhost:3000/Cart" ? (
               <div className="pictureDiv">

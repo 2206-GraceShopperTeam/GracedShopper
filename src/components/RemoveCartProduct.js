@@ -1,12 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { removeCartProduct } from "../axios-services";
 
 const RemoveCartProduct = ({
   setThisProduct,
-  cartProductId,
   cart,
-  setCartEmpty,
-  cartEmpty,
   setCartInfo,
   cartInfo,
   thisProduct,
