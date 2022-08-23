@@ -196,7 +196,8 @@ const Login = ({ setLoggedIn, loggedIn, setUser }) => {
           <input
             type="text"
             name="address"
-            placeholder="Address"
+            placeholder="Address*"
+            required={true}
             onChange={confirmAddressChange}
             value={address}
           />
