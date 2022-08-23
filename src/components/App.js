@@ -41,7 +41,6 @@ const App = () => {
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("user"));
     const renewedCart = JSON.parse(localStorage.getItem("cart"));
-    console.log()
     setCart(renewedCart);
     document.addEventListener("load", setUser(data));
   }, [updated]);

@@ -55,7 +55,6 @@ router.post("/", requireUser, async (req, res, next) => {
 
 router.patch("/:productId", async (req, res, next) => {
   const productId = req.params.productId;
-  console.log(req.body, "surfs up")
   const { name, description, price, category, picture } = req.body;
   try {
     const updatedProduct = await updateProducts(productId, {

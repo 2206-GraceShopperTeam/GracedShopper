@@ -13,7 +13,7 @@ const Cart = ({ cart, cartInfo, setCartInfo, loggedIn, setCart }) => {
   const handleClick = () => {
     navigate("/Checkout");
   };
-console.log(cartInfo, "whats in here?")
+
   async function createCart() {
     if (!localStorage.getItem("user") && !localStorage.getItem("cart")) {
       setCart([]);
@@ -28,11 +28,10 @@ console.log(cartInfo, "whats in here?")
   }
 
   useEffect(() => {
-    console.log("did this fire")
     refreshCart()
   }, [cartInfo]);
+
   useEffect(() => {
-    console.log("did this fire")
     refreshCart()
   }, []);
 
@@ -46,7 +45,6 @@ console.log(cartInfo, "whats in here?")
       setCartProducts(returnCartProducts);
     }
     fetchCartProducts();
-    console.log("1+1+1+!")
   }, [cartInfo]);
 
   return (
@@ -55,7 +53,7 @@ console.log(cartInfo, "whats in here?")
       {cart && cart.length ? (
         cart.map((product) => {
           return (
-            <div>
+            <div key={`Cart${product.id}`}>
               <SingleCartProduct
                 product={product}
                 cart2={cart}

@@ -26,8 +26,6 @@ router.post("/createCart", async (req, res, next) => {
 });
 
 router.delete("/:cartId", async (req, res, next) => {
-  console.log("friends for rurro")
-  console.log(req.params, "ruro")
   const { cartId } = req.params;
   try {
     const cart = await destroyCart(cartId);

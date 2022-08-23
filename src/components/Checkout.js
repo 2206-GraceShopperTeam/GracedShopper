@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getCartProducts, getCartById, emptyCart,createCart, addToCartProducts, } from "../axios-services";
+import { getCartProducts, getCartById, emptyCart, addToCartProducts, removeCartProduct } from "../axios-services";
 import logo from "../images/stacked-boxes-700x295-1.png";
 import "../style/Checkout.css";
 
@@ -19,14 +19,16 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
   async function getProductCart() {
     if (user) {
       const cart = await getCartById(user.id);
-      console.log(cart, "im the c")
       setProductCart(cart);
     }
   }
+  
   async function emptyThyCart (){
-    let id = productCart[0].cart_id
-    await emptyCart(id)
+    productCart.map(async (product)=>{
+      await removeCartProduct(product.cart_id,product.id)
+    })
   }
+
   async function fillThyCart (){
     if(loggedIn && localStorage.getItem("cart")){
       let convCart = JSON.parse(localStorage.getItem("cart"))
@@ -126,7 +128,6 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
                 {cart.map((product, index) => {
                   {
                     total += product.price * product.quantity;
-                    console.log(total, "this is total");
                   }
                   return (
                     <div key={index} className="cartProduct">

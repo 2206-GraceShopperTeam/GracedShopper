@@ -268,7 +268,6 @@ async function createInitialCartProducts() {
   console.log("Starting to create cart_products...");
   const carts = await getAllCarts();
   const products = await getAllProducts();
-  console.log(carts[0].id, "whats the info");
   try {
     const cartProductsToCreate = [
       {

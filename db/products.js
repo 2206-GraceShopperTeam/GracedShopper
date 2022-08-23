@@ -79,11 +79,9 @@ async function updateProducts(id, fields = {}) {
   const setString = Object.keys(fields)
     .map((key, index) => `"${key}" = $${index + 1}`)
     .join(", ");
-    console.log(setString, "sting me")
   if (setString.length === 0) {
     return;
   }
-  console.log(fields,"can i alteast try to live")
   try {
     const {
       rows: [product],
@@ -96,7 +94,7 @@ async function updateProducts(id, fields = {}) {
       `,
       Object.values(fields)
     );
-console.log(product,"console the cousile")
+
     return product;
   } catch (error) {
     console.error("Trouble Updating Products...");

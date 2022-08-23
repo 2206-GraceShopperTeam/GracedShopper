@@ -66,7 +66,6 @@ const Products = ({ loggedIn, cart, setCartInfo, cartInfo, setCart,setUpdated,up
   };
 
   const addToCart = async () => {
-    console.log(cart,"im the cart")
     const searchCart = cart.find(
       (product) => product.name === selectedProduct.name
     );
@@ -86,7 +85,6 @@ const Products = ({ loggedIn, cart, setCartInfo, cartInfo, setCart,setUpdated,up
     const searchCart = cart.find(
       (product) => product.name === selectedProduct.name
     );
-    console.log(searchCart, "what am i")
     if (!searchCart) {
       selectedProduct.quantity = 1;
      let addedProduct = await addToCartProducts(

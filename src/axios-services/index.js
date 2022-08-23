@@ -141,9 +141,6 @@ export async function editProduct(
   picture,
   category}
 ) {
-  console.log(name,
-    description,
-    price, "do i know the things")
   const response = await fetch(
     `http://localhost:4000/api/products/${productId}`,
     {
@@ -289,7 +286,6 @@ export async function getCartById(id) {
 }
 
 export async function emptyCart(cartId) {
-  console.log(cartId, "friends")
     const response = await fetch(
       `http://localhost:4000/api/cart/${cartId}`,
       {
@@ -300,6 +296,6 @@ export async function emptyCart(cartId) {
       }
     );
     const result = await response.json();
-    console.log(result, "whats here")
+
     return result;
   }
