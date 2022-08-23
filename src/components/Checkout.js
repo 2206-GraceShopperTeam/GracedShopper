@@ -20,6 +20,7 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
       setProductCart(cart);
     }
   }
+
   useEffect(() => {
     getProductCart();
     async function fetchCartProducts() {
@@ -28,13 +29,13 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
     }
     fetchCartProducts();
   }, []);
-  console.log(cart)
+
   return (
     <div>
       {loggedIn ? (
         <div className="checkout">
-          <h1>Order Details</h1>
           <div className={purchased ? "hidden" : "orderInfo"}>
+            <h1>Order Details</h1>
             {productCart.map((product, index) => {
               if (true) {
                 {
@@ -43,8 +44,10 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
                 return (
                   <div key={index} className="cartProduct">
                     <h3>{product.name}</h3>
-                    <p>({product.quantity})---> </p>
-                    <h3 className="price">${product.price * product.quantity}</h3>
+                    <p>({product.quantity})</p>
+                    <h3 className="price">
+                      ${product.price * product.quantity}
+                    </h3>
                   </div>
                 );
               }
@@ -56,7 +59,6 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
               <h3>Email Address: {user.email}</h3>
               <h3>Shipping Address: {user.address}</h3>
             </div>
-          </div>
             <button
               onClick={() => {
                 setPurchased(!purchased), setCart([]), emptyCart();
@@ -64,6 +66,7 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
             >
               Confirm Order
             </button>
+          </div>
           <div className={!purchased ? "hidden" : "purchaseMessage"}>
             Thank You For Your Money!
           </div>
@@ -101,7 +104,7 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
                     <div key={index} className="cartProduct">
                       <h3>{product.name}</h3>
                       <p>({product.quantity})</p>
-                      <h3>---> ${product.price * product.quantity}</h3>
+                      <h3>${product.price * product.quantity}</h3>
                     </div>
                   );
                 })}
