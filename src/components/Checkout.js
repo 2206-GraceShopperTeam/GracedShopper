@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getCartProducts, getCartById, emptyCart,createCart } from "../axios-services";
+import { getCartProducts, getCartById, emptyCart,createCart, addToCartProducts, } from "../axios-services";
 import logo from "../images/stacked-boxes-700x295-1.png";
 import "../style/Checkout.css";
 
@@ -28,10 +28,22 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
     await emptyCart(id)
   }
   async function fillThyCart (){
-    await createCart(user.id)
+    if(loggedIn && localStorage.getItem("cart")){
+      let convCart = JSON.parse(localStorage.getItem("cart"))
+      if(convCart){
+        convCart.map(async(product)=>{
+           await addToCartProducts(
+            user.id,
+            product.id,
+            product.quantity)
+        })
+      }
+    }
   }
 
+
   useEffect(() => {
+    fillThyCart ()
     getProductCart();
     async function fetchCartProducts() {
       const returnCartProducts = await getCartProducts();
