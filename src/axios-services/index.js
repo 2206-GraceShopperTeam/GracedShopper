@@ -1,5 +1,5 @@
 // Users
-export async function register(regEmail,regPassword,name,address) {
+export async function register(regEmail, regPassword, name, address) {
   const response = await fetch(`http://localhost:4000/api/users/register`, {
     method: "POST",
     headers: {
@@ -16,7 +16,7 @@ export async function register(regEmail,regPassword,name,address) {
   const result = await response.json();
   const token = result.token;
   localStorage.setItem("token", token);
-  return result
+  return result;
 }
 
 export async function login(email, password) {
@@ -49,21 +49,18 @@ export async function getAllUsers() {
   }
 }
 
-export async function editUserInfo(userId, name,email,address) {
-  const response = await fetch(
-    `http://localhost:4000/api/users/${userId}`,
-    {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        name: name,
-        address: address,
-      }),
-    }
-  );
+export async function editUserInfo(userId, name, email, address) {
+  const response = await fetch(`http://localhost:4000/api/users/${userId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email: email,
+      name: name,
+      address: address,
+    }),
+  });
   const result = await response.json();
   return result;
 }
@@ -122,12 +119,15 @@ export async function getProducts() {
 }
 
 export async function getProductById(productId) {
-  const response = await fetch(`http://localhost:4000/api/products/${productId}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const response = await fetch(
+    `http://localhost:4000/api/products/${productId}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
   const result = await response.json();
   return result;
 }
@@ -140,36 +140,42 @@ export async function editProduct(
   price,
   category
 ) {
-  const response = await fetch(`http://localhost:4000/api/products/${productId}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify({
-      name: nameProduct,
-      description: description,
-      price: price,
-      category: category,
-    }),
-  });
+  const response = await fetch(
+    `http://localhost:4000/api/products/${productId}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        name: nameProduct,
+        description: description,
+        price: price,
+        category: category,
+      }),
+    }
+  );
   const result = await response.json();
   return result;
 }
 
 export async function deleteProduct(productId) {
-  const response = await fetch(`http://localhost:4000/api/products/${productId}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const response = await fetch(
+    `http://localhost:4000/api/products/${productId}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
   const result = await response.json();
   return result;
 }
 
 // Cart Products
-export async function addToCartProducts( cartId, product_id, quantity) {
+export async function addToCartProducts(cartId, product_id, quantity) {
   const response = await fetch(
     `http://localhost:4000/api/cartProducts/${cartId}`,
     {
@@ -197,6 +203,7 @@ export async function getCartProducts() {
   const result = await response.json();
   return result;
 }
+
 export async function getCartProductsById(id) {
   const response = await fetch(`http://localhost:4000/api/cartProducts/${id}`, {
     method: "GET",
@@ -225,7 +232,7 @@ export async function editCartProduct(cartProductId, quantity) {
   return result;
 }
 
-export async function removeCartProduct(cartProductId,product_id) {
+export async function removeCartProduct(cartProductId, product_id) {
   const response = await fetch(
     `http://localhost:4000/api/cartProducts/${cartProductId}`,
     {
@@ -245,15 +252,15 @@ export async function removeCartProduct(cartProductId,product_id) {
 // Cart
 export async function createCart(id) {
   try {
-    const response = await fetch(`http://localhost:4000/api/cart/createCart`,{
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      user_id: id,
-    }),
-  })
+    const response = await fetch(`http://localhost:4000/api/cart/createCart`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user_id: id,
+      }),
+    });
     const cart = await response.json();
     return cart;
   } catch (error) {
@@ -263,7 +270,7 @@ export async function createCart(id) {
 
 export async function getCartById(id) {
   try {
-    const response = await fetch(`http://localhost:4000/api/cart/${id}`)
+    const response = await fetch(`http://localhost:4000/api/cart/${id}`);
     const cart = await response.json();
     return cart;
   } catch (error) {
@@ -271,15 +278,14 @@ export async function getCartById(id) {
   }
 }
 
-export async function emptyCart(cartId){
+export async function emptyCart(cartId) {
   try {
-    const response = await fetch(`http://localhost:4000/api/cart/emptyCart/${cartId}`)
+    const response = await fetch(
+      `http://localhost:4000/api/cart/emptyCart/${cartId}`
+    );
     const emptied = await response.json();
-    return emptied
+    return emptied;
   } catch (error) {
-    next(error)
+    next(error);
   }
 }
-
-
-

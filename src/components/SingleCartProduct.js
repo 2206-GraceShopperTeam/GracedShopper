@@ -96,7 +96,7 @@ const SingleCartProduct = ({
   };
 
   return (
-    <div className="products">
+    <div className="productsInCart">
       {!cart2 ? (
         <div className="brandAndButtonsCenter">
           <div className="brandAndButtonsColumn">
