@@ -80,22 +80,6 @@ const EditProduct = ({ alterProduct,setAlterProduct, setProduct,product, setUpda
         {product.description}
         <TbEdit className="editButton" onClick={() => setEditDescription(true)} />
       </div>
-      <div className={!editPrice ? "prodPrice" : "hidden"}>
-        <b>Price: $</b>
-        {product.price}
-        <TbEdit className="editButton" onClick={() => setEditPrice(true)} />
-      </div>
-      <div className={!editPrice ? "prodPicture" : "hidden"}>
-                  <img src={product.picture} className="productPicture" />
-        <TbEdit className="editButton" onClick={() => setEditPicture(true)} />
-        <label>Choose a Brand:</label>
-          <select id="brand" onChange={categoryChange}>
-            <option value="DELL">DELL</option>
-            <option value="HP">HP</option>
-            <option value="ASUS">ASUS</option>
-            <option value="Apple">Apple</option>
-          </select>
-      </div>
       <div className={editDescription ? "productsDescription" : "hidden"}>
         <form onSubmit={handleChange}>
           <input
@@ -108,7 +92,12 @@ const EditProduct = ({ alterProduct,setAlterProduct, setProduct,product, setUpda
         </form>
         <TbEdit className="editButton" onClick={() => setEditDescription(false)} />
       </div>
-      <div className={editPrice ? "productsPrice" : "hidden"}>
+      <div className={!editPrice ? "prodPrice" : "hidden"}>
+        <b>Price: $</b>
+        {product.price}
+        <TbEdit className="editButton" onClick={() => setEditPrice(true)} />
+      </div>
+      <div className={editPrice ? "prodPrice" : "hidden"}>
         <form onSubmit={handleChange}>
           <input
             type="text"
@@ -120,14 +109,24 @@ const EditProduct = ({ alterProduct,setAlterProduct, setProduct,product, setUpda
           <BiTrash className="editButton" onClick={() => setEditPrice(false)} />
         </form>
         </div>
-      <div className={editPicture ? "productsPicture" : "hidden"}>
+      <div className={!editPicture ? "prodPicture" : "hidden"}>
+                  <img src={product.picture} className="productPicture" />
+        <TbEdit className="editButton" onClick={() => setEditPicture(true)} />
+        <label>Choose a Brand:</label>
+          <select id="brand" onChange={categoryChange}>
+            <option value="DELL">DELL</option>
+            <option value="HP">HP</option>
+            <option value="ASUS">ASUS</option>
+            <option value="Apple">Apple</option>
+          </select>
+      </div>
+      <div className={editPicture ? "prodPicture " : "hidden"}>
         <form onSubmit={handleChange}>
           <input
             type="text"
             defaultValue={product.picture}
             onChange={(e) => setPicture(e.target.value)}
           />
-
           <button type="submit" onClick={() => setEditPicture(false)}>☑️</button>
           <BiTrash className="editButton" onClick={() => setEditPicture(false)} />
         </form>
