@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
 import { createProduct } from "../axios-services";
 
 const AddProduct = () => {
@@ -7,7 +8,7 @@ const AddProduct = () => {
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("DELL");
   const [picture, setPicture] = useState("");
-
+  const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
     const token = localStorage.getItem("token");
@@ -49,13 +50,11 @@ const AddProduct = () => {
 
   return (
     <div className="AddProduct">
-      <div className="routineDetailsTitle">
+      <div className="AddPTitle">
         Add New Product
-        <p className="xButton" onClick={() => {}}>
-          ❌
-        </p>
+       
       </div>
-      <form>
+      <form className="addPF">
         <div className="createForm">
           <input
             type="text"
@@ -81,24 +80,28 @@ const AddProduct = () => {
             onChange={pictureChange}
           />
           <input
+          className="createField"
             type="number"
             name="price"
             placeholder="Price"
             required={true}
             onChange={priceChange}
           />
-          <label>Choose a Brand:</label>
-          <select id="brand" onChange={categoryChange}>
+          <label className="createField">Choose a Brand:</label>
+          <select className="createField" id="brand" onChange={categoryChange}>
             <option value="DELL">DELL</option>
             <option value="HP">HP</option>
             <option value="ASUS">ASUS</option>
             <option value="Apple">Apple</option>
           </select>
-          <button type="submit" id="addActivityButton" onClick={handleSubmit}>
+          <button type="submit" className="createField" onClick={handleSubmit}>
             CREATE
           </button>
         </div>
       </form>
+      <p className="xButton" onClick={() => {navigate("/Products")}}>
+          ❌
+        </p>
     </div>
   );
 };

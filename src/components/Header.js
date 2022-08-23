@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../style/index.css";
-import logo from "../images/ScreenShot.png";
+import logo from "../images/betterbuylogo.png";
 import { IoCartOutline } from "react-icons/io5";
 
 const Header = ({ loggedIn, setLoggedIn }) => {
@@ -94,7 +94,7 @@ const Header = ({ loggedIn, setLoggedIn }) => {
               navigate("/UserInfo");
             }}
           >
-            My Info
+            Account
           </p>
         </div>
       ) : null}

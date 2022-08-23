@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCartProducts, getCartById, emptyCart,createCart } from "../axios-services";
+import logo from "../images/stacked-boxes-700x295-1.png";
 import "../style/Checkout.css";
 
 const Checkout = ({ cart, setCart, loggedIn }) => {
@@ -77,8 +78,13 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
             </button>
           </div>
           <div className={!purchased ? "hidden" : "purchaseMessage"}>
-            Thank You For Your Money!
+            Thank You For Your Order!
           </div>
+          <img
+          className={!purchased ? "hidden" : "boxes"}
+          src={logo}
+          alt="logo"
+        ></img>
         </div>
       ) : (
         <div>
@@ -104,6 +110,7 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
           ) : (
             <div className="checkout">
               <div className={purchased ? "hidden" : "orderInfo"}>
+            <h1>Order Details</h1>
                 {cart.map((product, index) => {
                   {
                     total += product.price * product.quantity;
@@ -129,8 +136,13 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
                 </button>
               </div>
               <div className={!purchased ? "hidden" : "purchaseMessage"}>
-                Thank You For Your Money!
+                Thank You For Your Order!
               </div>
+              <img
+          className={!purchased ? "hidden" : "boxes"}
+          src={logo}
+          alt="logo"
+        ></img>
             </div>
           )}
         </div>
@@ -140,98 +152,3 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
 };
 export default Checkout;
 
-// if (token) {
-//     const string = localStorage.getItem("user");
-//     const user = JSON.parse(string);
-//     console.log(cartProducts, 'this is cartProducts')
-//     return (
-// <div className="checkout">
-//   <div className={purchased ? "hidden" : "orderInfo"}>
-//     {productCart.map((product, index) => {
-//       // getProductCart(product.cart_id)
-//       console.log(productCart, 'this is the cart info')
-//       console.log(user.id, 'this is the userid')
-//         if(user.id === productCart.user_id){
-//       {
-//         total.push(product.price * product.quantity);
-//       }
-//       return (
-//         <div key={index} className="cartProduct">
-//           <h3>{product.name}</h3>
-//           <p>({product.quantity})</p>
-//           <h3>${product.price}</h3>
-//         </div>
-//       )
-//     }})}
-//     <form>
-//       <h3>
-//         Total: ${total.reduce((partialSum, a) => partialSum + a, 0) / 2}
-//       </h3>
-//       <h3>{user.email}</h3>
-//       <h3>{user.address}</h3>
-//     </form>
-//     <button
-//       onClick={() => {
-//         setPurchased(!purchased), setCart([]);
-//       }}
-//     >
-//       Purchase
-//     </button>
-//   </div>
-//   <div className={!purchased ? "hidden" : "purchaseMessage"}>
-//     Thank You For Your Money!
-//   </div>
-// </div>
-//     );
-//   } else if (guest) {
-//     return (
-//     <div className="checkout">
-//       <div className={purchased ? "hidden" : "orderInfo"}>
-//         {cart.map((product, index) => {
-//           {
-//             total.push(product.price * product.quantity);
-//           }
-//           return (
-//             <div key={index} className="cartProduct">
-//               <h3>{product.name}</h3>
-//               <p>({product.quantity})</p>
-//               <h3>${product.price}</h3>
-//             </div>
-//           );
-//         })}
-//         <h3>
-//           Total: ${total.reduce((partialSum, a) => partialSum + a, 0)}
-//         </h3>
-//         <button
-//           onClick={() => {
-//             setPurchased(!purchased), setCart([]);
-//           }}
-//         >
-//           Purchase
-//         </button>
-//       </div>
-//       <div className={!purchased ? "hidden" : "purchaseMessage"}>
-//         Thank You For Your Money!
-//       </div>
-//     </div>
-//   );
-// } else {
-//   return (
-//     <div className="checkoutOptions">
-//       <button
-//         onClick={() => {
-//           localStorage.setItem("redirect", "/Checkout"), navigate("/Login");
-//         }}
-//       >
-//         Login/Register
-//       </button>
-//       <button
-//         onClick={() => {
-//           setGuest(true);
-//         }}
-//       >
-//         Continue As Guest
-//       </button>
-//     </div>
-//     );
-//   }

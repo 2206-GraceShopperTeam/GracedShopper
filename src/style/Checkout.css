@@ -29,6 +29,7 @@
   box-shadow: 0px 15px 10px -15px black;
   margin-bottom: 20px;
   padding: 10px;
+  background-color: rgb(249, 248, 248);
 }
 
 .cartProduct {
@@ -43,4 +44,17 @@
 
 .price {
   justify-self: end;
+}
+
+.boxes{
+  display: flex;
+  position: relative;
+  justify-content: center;
+  top: 9vh;
+}
+
+
+.purchaseMessage{
+  font-size: 3vw;
+  text-align: center;
 }
