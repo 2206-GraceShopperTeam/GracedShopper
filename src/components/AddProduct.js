@@ -1,5 +1,3 @@
-// If you go to update a product but only want to change the brand, it won't work. You'll need to update something else along with the updated brand for the change to happen.
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { createProduct } from "../axios-services";
@@ -10,11 +8,9 @@ const AddProduct = () => {
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
   const [picture, setPicture] = useState("");
-  const [empty, setEmpty] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
     const token = localStorage.getItem("token");
     const newProduct = await createProduct(
       token,
@@ -27,13 +23,15 @@ const AddProduct = () => {
     if ("error" in newProduct) {
       alert("An product with that name already exists please try again!");
     } else {
-      navigate("/Products")
+      setName("");
+      setDescription("");
+      setPrice("");
+      setPicture("");
+      setCategory("");
       alert("product was created!");
       return newProduct;
     }
   };
-
-  useEffect(()=>{},[empty])
 
   const nameChange = (event) => {
     setName(event.target.value);
