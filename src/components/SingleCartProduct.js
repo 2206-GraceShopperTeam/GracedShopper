@@ -143,13 +143,13 @@ const SingleCartProduct = ({
               <b>Brand: </b>
               {thisProduct.category}
             </p>
-            {location.href === "http://localhost:3000/Cart" ? (
+            {location.href === "https://graceshopper-betterbuy.herokuapp.com/Cart" ? (
               <p>
                 <b>Quantity: </b>
                 {thisProduct.quantity}
               </p>
             ) : null}
-            {location.href !== "http://localhost:3000/Cart" ? (
+            {location.href !== "https://graceshopper-betterbuy.herokuapp.com/Cart" ? (
               <button
                 onClick={() => {
                   loggedIn ? addToUserCart() : addToCart();
@@ -158,17 +158,12 @@ const SingleCartProduct = ({
                 Add to cart
               </button>
             ) : null}
-            {location.href !== "http://localhost:3000/Cart" ? (
+            {location.href !== "https://graceshopper-betterbuy.herokuapp.com/Cart" ? (
               <div className="pictureDiv">
                 <img src={thisProduct.picture} className="productPicture" />
               </div>
             ) : null}
-            {/* {location.href == "http://localhost:3000/Cart" ? (
-              <div className="pictureDiv">
-              <img src = {thisProduct.picture} className="productPicture"/>
-            </div>          
-            ) : null} */}
-            {location.href === "http://localhost:3000/Cart" ? (
+            {location.href === "https://graceshopper-betterbuy.herokuapp.com/Cart" ? (
               <>
                 <EditQuantity
                   thisProduct={thisProduct}

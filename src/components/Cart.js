@@ -1,5 +1,3 @@
-// when you update quantity as a logged in user, the new quantity doesn't render. Please go to another component and then come back to the cart and then you'll see the new quantity.
-
 import React, { useState, useEffect } from "react";
 import { getCartProducts, getCartById } from "../axios-services";
 import { SingleCartProduct } from "./";
@@ -7,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 
 const Cart = ({ cart, cartInfo, setCartInfo, loggedIn, setCart }) => {
   const [cartProducts, setCartProducts] = useState([]);
-  const [cartEmpty, setCartEmpty] = useState(false);
   const string = localStorage.getItem("user");
   const user = JSON.parse(string);
   const navigate = useNavigate();

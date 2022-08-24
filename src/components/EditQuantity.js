@@ -10,6 +10,7 @@ const EditQuantity = ({
 }) => {
   const [editForm, setEditForm] = useState(false);
   const [error, setError] = useState(null);
+  const [refresh, setRefresh] = useState(false);
   const [quantity, setQuantity] = useState(
     thisProduct ? thisProduct.quantity : 1
   );
@@ -54,7 +55,7 @@ const EditQuantity = ({
           required={true}
           onChange={quantityChange}
         />
-        <button type="submit" onClick={() => setCartInfo(!cartInfo)}>
+        <button type="submit" onClick={() => {setCartInfo(!cartInfo); setRefresh(true)}}>
           UPDATE
         </button>
       </form>
