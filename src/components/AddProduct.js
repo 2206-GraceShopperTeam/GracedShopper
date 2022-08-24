@@ -8,7 +8,9 @@ const AddProduct = () => {
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
   const [picture, setPicture] = useState("");
+  const [empty, setEmpty] = useState(false);
   const navigate = useNavigate();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const token = localStorage.getItem("token");
@@ -29,9 +31,12 @@ const AddProduct = () => {
       setPrice("");
       setPicture("");
       setCategory("");
+      setEmpty(true);
       return newProduct;
     }
   };
+
+  UseEffect(()=>{},[empty])
 
   const nameChange = (event) => {
     setName(event.target.value);

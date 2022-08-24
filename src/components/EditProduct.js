@@ -119,6 +119,7 @@ const EditProduct = ({ alterProduct,setAlterProduct, setProduct,product, setUpda
             <option value="ASUS">ASUS</option>
             <option value="Apple">Apple</option>
           </select>
+          <button type="submit">☑️</button>
       </div>
       <div className={editPicture ? "prodPicture " : "hidden"}>
         <form onSubmit={handleChange}>
