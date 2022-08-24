@@ -12,6 +12,7 @@ const connectionString =
 //       : undefined,
 // });
 
-const client = new Client("https://localhost:5432/GraceShopper");
+const client = new Client(process.env.DATABASE_URL ||"https://localhost:5432/GraceShopper");
+
 
 module.exports = client;
