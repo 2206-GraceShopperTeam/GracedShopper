@@ -1,3 +1,5 @@
+// If you go to update a product but only want to change the brand, it won't work. You'll need to update something else along with the updated brand for the change to happen.
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { createProduct } from "../axios-services";
