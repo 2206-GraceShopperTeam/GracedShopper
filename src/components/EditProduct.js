@@ -1,3 +1,5 @@
+// If you go to update a product but only want to change the brand, it won't work. You'll need to update something else along with the updated brand for the change to take place.
+
 import React, { useEffect, useState } from "react";
 import { TbEdit } from "react-icons/tb";
 import { BiWindowClose,BiTrash } from "react-icons/bi";

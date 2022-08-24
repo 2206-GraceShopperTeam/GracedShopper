@@ -45,7 +45,7 @@ const Home = ({ setCart, loggedIn }) => {
           alt="mac"
         />
       </div>
-      <div className="signUp">
+      {!loggedIn ? <div className="signUp">
         <h2 className="catcher">Sign-Up today</h2>
         <p className="pitch">
           When you create an account today
@@ -61,7 +61,9 @@ const Home = ({ setCart, loggedIn }) => {
         >
           Sign-Up
         </button>
-      </div>
+      </div> : <div className="signUp">
+        <h2 className="catcher">{`Welcome to Better Buy, ${user.name}!`}</h2>
+      </div>}
       <div className="stock">
         <h2 className="ourStock">Our Stock</h2>
         <p className="howMany">
