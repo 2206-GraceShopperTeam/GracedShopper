@@ -25,13 +25,7 @@ const AddProduct = () => {
     if ("error" in newProduct) {
       alert("An product with that name already exists please try again!");
     } else {
-      
-      setName("");
-      setDescription("");
-      setPrice("");
-      setPicture("");
-      setCategory("");
-      setEmpty(true);
+      navigate("/Products")
       alert("product was created!");
       return newProduct;
     }
