@@ -1,6 +1,8 @@
+const BASE = "https://graceshopper-betterbuy.herokuapp.com/api"
+
 // Users
 export async function register(regEmail, regPassword, name, address) {
-  const response = await fetch(`http://localhost:4000/api/users/register`, {
+  const response = await fetch(`${BASE}/users/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -31,7 +33,7 @@ export async function login(email, password) {
     }),
   };
   const response = await fetch(
-    `http://localhost:4000/api/users/login`,
+    `${BASE}/users/login`,
     request
   );
   const result = await response.json();
@@ -41,7 +43,7 @@ export async function login(email, password) {
 
 export async function getAllUsers() {
   try {
-    const response = await fetch(`http://localhost:4000/api/users`);
+    const response = await fetch(`${BASE}/users`);
     const users = await response.json();
     return users;
   } catch (error) {
@@ -50,7 +52,7 @@ export async function getAllUsers() {
 }
 
 export async function editUserInfo(userId, name, email, address) {
-  const response = await fetch(`http://localhost:4000/api/users/${userId}`, {
+  const response = await fetch(`${BASE}/users/${userId}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -67,7 +69,7 @@ export async function editUserInfo(userId, name, email, address) {
 
 export async function whoAmI(token) {
   try {
-    const response = await fetch(`http://localhost:4000/api/users/me`, {
+    const response = await fetch(`${BASE}/users/me`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -89,7 +91,7 @@ export async function createProduct(
   category,
   picture
 ) {
-  const response = await fetch(`http://localhost:4000/api/products`, {
+  const response = await fetch(`${BASE}/products`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -108,7 +110,7 @@ export async function createProduct(
 }
 
 export async function getProducts() {
-  const response = await fetch(`http://localhost:4000/api/products`, {
+  const response = await fetch(`${BASE}/products`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -120,7 +122,7 @@ export async function getProducts() {
 
 export async function getProductById(productId) {
   const response = await fetch(
-    `http://localhost:4000/api/products/${productId}`,
+    `${BASE}/products/${productId}`,
     {
       method: "GET",
       headers: {
@@ -142,7 +144,7 @@ export async function editProduct(
   category}
 ) {
   const response = await fetch(
-    `http://localhost:4000/api/products/${productId}`,
+    `${BASE}/products/${productId}`,
     {
       method: "PATCH",
       headers: {
@@ -164,7 +166,7 @@ export async function editProduct(
 
 export async function deleteProduct(productId) {
   const response = await fetch(
-    `http://localhost:4000/api/products/${productId}`,
+    `${BASE}/products/${productId}`,
     {
       method: "DELETE",
       headers: {
@@ -179,7 +181,7 @@ export async function deleteProduct(productId) {
 // Cart Products
 export async function addToCartProducts(cartId, product_id, quantity) {
   const response = await fetch(
-    `http://localhost:4000/api/cartProducts/${cartId}`,
+    `${BASE}/cartProducts/${cartId}`,
     {
       method: "POST",
       headers: {
@@ -196,7 +198,7 @@ export async function addToCartProducts(cartId, product_id, quantity) {
 }
 
 export async function getCartProducts() {
-  const response = await fetch(`http://localhost:4000/api/cartProducts/`, {
+  const response = await fetch(`${BASE}/cartProducts/`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -207,7 +209,7 @@ export async function getCartProducts() {
 }
 
 export async function getCartProductsById(id) {
-  const response = await fetch(`http://localhost:4000/api/cartProducts/${id}`, {
+  const response = await fetch(`${BASE}/cartProducts/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -219,7 +221,7 @@ export async function getCartProductsById(id) {
 
 export async function editCartProduct(cartProductId, quantity) {
   const response = await fetch(
-    `http://localhost:4000/api/cartProducts/${cartProductId}`,
+    `${BASE}/cartProducts/${cartProductId}`,
     {
       method: "PATCH",
       headers: {
@@ -237,7 +239,7 @@ export async function editCartProduct(cartProductId, quantity) {
 export async function removeCartProduct(cartProductId, product_id) {
   try {
     const response = await fetch(
-    `http://localhost:4000/api/cartProducts/${cartProductId}`,
+    `${BASE}/cartProducts/${cartProductId}`,
     {
       method: "DELETE",
       headers: {
@@ -259,7 +261,7 @@ export async function removeCartProduct(cartProductId, product_id) {
 // Cart
 export async function createCart(id) {
   try {
-    const response = await fetch(`http://localhost:4000/api/cart/createCart`, {
+    const response = await fetch(`${BASE}/cart/createCart`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -277,7 +279,7 @@ export async function createCart(id) {
 
 export async function getCartById(id) {
   try {
-    const response = await fetch(`http://localhost:4000/api/cart/${id}`);
+    const response = await fetch(`${BASE}/cart/${id}`);
     const cart = await response.json();
     return cart;
   } catch (error) {
@@ -287,7 +289,7 @@ export async function getCartById(id) {
 
 export async function emptyCart(cartId) {
     const response = await fetch(
-      `http://localhost:4000/api/cart/${cartId}`,
+      `${BASE}/cart/${cartId}`,
       {
         method: "DELETE",
         headers: {
