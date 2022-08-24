@@ -36,7 +36,7 @@ const AddProduct = () => {
     }
   };
 
-  UseEffect(()=>{},[empty])
+  useEffect(()=>{},[empty])
 
   const nameChange = (event) => {
     setName(event.target.value);
