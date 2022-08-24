@@ -175,7 +175,6 @@ export async function deleteProduct(productId) {
     }
   );
   const result = await response.json();
-  return result;
 }
 
 // Cart Products
