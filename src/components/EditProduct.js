@@ -112,15 +112,17 @@ const EditProduct = ({ alterProduct,setAlterProduct, setProduct,product, setUpda
       <div className={!editPicture ? "prodPicture" : "hidden"}>
                   <img src={product.picture} className="productPicture" />
         <TbEdit className="editButton" onClick={() => setEditPicture(true)} />
-        <label>Choose a Brand:</label>
-          <select id="brand" onChange={categoryChange}>
-          <option value="">choose here</option>
+        <div className={!editCategory ? "prodCategory" : "hidden"}> 
+        Brand: {`${product.category}`}
+        <TbEdit className="editButton" onClick={() => setEditCategory(true)} /></div>
+        <label className={editCategory ? "prodCategory" : "hidden"}>Choose a Brand:</label>
+          <select id="brand" onChange={(e) => setPrice(e.target.value)} className={editCategory ? "prodCategory" : "hidden"}>
             <option value="DELL">DELL</option>
             <option value="HP">HP</option>
             <option value="ASUS">ASUS</option>
             <option value="Apple">Apple</option>
           </select>
-          <button type="submit">☑️</button>
+          <button type="submit"  className={editCategory ? "prodCategory" : "hidden"}onClick={() => {setEditCategory(false);setReload(!reload)}}>☑️</button>
       </div>
       <div className={editPicture ? "prodPicture " : "hidden"}>
         <form onSubmit={handleChange}>
