@@ -6,7 +6,7 @@ const AddProduct = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
-  const [category, setCategory] = useState("DELL");
+  const [category, setCategory] = useState("");
   const [picture, setPicture] = useState("");
   const navigate = useNavigate();
   const handleSubmit = async (event) => {
@@ -24,6 +24,11 @@ const AddProduct = () => {
       alert("An product with that name already exists please try again!");
     } else {
       alert("product was created!");
+      setName("");
+      setDescription("");
+      setPrice("");
+      setPicture("");
+      setCategory("");
       return newProduct;
     }
   };
@@ -89,6 +94,7 @@ const AddProduct = () => {
           />
           <label className="createField">Choose a Brand:</label>
           <select className="createField" id="brand" onChange={categoryChange}>
+          <option value="">choose here</option>
             <option value="DELL">DELL</option>
             <option value="HP">HP</option>
             <option value="ASUS">ASUS</option>

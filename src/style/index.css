@@ -690,4 +690,5 @@ body {
 display: flex;
 position: relative;
 top: 2vh;
+cursor: pointer;
 }
