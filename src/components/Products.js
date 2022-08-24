@@ -68,8 +68,8 @@ const Products = ({
   const handleDelete = async () => {
     const productId = selectedProduct.id;
     setRemovedProduct(true);
-    await deleteProduct(productId);
     alert("Product Deleted");
+    await deleteProduct(productId);
   };
 
   const addToCart = async () => {
