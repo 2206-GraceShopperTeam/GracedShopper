@@ -9,7 +9,15 @@ import {
 import { useNavigate } from "react-router";
 import EditProduct from "./EditProduct";
 
-const Products = ({ loggedIn, cart, setCartInfo, cartInfo, setCart,setUpdated,updated }) => {
+const Products = ({
+  loggedIn,
+  cart,
+  setCartInfo,
+  cartInfo,
+  setCart,
+  setUpdated,
+  updated,
+}) => {
   const navigate = useNavigate();
   const [allProducts, setAllProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState([]);
@@ -31,9 +39,7 @@ const Products = ({ loggedIn, cart, setCartInfo, cartInfo, setCart,setUpdated,up
       setCart([]);
     }
   }, []);
-  useEffect(()=>{
-  },[selectedProduct])
-
+  useEffect(() => {}, [selectedProduct]);
 
   const productClick = (product) => {
     navigate(`/products/${product.id}`);
@@ -87,7 +93,7 @@ const Products = ({ loggedIn, cart, setCartInfo, cartInfo, setCart,setUpdated,up
     );
     if (!searchCart) {
       selectedProduct.quantity = 1;
-     let addedProduct = await addToCartProducts(
+      let addedProduct = await addToCartProducts(
         user.id,
         selectedProduct.id,
         selectedProduct.quantity
@@ -176,13 +182,29 @@ const Products = ({ loggedIn, cart, setCartInfo, cartInfo, setCart,setUpdated,up
                   >
                     delete
                   </button>
-                  <button onClick={()=>{setAlterProduct(true);setProduct(selectedProduct) }}>update</button>
+                  <button
+                    onClick={() => {
+                      setAlterProduct(true);
+                      setProduct(selectedProduct);
+                    }}
+                  >
+                    update
+                  </button>
                 </div>
               </div>
             );
           })
         : null}
-        {alterProduct ? <EditProduct  alterProduct={alterProduct} setAlterProduct={setAlterProduct} product={product} setProduct={product} setUpdated={setUpdated} updated={updated}/>: null}
+      {alterProduct ? (
+        <EditProduct
+          alterProduct={alterProduct}
+          setAlterProduct={setAlterProduct}
+          product={product}
+          setProduct={product}
+          setUpdated={setUpdated}
+          updated={updated}
+        />
+      ) : null}
     </div>
   );
 };

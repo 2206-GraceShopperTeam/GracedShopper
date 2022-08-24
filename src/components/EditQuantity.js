@@ -37,6 +37,7 @@ const EditQuantity = ({
       if (searchCart) {
         const result = await editCartProduct(searchCart.id, quantity);
         setCartInfo(!cartInfo);
+        setRefresh(true);
       }
     }
   };
