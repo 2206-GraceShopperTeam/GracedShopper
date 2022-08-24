@@ -114,6 +114,7 @@ const EditProduct = ({ alterProduct,setAlterProduct, setProduct,product, setUpda
         <TbEdit className="editButton" onClick={() => setEditPicture(true)} />
         <label>Choose a Brand:</label>
           <select id="brand" onChange={categoryChange}>
+          <option value="">choose here</option>
             <option value="DELL">DELL</option>
             <option value="HP">HP</option>
             <option value="ASUS">ASUS</option>
