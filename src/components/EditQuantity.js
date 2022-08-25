@@ -3,7 +3,6 @@ import { editCartProduct } from "../axios-services";
 
 const EditQuantity = ({
   thisProduct,
-  setThisProduct,
   cart,
   setCartInfo,
   cartInfo,
@@ -36,9 +35,8 @@ const EditQuantity = ({
         (product) => product.name === thisProduct.name
       );
       if (searchCart) {
-        const result = await editCartProduct(searchCart.id, quantity);
+        await editCartProduct(searchCart.id, quantity);
         setCartInfo(!cartInfo);
-        setThisProduct(result);
       }
     }
   };
