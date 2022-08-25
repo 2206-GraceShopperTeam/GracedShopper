@@ -13,7 +13,6 @@ const SingleCartProduct = ({
   product,
   cart2,
   cart,
-  setCart,
   cartInfo,
   setCartInfo,
   loggedIn,
@@ -21,7 +20,6 @@ const SingleCartProduct = ({
   const navigate = useNavigate();
   const [thisProduct, setThisProduct] = useState(product);
   const [selectedProduct, setSelectedProduct] = useState([]);
-  const [cartEmpty, setCartEmpty] = useState(false);
   const string = localStorage.getItem("user");
   const user = JSON.parse(string);
   let { productId } = useParams();
@@ -36,9 +34,7 @@ const SingleCartProduct = ({
     }
   }, [selectedProduct]);
 
-  useEffect(() => {
-
-  }, [cartInfo]);
+  useEffect(() => {}, [cartInfo]);
 
   const dellHandleClick = (event) => {
     event.preventDefault();
@@ -68,10 +64,10 @@ const SingleCartProduct = ({
     if (!searchCart) {
       selectedProduct.quantity = 1;
       cart.push(selectedProduct);
-      alert("item added to cart");
+      alert("Item added to cart!");
     } else {
       searchCart.quantity++;
-      alert("Quantity increased");
+      alert("Quantity increased!");
     }
   };
 
@@ -82,17 +78,17 @@ const SingleCartProduct = ({
     );
     if (!searchCart) {
       selectedProduct.quantity = 1;
-     let addedProduct = await addToCartProducts(
+      await addToCartProducts(
         user.id,
         selectedProduct.id,
         selectedProduct.quantity
       );
       setCartInfo(!cartInfo);
-      alert("item added to cart");
+      alert("Item added to cart!");
     } else {
-      alert("Quantity increased");
+      alert("Quantity increased!");
       searchCart.quantity++;
-      const result = await editCartProduct(searchCart.id, searchCart.quantity);
+      await editCartProduct(searchCart.id, searchCart.quantity);
       setCartInfo(!cartInfo);
     }
   };
@@ -143,13 +139,15 @@ const SingleCartProduct = ({
               <b>Brand: </b>
               {thisProduct.category}
             </p>
-            {location.href === "https://graceshopper-betterbuy.herokuapp.com/Cart" ? (
+            {location.href ===
+            "https://graceshopper-betterbuy.herokuapp.com/Cart" ? (
               <p>
                 <b>Quantity: </b>
                 {thisProduct.quantity}
               </p>
             ) : null}
-            {location.href !== "https://graceshopper-betterbuy.herokuapp.com/Cart" ? (
+            {location.href !==
+            "https://graceshopper-betterbuy.herokuapp.com/Cart" ? (
               <button
                 onClick={() => {
                   loggedIn ? addToUserCart() : addToCart();
@@ -158,20 +156,18 @@ const SingleCartProduct = ({
                 Add to cart
               </button>
             ) : null}
-            {location.href !== "https://graceshopper-betterbuy.herokuapp.com/Cart" ? (
+            {location.href !==
+            "https://graceshopper-betterbuy.herokuapp.com/Cart" ? (
               <div className="pictureDiv">
                 <img src={thisProduct.picture} className="productPicture" />
               </div>
             ) : null}
-            {location.href === "https://graceshopper-betterbuy.herokuapp.com/Cart" ? (
+            {location.href ===
+            "https://graceshopper-betterbuy.herokuapp.com/Cart" ? (
               <>
                 <EditQuantity
                   thisProduct={thisProduct}
-                  setThisProduct={setThisProduct}
-                  cartProductId={thisProduct.id}
-                  setCartEmpty={setCartEmpty}
                   cart={cart2}
-                  setCart={setCart}
                   setCartInfo={setCartInfo}
                   cartInfo={cartInfo}
                   loggedIn={loggedIn}
@@ -179,10 +175,7 @@ const SingleCartProduct = ({
                 <RemoveCartProduct
                   setThisProduct={setThisProduct}
                   thisProduct={thisProduct}
-                  cartProductId={thisProduct.id}
                   cart={cart2}
-                  setCartEmpty={setCartEmpty}
-                  cartEmpty={cartEmpty}
                   cartInfo={cartInfo}
                   setCartInfo={setCartInfo}
                   loggedIn={loggedIn}

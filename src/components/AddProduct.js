@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { createProduct } from "../axios-services";
 
@@ -10,7 +10,7 @@ const AddProduct = () => {
   const [picture, setPicture] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async () => {
     const token = localStorage.getItem("token");
     const newProduct = await createProduct(
       token,
@@ -21,14 +21,14 @@ const AddProduct = () => {
       picture
     );
     if ("error" in newProduct) {
-      alert("An product with that name already exists please try again!");
+      alert("A product with that name already exists. Please try again!");
     } else {
       setName("");
       setDescription("");
       setPrice("");
       setPicture("");
       setCategory("");
-      alert("product was created!");
+      alert("Product was created!");
       return newProduct;
     }
   };
@@ -55,10 +55,7 @@ const AddProduct = () => {
 
   return (
     <div className="AddProduct">
-      <div className="AddPTitle">
-        Add New Product
-       
-      </div>
+      <div className="AddPTitle">Add New Product</div>
       <form className="addPF">
         <div className="createForm">
           <input
@@ -85,7 +82,7 @@ const AddProduct = () => {
             onChange={pictureChange}
           />
           <input
-          className="createField"
+            className="createField"
             type="number"
             name="price"
             placeholder="Price"
@@ -94,7 +91,7 @@ const AddProduct = () => {
           />
           <label className="createField">Choose a Brand:</label>
           <select className="createField" id="brand" onChange={categoryChange}>
-          <option value="">choose here</option>
+            <option value="">choose here</option>
             <option value="DELL">DELL</option>
             <option value="HP">HP</option>
             <option value="ASUS">ASUS</option>
@@ -105,9 +102,14 @@ const AddProduct = () => {
           </button>
         </div>
       </form>
-      <p className="xButton" onClick={() => {navigate("/Products")}}>
-          ❌
-        </p>
+      <p
+        className="xButton"
+        onClick={() => {
+          navigate("/Products");
+        }}
+      >
+        ❌
+      </p>
     </div>
   );
 };

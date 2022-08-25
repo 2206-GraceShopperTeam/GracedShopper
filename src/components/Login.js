@@ -36,12 +36,12 @@ const Login = ({ setLoggedIn, loggedIn, setUser }) => {
         setConfirmEmail("");
         setName("");
         setAddress("");
-        alert("Registration successful please Login");
+        alert("Registration successful! Please login.");
         setSignUp(false);
         await createCart(newUser.user.id);
       }
     } catch (error) {
-      alert("register failed");
+      alert("Registration failed.");
     }
   };
 

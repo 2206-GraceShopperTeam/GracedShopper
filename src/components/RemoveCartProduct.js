@@ -11,19 +11,17 @@ const RemoveCartProduct = ({
 }) => {
   const handleDelete = async (event) => {
     event.preventDefault();
-      if (loggedIn) {
-      const result = await removeCartProduct(
-        thisProduct.cart_id,
-        thisProduct.id
-      )}
+    if (loggedIn) {
+      await removeCartProduct(thisProduct.cart_id, thisProduct.id);
+    }
 
     if (localStorage.getItem("cart")) {
       setThisProduct(null);
       cart.pop();
       setCartInfo(!cartInfo);
       alert("Product has been removed!");
-    }}
-  
+    }
+  };
 
   return (
     <div>

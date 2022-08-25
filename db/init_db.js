@@ -106,7 +106,7 @@ async function createInitialUsers() {
         admin: false,
       },
     ];
-    const users = await Promise.all(usersToCreate.map(createUser));
+    await Promise.all(usersToCreate.map(createUser));
     console.log("Users created:");
     console.log("Finished creating users!");
   } catch (error) {
@@ -224,7 +224,7 @@ async function createInitialProducts() {
           "https://s.yimg.com/uu/api/res/1.2/kxy_AeoAwvwByQob1BNsyQ--~B/aD0xMzM0O3c9MjAwMDthcHBpZD15dGFjaHlvbg--/https://s.yimg.com/os/creatr-uploaded-images/2020-11/c8aea820-28a0-11eb-9f89-5ddd62987703.cf.jpg"),
       },
     ];
-    const products = await Promise.all(productsToCreate.map(createProduct));
+    await Promise.all(productsToCreate.map(createProduct));
     console.log("Products created:");
     console.log("Finished creating products!");
   } catch (error) {
@@ -255,7 +255,7 @@ async function createInitialCart() {
         is_ordered: false,
       },
     ];
-    const cart = await Promise.all(cartToCreate.map(createCart));
+    await Promise.all(cartToCreate.map(createCart));
     console.log("Cart created:");
     console.log("Finished creating cart!");
   } catch (error) {
@@ -266,7 +266,7 @@ async function createInitialCart() {
 
 async function createInitialCartProducts() {
   console.log("Starting to create cart_products...");
-  const carts = await getAllCarts();
+  await getAllCarts();
   const products = await getAllProducts();
   try {
     const cartProductsToCreate = [
@@ -286,9 +286,7 @@ async function createInitialCartProducts() {
         quantity: 3,
       },
     ];
-    const cart = await Promise.all(
-      cartProductsToCreate.map(createCartProducts)
-    );
+    await Promise.all(cartProductsToCreate.map(createCartProducts));
     console.log("Cart_products created:");
     console.log("Finished creating cart_products!");
   } catch (error) {

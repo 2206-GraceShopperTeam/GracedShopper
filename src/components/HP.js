@@ -54,10 +54,10 @@ const HP = ({ cart, cartInfo, setCartInfo, loggedIn }) => {
     if (!searchCart) {
       selectedProduct.quantity = 1;
       cart.push(selectedProduct);
-      alert("item added to cart");
+      alert("Item added to cart!");
     } else {
       searchCart.quantity++;
-      alert("Quantity increased");
+      alert("Quantity increased!");
     }
   };
 
@@ -68,17 +68,17 @@ const HP = ({ cart, cartInfo, setCartInfo, loggedIn }) => {
     );
     if (!searchCart) {
       selectedProduct.quantity = 1;
-     let addedProduct = await addToCartProducts(
+      await addToCartProducts(
         user.id,
         selectedProduct.id,
         selectedProduct.quantity
       );
       setCartInfo(!cartInfo);
-      alert("item added to cart");
+      alert("Item added to cart!");
     } else {
-      alert("Quantity increased");
+      alert("Quantity increased!");
       searchCart.quantity++;
-      const result = await editCartProduct(searchCart.id, searchCart.quantity);
+      await editCartProduct(searchCart.id, searchCart.quantity);
       setCartInfo(!cartInfo);
     }
   };

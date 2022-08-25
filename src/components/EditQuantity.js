@@ -35,7 +35,7 @@ const EditQuantity = ({
         (product) => product.name === thisProduct.name
       );
       if (searchCart) {
-        const result = await editCartProduct(searchCart.id, quantity);
+        await editCartProduct(searchCart.id, quantity);
         setCartInfo(!cartInfo);
         setRefresh(true);
       }
@@ -56,7 +56,13 @@ const EditQuantity = ({
           required={true}
           onChange={quantityChange}
         />
-        <button type="submit" onClick={() => {setCartInfo(!cartInfo); setRefresh(true)}}>
+        <button
+          type="submit"
+          onClick={() => {
+            setCartInfo(!cartInfo);
+            setRefresh(true);
+          }}
+        >
           UPDATE
         </button>
       </form>

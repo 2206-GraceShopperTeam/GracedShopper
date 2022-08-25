@@ -15,7 +15,6 @@ const Products = ({
   setCartInfo,
   cartInfo,
   setCart,
-  setUpdated,
   updated,
 }) => {
   const navigate = useNavigate();
@@ -26,6 +25,7 @@ const Products = ({
   const [alterProduct, setAlterProduct] = useState(false);
   const string = localStorage.getItem("user");
   const user = JSON.parse(string);
+
   useEffect(() => {
     async function fetchProducts() {
       const returnProducts = await getProducts();
@@ -39,6 +39,7 @@ const Products = ({
       setCart([]);
     }
   }, []);
+
   useEffect(() => {}, [selectedProduct]);
 
   const productClick = (product) => {
@@ -68,7 +69,7 @@ const Products = ({
   const handleDelete = async () => {
     const productId = selectedProduct.id;
     setRemovedProduct(true);
-    alert("Product Deleted");
+    alert("Product Deleted.");
     await deleteProduct(productId);
   };
 
@@ -80,10 +81,10 @@ const Products = ({
     if (!searchCart) {
       selectedProduct.quantity = 1;
       cart.push(selectedProduct);
-      alert("item added to cart");
+      alert("Item added to cart!");
     } else {
       searchCart.quantity++;
-      alert("Quantity increased");
+      alert("Quantity increased!");
     }
   };
 
@@ -94,17 +95,17 @@ const Products = ({
     );
     if (!searchCart) {
       selectedProduct.quantity = 1;
-      let addedProduct = await addToCartProducts(
+      await addToCartProducts(
         user.id,
         selectedProduct.id,
         selectedProduct.quantity
       );
       setCartInfo(!cartInfo);
-      alert("item added to cart");
+      alert("Item added to cart!");
     } else {
-      alert("Quantity increased");
+      alert("Quantity increased!");
       searchCart.quantity++;
-      const result = await editCartProduct(searchCart.id, searchCart.quantity);
+      await editCartProduct(searchCart.id, searchCart.quantity);
       setCartInfo(!cartInfo);
     }
   };
@@ -198,11 +199,9 @@ const Products = ({
         : null}
       {alterProduct ? (
         <EditProduct
-          alterProduct={alterProduct}
           setAlterProduct={setAlterProduct}
           product={product}
           setProduct={product}
-          setUpdated={setUpdated}
           updated={updated}
         />
       ) : null}

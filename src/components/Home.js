@@ -45,25 +45,29 @@ const Home = ({ setCart, loggedIn }) => {
           alt="mac"
         />
       </div>
-      {!loggedIn ? <div className="signUp">
-        <h2 className="catcher">Sign-Up today</h2>
-        <p className="pitch">
-          When you create an account today
-          <br /> you'll qualify for free shipping on all orders.
-          <br />
-          So sign up while the promo lasts!
-        </p>
-        <button
-          className="offerBttn"
-          onClick={() => {
-            navigate("/Login");
-          }}
-        >
-          Sign-Up
-        </button>
-      </div> : <div className="signUp">
-        <h2 className="catcher">{`Welcome to Better Buy, ${user.name}!`}</h2>
-      </div>}
+      {!loggedIn ? (
+        <div className="signUp">
+          <h2 className="catcher">Sign-Up today</h2>
+          <p className="pitch">
+            When you create an account today
+            <br /> you'll qualify for free shipping on all orders.
+            <br />
+            So sign up while the promo lasts!
+          </p>
+          <button
+            className="offerBttn"
+            onClick={() => {
+              navigate("/Login");
+            }}
+          >
+            Sign-Up
+          </button>
+        </div>
+      ) : (
+        <div className="signUp">
+          <h2 className="catcher">{`Welcome to Better Buy, ${user.name}!`}</h2>
+        </div>
+      )}
       <div className="stock">
         <h2 className="ourStock">Our Stock</h2>
         <p className="howMany">
