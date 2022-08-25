@@ -1,5 +1,4 @@
 const BASE = "https://graceshopper-betterbuy.herokuapp.com/api"
-// const BASE = "http://localhost:4000/api"
 
 // Users
 export async function register(regEmail, regPassword, name, address) {

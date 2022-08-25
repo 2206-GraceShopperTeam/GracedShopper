@@ -29,7 +29,6 @@ const Login = ({ setLoggedIn, loggedIn, setUser }) => {
         setConfirmEmail("");
       }
       const newUser = await register(regEmail, regPassword, name, address);
-      console.log(newUser, "banana")
       if (newUser) {
         setRegEmail("");
         setRegPassword("");
