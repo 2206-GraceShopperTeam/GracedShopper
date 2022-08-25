@@ -1,5 +1,3 @@
-// If you go to update a product but only want to change the brand, it won't work. You'll need to update something else along with the updated brand for the change to take place.
-
 import React, { useEffect, useState } from "react";
 import { TbEdit } from "react-icons/tb";
 import { BiWindowClose, BiTrash } from "react-icons/bi";
@@ -132,36 +130,21 @@ const EditProduct = ({ setAlterProduct, setProduct, product, updated }) => {
       <div className={!editPicture ? "prodPicture" : "hidden"}>
         <img src={product.picture} className="productPicture" />
         <TbEdit className="editButton" onClick={() => setEditPicture(true)} />
-        <div className={!editCategory ? "prodCategory" : "hidden"}>
-          Brand: {`${product.category}`}
-          <TbEdit
-            className="editButton"
-            onClick={() => setEditCategory(true)}
-          />
         </div>
-        <label className={editCategory ? "prodCategory" : "hidden"}>
-          Choose a Brand:
-        </label>
-        <select
-          id="brand"
-          onChange={(e) => setPrice(e.target.value)}
-          className={editCategory ? "prodCategory" : "hidden"}
-        >
-          <option value="DELL">DELL</option>
-          <option value="HP">HP</option>
-          <option value="ASUS">ASUS</option>
-          <option value="Apple">Apple</option>
-        </select>
-        <button
-          type="submit"
-          className={editCategory ? "prodCategory" : "hidden"}
-          onClick={() => {
-            setEditCategory(false);
-            setReload(!reload);
-          }}
-        >
-          ☑️
-        </button>
+        <div className={!editCategory ? "prodCategory" : "hidden"}> 
+        Brand: {`${product.category}`}
+        <TbEdit className="editButton" onClick={() => setEditCategory(true)} /></div>
+        <div>
+        <form onSubmit={handleChange}>
+        <label className={editCategory ? "prodCategory" : "hidden"}>Choose a Brand:</label>
+          <select id="brand" onChange={categoryChange} className={editCategory ? "prodCategory" : "hidden"}>
+            <option value={product.category}>Choose Brand</option>
+            <option value="DELL">DELL</option>
+            <option value="HP">HP</option>
+            <option value="ASUS">ASUS</option>
+            <option value="Apple">Apple</option>
+          </select>
+          <button  className={editCategory ? "prodCategory" : "hidden"}onClick={() => {setEditCategory(false);setReload(!reload);}}>☑️</button></form>
       </div>
       <div className={editPicture ? "prodPicture " : "hidden"}>
         <form onSubmit={handleChange}>
