@@ -171,6 +171,7 @@ const SingleCartProduct = ({
                   setCartInfo={setCartInfo}
                   cartInfo={cartInfo}
                   loggedIn={loggedIn}
+                  setThisProduct={setThisProduct}
                 />
                 <RemoveCartProduct
                   setThisProduct={setThisProduct}

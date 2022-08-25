@@ -1,5 +1,3 @@
-// when you update quantity as a logged in user, the new quantity doesn't render. Please go to another component and then come back to the cart and then you'll see the new quantity.
-
 import React, { useState, useEffect } from "react";
 import { getCartProducts, getCartById } from "../axios-services";
 import { SingleCartProduct } from "./";
