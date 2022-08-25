@@ -46,8 +46,7 @@ const App = () => {
   }, [updated]);
 
   useEffect(() => {
-
-    if (cart && cart.length >= 0 ) {
+    if (cart && cart.length >= 0) {
       localStorage.setItem("cart", JSON.stringify(cart));
     }
   }, [cartInfo]);
@@ -61,25 +60,158 @@ const App = () => {
         setUser={setUser}
       />
       <Routes>
-         <Route path="/EditProduct" element={<EditProduct cart={cart} setCart={setCart} cartInfo={cartInfo} setCartInfo={setCartInfo} loggedIn={loggedIn} setUpdated={setUpdated} updated={updated}/>} />
-         <Route path="/EditQuantity" element={<EditQuantity cart={cart} setCart={setCart} cartInfo={cartInfo} setCartInfo={setCartInfo} loggedIn={loggedIn}/>} />
-         <Route path="/RemoveCartProduct" element={<RemoveCartProduct cartInfo={cartInfo} setCartInfo={setCartInfo} loggedIn={loggedIn} />} />
-         <Route path="/SingleCartProduct" element={<SingleCartProduct cart={cart} setCart={setCart} setCartInfo={setCartInfo} cartInfo={cartInfo} loggedIn={loggedIn}/>} />
-         <Route path="/AddProduct" element={<AddProduct />} />
-         <Route path="/Checkout" element={<Checkout cart={cart} setCart={setCart} loggedIn={loggedIn} setCartInfo={setCartInfo}/>} />
-         <Route path="/AddProduct" element={<AddProduct />} />
-         <Route path="/AllUsers" element={<AllUsers />} />
-         <Route path="/UserInfo" element={<UserInfo user={user} setUser={setUser} setUpdated={setUpdated} updated={updated}/>} />
-         <Route path="/Login" element={<Login setLoggedIn={setLoggedIn} loggedIn={loggedIn} user={user} setUser={setUser}/>} />
-         <Route path="/Products" element={<Products setLoggedIn={setLoggedIn} loggedIn={loggedIn} user={user} setUser={setUser} cart={cart} setCart={setCart} setCartInfo={setCartInfo} cartInfo={cartInfo} setUpdated={setUpdated} updated={updated}/>} />
-         <Route path="/Products/Dell" element={<Dell cart={cart} cartInfo={cartInfo} setCartInfo={setCartInfo} loggedIn={loggedIn}/>} />
-         <Route path="/Products/HP" element={<HP cart={cart} cartInfo={cartInfo} setCartInfo={setCartInfo} loggedIn={loggedIn}/>} />
-         <Route path="/Products/ASUS" element={<ASUS cart={cart} cartInfo={cartInfo} setCartInfo={setCartInfo} loggedIn={loggedIn}/>} />
-         <Route path="/Products/Apple" element={<Apple cart={cart} cartInfo={cartInfo} setCartInfo={setCartInfo} loggedIn={loggedIn}/>} />
-         <Route path="/Cart" element={<Cart cart={cart} loggedIn={loggedIn} setCart={setCart} setCartInfo={setCartInfo} cartInfo={cartInfo} />} />
-         <Route path="/Products/:productId" element={<SingleCartProduct cart={cart} setCart={setCart} setCartInfo={setCartInfo} cartInfo={cartInfo} loggedIn={loggedIn}/> } />
-         <Route path="/" element={<Home user={user} setCart={setCart} loggedIn={loggedIn}/>} />
-         
+        <Route
+          path="/EditProduct"
+          element={<EditProduct updated={updated} />}
+        />
+        <Route
+          path="/EditQuantity"
+          element={
+            <EditQuantity
+              cart={cart}
+              cartInfo={cartInfo}
+              setCartInfo={setCartInfo}
+              loggedIn={loggedIn}
+            />
+          }
+        />
+        <Route
+          path="/RemoveCartProduct"
+          element={
+            <RemoveCartProduct
+              cartInfo={cartInfo}
+              setCartInfo={setCartInfo}
+              loggedIn={loggedIn}
+            />
+          }
+        />
+        <Route
+          path="/SingleCartProduct"
+          element={
+            <SingleCartProduct
+              cart={cart}
+              setCart={setCart}
+              setCartInfo={setCartInfo}
+              cartInfo={cartInfo}
+              loggedIn={loggedIn}
+            />
+          }
+        />
+        <Route path="/AddProduct" element={<AddProduct />} />
+        <Route
+          path="/Checkout"
+          element={
+            <Checkout cart={cart} setCart={setCart} loggedIn={loggedIn} />
+          }
+        />
+        <Route path="/AllUsers" element={<AllUsers />} />
+        <Route
+          path="/UserInfo"
+          element={
+            <UserInfo
+              user={user}
+              setUser={setUser}
+              setUpdated={setUpdated}
+              updated={updated}
+            />
+          }
+        />
+        <Route
+          path="/Login"
+          element={
+            <Login
+              setLoggedIn={setLoggedIn}
+              loggedIn={loggedIn}
+              setUser={setUser}
+            />
+          }
+        />
+        <Route
+          path="/Products"
+          element={
+            <Products
+              loggedIn={loggedIn}
+              cart={cart}
+              setCart={setCart}
+              setCartInfo={setCartInfo}
+              cartInfo={cartInfo}
+              setUpdated={setUpdated}
+              updated={updated}
+            />
+          }
+        />
+        <Route
+          path="/Products/Dell"
+          element={
+            <Dell
+              cart={cart}
+              cartInfo={cartInfo}
+              setCartInfo={setCartInfo}
+              loggedIn={loggedIn}
+            />
+          }
+        />
+        <Route
+          path="/Products/HP"
+          element={
+            <HP
+              cart={cart}
+              cartInfo={cartInfo}
+              setCartInfo={setCartInfo}
+              loggedIn={loggedIn}
+            />
+          }
+        />
+        <Route
+          path="/Products/ASUS"
+          element={
+            <ASUS
+              cart={cart}
+              cartInfo={cartInfo}
+              setCartInfo={setCartInfo}
+              loggedIn={loggedIn}
+            />
+          }
+        />
+        <Route
+          path="/Products/Apple"
+          element={
+            <Apple
+              cart={cart}
+              cartInfo={cartInfo}
+              setCartInfo={setCartInfo}
+              loggedIn={loggedIn}
+            />
+          }
+        />
+        <Route
+          path="/Cart"
+          element={
+            <Cart
+              cart={cart}
+              loggedIn={loggedIn}
+              setCart={setCart}
+              setCartInfo={setCartInfo}
+              cartInfo={cartInfo}
+            />
+          }
+        />
+        <Route
+          path="/Products/:productId"
+          element={
+            <SingleCartProduct
+              cart={cart}
+              setCart={setCart}
+              setCartInfo={setCartInfo}
+              cartInfo={cartInfo}
+              loggedIn={loggedIn}
+            />
+          }
+        />
+        <Route
+          path="/"
+          element={<Home setCart={setCart} loggedIn={loggedIn} />}
+        />
       </Routes>
     </div>
   );

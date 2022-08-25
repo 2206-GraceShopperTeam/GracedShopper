@@ -15,7 +15,6 @@ const Products = ({
   setCartInfo,
   cartInfo,
   setCart,
-  setUpdated,
   updated,
 }) => {
   const navigate = useNavigate();
@@ -26,6 +25,7 @@ const Products = ({
   const [alterProduct, setAlterProduct] = useState(false);
   const string = localStorage.getItem("user");
   const user = JSON.parse(string);
+
   useEffect(() => {
     async function fetchProducts() {
       const returnProducts = await getProducts();
@@ -89,12 +89,13 @@ const Products = ({
 
   const addToUserCart = async () => {
     let cart = await getCartById(user.id);
+    console.log(cart, "orange")
     const searchCart = cart.find(
       (product) => product.name === selectedProduct.name
     );
     if (!searchCart) {
       selectedProduct.quantity = 1;
-      let addedProduct = await addToCartProducts(
+      await addToCartProducts(
         user.id,
         selectedProduct.id,
         selectedProduct.quantity
@@ -104,7 +105,7 @@ const Products = ({
     } else {
       alert("Quantity increased");
       searchCart.quantity++;
-      const result = await editCartProduct(searchCart.id, searchCart.quantity);
+      await editCartProduct(searchCart.id, searchCart.quantity);
       setCartInfo(!cartInfo);
     }
   };
@@ -198,11 +199,9 @@ const Products = ({
         : null}
       {alterProduct ? (
         <EditProduct
-          alterProduct={alterProduct}
           setAlterProduct={setAlterProduct}
           product={product}
           setProduct={product}
-          setUpdated={setUpdated}
           updated={updated}
         />
       ) : null}

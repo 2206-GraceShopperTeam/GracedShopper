@@ -5,7 +5,7 @@ import { TbEdit } from "react-icons/tb";
 import { BiWindowClose,BiTrash } from "react-icons/bi";
 import { editProduct,getProductById} from "../axios-services";
 
-const EditProduct = ({ alterProduct,setAlterProduct, setProduct,product, setUpdated, updated }) => {
+const EditProduct = ({ setAlterProduct, setProduct, product, updated }) => {
   const [reload, setReload] = useState(false);
   const [editName, setEditName] = useState(false);
   const [editDescription, setEditDescription] = useState(false);

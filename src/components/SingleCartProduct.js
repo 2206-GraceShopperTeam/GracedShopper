@@ -13,7 +13,6 @@ const SingleCartProduct = ({
   product,
   cart2,
   cart,
-  setCart,
   cartInfo,
   setCartInfo,
   loggedIn,
@@ -21,7 +20,6 @@ const SingleCartProduct = ({
   const navigate = useNavigate();
   const [thisProduct, setThisProduct] = useState(product);
   const [selectedProduct, setSelectedProduct] = useState([]);
-  const [cartEmpty, setCartEmpty] = useState(false);
   const string = localStorage.getItem("user");
   const user = JSON.parse(string);
   let { productId } = useParams();
@@ -167,11 +165,7 @@ const SingleCartProduct = ({
               <>
                 <EditQuantity
                   thisProduct={thisProduct}
-                  setThisProduct={setThisProduct}
-                  cartProductId={thisProduct.id}
-                  setCartEmpty={setCartEmpty}
                   cart={cart2}
-                  setCart={setCart}
                   setCartInfo={setCartInfo}
                   cartInfo={cartInfo}
                   loggedIn={loggedIn}
@@ -179,10 +173,7 @@ const SingleCartProduct = ({
                 <RemoveCartProduct
                   setThisProduct={setThisProduct}
                   thisProduct={thisProduct}
-                  cartProductId={thisProduct.id}
                   cart={cart2}
-                  setCartEmpty={setCartEmpty}
-                  cartEmpty={cartEmpty}
                   cartInfo={cartInfo}
                   setCartInfo={setCartInfo}
                   loggedIn={loggedIn}

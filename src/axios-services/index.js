@@ -1,4 +1,4 @@
-const BASE = "https://graceshopper-betterbuy.herokuapp.com/api"
+const BASE = "https://graceshopper-betterbuy.herokuapp.com/api";
 
 // Users
 export async function register(regEmail, regPassword, name, address) {
@@ -32,12 +32,8 @@ export async function login(email, password) {
       password: password,
     }),
   };
-  const response = await fetch(
-    `${BASE}/users/login`,
-    request
-  );
+  const response = await fetch(`${BASE}/users/login`, request);
   const result = await response.json();
-  // const token = result.token;
   return result;
 }
 
@@ -65,21 +61,6 @@ export async function editUserInfo(userId, name, email, address) {
   });
   const result = await response.json();
   return result;
-}
-
-export async function whoAmI(token) {
-  try {
-    const response = await fetch(`${BASE}/users/me`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const result = await response.json();
-    return result;
-  } catch (error) {
-    throw error;
-  }
 }
 
 // Products
@@ -121,15 +102,12 @@ export async function getProducts() {
 }
 
 export async function getProductById(productId) {
-  const response = await fetch(
-    `${BASE}/products/${productId}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const response = await fetch(`${BASE}/products/${productId}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
   const result = await response.json();
   return result;
 }
@@ -137,61 +115,48 @@ export async function getProductById(productId) {
 export async function editProduct(
   productId,
   token,
-  {name,
-  description,
-  price,
-  picture,
-  category}
+  { name, description, price, picture, category }
 ) {
-  const response = await fetch(
-    `${BASE}/products/${productId}`,
-    {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        name: name,
-        description: description,
-        price: price,
-        picture: picture,
-        category: category,
-      }),
-    }
-  );
+  const response = await fetch(`${BASE}/products/${productId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      name: name,
+      description: description,
+      price: price,
+      picture: picture,
+      category: category,
+    }),
+  });
   const result = await response.json();
   return result;
 }
 
 export async function deleteProduct(productId) {
-  const response = await fetch(
-    `${BASE}/products/${productId}`,
-    {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const response = await fetch(`${BASE}/products/${productId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
   const result = await response.json();
 }
 
 // Cart Products
 export async function addToCartProducts(cartId, product_id, quantity) {
-  const response = await fetch(
-    `${BASE}/cartProducts/${cartId}`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        product_id: product_id,
-        quantity: quantity,
-      }),
-    }
-  );
+  const response = await fetch(`http://localhost:4000/api/cartProducts/${cartId}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      product_id: product_id,
+      quantity: quantity,
+    }),
+  });
   const result = await response.json();
   return result;
 }
@@ -207,39 +172,23 @@ export async function getCartProducts() {
   return result;
 }
 
-export async function getCartProductsById(id) {
-  const response = await fetch(`${BASE}/cartProducts/${id}`, {
-    method: "GET",
+export async function editCartProduct(cartProductId, quantity) {
+  const response = await fetch(`${BASE}/cartProducts/${cartProductId}`, {
+    method: "PATCH",
     headers: {
       "Content-Type": "application/json",
     },
+    body: JSON.stringify({
+      quantity: quantity,
+    }),
   });
-  const result = await response.json();
-  return result;
-}
-
-export async function editCartProduct(cartProductId, quantity) {
-  const response = await fetch(
-    `${BASE}/cartProducts/${cartProductId}`,
-    {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        quantity: quantity,
-      }),
-    }
-  );
   const result = await response.json();
   return result;
 }
 
 export async function removeCartProduct(cartProductId, product_id) {
   try {
-    const response = await fetch(
-    `${BASE}/cartProducts/${cartProductId}`,
-    {
+    const response = await fetch(`${BASE}/cartProducts/${cartProductId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -247,14 +196,12 @@ export async function removeCartProduct(cartProductId, product_id) {
       body: JSON.stringify({
         product_id: product_id,
       }),
-    }
-  );
-  const result = await response.json();
-  return result;
+    });
+    const result = await response.json();
+    return result;
   } catch (error) {
-    console.log("delete failed")
+    console.log("delete failed");
   }
-  
 }
 
 // Cart
@@ -287,16 +234,12 @@ export async function getCartById(id) {
 }
 
 export async function emptyCart(cartId) {
-    const response = await fetch(
-      `${BASE}/cart/${cartId}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    const result = await response.json();
-
-    return result;
-  }
+  const response = await fetch(`${BASE}/cart/${cartId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const result = await response.json();
+  return result;
+}
