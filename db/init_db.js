@@ -233,69 +233,69 @@ async function createInitialProducts() {
   }
 }
 
-async function createInitialCart() {
-  const users = await getAllUsers();
+// async function createInitialCart() {
+//   const users = await getAllUsers();
 
-  try {
-    const cartToCreate = [
-      {
-        user_id: users[0].id,
-        is_ordered: false,
-      },
-      {
-        user_id: users[1].id,
-        is_ordered: false,
-      },
-      {
-        user_id: users[2].id,
-        is_ordered: false,
-      },
-      {
-        user_id: users[3].id,
-        is_ordered: false,
-      },
-    ];
-    const cart = await Promise.all(cartToCreate.map(createCart));
-    console.log("Cart created:");
-    console.log("Finished creating cart!");
-  } catch (error) {
-    console.error("Error creating cart...");
-    throw error;
-  }
-}
+//   try {
+//     const cartToCreate = [
+//       {
+//         user_id: users[0].id,
+//         is_ordered: false,
+//       },
+//       {
+//         user_id: users[1].id,
+//         is_ordered: false,
+//       },
+//       {
+//         user_id: users[2].id,
+//         is_ordered: false,
+//       },
+//       {
+//         user_id: users[3].id,
+//         is_ordered: false,
+//       },
+//     ];
+//     const cart = await Promise.all(cartToCreate.map(createCart));
+//     console.log("Cart created:");
+//     console.log("Finished creating cart!");
+//   } catch (error) {
+//     console.error("Error creating cart...");
+//     throw error;
+//   }
+// }
 
-async function createInitialCartProducts() {
-  console.log("Starting to create cart_products...");
-  const carts = await getAllCarts();
-  const products = await getAllProducts();
-  try {
-    const cartProductsToCreate = [
-      {
-        cart_id: 1,
-        product_id: products[0].id,
-        quantity: 1,
-      },
-      {
-        cart_id: 1,
-        product_id: products[1].id,
-        quantity: 10,
-      },
-      {
-        cart_id: 1,
-        product_id: products[2].id,
-        quantity: 3,
-      },
-    ];
-    const cart = await Promise.all(
-      cartProductsToCreate.map(createCartProducts)
-    );
-    console.log("Cart_products created:");
-    console.log("Finished creating cart_products!");
-  } catch (error) {
-    console.error("Error creating cart_products...");
-    throw error;
-  }
-}
+// async function createInitialCartProducts() {
+//   console.log("Starting to create cart_products...");
+//   const carts = await getAllCarts();
+//   const products = await getAllProducts();
+//   try {
+//     const cartProductsToCreate = [
+//       {
+//         cart_id: 1,
+//         product_id: products[0].id,
+//         quantity: 1,
+//       },
+//       {
+//         cart_id: 1,
+//         product_id: products[1].id,
+//         quantity: 10,
+//       },
+//       {
+//         cart_id: 1,
+//         product_id: products[2].id,
+//         quantity: 3,
+//       },
+//     ];
+//     const cart = await Promise.all(
+//       cartProductsToCreate.map(createCartProducts)
+//     );
+//     console.log("Cart_products created:");
+//     console.log("Finished creating cart_products!");
+//   } catch (error) {
+//     console.error("Error creating cart_products...");
+//     throw error;
+//   }
+// }
 
 async function rebuildDB() {
   try {
@@ -303,8 +303,8 @@ async function rebuildDB() {
     await createTables();
     await createInitialUsers();
     await createInitialProducts();
-    await createInitialCart();
-    await createInitialCartProducts();
+    // await createInitialCart();
+    // await createInitialCartProducts();
     client.end();
   } catch (error) {
     console.log("Error during rebuildDB");
