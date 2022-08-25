@@ -39,6 +39,7 @@ const Products = ({
       setCart([]);
     }
   }, []);
+
   useEffect(() => {}, [selectedProduct]);
 
   const productClick = (product) => {
@@ -68,7 +69,7 @@ const Products = ({
   const handleDelete = async () => {
     const productId = selectedProduct.id;
     setRemovedProduct(true);
-    alert("Product Deleted");
+    alert("Product Deleted.");
     await deleteProduct(productId);
   };
 
@@ -80,16 +81,15 @@ const Products = ({
     if (!searchCart) {
       selectedProduct.quantity = 1;
       cart.push(selectedProduct);
-      alert("item added to cart");
+      alert("Item added to cart!");
     } else {
       searchCart.quantity++;
-      alert("Quantity increased");
+      alert("Quantity increased!");
     }
   };
 
   const addToUserCart = async () => {
     let cart = await getCartById(user.id);
-    console.log(cart, "orange")
     const searchCart = cart.find(
       (product) => product.name === selectedProduct.name
     );
@@ -101,9 +101,9 @@ const Products = ({
         selectedProduct.quantity
       );
       setCartInfo(!cartInfo);
-      alert("item added to cart");
+      alert("Item added to cart!");
     } else {
-      alert("Quantity increased");
+      alert("Quantity increased!");
       searchCart.quantity++;
       await editCartProduct(searchCart.id, searchCart.quantity);
       setCartInfo(!cartInfo);

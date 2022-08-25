@@ -46,15 +46,14 @@
   justify-self: end;
 }
 
-.boxes{
+.boxes {
   display: flex;
   position: relative;
   justify-content: center;
   top: 9vh;
 }
 
-
-.purchaseMessage{
+.purchaseMessage {
   font-size: 3vw;
   text-align: center;
 }

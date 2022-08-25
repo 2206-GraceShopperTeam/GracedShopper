@@ -9,8 +9,8 @@ const {
 const { requireUser } = require("./util");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
-
 const { JWT_SECRET } = process.env;
+
 // POST /api/users/register
 router.post("/register", async (req, res, next) => {
   try {

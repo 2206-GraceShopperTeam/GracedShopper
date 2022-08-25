@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getCartProducts, getCartById, emptyCart, addToCartProducts, removeCartProduct } from "../axios-services";
+import {
+  getCartProducts,
+  getCartById,
+  addToCartProducts,
+  removeCartProduct,
+} from "../axios-services";
 import logo from "../images/stacked-boxes-700x295-1.png";
 import "../style/Checkout.css";
 
 const Checkout = ({ cart, setCart, loggedIn }) => {
   const navigate = useNavigate();
   const [cartProducts, setCartProducts] = useState([]);
-  const [cartId, setCartId] = useState(0)
   const [purchased, setPurchased] = useState(false);
   const [guest, setGuest] = useState(false);
   const [productCart, setProductCart] = useState([]);
@@ -22,30 +26,26 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
       setProductCart(cart);
     }
   }
-  
-  async function emptyThyCart (){
-    productCart.map(async (product)=>{
-      await removeCartProduct(product.cart_id,product.id)
-    })
+
+  async function emptyThyCart() {
+    productCart.map(async (product) => {
+      await removeCartProduct(product.cart_id, product.id);
+    });
   }
 
-  async function fillThyCart (){
-    if(loggedIn && localStorage.getItem("cart")){
-      let convCart = JSON.parse(localStorage.getItem("cart"))
-      if(convCart){
-        convCart.map(async(product)=>{
-           await addToCartProducts(
-            user.id,
-            product.id,
-            product.quantity)
-        })
+  async function fillThyCart() {
+    if (loggedIn && localStorage.getItem("cart")) {
+      let convCart = JSON.parse(localStorage.getItem("cart"));
+      if (convCart) {
+        convCart.map(async (product) => {
+          await addToCartProducts(user.id, product.id, product.quantity);
+        });
       }
     }
   }
 
-
   useEffect(() => {
-    fillThyCart ()
+    fillThyCart();
     getProductCart();
     async function fetchCartProducts() {
       const returnCartProducts = await getCartProducts();
@@ -53,6 +53,7 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
     }
     fetchCartProducts();
   }, []);
+
   return (
     <div>
       {loggedIn ? (
@@ -61,7 +62,7 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
             <h1>Order Details</h1>
             {productCart.map((product, index) => {
               if (product) {
-                localStorage.setItem("cartId", product.cart_id)
+                localStorage.setItem("cartId", product.cart_id);
                 {
                   total += product.price * product.quantity;
                 }
@@ -81,11 +82,16 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
             </div>
             <div>
               <h3>Email Address: {user.email}</h3>
-              <h3>Shipping Address: {user.address ? user.address : "No Address on File"}</h3>
+              <h3>
+                Shipping Address:{" "}
+                {user.address ? user.address : "No Address on File"}
+              </h3>
             </div>
             <button
               onClick={() => {
-                setPurchased(!purchased); setCart([]); emptyThyCart();
+                setPurchased(!purchased);
+                setCart([]);
+                emptyThyCart();
               }}
             >
               Confirm Order
@@ -95,10 +101,10 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
             Thank You For Your Order!
           </div>
           <img
-          className={!purchased ? "hidden" : "boxes"}
-          src={logo}
-          alt="logo"
-        ></img>
+            className={!purchased ? "hidden" : "boxes"}
+            src={logo}
+            alt="logo"
+          ></img>
         </div>
       ) : (
         <div>
@@ -124,7 +130,7 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
           ) : (
             <div className="checkout">
               <div className={purchased ? "hidden" : "orderInfo"}>
-            <h1>Order Details</h1>
+                <h1>Order Details</h1>
                 {cart.map((product, index) => {
                   {
                     total += product.price * product.quantity;
@@ -152,10 +158,10 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
                 Thank You For Your Order!
               </div>
               <img
-          className={!purchased ? "hidden" : "boxes"}
-          src={logo}
-          alt="logo"
-        ></img>
+                className={!purchased ? "hidden" : "boxes"}
+                src={logo}
+                alt="logo"
+              ></img>
             </div>
           )}
         </div>
@@ -163,5 +169,5 @@ const Checkout = ({ cart, setCart, loggedIn }) => {
     </div>
   );
 };
-export default Checkout;
 
+export default Checkout;

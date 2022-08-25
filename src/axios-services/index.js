@@ -147,16 +147,19 @@ export async function deleteProduct(productId) {
 
 // Cart Products
 export async function addToCartProducts(cartId, product_id, quantity) {
-  const response = await fetch(`http://localhost:4000/api/cartProducts/${cartId}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      product_id: product_id,
-      quantity: quantity,
-    }),
-  });
+  const response = await fetch(
+    `http://localhost:4000/api/cartProducts/${cartId}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        product_id: product_id,
+        quantity: quantity,
+      }),
+    }
+  );
   const result = await response.json();
   return result;
 }

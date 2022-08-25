@@ -47,7 +47,7 @@ async function addProductToCart(cart_id, product_id, quantity) {
     `,
       [cart_id, product_id, quantity]
     );
-    
+
     return cart_products;
   } catch (error) {
     throw error;
@@ -114,7 +114,6 @@ async function destroyCartProduct(cart_id, product_id) {
     throw error;
   }
 }
-
 
 module.exports = {
   getAllCartProducts,

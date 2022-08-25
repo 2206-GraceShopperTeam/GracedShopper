@@ -18,7 +18,7 @@ const Cart = ({ cart, cartInfo, setCartInfo, loggedIn, setCart }) => {
   async function createCart() {
     if (!localStorage.getItem("user") && !localStorage.getItem("cart")) {
       setCart([]);
-    } 
+    }
   }
 
   async function refreshCart() {
@@ -29,11 +29,11 @@ const Cart = ({ cart, cartInfo, setCartInfo, loggedIn, setCart }) => {
   }
 
   useEffect(() => {
-    refreshCart()
+    refreshCart();
   }, [cartInfo]);
 
   useEffect(() => {
-    refreshCart()
+    refreshCart();
   }, []);
 
   useEffect(() => {

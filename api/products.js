@@ -14,6 +14,7 @@ router.get("/:productId", async (req, res, next) => {
   const productId = req.params.productId;
   try {
     const product = await getProductById(productId);
+
     res.send(product);
   } catch ({ name, message }) {
     next({
@@ -46,6 +47,7 @@ router.post("/", requireUser, async (req, res, next) => {
         picture,
       };
       const newProduct = await createProduct(postData);
+
       res.send(newProduct);
     }
   } catch ({ name, message }) {
@@ -64,6 +66,7 @@ router.patch("/:productId", async (req, res, next) => {
       category,
       picture,
     });
+
     res.send(updatedProduct);
   } catch ({ name, message }) {
     next({ name, message });
@@ -73,7 +76,7 @@ router.patch("/:productId", async (req, res, next) => {
 router.delete("/:productId", async (req, res, next) => {
   const productId = req.params.productId;
   try {
-    const product = await getProductById(productId);
+    await getProductById(productId);
     await deleteProduct(productId);
     const deleted = await getProductById(productId);
     if (!deleted) {

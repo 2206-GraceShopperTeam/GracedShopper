@@ -106,7 +106,7 @@ async function createInitialUsers() {
         admin: false,
       },
     ];
-    const users = await Promise.all(usersToCreate.map(createUser));
+    await Promise.all(usersToCreate.map(createUser));
     console.log("Users created:");
     console.log("Finished creating users!");
   } catch (error) {
@@ -224,7 +224,7 @@ async function createInitialProducts() {
           "https://s.yimg.com/uu/api/res/1.2/kxy_AeoAwvwByQob1BNsyQ--~B/aD0xMzM0O3c9MjAwMDthcHBpZD15dGFjaHlvbg--/https://s.yimg.com/os/creatr-uploaded-images/2020-11/c8aea820-28a0-11eb-9f89-5ddd62987703.cf.jpg"),
       },
     ];
-    const products = await Promise.all(productsToCreate.map(createProduct));
+    await Promise.all(productsToCreate.map(createProduct));
     console.log("Products created:");
     console.log("Finished creating products!");
   } catch (error) {
@@ -233,69 +233,67 @@ async function createInitialProducts() {
   }
 }
 
-// async function createInitialCart() {
-//   const users = await getAllUsers();
+async function createInitialCart() {
+  const users = await getAllUsers();
 
-//   try {
-//     const cartToCreate = [
-//       {
-//         user_id: users[0].id,
-//         is_ordered: false,
-//       },
-//       {
-//         user_id: users[1].id,
-//         is_ordered: false,
-//       },
-//       {
-//         user_id: users[2].id,
-//         is_ordered: false,
-//       },
-//       {
-//         user_id: users[3].id,
-//         is_ordered: false,
-//       },
-//     ];
-//     const cart = await Promise.all(cartToCreate.map(createCart));
-//     console.log("Cart created:");
-//     console.log("Finished creating cart!");
-//   } catch (error) {
-//     console.error("Error creating cart...");
-//     throw error;
-//   }
-// }
+  try {
+    const cartToCreate = [
+      {
+        user_id: users[0].id,
+        is_ordered: false,
+      },
+      {
+        user_id: users[1].id,
+        is_ordered: false,
+      },
+      {
+        user_id: users[2].id,
+        is_ordered: false,
+      },
+      {
+        user_id: users[3].id,
+        is_ordered: false,
+      },
+    ];
+    await Promise.all(cartToCreate.map(createCart));
+    console.log("Cart created:");
+    console.log("Finished creating cart!");
+  } catch (error) {
+    console.error("Error creating cart...");
+    throw error;
+  }
+}
 
-// async function createInitialCartProducts() {
-//   console.log("Starting to create cart_products...");
-//   const carts = await getAllCarts();
-//   const products = await getAllProducts();
-//   try {
-//     const cartProductsToCreate = [
-//       {
-//         cart_id: 1,
-//         product_id: products[0].id,
-//         quantity: 1,
-//       },
-//       {
-//         cart_id: 1,
-//         product_id: products[1].id,
-//         quantity: 10,
-//       },
-//       {
-//         cart_id: 1,
-//         product_id: products[2].id,
-//         quantity: 3,
-//       },
-//     ];
-//     const cart = await Promise.all(
-//       cartProductsToCreate.map(createCartProducts)
-//     );
-//     console.log("Cart_products created:");
-//     console.log("Finished creating cart_products!");
-//   } catch (error) {
-//     console.error("Error creating cart_products...");
-//     throw error;
-//   }
-// }
+async function createInitialCartProducts() {
+  console.log("Starting to create cart_products...");
+  await getAllCarts();
+  const products = await getAllProducts();
+  try {
+    const cartProductsToCreate = [
+      {
+        cart_id: 1,
+        product_id: products[0].id,
+        quantity: 1,
+      },
+      {
+        cart_id: 1,
+        product_id: products[1].id,
+        quantity: 10,
+      },
+      {
+        cart_id: 1,
+        product_id: products[2].id,
+        quantity: 3,
+      },
+    ];
+    await Promise.all(cartProductsToCreate.map(createCartProducts));
+    console.log("Cart_products created:");
+    console.log("Finished creating cart_products!");
+  } catch (error) {
+    console.error("Error creating cart_products...");
+    throw error;
+  }
+}
 
 async function rebuildDB() {
   try {
@@ -303,8 +301,8 @@ async function rebuildDB() {
     await createTables();
     await createInitialUsers();
     await createInitialProducts();
-    // await createInitialCart();
-    // await createInitialCartProducts();
+    await createInitialCart();
+    await createInitialCartProducts();
     client.end();
   } catch (error) {
     console.log("Error during rebuildDB");

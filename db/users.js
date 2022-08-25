@@ -86,6 +86,7 @@ async function getUserByEmail(email) {
     throw error;
   }
 }
+
 async function getUserById(userId) {
   try {
     const {

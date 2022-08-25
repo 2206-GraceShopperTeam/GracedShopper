@@ -49,11 +49,9 @@ const Login = ({ setLoggedIn, loggedIn, setUser }) => {
     try {
       const result = await login(email, password);
       if (result) {
-        console.log(result, "kiwi")
         localStorage.setItem("token", result.token);
         localStorage.setItem("user", JSON.stringify(result.user));
         setLoggedIn(true);
-        console.log(result.user, "apple")
         setUser(result.user);
         if (localStorage.getItem("redirect")) {
           const redirect = localStorage.getItem("redirect");

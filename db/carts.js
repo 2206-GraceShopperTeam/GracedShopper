@@ -80,6 +80,7 @@ async function updateCart({ id, ...fields }) {
   if (setString.length === 0) {
     return;
   }
+
   try {
     const {
       rows: [cart],

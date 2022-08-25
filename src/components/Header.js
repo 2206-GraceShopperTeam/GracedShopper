@@ -8,6 +8,7 @@ const Header = ({ loggedIn, setLoggedIn }) => {
   const navigate = useNavigate();
   const string = localStorage.getItem("user");
   const user = JSON.parse(string);
+
   useEffect(() => {}, [loggedIn]);
 
   const logout = () => {
