@@ -148,7 +148,7 @@ export async function deleteProduct(productId) {
 // Cart Products
 export async function addToCartProducts(cartId, product_id, quantity) {
   const response = await fetch(
-    `http://localhost:4000/api/cartProducts/${cartId}`,
+    `${BASE}/cartProducts/${cartId}`,
     {
       method: "POST",
       headers: {
